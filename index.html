@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SKOLARIS - Student Information System Documentation</title>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
     
     <!-- Security Protection Scripts -->
     <script>
@@ -108,8 +107,29 @@
     </script>
     
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; background: #f8f9fa; overflow-x: hidden; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            line-height: 1.6; 
+            color: #333; 
+            background: #f8f9fa; 
+            overflow-x: hidden;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; width: 100%; }
         .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px 0; text-align: center; margin-bottom: 0; }
         .header h1 { font-size: 2.8em; margin-bottom: 15px; font-weight: 700; }
@@ -9002,38 +9022,51 @@ INSERT INTO permissions (module, action, resource, description) VALUES
                     <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
                         <h5 style="color: #2c3e50; margin-bottom: 20px;">🏗️ Module System ERD</h5>
                         
-                        <!-- ERD Diagram using Mermaid -->
-                        <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; border: 1px solid #dee2e6; overflow-x: auto;">
-                            <div style="display: none;">
-erDiagram
-    %% Core System Tables
-    CAMPUSES {
-        int campus_id PK
-        string campus_name
-        string campus_code
-        string address
-        string contact_info
-        boolean is_active
-        timestamp created_at
-        timestamp updated_at
-    }
-    
-    USERS {
-        bigint user_id PK
-        int campus_id FK
-        string email
-        string phone
-        string student_id
-        string first_name
-        string last_name
-        string password_hash
-        boolean is_active
-        timestamp last_login
-        timestamp created_at
-        timestamp updated_at
-    }
-    
-    ROLES {
+                        <!-- Database Schema Note -->
+                        <div style="background: #e8f4fd; padding: 20px; border-radius: 8px; border: 1px solid #17a2b8;">
+                            <h6 style="color: #17a2b8; margin: 0 0 15px 0;">📊 Database Schema Overview</h6>
+                            <p style="color: #495057; margin: 0; line-height: 1.6;">
+                                The SKOLARIS database schema consists of 40 interconnected tables organized into logical modules. 
+                                The complete ERD diagram shows relationships between core system tables, academic management, 
+                                financial processing, and administrative functions across all ICCT campuses.
+                            </p>
+                        </div>
+                        
+                        <!-- Visual ERD Representation -->
+                        <div style="background: white; padding: 30px; border-radius: 12px; margin: 20px 0; border: 2px solid #e9ecef;">
+                            <div style="font-size: 1.3em; font-weight: 600; text-align: center; margin-bottom: 30px; color: #2c3e50; padding-bottom: 15px; border-bottom: 2px solid #667eea;">Complete Database Schema - Entity Relationship Diagram</div>
+                            
+                            <!-- Core System Tables Row -->
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin: 25px 0; flex-wrap: wrap; gap: 15px;">
+                                <div style="background: white; border: 2px solid #dee2e6; border-radius: 8px; min-width: 180px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                    <div style="background: #667eea; color: white; padding: 12px; font-weight: 600; text-align: center;">🏢 CAMPUSES</div>
+                                    <div style="padding: 15px; font-size: 0.9em; color: #495057;">
+                                        <div><strong>campus_id</strong> (PK)</div>
+                                        <div>campus_name</div>
+                                        <div>campus_code</div>
+                                        <div>address</div>
+                                        <div>contact_info</div>
+                                        <div>is_active</div>
+                                    </div>
+                                </div>
+                                
+                                <div style="font-size: 1.5em; color: #667eea; font-weight: bold;">→</div>
+                                
+                                <div style="background: white; border: 2px solid #dee2e6; border-radius: 8px; min-width: 180px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                    <div style="background: #667eea; color: white; padding: 12px; font-weight: 600; text-align: center;">👥 USERS</div>
+                                    <div style="padding: 15px; font-size: 0.9em; color: #495057;">
+                                        <div><strong>user_id</strong> (PK)</div>
+                                        <div style="color: #28a745; font-weight: 600;">campus_id (FK)</div>
+                                        <div>email, phone</div>
+                                        <div>first_name, last_name</div>
+                                        <div>password_hash</div>
+                                    </div>
+                                </div>
+                                
+                                <div style="font-size: 1.5em; color: #667eea; font-weight: bold;">→</div>
+                                
+                                <div style="background: white; border: 2px solid #dee2e6; border-radius: 8px; min-width: 180px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                    <div style="background: #667eea; color: white; padding: 12px; font-weight: 600; text-align: center;">🔐 ROLES</div>
         int role_id PK
         string role_name
         text description
@@ -9777,19 +9810,6 @@ erDiagram
     </div>
 
     <script>
-        // Initialize Mermaid
-        mermaid.initialize({
-            startOnLoad: true,
-            theme: 'default',
-            flowchart: {
-                useMaxWidth: true,
-                htmlLabels: true
-            },
-            er: {
-                useMaxWidth: true,
-                htmlLabels: true
-            }
-        });
 
         document.addEventListener('DOMContentLoaded', function() {
             const navLinks = document.querySelectorAll('.nav-link');
