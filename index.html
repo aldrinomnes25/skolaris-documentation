@@ -722,7 +722,7 @@
                                 </div>
                                 <div style="background: white; padding: 15px; border-radius: 6px; border: 1px solid #ffcc02;">
                                     <div style="font-weight: 600; color: #f57c00; margin-bottom: 5px;">📊 Database Features</div>
-                                    <div style="font-size: 0.9em; color: #424242;">• 40+ Tables<br>• JSON Data Types<br>• Full-text Search<br>• Audit Logging</div>
+                                    <div style="font-size: 0.9em; color: #424242;">• 45+ Tables<br>• JSON Data Types<br>• Full-text Search<br>• Audit Logging</div>
                                 </div>
                                 <div style="background: white; padding: 15px; border-radius: 6px; border: 1px solid #ffcc02;">
                                     <div style="font-weight: 600; color: #f57c00; margin-bottom: 5px;">🔄 Caching Layer</div>
@@ -999,14 +999,14 @@
                 
                 <div class="highlight-box">
                     <h4>📊 Database Overview</h4>
-                    <p>SKOLARIS uses a comprehensive relational database design with <strong>40 tables</strong> organized into logical modules. The core architecture supports multi-campus operations with role-based access control, ensuring data integrity and scalability across all ICCT campuses.</p>
+                    <p>SKOLARIS uses a comprehensive relational database design with <strong>45 tables</strong> organized into logical modules. The core architecture supports multi-campus operations with role-based access control, ensuring data integrity and scalability across all ICCT campuses. The system includes comprehensive Philippine student information management with DepEd compliance.</p>
                     <div class="stats-row">
                         <div class="stat-box">
                             <div class="stat-number">10</div>
                             <div class="stat-label">Core Tables</div>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-number">12</div>
+                            <div class="stat-number">17</div>
                             <div class="stat-label">Academic Tables</div>
                         </div>
                         <div class="stat-box">
@@ -1038,6 +1038,14 @@
                             <div style="background: white; padding: 15px; border-radius: 6px; border: 1px solid #bbdefb;">
                                 <div style="font-weight: 600; color: #1976d2; margin-bottom: 5px;">📊 Analytics</div>
                                 <div style="font-size: 0.9em; color: #424242;">• Reporting views<br>• Data aggregation<br>• Business intelligence<br>• Real-time metrics</div>
+                            </div>
+                            <div style="background: white; padding: 15px; border-radius: 6px; border: 1px solid #bbdefb;">
+                                <div style="font-weight: 600; color: #1976d2; margin-bottom: 5px;">🇵🇭 Education System</div>
+                                <div style="font-size: 0.9em; color: #424242;">• LRN Management<br>• DSWD 4Ps Integration<br>• DepEd Compliance<br>• Scholarship Tracking</div>
+                            </div>
+                            <div style="background: white; padding: 15px; border-radius: 6px; border: 1px solid #bbdefb;">
+                                <div style="font-weight: 600; color: #1976d2; margin-bottom: 5px;">👨‍🎓 Student Data</div>
+                                <div style="font-size: 0.9em; color: #424242;">• Personal Information<br>• Educational Background<br>• Family Information<br>• Contact Management</div>
                             </div>
                         </div>
                     </div>
@@ -1181,6 +1189,7 @@
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #dc3545; font-weight: 600;">user_id (PK)</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">campus_id (FK)</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #555;">email, phone</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">student_id, employee_number</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #555;">full_name, user_type</div>
                                     </div>
                                 </div>
@@ -2206,7 +2215,7 @@ CREATE TABLE users (
     email VARCHAR(150) UNIQUE,
     phone VARCHAR(50),
     student_id VARCHAR(50) UNIQUE,
-    employee_id VARCHAR(50) UNIQUE,
+    employee_number VARCHAR(50) UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
     full_name VARCHAR(150) NOT NULL,
     user_type ENUM('student', 'faculty', 'staff', 'parent', 'admin', 'alumni') NOT NULL,
@@ -2217,7 +2226,8 @@ CREATE TABLE users (
     INDEX idx_user_email (email),
     INDEX idx_user_campus (campus_id),
     INDEX idx_user_type (user_type),
-    INDEX idx_user_active (is_active)
+    INDEX idx_user_active (is_active),
+    INDEX idx_user_employee_number (employee_number)
 );
 
 -- 3. ROLES TABLE
@@ -2338,7 +2348,18 @@ CREATE TABLE role_module_access (
     INDEX idx_role_id (role_id),
     INDEX idx_module_id (module_id),
     INDEX idx_is_active (is_active)
-);</code></pre>
+);
+
+-- =============================================
+-- MIGRATION SCRIPT FOR EXISTING DATABASES
+-- =============================================
+-- Run this script to update existing databases to use consistent naming
+
+-- Rename employee_id to employee_number in users table
+ALTER TABLE users CHANGE COLUMN employee_id employee_number VARCHAR(50) UNIQUE;
+
+-- Add index for employee_number if it doesn't exist
+ALTER TABLE users ADD INDEX idx_user_employee_number (employee_number);</code></pre>
                     </div>
                 </div>
                 <!-- Academic Module SQL Scripts -->
@@ -2376,7 +2397,131 @@ CREATE TABLE students (
     INDEX idx_student_status (status)
 );
 
--- 2. PROGRAMS TABLE
+-- 2. STUDENT_PERSONAL_INFORMATION TABLE
+CREATE TABLE student_personal_information (
+    personal_info_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    student_id BIGINT NOT NULL,
+    lrn VARCHAR(12) UNIQUE, -- Learner Reference Number (DepEd)
+    dswd_household_no VARCHAR(20), -- DSWD Household Number (optional)
+    birth_date DATE NOT NULL,
+    birth_place VARCHAR(100) NOT NULL,
+    gender ENUM('male', 'female') NOT NULL,
+    civil_status ENUM('single', 'married', 'widowed', 'separated', 'divorced') DEFAULT 'single',
+    nationality VARCHAR(50) DEFAULT 'Filipino',
+    religion VARCHAR(50),
+    blood_type ENUM('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'),
+    height_cm DECIMAL(5,2),
+    weight_kg DECIMAL(5,2),
+    disability_type VARCHAR(100),
+    is_pwd BOOLEAN DEFAULT FALSE, -- Person with Disability
+    is_4ps_beneficiary BOOLEAN DEFAULT FALSE, -- 4Ps Program beneficiary
+    is_scholarship_recipient BOOLEAN DEFAULT FALSE,
+    scholarship_type VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE,
+    INDEX idx_lrn (lrn),
+    INDEX idx_dswd_household (dswd_household_no),
+    INDEX idx_birth_date (birth_date),
+    INDEX idx_gender (gender)
+);
+
+-- 3. STUDENT_EDUCATIONAL_BACKGROUND TABLE
+CREATE TABLE student_educational_background (
+    education_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    student_id BIGINT NOT NULL,
+    education_level ENUM('elementary', 'junior_high', 'senior_high', 'college', 'graduate') NOT NULL,
+    school_name VARCHAR(200) NOT NULL,
+    school_address TEXT,
+    school_type ENUM('public', 'private', 'state_university', 'local_university') NOT NULL,
+    year_graduated YEAR,
+    year_started YEAR,
+    strand VARCHAR(100), -- For Senior High School (STEM, ABM, HUMSS, GAS, TVL, etc.)
+    track VARCHAR(50), -- Academic, Technical-Vocational-Livelihood, Sports, Arts and Design
+    specialization VARCHAR(100), -- For TVL track
+    gpa DECIMAL(3,2),
+    honors_received VARCHAR(200),
+    is_graduated BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE,
+    INDEX idx_education_level (education_level),
+    INDEX idx_school_name (school_name),
+    INDEX idx_year_graduated (year_graduated),
+    INDEX idx_strand (strand)
+);
+
+-- 4. STUDENT_FAMILY_INFORMATION TABLE
+CREATE TABLE student_family_information (
+    family_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    student_id BIGINT NOT NULL,
+    father_name VARCHAR(150),
+    father_occupation VARCHAR(100),
+    father_employer VARCHAR(150),
+    father_contact VARCHAR(20),
+    father_education VARCHAR(100),
+    mother_name VARCHAR(150),
+    mother_occupation VARCHAR(100),
+    mother_employer VARCHAR(150),
+    mother_contact VARCHAR(20),
+    mother_education VARCHAR(100),
+    guardian_name VARCHAR(150),
+    guardian_relationship VARCHAR(50),
+    guardian_contact VARCHAR(20),
+    guardian_address TEXT,
+    family_income_range ENUM('below_10k', '10k_20k', '20k_30k', '30k_50k', '50k_100k', 'above_100k'),
+    number_of_siblings INT DEFAULT 0,
+    birth_order INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE,
+    INDEX idx_father_name (father_name),
+    INDEX idx_mother_name (mother_name),
+    INDEX idx_guardian_name (guardian_name)
+);
+
+-- 5. STUDENT_ADDRESS_INFORMATION TABLE
+CREATE TABLE student_address_information (
+    address_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    student_id BIGINT NOT NULL,
+    address_type ENUM('permanent', 'present', 'provincial') NOT NULL,
+    house_no VARCHAR(20),
+    street VARCHAR(100),
+    barangay VARCHAR(100) NOT NULL,
+    city_municipality VARCHAR(100) NOT NULL,
+    province VARCHAR(100) NOT NULL,
+    region VARCHAR(100) NOT NULL,
+    postal_code VARCHAR(10),
+    country VARCHAR(50) DEFAULT 'Philippines',
+    is_same_as_permanent BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE,
+    INDEX idx_address_type (address_type),
+    INDEX idx_city_municipality (city_municipality),
+    INDEX idx_province (province),
+    INDEX idx_region (region)
+);
+
+-- 6. STUDENT_CONTACT_INFORMATION TABLE
+CREATE TABLE student_contact_information (
+    contact_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    student_id BIGINT NOT NULL,
+    contact_type ENUM('mobile', 'landline', 'email', 'facebook', 'telegram', 'viber') NOT NULL,
+    contact_value VARCHAR(100) NOT NULL,
+    is_primary BOOLEAN DEFAULT FALSE,
+    is_emergency_contact BOOLEAN DEFAULT FALSE,
+    contact_person VARCHAR(150), -- For emergency contacts
+    relationship VARCHAR(50), -- For emergency contacts
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE,
+    INDEX idx_contact_type (contact_type),
+    INDEX idx_is_primary (is_primary),
+    INDEX idx_is_emergency (is_emergency_contact)
+);
+
+-- 7. PROGRAMS TABLE
 CREATE TABLE programs (
     program_id INT AUTO_INCREMENT PRIMARY KEY,
     campus_id INT NOT NULL,
@@ -3154,6 +3299,102 @@ INSERT INTO permissions (module, action, resource, description) VALUES
 ('reports', 'view', 'reports', 'Generate and view reports');</code></pre>
                     </div>
                 </div>
+
+                <div class="process-group">
+                    <h3 class="group-title">👨‍🎓 Student Information Sample Data</h3>
+                    <div class="entry">
+                        <div class="meta">
+                            <span class="meta-badge category">Sample Data</span>
+                            <span class="meta-badge priority">High</span>
+                        </div>
+                        <h3>Student Information Sample Data</h3>
+                        <h4>Comprehensive student data with education system requirements</h4>
+                        <pre><code>-- =============================================
+-- STUDENT INFORMATION SAMPLE DATA
+-- =============================================
+
+-- Sample Student Personal Information
+INSERT INTO student_personal_information (student_id, lrn, dswd_household_no, birth_date, birth_place, gender, civil_status, nationality, religion, blood_type, height_cm, weight_kg, is_pwd, is_4ps_beneficiary, is_scholarship_recipient, scholarship_type) VALUES
+(1, '123456789012', 'DSWD-2024-001234', '2005-03-15', 'Manila, Philippines', 'male', 'single', 'Filipino', 'Roman Catholic', 'O+', 170.5, 65.2, FALSE, TRUE, TRUE, 'CHED Scholarship'),
+(2, '123456789013', NULL, '2004-07-22', 'Quezon City, Philippines', 'female', 'single', 'Filipino', 'Protestant', 'A+', 165.0, 55.8, FALSE, FALSE, FALSE, NULL),
+(3, '123456789014', 'DSWD-2024-001235', '2005-11-08', 'Cebu City, Philippines', 'male', 'single', 'Filipino', 'Roman Catholic', 'B+', 175.0, 70.0, TRUE, TRUE, TRUE, 'DOST Scholarship'),
+(4, '123456789015', NULL, '2004-01-30', 'Davao City, Philippines', 'female', 'single', 'Filipino', 'Islam', 'AB+', 160.0, 52.0, FALSE, FALSE, TRUE, 'Private Scholarship'),
+(5, '123456789016', 'DSWD-2024-001236', '2005-05-12', 'Iloilo City, Philippines', 'male', 'single', 'Filipino', 'Roman Catholic', 'O-', 168.0, 62.5, FALSE, TRUE, FALSE, NULL);
+
+-- Sample Student Educational Background
+INSERT INTO student_educational_background (student_id, education_level, school_name, school_address, school_type, year_graduated, year_started, strand, track, specialization, gpa, honors_received, is_graduated) VALUES
+-- Elementary Education
+(1, 'elementary', 'Manila Elementary School', 'Taft Avenue, Manila', 'public', 2017, 2011, NULL, NULL, NULL, 1.25, 'Valedictorian', TRUE),
+(2, 'elementary', 'Quezon City Elementary School', 'Quezon City', 'public', 2017, 2011, NULL, NULL, NULL, 1.50, 'Salutatorian', TRUE),
+(3, 'elementary', 'Cebu Elementary School', 'Cebu City', 'public', 2017, 2011, NULL, NULL, NULL, 1.75, 'Honor Student', TRUE),
+
+-- Junior High School
+(1, 'junior_high', 'Manila High School', 'Taft Avenue, Manila', 'public', 2021, 2017, NULL, NULL, NULL, 1.30, 'With High Honors', TRUE),
+(2, 'junior_high', 'Quezon City High School', 'Quezon City', 'public', 2021, 2017, NULL, NULL, NULL, 1.45, 'With Honors', TRUE),
+(3, 'junior_high', 'Cebu High School', 'Cebu City', 'public', 2021, 2017, NULL, NULL, NULL, 1.60, 'With Honors', TRUE),
+
+-- Senior High School
+(1, 'senior_high', 'Manila Senior High School', 'Taft Avenue, Manila', 'public', 2023, 2021, 'STEM', 'Academic', 'Science, Technology, Engineering, Mathematics', 1.20, 'With High Honors', TRUE),
+(2, 'senior_high', 'Quezon City Senior High School', 'Quezon City', 'public', 2023, 2021, 'ABM', 'Academic', 'Accountancy, Business, Management', 1.35, 'With Honors', TRUE),
+(3, 'senior_high', 'Cebu Senior High School', 'Cebu City', 'public', 2023, 2021, 'HUMSS', 'Academic', 'Humanities and Social Sciences', 1.50, 'With Honors', TRUE),
+(4, 'senior_high', 'Davao Senior High School', 'Davao City', 'public', 2023, 2021, 'TVL-ICT', 'Technical-Vocational-Livelihood', 'Information and Communications Technology', 1.40, 'With Honors', TRUE),
+(5, 'senior_high', 'Iloilo Senior High School', 'Iloilo City', 'public', 2023, 2021, 'GAS', 'Academic', 'General Academic Strand', 1.55, 'With Honors', TRUE);
+
+-- Sample Student Family Information
+INSERT INTO student_family_information (student_id, father_name, father_occupation, father_employer, father_contact, father_education, mother_name, mother_occupation, mother_employer, mother_contact, mother_education, guardian_name, guardian_relationship, guardian_contact, family_income_range, number_of_siblings, birth_order) VALUES
+(1, 'Juan Dela Cruz', 'Engineer', 'DPWH', '09171234567', 'Bachelor of Science in Civil Engineering', 'Maria Dela Cruz', 'Teacher', 'DepEd', '09171234568', 'Bachelor of Elementary Education', 'Maria Dela Cruz', 'Mother', '09171234568', '30k_50k', 2, 1),
+(2, 'Pedro Santos', 'Driver', 'Transportation Company', '09171234569', 'High School Graduate', 'Ana Santos', 'Vendor', 'Self-employed', '09171234570', 'Elementary Graduate', 'Ana Santos', 'Mother', '09171234570', '10k_20k', 3, 2),
+(3, 'Jose Garcia', 'OFW', 'Saudi Arabia', '09171234571', 'High School Graduate', 'Rosa Garcia', 'Housewife', 'N/A', '09171234572', 'High School Graduate', 'Rosa Garcia', 'Mother', '09171234572', '20k_30k', 4, 1),
+(4, 'Ahmed Hassan', 'Business Owner', 'Hassan Trading', '09171234573', 'Bachelor of Business Administration', 'Fatima Hassan', 'Nurse', 'Davao City Hospital', '09171234574', 'Bachelor of Science in Nursing', 'Ahmed Hassan', 'Father', '09171234573', '50k_100k', 1, 1),
+(5, 'Roberto Villanueva', 'Farmer', 'Self-employed', '09171234575', 'Elementary Graduate', 'Carmen Villanueva', 'Seamstress', 'Self-employed', '09171234576', 'Elementary Graduate', 'Carmen Villanueva', 'Mother', '09171234576', 'below_10k', 5, 3);
+
+-- Sample Student Address Information
+INSERT INTO student_address_information (student_id, address_type, house_no, street, barangay, city_municipality, province, region, postal_code, country, is_same_as_permanent) VALUES
+-- Permanent Addresses
+(1, 'permanent', '123', 'Rizal Street', 'Barangay 1', 'Manila', 'Metro Manila', 'NCR', '1000', 'Philippines', FALSE),
+(2, 'permanent', '456', 'Quezon Avenue', 'Barangay 2', 'Quezon City', 'Metro Manila', 'NCR', '1100', 'Philippines', FALSE),
+(3, 'permanent', '789', 'Colon Street', 'Barangay 3', 'Cebu City', 'Cebu', 'Region VII', '6000', 'Philippines', FALSE),
+(4, 'permanent', '321', 'Roxas Avenue', 'Barangay 4', 'Davao City', 'Davao del Sur', 'Region XI', '8000', 'Philippines', FALSE),
+(5, 'permanent', '654', 'Iloilo Street', 'Barangay 5', 'Iloilo City', 'Iloilo', 'Region VI', '5000', 'Philippines', FALSE),
+
+-- Present Addresses (same as permanent for most students)
+(1, 'present', '123', 'Rizal Street', 'Barangay 1', 'Manila', 'Metro Manila', 'NCR', '1000', 'Philippines', TRUE),
+(2, 'present', '456', 'Quezon Avenue', 'Barangay 2', 'Quezon City', 'Metro Manila', 'NCR', '1100', 'Philippines', TRUE),
+(3, 'present', '789', 'Colon Street', 'Barangay 3', 'Cebu City', 'Cebu', 'Region VII', '6000', 'Philippines', TRUE),
+(4, 'present', '321', 'Roxas Avenue', 'Barangay 4', 'Davao City', 'Davao del Sur', 'Region XI', '8000', 'Philippines', TRUE),
+(5, 'present', '654', 'Iloilo Street', 'Barangay 5', 'Iloilo City', 'Iloilo', 'Region VI', '5000', 'Philippines', TRUE);
+
+-- Sample Student Contact Information
+INSERT INTO student_contact_information (student_id, contact_type, contact_value, is_primary, is_emergency_contact, contact_person, relationship) VALUES
+-- Primary Mobile Numbers
+(1, 'mobile', '09171234567', TRUE, FALSE, 'Juan Dela Cruz', 'Father'),
+(2, 'mobile', '09171234568', TRUE, FALSE, 'Ana Santos', 'Mother'),
+(3, 'mobile', '09171234569', TRUE, FALSE, 'Rosa Garcia', 'Mother'),
+(4, 'mobile', '09171234570', TRUE, FALSE, 'Ahmed Hassan', 'Father'),
+(5, 'mobile', '09171234571', TRUE, FALSE, 'Carmen Villanueva', 'Mother'),
+
+-- Email Addresses
+(1, 'email', 'juan.delacruz@email.com', FALSE, FALSE, 'Juan Dela Cruz', 'Student'),
+(2, 'email', 'ana.santos@email.com', FALSE, FALSE, 'Ana Santos', 'Student'),
+(3, 'email', 'rosa.garcia@email.com', FALSE, FALSE, 'Rosa Garcia', 'Student'),
+(4, 'email', 'ahmed.hassan@email.com', FALSE, FALSE, 'Ahmed Hassan', 'Student'),
+(5, 'email', 'carmen.villanueva@email.com', FALSE, FALSE, 'Carmen Villanueva', 'Student'),
+
+-- Emergency Contacts
+(1, 'mobile', '09171234580', FALSE, TRUE, 'Maria Dela Cruz', 'Mother'),
+(2, 'mobile', '09171234581', FALSE, TRUE, 'Pedro Santos', 'Father'),
+(3, 'mobile', '09171234582', FALSE, TRUE, 'Jose Garcia', 'Father'),
+(4, 'mobile', '09171234583', FALSE, TRUE, 'Fatima Hassan', 'Mother'),
+(5, 'mobile', '09171234584', FALSE, TRUE, 'Roberto Villanueva', 'Father'),
+
+-- Social Media Contacts
+(1, 'facebook', 'juan.delacruz.fb', FALSE, FALSE, 'Juan Dela Cruz', 'Student'),
+(2, 'facebook', 'ana.santos.fb', FALSE, FALSE, 'Ana Santos', 'Student'),
+(3, 'facebook', 'rosa.garcia.fb', FALSE, FALSE, 'Rosa Garcia', 'Student'),
+(4, 'facebook', 'ahmed.hassan.fb', FALSE, FALSE, 'Ahmed Hassan', 'Student'),
+(5, 'facebook', 'carmen.villanueva.fb', FALSE, FALSE, 'Carmen Villanueva', 'Student');</code></pre>
+                    </div>
+                </div>
             </div>
 
             <!-- Implementation Roadmap Section -->
@@ -3290,6 +3531,10 @@ INSERT INTO permissions (module, action, resource, description) VALUES
                                             <li>Student profile management</li>
                                             <li>Document verification system</li>
                                             <li>Online application forms</li>
+                                            <li>🇵🇭 Student data collection (LRN, DSWD, DepEd compliance)</li>
+                                            <li>Educational background tracking</li>
+                                            <li>Family information management</li>
+                                            <li>Contact information system</li>
                                         </ul>
                                     </div>
                                     <div>
@@ -4023,6 +4268,7 @@ INSERT INTO permissions (module, action, resource, description) VALUES
                                     <div style="background: linear-gradient(135deg, #28a745, #20c997); color: white; padding: 20px; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);">
                                     <div style="font-size: 2em; margin-bottom: 10px;">📝</div>
                                         <div style="font-weight: 700; font-size: 1.1em; margin-bottom: 8px;">Step 1.1: Online Application</div>
+                                        <div style="font-size: 0.9em; opacity: 0.9;">🇵🇭 Includes LRN, DSWD 4Ps, DepEd compliance</div>
                                         <div style="font-size: 0.9em; opacity: 0.9;">Initial application submission</div>
                                         <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.8;">• Personal information entry<br>• Program selection<br>• Campus preference<br>• Contact details</div>
                                 </div>
@@ -5944,15 +6190,15 @@ INSERT INTO permissions (module, action, resource, description) VALUES
                     <p>Comprehensive task management system with separate frontend (React JS) and backend (Laravel API) development tasks for each module. Each task includes ticket numbers, priority levels, assigned developers, and expected results.</p>
                     <div class="stats-row">
                         <div class="stat-box">
-                            <div class="stat-number">155+</div>
+                            <div class="stat-number">159+</div>
                             <div class="stat-label">Total Tasks</div>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-number">50</div>
+                            <div class="stat-number">52</div>
                             <div class="stat-label">Frontend Tasks</div>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-number">50</div>
+                            <div class="stat-number">52</div>
                             <div class="stat-label">Backend Tasks</div>
                         </div>
                         <div class="stat-box">
@@ -6176,6 +6422,59 @@ INSERT INTO permissions (module, action, resource, description) VALUES
                             <div class="expected-result">
                                 <h6>🎯 Expected Result:</h6>
                                 <p>Complete student profile API with secure data management, validation, emergency contacts, academic history, and comprehensive audit trails.</p>
+                            </div>
+                        </div>
+
+                        <!-- Student Information Frontend -->
+                        <div class="task-card frontend">
+                            <div class="task-header">
+                                <div class="task-ticket frontend">SKOL-011-FE</div>
+                                <div class="task-status for-development">For Development</div>
+                            </div>
+                            <h4>🇵🇭 Student Information Interface</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Create LRN (Learner Reference Number) input form</li>
+                                    <li>Build DSWD 4Ps beneficiary registration</li>
+                                    <li>Implement educational background tracking</li>
+                                    <li>Create family information management</li>
+                                    <li>Build address information system (Barangay, City, Province, Region)</li>
+                                    <li>Implement contact information management</li>
+                                    <li>Create scholarship tracking interface</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Comprehensive student information system with DepEd compliance, DSWD integration, and complete student data management following education standards.</p>
+                            </div>
+                        </div>
+
+                        <!-- Student Information Backend -->
+                        <div class="task-card backend">
+                            <div class="task-header">
+                                <div class="task-ticket backend">SKOL-011-BE</div>
+                                <div class="task-status for-development">For Development</div>
+                            </div>
+                            <h4>🇵🇭 Student Information API</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Create student_personal_information table and API</li>
+                                    <li>Build student_educational_background API</li>
+                                    <li>Implement student_family_information API</li>
+                                    <li>Create student_address_information API</li>
+                                    <li>Build student_contact_information API</li>
+                                    <li>Implement LRN validation and uniqueness</li>
+                                    <li>Create DSWD 4Ps integration endpoints</li>
+                                    <li>Build scholarship management API</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Complete backend API system for student information management with data validation, DepEd compliance, and integration with government programs.</p>
                             </div>
                         </div>
                     </div>
@@ -9155,11 +9454,9 @@ INSERT INTO permissions (module, action, resource, description) VALUES
                                     <div style="padding: 15px; font-size: 0.9em; color: #495057;">
                                         <div><strong>user_id</strong> (PK)</div>
                                         <div>campus_id (FK)</div>
-                                        <div>email</div>
-                                        <div>phone</div>
-                                        <div>student_id</div>
-                                        <div>first_name</div>
-                                        <div>last_name</div>
+                                        <div>email, phone</div>
+                                        <div>student_id, employee_number</div>
+                                        <div>full_name, user_type</div>
                                         <div>password_hash</div>
                                     </div>
                                 </div>
@@ -9335,7 +9632,7 @@ INSERT INTO permissions (module, action, resource, description) VALUES
                                         <div>user_id (FK)</div>
                                         <div>campus_id (FK)</div>
                                         <div>department_id (FK)</div>
-                                        <div>employee_id</div>
+                                        <div>employee_number</div>
                                         <div>specialization</div>
                                         <div>employment_status</div>
                                         <div>hire_date</div>
