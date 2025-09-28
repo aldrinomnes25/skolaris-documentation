@@ -393,7 +393,6 @@
                 <a href="#" class="nav-link" data-section="implementation-roadmap">🚀 Implementation</a>
                 <a href="#" class="nav-link" data-section="process-flow">🔄 Process Flow</a>
                 <a href="#" class="nav-link" data-section="task-management">📋 Task Management</a>
-                <a href="#" class="nav-link" data-section="basic-information">ℹ️ Basic Info</a>
                 <a href="#" class="nav-link" data-section="ui-ux">⚛️ Frontend</a>
                 <a href="#" class="nav-link" data-section="mobile-development">📱 Flutter Mobile</a>
                 <a href="#" class="nav-link" data-section="security">🔒 Security</a>
@@ -627,26 +626,368 @@
                 <!-- Technology Stack Overview -->
                 <div class="highlight-box">
                     <h4>⚡ Technology Stack & Architecture</h4>
+                    <p style="margin-bottom: 25px; color: #555; line-height: 1.6;">SKOLARIS is built on a modern, scalable technology stack designed for multi-campus operations, high availability, and seamless integration across web and mobile platforms.</p>
+                    
+                    <!-- Core Technology Stack -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 20px 0;">
+                        <div style="background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                            <div style="font-size: 2.5em; margin-bottom: 10px;">⚛️</div>
+                            <div style="font-weight: 600; color: #2c3e50; margin-bottom: 5px;">React 18+</div>
+                            <div style="color: #666; font-size: 0.9em;">Frontend Framework</div>
+                        </div>
+                        <div style="background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                            <div style="font-size: 2.5em; margin-bottom: 10px;">🔧</div>
+                            <div style="font-weight: 600; color: #2c3e50; margin-bottom: 5px;">Laravel 10+</div>
+                            <div style="color: #666; font-size: 0.9em;">Backend API</div>
+                        </div>
+                        <div style="background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                            <div style="font-size: 2.5em; margin-bottom: 10px;">🗄️</div>
+                            <div style="font-weight: 600; color: #2c3e50; margin-bottom: 5px;">MySQL/Aurora</div>
+                            <div style="color: #666; font-size: 0.9em;">Database System</div>
+                        </div>
+                        <div style="background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                            <div style="font-size: 2.5em; margin-bottom: 10px;">📱</div>
+                            <div style="font-weight: 600; color: #2c3e50; margin-bottom: 5px;">Flutter 3.16+</div>
+                            <div style="color: #666; font-size: 0.9em;">Mobile Framework</div>
+                        </div>
+                        <div style="background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                            <div style="font-size: 2.5em; margin-bottom: 10px;">☁️</div>
+                            <div style="font-weight: 600; color: #2c3e50; margin-bottom: 5px;">AWS Cloud</div>
+                            <div style="color: #666; font-size: 0.9em;">Cloud Infrastructure</div>
+                        </div>
+                        <div style="background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                            <div style="font-size: 2.5em; margin-bottom: 10px;">🐳</div>
+                            <div style="font-weight: 600; color: #2c3e50; margin-bottom: 5px;">Docker</div>
+                            <div style="color: #666; font-size: 0.9em;">Containerization</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Detailed Technology Breakdown -->
+                    <div style="background: #f8f9fa; padding: 25px; border-radius: 12px; margin: 25px 0; border-left: 4px solid #667eea;">
+                        <h5 style="color: #2c3e50; margin: 0 0 20px 0; font-size: 1.2em;">🏗️ Comprehensive Technology Architecture</h5>
+                        
+                        <!-- Frontend Technology Stack -->
+                        <div style="background: #e3f2fd; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #2196f3;">
+                            <h5 style="color: #1976d2; margin: 0 0 15px 0;">🛠️ Frontend Technology Stack</h5>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                                <div style="background: white; padding: 15px; border-radius: 6px; border: 1px solid #bbdefb;">
+                                    <div style="font-weight: 600; color: #1976d2; margin-bottom: 5px;">⚛️ React Ecosystem</div>
+                                    <div style="font-size: 0.9em; color: #424242;">• React 18+ with Hooks<br>• React Router v6<br>• React Query (TanStack)<br>• React Hook Form</div>
+                                </div>
+                                <div style="background: white; padding: 15px; border-radius: 6px; border: 1px solid #bbdefb;">
+                                    <div style="font-weight: 600; color: #1976d2; margin-bottom: 5px;">🎨 UI Framework</div>
+                                    <div style="font-size: 0.9em; color: #424242;">• Material-UI (MUI) v5<br>• Tailwind CSS<br>• Styled Components<br>• Custom Design System</div>
+                                </div>
+                                <div style="background: white; padding: 15px; border-radius: 6px; border: 1px solid #bbdefb;">
+                                    <div style="font-weight: 600; color: #1976d2; margin-bottom: 5px;">📊 State Management</div>
+                                    <div style="font-size: 0.9em; color: #424242;">• Redux Toolkit<br>• Context API<br>• Local Storage<br>• Session Management</div>
+                                </div>
+                                <div style="background: white; padding: 15px; border-radius: 6px; border: 1px solid #bbdefb;">
+                                    <div style="font-weight: 600; color: #1976d2; margin-bottom: 5px;">🔧 Development Tools</div>
+                                    <div style="font-size: 0.9em; color: #424242;">• TypeScript<br>• Vite Build Tool<br>• ESLint & Prettier<br>• Jest Testing</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Backend Technology Stack -->
+                        <div style="background: #e8f5e8; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #4caf50;">
+                            <h5 style="color: #388e3c; margin: 0 0 15px 0;">🔧 Backend Technology Stack</h5>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                                <div style="background: white; padding: 15px; border-radius: 6px; border: 1px solid #c8e6c9;">
+                                    <div style="font-weight: 600; color: #388e3c; margin-bottom: 5px;">🚀 Laravel Framework</div>
+                                    <div style="font-size: 0.9em; color: #424242;">• Laravel 10+<br>• PHP 8.1+<br>• Eloquent ORM<br>• Artisan CLI</div>
+                                </div>
+                                <div style="background: white; padding: 15px; border-radius: 6px; border: 1px solid #c8e6c9;">
+                                    <div style="font-weight: 600; color: #388e3c; margin-bottom: 5px;">🔐 Authentication</div>
+                                    <div style="font-size: 0.9em; color: #424242;">• Laravel Sanctum<br>• JWT Tokens<br>• Multi-campus RBAC<br>• Session Management</div>
+                                </div>
+                                <div style="background: white; padding: 15px; border-radius: 6px; border: 1px solid #c8e6c9;">
+                                    <div style="font-weight: 600; color: #388e3c; margin-bottom: 5px;">📡 API Features</div>
+                                    <div style="font-size: 0.9em; color: #424242;">• RESTful APIs<br>• API Resources<br>• Rate Limiting<br>• CORS Support</div>
+                                </div>
+                                <div style="background: white; padding: 15px; border-radius: 6px; border: 1px solid #c8e6c9;">
+                                    <div style="font-weight: 600; color: #388e3c; margin-bottom: 5px;">🔄 Background Jobs</div>
+                                    <div style="font-size: 0.9em; color: #424242;">• Laravel Queues<br>• Redis Queue<br>• Job Scheduling<br>• Event Broadcasting</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Database Technology Stack -->
+                        <div style="background: #fff3e0; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #ff9800;">
+                            <h5 style="color: #f57c00; margin: 0 0 15px 0;">🗄️ Database Technology Stack</h5>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                                <div style="background: white; padding: 15px; border-radius: 6px; border: 1px solid #ffcc02;">
+                                    <div style="font-weight: 600; color: #f57c00; margin-bottom: 5px;">🗄️ Primary Database</div>
+                                    <div style="font-size: 0.9em; color: #424242;">• MySQL 8.0+<br>• AWS Aurora MySQL<br>• PostgreSQL Compatible<br>• Multi-campus Schema</div>
+                                </div>
+                                <div style="background: white; padding: 15px; border-radius: 6px; border: 1px solid #ffcc02;">
+                                    <div style="font-weight: 600; color: #f57c00; margin-bottom: 5px;">📊 Database Features</div>
+                                    <div style="font-size: 0.9em; color: #424242;">• 40+ Tables<br>• JSON Data Types<br>• Full-text Search<br>• Audit Logging</div>
+                                </div>
+                                <div style="background: white; padding: 15px; border-radius: 6px; border: 1px solid #ffcc02;">
+                                    <div style="font-weight: 600; color: #f57c00; margin-bottom: 5px;">🔄 Caching Layer</div>
+                                    <div style="font-size: 0.9em; color: #424242;">• Redis Cache<br>• Query Caching<br>• Session Storage<br>• Real-time Data</div>
+                                </div>
+                                <div style="background: white; padding: 15px; border-radius: 6px; border: 1px solid #ffcc02;">
+                                    <div style="font-weight: 600; color: #f57c00; margin-bottom: 5px;">🔍 Search Engine</div>
+                                    <div style="font-size: 0.9em; color: #424242;">• Elasticsearch<br>• Full-text Search<br>• Advanced Queries<br>• Analytics Support</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Mobile Technology Stack -->
+                        <div style="background: #f3e5f5; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #9c27b0;">
+                            <h5 style="color: #7b1fa2; margin: 0 0 15px 0;">📱 Mobile Technology Stack</h5>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                                <div style="background: white; padding: 15px; border-radius: 6px; border: 1px solid #e1bee7;">
+                                    <div style="font-weight: 600; color: #7b1fa2; margin-bottom: 5px;">🎯 Flutter Framework</div>
+                                    <div style="font-size: 0.9em; color: #424242;">• Flutter 3.16+<br>• Dart 3.2+<br>• Material Design 3<br>• Cupertino Design</div>
+                                </div>
+                                <div style="background: white; padding: 15px; border-radius: 6px; border: 1px solid #e1bee7;">
+                                    <div style="font-weight: 600; color: #7b1fa2; margin-bottom: 5px;">📱 Native Features</div>
+                                    <div style="font-size: 0.9em; color: #424242;">• Camera & Gallery<br>• Push Notifications<br>• Biometric Auth<br>• Location Services</div>
+                                </div>
+                                <div style="background: white; padding: 15px; border-radius: 6px; border: 1px solid #e1bee7;">
+                                    <div style="font-weight: 600; color: #7b1fa2; margin-bottom: 5px;">🔄 Offline Support</div>
+                                    <div style="font-size: 0.9em; color: #424242;">• Hive Database<br>• SQLite (sqflite)<br>• Sync Manager<br>• Conflict Resolution</div>
+                                </div>
+                                <div style="background: white; padding: 15px; border-radius: 6px; border: 1px solid #e1bee7;">
+                                    <div style="font-weight: 600; color: #7b1fa2; margin-bottom: 5px;">🔧 State Management</div>
+                                    <div style="font-size: 0.9em; color: #424242;">• Provider/Riverpod<br>• BLoC Pattern<br>• Local Storage<br>• API Integration</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Cloud & Infrastructure -->
+                        <div style="background: #e1f5fe; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #00bcd4;">
+                            <h5 style="color: #0097a7; margin: 0 0 15px 0;">☁️ Cloud & Infrastructure</h5>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                                <div style="background: white; padding: 15px; border-radius: 6px; border: 1px solid #b2ebf2;">
+                                    <div style="font-weight: 600; color: #0097a7; margin-bottom: 5px;">☁️ AWS Services</div>
+                                    <div style="font-size: 0.9em; color: #424242;">• EC2 Instances<br>• RDS Aurora<br>• S3 Storage<br>• CloudFront CDN</div>
+                                </div>
+                                <div style="background: white; padding: 15px; border-radius: 6px; border: 1px solid #b2ebf2;">
+                                    <div style="font-weight: 600; color: #0097a7; margin-bottom: 5px;">🐳 Containerization</div>
+                                    <div style="font-size: 0.9em; color: #424242;">• Docker Containers<br>• Docker Compose<br>• ECS/EKS<br>• Container Registry</div>
+                                </div>
+                                <div style="background: white; padding: 15px; border-radius: 6px; border: 1px solid #b2ebf2;">
+                                    <div style="font-weight: 600; color: #0097a7; margin-bottom: 5px;">🔄 CI/CD Pipeline</div>
+                                    <div style="font-size: 0.9em; color: #424242;">• GitHub Actions<br>• Automated Testing<br>• Blue-Green Deployment<br>• Rollback Capability</div>
+                                </div>
+                                <div style="background: white; padding: 15px; border-radius: 6px; border: 1px solid #b2ebf2;">
+                                    <div style="font-weight: 600; color: #0097a7; margin-bottom: 5px;">🔒 Security & Monitoring</div>
+                                    <div style="font-size: 0.9em; color: #424242;">• SSL/TLS Certificates<br>• WAF Protection<br>• CloudWatch Monitoring<br>• Security Audits</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Architecture Highlights -->
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #6c757d;">
+                        <h5 style="color: #495057; margin: 0 0 15px 0;">🏗️ Architecture Highlights</h5>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                            <div>
+                                <h6 style="color: #2c3e50; margin-bottom: 10px;">🌐 Multi-Platform Support</h6>
+                                <ul style="margin: 0; padding-left: 20px; color: #555; font-size: 0.9em;">
+                                    <li>Responsive Web Application (React)</li>
+                                    <li>Cross-platform Mobile App (Flutter)</li>
+                                    <li>Progressive Web App (PWA) capabilities</li>
+                                    <li>Offline-first mobile experience</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h6 style="color: #2c3e50; margin-bottom: 10px;">🏢 Multi-Campus Architecture</h6>
+                                <ul style="margin: 0; padding-left: 20px; color: #555; font-size: 0.9em;">
+                                    <li>Tenant-based data isolation</li>
+                                    <li>Centralized user management</li>
+                                    <li>Campus-specific configurations</li>
+                                    <li>Scalable database design</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h6 style="color: #2c3e50; margin-bottom: 10px;">🔐 Security & Compliance</h6>
+                                <ul style="margin: 0; padding-left: 20px; color: #555; font-size: 0.9em;">
+                                    <li>Role-based access control (RBAC)</li>
+                                    <li>Data encryption at rest and in transit</li>
+                                    <li>GDPR compliance features</li>
+                                    <li>Comprehensive audit logging</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Details & Team Information -->
+                <div class="category-grid" style="margin: 40px 0;">
+                    <div class="category-card">
+                        <h3>📋 Project Details</h3>
+                        <p><strong>Project Owner:</strong> ICCT Colleges</p>
+                        <p><strong>System Type:</strong> Student Information System (SIS)</p>
+                        <p><strong>Architecture:</strong> Multi-Campus with Role-Based Access Control</p>
+                        <p><strong>Workspace:</strong> <a href="https://skolaris.icct.edu.ph" target="_blank" style="color: #667eea;">https://skolaris.icct.edu.ph</a></p>
+                        <p><strong>Status:</strong> <span style="color: #ffc107; font-weight: 600;">Active Development</span></p>
+                        <p><strong>Version:</strong> 1.0.0 (Development Phase)</p>
+                        <p><strong>Development Phase:</strong> Core Module Implementation</p>
+                        <p><strong>Expected Completion:</strong> 8 Months (Q4 2024)</p>
+                        <p><strong>License:</strong> Proprietary - ICCT Colleges</p>
+                    </div>
+                    
+                    <div class="category-card">
+                        <h3>👥 Development Team</h3>
+                        <div style="display: grid; gap: 15px; margin-top: 15px;">
+                            <div style="background: linear-gradient(135deg, #dc3545, #c82333); color: white; padding: 15px; border-radius: 8px; position: relative;">
+                                <div style="position: absolute; top: -5px; right: -5px; font-size: 1.2em;">👑</div>
+                                <div style="font-weight: 600; margin-bottom: 5px;">Project Manager</div>
+                                <div>Joriz D. Chiong</div>
+                            </div>
+                            <div style="background: #667eea; color: white; padding: 15px; border-radius: 8px;">
+                                <div style="font-weight: 600; margin-bottom: 5px;">🔧 Lead Backend Developer & System Integrator</div>
+                                <div>Arnold Tayum</div>
+                            </div>
+                            <div style="background: #20c997; color: white; padding: 15px; border-radius: 8px;">
+                                <div style="font-weight: 600; margin-bottom: 5px;">⚛️ Full-Stack Architect & DevOps Lead</div>
+                                <div>Aldrin Cruz Omnes</div>
+                            </div>
+                            <div style="background: #6f42c1; color: white; padding: 15px; border-radius: 8px;">
+                                <div style="font-weight: 600; margin-bottom: 5px;">📱 Full Stack Developer & Mobile App Specialist</div>
+                                <div>John Axel Abille</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Development Status & Progress -->
+                <div class="entry">
+                    <div class="meta">
+                        <span class="meta-badge category">Development Status</span>
+                        <span class="meta-badge priority">High</span>
+                    </div>
+                    <h3>🚀 Development Status & Progress</h3>
+                    <h4>Current Implementation Phase</h4>
+                    
+                    <div style="background: #f8f9fa; padding: 25px; border-radius: 12px; margin: 20px 0; border-left: 4px solid #667eea;">
+                        <h5 style="color: #2c3e50; margin-bottom: 20px;">📊 Project Progress Overview</h5>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 20px;">
+                            <div style="background: white; padding: 15px; border-radius: 8px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                <div style="font-size: 2em; font-weight: bold; color: #28a745; margin-bottom: 5px;">100%</div>
+                                <div style="color: #666; font-size: 0.9em;">Database Schema</div>
+                            </div>
+                            <div style="background: white; padding: 15px; border-radius: 8px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                <div style="font-size: 2em; font-weight: bold; color: #ffc107; margin-bottom: 5px;">0%</div>
+                                <div style="color: #666; font-size: 0.9em;">Development Phases</div>
+                            </div>
+                            <div style="background: white; padding: 15px; border-radius: 8px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                <div style="font-size: 2em; font-weight: bold; color: #667eea; margin-bottom: 5px;">24</div>
+                                <div style="color: #666; font-size: 0.9em;">Tasks Ready</div>
+                            </div>
+                            <div style="background: white; padding: 15px; border-radius: 8px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                <div style="font-size: 2em; font-weight: bold; color: #17a2b8; margin-bottom: 5px;">8</div>
+                                <div style="color: #666; font-size: 0.9em;">User Roles</div>
+                            </div>
+                        </div>
+                        
+                        <div style="background: #e8f4fd; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #17a2b8;">
+                            <h6 style="color: #2c3e50; margin: 0 0 15px 0;">🎯 Current Development Status</h6>
+                            <ul style="margin: 0; padding-left: 20px; color: #495057;">
+                                <li><strong>Database Schema:</strong> ✅ Complete with 40 tables covering all system modules</li>
+                                <li><strong>Development Phases:</strong> 🔄 Ready to start - All 6 phases at 0% completion</li>
+                                <li><strong>Task Management:</strong> ✅ 24 development tasks ready for implementation</li>
+                                <li><strong>System Architecture:</strong> ✅ Complete design with 18 core modules defined</li>
+                                <li><strong>User Roles:</strong> ✅ 8 roles defined with permission structure</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="background: #fff3cd; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #ffc107;">
+                            <h6 style="color: #856404; margin: 0 0 15px 0;">📋 Development Phases Status</h6>
+                            <ul style="margin: 0; padding-left: 20px; color: #856404;">
+                                <li><strong>Phase 0 (Core System):</strong> 0% - Ready for development</li>
+                                <li><strong>Phase 1 (Student Entry):</strong> 0% - Ready for development</li>
+                                <li><strong>Phase 2 (Academic Management):</strong> 0% - Ready for development</li>
+                                <li><strong>Phase 3 (Financial Management):</strong> 0% - Ready for development</li>
+                                <li><strong>Phase 4 (Support Services):</strong> 0% - Ready for development</li>
+                                <li><strong>Phase 5 (Mobile & Communication):</strong> 0% - Ready for development</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ICCT Colleges Campus Information -->
+                <div class="entry">
+                    <div class="meta">
+                        <span class="meta-badge category">Campus Information</span>
+                        <span class="meta-badge priority">Active</span>
+                    </div>
+                    <h3>🏢 ICCT Colleges - Multi-Campus Network</h3>
+                    <h4>Complete Campus Information System</h4>
+                    
+                    <!-- Main Campus -->
+                    <div style="background: linear-gradient(135deg, #667eea10 0%, #764ba220 100%); padding: 25px; border-radius: 12px; border: 2px solid #667eea30; margin: 20px 0;">
+                        <h5 style="color: #2c3e50; margin-bottom: 15px; font-size: 1.2em;">🏛️ Main Campus</h5>
+                        <div style="background: white; padding: 20px; border-radius: 8px; border-left: 4px solid #667eea;">
+                            <p><strong>ICCT Colleges - Main Campus</strong></p>
+                            <p>📍 <strong>Address:</strong> Cainta, Rizal, Philippines</p>
+                            <p>📞 <strong>Phone:</strong> (02) 8XXX-XXXX</p>
+                            <p>✉️ <strong>Email:</strong> main@icct.edu.ph</p>
+                            <p>🌐 <strong>Website:</strong> www.icct.edu.ph</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Branch Campuses -->
+                    <h5 style="color: #2c3e50; margin: 30px 0 20px 0; font-size: 1.2em;">🏫 Branch Campuses</h5>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 20px 0;">
+                        <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 4px solid #28a745;">
+                            <h6 style="color: #2c3e50; margin-bottom: 10px;">🏢 Antipolo Campus</h6>
+                            <p style="color: #666; margin-bottom: 5px;">📍 Antipolo City, Rizal</p>
+                            <p style="color: #666; margin-bottom: 5px;">📞 (02) 8XXX-XXXX</p>
+                            <p style="color: #666;">✉️ antipolo@icct.edu.ph</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 4px solid #17a2b8;">
+                            <h6 style="color: #2c3e50; margin-bottom: 10px;">🏢 Binangonan Campus</h6>
+                            <p style="color: #666; margin-bottom: 5px;">📍 Binangonan, Rizal</p>
+                            <p style="color: #666; margin-bottom: 5px;">📞 (02) 8XXX-XXXX</p>
+                            <p style="color: #666;">✉️ binangonan@icct.edu.ph</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 4px solid #ffc107;">
+                            <h6 style="color: #2c3e50; margin-bottom: 10px;">🏢 Taytay Campus</h6>
+                            <p style="color: #666; margin-bottom: 5px;">📍 Taytay, Rizal</p>
+                            <p style="color: #666; margin-bottom: 5px;">📞 (02) 8XXX-XXXX</p>
+                            <p style="color: #666;">✉️ taytay@icct.edu.ph</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 4px solid #6f42c1;">
+                            <h6 style="color: #2c3e50; margin-bottom: 10px;">🏢 San Mateo Campus</h6>
+                            <p style="color: #666; margin-bottom: 5px;">📍 San Mateo, Rizal</p>
+                            <p style="color: #666; margin-bottom: 5px;">📞 (02) 8XXX-XXXX</p>
+                            <p style="color: #666;">✉️ sanmateo@icct.edu.ph</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 4px solid #dc3545;">
+                            <h6 style="color: #2c3e50; margin-bottom: 10px;">🏢 Rodriguez Campus</h6>
+                            <p style="color: #666; margin-bottom: 5px;">📍 Rodriguez, Rizal</p>
+                            <p style="color: #666; margin-bottom: 5px;">📞 (02) 8XXX-XXXX</p>
+                            <p style="color: #666;">✉️ rodriguez@icct.edu.ph</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Campus Statistics -->
                     <div class="stats-row">
                         <div class="stat-box">
-                            <div style="font-size: 1.8em; margin-bottom: 10px;">⚛️</div>
-                            <div class="stat-label"><strong>React JS</strong><br/>Frontend Framework</div>
+                            <div class="stat-number">6</div>
+                            <div class="stat-label">Total Campuses</div>
                         </div>
                         <div class="stat-box">
-                            <div style="font-size: 1.8em; margin-bottom: 10px;">🔧</div>
-                            <div class="stat-label"><strong>Laravel API</strong><br/>Backend Framework</div>
+                            <div class="stat-number">1</div>
+                            <div class="stat-label">Main Campus</div>
                         </div>
                         <div class="stat-box">
-                            <div style="font-size: 1.8em; margin-bottom: 10px;">🗄️</div>
-                            <div class="stat-label"><strong>MySQL</strong><br/>Database System</div>
+                            <div class="stat-number">5</div>
+                            <div class="stat-label">Branch Campuses</div>
                         </div>
                         <div class="stat-box">
-                            <div style="font-size: 1.8em; margin-bottom: 10px;">☁️</div>
-                            <div class="stat-label"><strong>AWS</strong><br/>Cloud Hosting</div>
-                        </div>
-                        <div class="stat-box">
-                            <div style="font-size: 1.8em; margin-bottom: 10px;">🐳</div>
-                            <div class="stat-label"><strong>Docker</strong><br/>Containerization</div>
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">Rizal Province</div>
                         </div>
                     </div>
                 </div>
@@ -6921,296 +7262,6 @@ INSERT INTO permissions (module, action, resource, description) VALUES
                 </div>
             </div>
 
-            <!-- Basic Information Section -->
-            <div class="content-section" id="basic-information">
-                <h2 class="section-title">ℹ️ Basic Information</h2>
-                
-                <div class="highlight-box">
-                    <h4>📋 SKOLARIS Project Information</h4>
-                    <p>Comprehensive project details, team information, system specifications, and campus data for the SKOLARIS Student Information System development and deployment.</p>
-                    <div class="stats-row">
-                        <div class="stat-box">
-                            <div class="stat-number">6</div>
-                            <div class="stat-label">ICCT Campuses</div>
-                        </div>
-                        <div class="stat-box">
-                            <div class="stat-number">8</div>
-                            <div class="stat-label">User Roles</div>
-                        </div>
-                        <div class="stat-box">
-                            <div class="stat-number">40</div>
-                            <div class="stat-label">Database Tables</div>
-                        </div>
-                        <div class="stat-box">
-                            <div class="stat-number">18</div>
-                            <div class="stat-label">Core Modules</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="category-grid">
-                    <div class="category-card">
-                        <h3>📋 Project Details</h3>
-                        <p><strong>Project Owner:</strong> ICCT Colleges</p>
-                        <p><strong>System Type:</strong> Student Information System (SIS)</p>
-                        <p><strong>Architecture:</strong> Multi-Campus with Role-Based Access Control</p>
-                        <p><strong>Workspace:</strong> <a href="https://skolaris.icct.edu.ph" target="_blank" style="color: #667eea;">https://skolaris.icct.edu.ph</a></p>
-                        <p><strong>Status:</strong> <span style="color: #ffc107; font-weight: 600;">Active Development</span></p>
-                        <p><strong>Version:</strong> 1.0.0 (Development Phase)</p>
-                        <p><strong>Development Phase:</strong> Core Module Implementation</p>
-                        <p><strong>Expected Completion:</strong> 8 Months (Q4 2024)</p>
-                        <p><strong>License:</strong> Proprietary - ICCT Colleges</p>
-                    </div>
-                    
-                    <div class="category-card">
-                        <h3>👥 Development Team</h3>
-                        <div style="display: grid; gap: 15px; margin-top: 15px;">
-                            <div style="background: linear-gradient(135deg, #dc3545, #c82333); color: white; padding: 15px; border-radius: 8px; position: relative;">
-                                <div style="position: absolute; top: -5px; right: -5px; font-size: 1.2em;">👑</div>
-                                <div style="font-weight: 600; margin-bottom: 5px;">Project Manager</div>
-                                <div>Joriz D. Chiong</div>
-                            </div>
-                            <div style="background: #667eea; color: white; padding: 15px; border-radius: 8px;">
-                                <div style="font-weight: 600; margin-bottom: 5px;">🔧 Lead Backend Developer & System Integrator</div>
-                                <div>Arnold Tayum</div>
-                            </div>
-                            <div style="background: #20c997; color: white; padding: 15px; border-radius: 8px;">
-                                <div style="font-weight: 600; margin-bottom: 5px;">⚛️ Full-Stack Architect & DevOps Lead</div>
-                                <div>Aldrin Cruz Omnes</div>
-                            </div>
-                            <div style="background: #6f42c1; color: white; padding: 15px; border-radius: 8px;">
-                                <div style="font-weight: 600; margin-bottom: 5px;">📱 Full Stack Developer & Mobile App Specialist</div>
-                                <div>John Axel Abille</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="highlight-box">
-                    <h4>⚡ Technology Stack & Architecture</h4>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 20px 0;">
-                        <div style="background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                            <div style="font-size: 2.5em; margin-bottom: 10px;">⚛️</div>
-                            <div style="font-weight: 600; color: #2c3e50; margin-bottom: 5px;">React JS</div>
-                            <div style="color: #666; font-size: 0.9em;">Frontend Framework</div>
-                        </div>
-                        <div style="background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                            <div style="font-size: 2.5em; margin-bottom: 10px;">🔧</div>
-                            <div style="font-weight: 600; color: #2c3e50; margin-bottom: 5px;">Laravel API</div>
-                            <div style="color: #666; font-size: 0.9em;">Backend Framework</div>
-                        </div>
-                        <div style="background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                            <div style="font-size: 2.5em; margin-bottom: 10px;">🗄️</div>
-                            <div style="font-weight: 600; color: #2c3e50; margin-bottom: 5px;">MySQL</div>
-                            <div style="color: #666; font-size: 0.9em;">Database System</div>
-                        </div>
-                        <div style="background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                            <div style="font-size: 2.5em; margin-bottom: 10px;">📱</div>
-                            <div style="font-weight: 600; color: #2c3e50; margin-bottom: 5px;">Flutter</div>
-                            <div style="color: #666; font-size: 0.9em;">Mobile Framework</div>
-                        </div>
-                        <div style="background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                            <div style="font-size: 2.5em; margin-bottom: 10px;">☁️</div>
-                            <div style="font-weight: 600; color: #2c3e50; margin-bottom: 5px;">AWS</div>
-                            <div style="color: #666; font-size: 0.9em;">Cloud Hosting</div>
-                        </div>
-                        <div style="background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                            <div style="font-size: 2.5em; margin-bottom: 10px;">🐳</div>
-                            <div style="font-weight: 600; color: #2c3e50; margin-bottom: 5px;">Docker</div>
-                            <div style="color: #666; font-size: 0.9em;">Containerization</div>
-                        </div>
-                    </div>
-                    
-                    <!-- Additional Technology Details -->
-                    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #667eea;">
-                        <h5 style="color: #2c3e50; margin: 0 0 15px 0;">🔧 Additional Technologies & Tools</h5>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
-                            <div style="text-align: center; padding: 10px;">
-                                <div style="font-weight: 600; color: #2c3e50; margin-bottom: 5px;">PHP 8.1+</div>
-                                <div style="color: #666; font-size: 0.85em;">Backend Language</div>
-                            </div>
-                            <div style="text-align: center; padding: 10px;">
-                                <div style="font-weight: 600; color: #2c3e50; margin-bottom: 5px;">JavaScript ES6+</div>
-                                <div style="color: #666; font-size: 0.85em;">Frontend Language</div>
-                            </div>
-                            <div style="text-align: center; padding: 10px;">
-                                <div style="font-weight: 600; color: #2c3e50; margin-bottom: 5px;">Dart</div>
-                                <div style="color: #666; font-size: 0.85em;">Mobile Language</div>
-                            </div>
-                            <div style="text-align: center; padding: 10px;">
-                                <div style="font-weight: 600; color: #2c3e50; margin-bottom: 5px;">RESTful API</div>
-                                <div style="color: #666; font-size: 0.85em;">API Architecture</div>
-                            </div>
-                            <div style="text-align: center; padding: 10px;">
-                                <div style="font-weight: 600; color: #2c3e50; margin-bottom: 5px;">JWT</div>
-                                <div style="color: #666; font-size: 0.85em;">Authentication</div>
-                            </div>
-                            <div style="text-align: center; padding: 10px;">
-                                <div style="font-weight: 600; color: #2c3e50; margin-bottom: 5px;">Git</div>
-                                <div style="color: #666; font-size: 0.85em;">Version Control</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Development Status & Progress -->
-                <div class="entry">
-                    <div class="meta">
-                        <span class="meta-badge category">Development Status</span>
-                        <span class="meta-badge priority">High</span>
-                    </div>
-                    <h3>🚀 Development Status & Progress</h3>
-                    <h4>Current Implementation Phase</h4>
-                    
-                    <div style="background: #f8f9fa; padding: 25px; border-radius: 12px; margin: 20px 0; border-left: 4px solid #667eea;">
-                        <h5 style="color: #2c3e50; margin-bottom: 20px;">📊 Project Progress Overview</h5>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 20px;">
-                            <div style="background: white; padding: 15px; border-radius: 8px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                                <div style="font-size: 2em; font-weight: bold; color: #28a745; margin-bottom: 5px;">100%</div>
-                                <div style="color: #666; font-size: 0.9em;">Database Schema</div>
-                            </div>
-                            <div style="background: white; padding: 15px; border-radius: 8px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                                <div style="font-size: 2em; font-weight: bold; color: #ffc107; margin-bottom: 5px;">0%</div>
-                                <div style="color: #666; font-size: 0.9em;">Development Phases</div>
-                            </div>
-                            <div style="background: white; padding: 15px; border-radius: 8px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                                <div style="font-size: 2em; font-weight: bold; color: #667eea; margin-bottom: 5px;">24</div>
-                                <div style="color: #666; font-size: 0.9em;">Tasks Ready</div>
-                            </div>
-                            <div style="background: white; padding: 15px; border-radius: 8px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                                <div style="font-size: 2em; font-weight: bold; color: #17a2b8; margin-bottom: 5px;">8</div>
-                                <div style="color: #666; font-size: 0.9em;">User Roles</div>
-                            </div>
-                        </div>
-                        
-                        <div style="background: #e8f4fd; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #17a2b8;">
-                            <h6 style="color: #2c3e50; margin: 0 0 15px 0;">🎯 Current Development Status</h6>
-                            <ul style="margin: 0; padding-left: 20px; color: #495057;">
-                                <li><strong>Database Schema:</strong> ✅ Complete with 40 tables covering all system modules</li>
-                                <li><strong>Development Phases:</strong> 🔄 Ready to start - All 6 phases at 0% completion</li>
-                                <li><strong>Task Management:</strong> ✅ 24 development tasks ready for implementation</li>
-                                <li><strong>System Architecture:</strong> ✅ Complete design with 18 core modules defined</li>
-                                <li><strong>User Roles:</strong> ✅ 8 roles defined with permission structure</li>
-                            </ul>
-                        </div>
-                        
-                        <div style="background: #fff3cd; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #ffc107;">
-                            <h6 style="color: #856404; margin: 0 0 15px 0;">📋 Development Phases Status</h6>
-                            <ul style="margin: 0; padding-left: 20px; color: #856404;">
-                                <li><strong>Phase 0 (Core System):</strong> 0% - Ready for development</li>
-                                <li><strong>Phase 1 (Student Entry):</strong> 0% - Ready for development</li>
-                                <li><strong>Phase 2 (Academic Management):</strong> 0% - Ready for development</li>
-                                <li><strong>Phase 3 (Financial Management):</strong> 0% - Ready for development</li>
-                                <li><strong>Phase 4 (Support Services):</strong> 0% - Ready for development</li>
-                                <li><strong>Phase 5 (Mobile & Communication):</strong> 0% - Ready for development</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="entry">
-                    <div class="meta">
-                        <span class="meta-badge category">Campus Information</span>
-                        <span class="meta-badge priority">Active</span>
-                    </div>
-                    <h3>🏢 ICCT Colleges - Multi-Campus Network</h3>
-                    <h4>Complete Campus Information System</h4>
-                    
-                    <!-- Main Campus -->
-                    <div style="background: linear-gradient(135deg, #667eea10 0%, #764ba220 100%); padding: 25px; border-radius: 12px; border: 2px solid #667eea30; margin: 20px 0;">
-                        <h5 style="color: #2c3e50; margin-bottom: 15px; font-size: 1.2em;">🏛️ Main Campus</h5>
-                        <div style="background: white; padding: 20px; border-radius: 8px; border-left: 4px solid #667eea;">
-                            <p><strong>ICCT Colleges - Main Campus</strong></p>
-                            <p>📍 <strong>Address:</strong> Cainta, Rizal, Philippines</p>
-                            <p>📞 <strong>Phone:</strong> (02) 8XXX-XXXX</p>
-                            <p>✉️ <strong>Email:</strong> main@icct.edu.ph</p>
-                            <p>🌐 <strong>Website:</strong> www.icct.edu.ph</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Branch Campuses -->
-                    <h5 style="color: #2c3e50; margin: 30px 0 20px 0; font-size: 1.2em;">🏫 Branch Campuses</h5>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 20px 0;">
-                        <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 4px solid #28a745;">
-                            <h6 style="color: #2c3e50; margin-bottom: 10px;">🏢 Antipolo Campus</h6>
-                            <p style="color: #666; margin-bottom: 5px;">📍 Antipolo City, Rizal</p>
-                            <p style="color: #666; margin-bottom: 5px;">📞 (02) 8XXX-XXXX</p>
-                            <p style="color: #666;">✉️ antipolo@icct.edu.ph</p>
-                        </div>
-                        
-                        <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 4px solid #17a2b8;">
-                            <h6 style="color: #2c3e50; margin-bottom: 10px;">🏢 Binangonan Campus</h6>
-                            <p style="color: #666; margin-bottom: 5px;">📍 Binangonan, Rizal</p>
-                            <p style="color: #666; margin-bottom: 5px;">📞 (02) 8XXX-XXXX</p>
-                            <p style="color: #666;">✉️ binangonan@icct.edu.ph</p>
-                        </div>
-                        
-                        <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 4px solid #ffc107;">
-                            <h6 style="color: #2c3e50; margin-bottom: 10px;">🏢 Taytay Campus</h6>
-                            <p style="color: #666; margin-bottom: 5px;">📍 Taytay, Rizal</p>
-                            <p style="color: #666; margin-bottom: 5px;">📞 (02) 8XXX-XXXX</p>
-                            <p style="color: #666;">✉️ taytay@icct.edu.ph</p>
-                        </div>
-                        
-                        <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 4px solid #6f42c1;">
-                            <h6 style="color: #2c3e50; margin-bottom: 10px;">🏢 San Mateo Campus</h6>
-                            <p style="color: #666; margin-bottom: 5px;">📍 San Mateo, Rizal</p>
-                            <p style="color: #666; margin-bottom: 5px;">📞 (02) 8XXX-XXXX</p>
-                            <p style="color: #666;">✉️ sanmateo@icct.edu.ph</p>
-                        </div>
-                        
-                        <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 4px solid #dc3545;">
-                            <h6 style="color: #2c3e50; margin-bottom: 10px;">🏢 Rodriguez Campus</h6>
-                            <p style="color: #666; margin-bottom: 5px;">📍 Rodriguez, Rizal</p>
-                            <p style="color: #666; margin-bottom: 5px;">📞 (02) 8XXX-XXXX</p>
-                            <p style="color: #666;">✉️ rodriguez@icct.edu.ph</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Campus Statistics -->
-                    <div class="stats-row">
-                        <div class="stat-box">
-                            <div class="stat-number">6</div>
-                            <div class="stat-label">Total Campuses</div>
-                        </div>
-                        <div class="stat-box">
-                            <div class="stat-number">1</div>
-                            <div class="stat-label">Main Campus</div>
-                        </div>
-                        <div class="stat-box">
-                            <div class="stat-number">5</div>
-                            <div class="stat-label">Branch Campuses</div>
-                        </div>
-                        <div class="stat-box">
-                            <div class="stat-number">100%</div>
-                            <div class="stat-label">Rizal Province</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project Documentation -->
-                <div class="entry">
-                    <div class="meta">
-                        <span class="meta-badge category">Documentation</span>
-                        <span class="meta-badge priority">Active</span>
-                    </div>
-                    <h3>📝 Project Documentation</h3>
-                    <h4>Additional Resources and Notes</h4>
-                    <p>This documentation serves as the central repository for all SKOLARIS project information, including technical specifications, implementation details, and project management resources.</p>
-                    <h5>Documentation Sections:</h5>
-                    <ul>
-                        <li><strong>Overview:</strong> Project summary and module descriptions</li>
-                        <li><strong>Database:</strong> Schema design and structure overview</li>
-                        <li><strong>SQL Scripts:</strong> Complete database creation and sample data scripts</li>
-                        <li><strong>Implementation:</strong> Development roadmap and implementation phases</li>
-                        <li><strong>Process Flow:</strong> System workflows and user journey processes</li>
-                        <li><strong>Task Management:</strong> Development tasks organized by module and priority</li>
-                        <li><strong>Frontend:</strong> React JS web development specifications</li>
-                        <li><strong>Mobile:</strong> Flutter mobile app development</li>
-                        <li><strong>Basic Info:</strong> Project details, team information, and campus data</li>
-                    </ul>
-                </div>
-            </div>
 
             <!-- UI/UX Section -->
             <div class="content-section" id="ui-ux">
