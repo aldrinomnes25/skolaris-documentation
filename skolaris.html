@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>🔐 SKOLARIS - Secure Documentation Portal</title>
+    <style>
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            touch-action: manipulation;
+        }
+        html {
+            height: -webkit-fill-available;
+        }
+        .auth-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            margin: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .logo {
+            font-size: 2.5em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 1em;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+        .input-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        .input-label {
+            display: block;
+            color: #555;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+        .password-input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            font-size: 16px; /* Prevents zoom on iOS */
+            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.9);
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        .password-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        .unlock-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            -webkit-appearance: none;
+            appearance: none;
+            touch-action: manipulation;
+        }
+        .unlock-btn:hover, .unlock-btn:active {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+        .unlock-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .error-message {
+            color: #dc3545;
+            font-size: 0.9em;
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(220, 53, 69, 0.1);
+            border-radius: 8px;
+            display: none;
+        }
+        .security-info {
+            font-size: 0.8em;
+            color: #888;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            line-height: 1.4;
+        }
+        .loading {
+            display: none;
+            margin-top: 20px;
+        }
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        #decrypted-content {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            z-index: 9999;
+        }
+        .logout-btn { 
+            position: fixed; 
+            top: 10px; 
+            right: 10px; 
+            background: #dc3545; 
+            color: white; 
+            border: none; 
+            padding: 8px 16px; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-weight: 600; 
+            z-index: 10000; 
+            display: none;
+            font-size: 0.9em;
+            touch-action: manipulation;
+        }
+        .logout-btn:hover, .logout-btn:active { 
+            background: #c82333; 
+        }
+        
+        /* Mobile-specific styles */
+        @media (max-width: 768px) {
+            .auth-container {
+                padding: 30px 20px;
+                margin: 10px;
+                border-radius: 15px;
+            }
+            .logo {
+                font-size: 2.2em;
+            }
+            .subtitle {
+                font-size: 0.95em;
+            }
+            .password-input {
+                padding: 14px 16px;
+            }
+            .unlock-btn {
+                padding: 14px;
+            }
+        }
+        
+        /* iOS Safari specific fixes */
+        @supports (-webkit-touch-callout: none) {
+            body {
+                min-height: -webkit-fill-available;
+            }
+            .password-input {
+                font-size: 16px; /* Prevents zoom */
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="logout-btn" id="logout-btn" onclick="logout()">🔒 Logout</button>
+    
+    <div class="auth-container" id="auth-container">
+        <div class="logo">🔐 SKOLARIS</div>
+        <div class="subtitle">Secure Documentation Portal</div>
+        
+        <form onsubmit="return unlockContent(event)" autocomplete="off">
+            <div class="input-group">
+                <label class="input-label" for="password">Enter Access Password:</label>
+                <input type="password" id="password" class="password-input" 
+                       placeholder="Enter your secure password..." 
+                       autocomplete="new-password" 
+                       autocapitalize="none" 
+                       autocorrect="off" 
+                       spellcheck="false"
+                       required>
+            </div>
+            
+            <button type="submit" class="unlock-btn" id="unlock-btn">
+                🔓 Unlock Documentation
+            </button>
+        </form>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <div style="margin-top: 10px; color: #666;">Decrypting content...</div>
+        </div>
+        
+        <div class="error-message" id="error-message">
+            ❌ Invalid password. Please try again.
+        </div>
+        
+        <div class="security-info">
+            🛡️ This document is protected with instant decryption.<br>
+            Maximum 3 login attempts allowed.<br>
+            <em>Contact administrator for access credentials.</em>
+        </div>
+    </div>
+
+    <iframe id="decrypted-content"></iframe>
+
+    <script>
+        let failedAttempts = 0;
+        const maxAttempts = 3;
+        const correctPassword = "SKOLARIS2025!";
+    
+        // Check if already logged in (session active)
+        window.addEventListener('load', function () {
+            if (sessionStorage.getItem("skolarisAuth") === "true") {
+                loadActualContent();
+            } else {
+                // Autofocus password input
+                setTimeout(() => {
+                    const passwordInput = document.getElementById('password');
+                    if (passwordInput) passwordInput.focus();
+                }, 100);
+            }
+        });
+    
+        async function unlockContent(event) {
+            event.preventDefault();
+    
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('error-message');
+            const loadingDiv = document.getElementById('loading');
+            const unlockBtn = document.getElementById('unlock-btn');
+    
+            unlockBtn.disabled = true;
+            unlockBtn.textContent = '🔄 Processing...';
+    
+            if (password !== correctPassword) {
+                failedAttempts++;
+                errorDiv.style.display = 'block';
+                errorDiv.innerHTML = `❌ Invalid password. ${maxAttempts - failedAttempts} attempts remaining.`;
+    
+                if (failedAttempts >= maxAttempts) {
+                    errorDiv.innerHTML = '🔒 Maximum attempts exceeded. Access denied.';
+                    document.getElementById('password').disabled = true;
+                    unlockBtn.textContent = '🔒 Locked';
+                    return false;
+                }
+    
+                document.getElementById('password').value = '';
+                document.getElementById('password').focus();
+    
+                unlockBtn.disabled = false;
+                unlockBtn.textContent = '🔓 Unlock Documentation';
+                return false;
+            }
+    
+            // Save session
+            sessionStorage.setItem("skolarisAuth", "true");
+    
+            loadingDiv.style.display = 'block';
+            errorDiv.style.display = 'none';
+    
+            setTimeout(() => {
+                loadActualContent();
+            }, 800);
+    
+            return false;
+        }
+    
+        function loadActualContent() {
+            document.getElementById('auth-container').style.display = 'none';
+            document.getElementById('logout-btn').style.display = 'block';
+    
+            const iframe = document.getElementById('decrypted-content');
+            iframe.style.display = 'block';
+            iframe.src = './index.html';
+        }
+    
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                sessionStorage.removeItem("skolarisAuth");
+                location.reload();
+            }
+        }
+    
+        // Auto-logout after 30 minutes
+        setTimeout(function() {
+            sessionStorage.removeItem("skolarisAuth");
+            alert('Session expired. You will be logged out for security.');
+            location.reload();
+        }, 30 * 60 * 1000);
+    </script>
+    
+</body>
+</html>
