@@ -4,6 +4,107 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>🔐 SKOLARIS - Secure Documentation Portal</title>
+    <!-- Security Protection Scripts -->
+    <script>
+        // Disable right-click context menu
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || 
+                (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                (e.ctrlKey && e.shiftKey && e.key === 'J') ||
+                (e.ctrlKey && e.key === 'U') ||
+                (e.ctrlKey && e.key === 'S') ||
+                (e.ctrlKey && e.key === 'A') ||
+                (e.ctrlKey && e.key === 'P')) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Disable text selection
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        // Disable drag and drop
+        document.addEventListener('dragstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        // Anti-debugging measures
+        let devtools = {open: false, orientation: null};
+        const threshold = 160;
+        
+        setInterval(function() {
+            if (window.outerHeight - window.innerHeight > threshold || 
+                window.outerWidth - window.innerWidth > threshold) {
+                if (!devtools.open) {
+                    devtools.open = true;
+                    console.clear();
+                    console.log('%cSTOP!', 'color: red; font-size: 50px; font-weight: bold;');
+                    console.log('%cThis is a browser feature intended for developers. Do not paste any code here that someone told you to paste.', 'color: red; font-size: 20px;');
+                    // document.body.innerHTML = '<div style="display:flex;justify-content:center;align-items:center;height:100vh;background:#000;color:#fff;font-family:Arial;"><h1>Access Denied - Developer Tools Detected</h1></div>';
+                }
+            } else {
+                devtools.open = false;
+            }
+        }, 500);
+
+        // Console warning
+        console.clear();
+        console.log('%c⚠️ WARNING ⚠️', 'color: red; font-size: 30px; font-weight: bold;');
+        console.log('%cThis is a browser feature intended for developers. Do not paste any code here that someone told you to paste.', 'color: red; font-size: 16px;');
+        console.log('%cUnauthorized access attempts are logged and monitored.', 'color: orange; font-size: 14px;');
+
+        // Disable print screen
+        document.addEventListener('keyup', function(e) {
+            if (e.keyCode === 44) { // Print Screen key
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // // Blur content when window loses focus (alt+tab protection)
+        // let isBlurred = false;
+        // window.addEventListener('blur', function() {
+        //     if (!isBlurred) {
+        //         isBlurred = true;
+        //         document.body.style.filter = 'blur(5px)';
+        //         document.body.style.transition = 'filter 0.3s ease';
+        //     }
+        // });
+
+        // window.addEventListener('focus', function() {
+        //     if (isBlurred) {
+        //         isBlurred = false;
+        //         document.body.style.filter = 'none';
+        //     }
+        // });
+
+        // Disable image saving
+        document.addEventListener('dragstart', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Obfuscate source code
+        (function() {
+            const originalLog = console.log;
+            console.log = function() {
+                originalLog.apply(console, ['%c🔒 Protected Content', 'color: red; font-weight: bold;']);
+            };
+        })();
+    </script>    
+    
     <style>
         * { 
             margin: 0; 
