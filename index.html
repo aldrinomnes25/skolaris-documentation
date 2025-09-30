@@ -1144,12 +1144,9 @@
                                 <li><strong>🔑 PERMISSIONS:</strong> Granular permission system controlling access to specific modules and actions</li>
                                 <li><strong>🔗 ROLE_PERMISSIONS:</strong> Many-to-many relationship mapping roles to their specific permissions</li>
                                 <li><strong>👤 USER_ROLES:</strong> Junction table assigning roles to users within specific campus contexts</li>
-                                <li><strong>📅 ACADEMIC_CALENDAR_CONFIG:</strong> Campus-specific academic system configuration (semester/trimester/quarter)</li>
-                                <li><strong>📚 ACADEMIC_TERMS:</strong> Academic terms/periods with enrollment and exam dates</li>
-                                <li><strong>🗓️ ACADEMIC_YEARS:</strong> Academic year management and tracking</li>
                             </ul>
                             <p style="margin: 10px 0 0 0; color: #495057; line-height: 1.6; font-style: italic;">
-                                This schema ensures secure, scalable multi-campus management with fine-grained access control, data isolation between campuses, and comprehensive academic calendar support for both semester and trimester systems.
+                                This schema ensures secure, scalable multi-campus management with fine-grained access control and data isolation between campuses.
                             </p>
                         </div>
                         
@@ -1284,14 +1281,11 @@
                                 <li><strong>🏫 SECTIONS:</strong> Class sections for each program year level with capacity limits</li>
                                 <li><strong>⏰ CLASS_SCHEDULES:</strong> Detailed scheduling linking sections, subjects, rooms, and time slots</li>
                                 <li><strong>📊 STUDENT_GRADES:</strong> Grade tracking for each student-subject combination with multiple assessment types</li>
-                                <li><strong>📜 TRANSCRIPTS:</strong> Academic records summarizing student performance by term and year</li>
+                                <li><strong>📜 TRANSCRIPTS:</strong> Academic records summarizing student performance by semester and year</li>
                                 <li><strong>🏢 ROOMS:</strong> Physical classroom and facility management for scheduling</li>
-                                <li><strong>📅 ACADEMIC_CALENDAR_CONFIG:</strong> Campus-specific academic system configuration (semester/trimester/quarter)</li>
-                                <li><strong>📚 ACADEMIC_TERMS:</strong> Academic terms/periods with enrollment and exam dates</li>
-                                <li><strong>🗓️ ACADEMIC_YEARS:</strong> Academic year management and tracking</li>
                             </ul>
                             <p style="margin: 10px 0 0 0; color: #495057; line-height: 1.6; font-style: italic;">
-                                This module ensures comprehensive academic management with flexible curriculum design, efficient scheduling, accurate grade tracking, and complete academic calendar support for both semester and trimester systems across all programs and campuses.
+                                This module ensures comprehensive academic management with flexible curriculum design, efficient scheduling, and accurate grade tracking across all programs and campuses.
                             </p>
                         </div>
                         
@@ -1428,46 +1422,6 @@
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">subject_id (FK)</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">room_id (FK)</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #555;">day, time_start, time_end</div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Row 2.5: Academic Calendar Tables -->
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin: 25px 0; flex-wrap: wrap; gap: 15px;">
-                                <div style="background: white; border: 2px solid #28a745; border-radius: 8px; min-width: 180px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                                    <div style="background: #28a745; color: white; padding: 12px; font-weight: 600; text-align: center;">📅 ACADEMIC_CALENDAR_CONFIG</div>
-                                    <div style="padding: 15px;">
-                                        <div style="padding: 4px 0; font-size: 0.9em; color: #dc3545; font-weight: 600;">config_id (PK)</div>
-                                        <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">campus_id (FK)</div>
-                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">academic_system</div>
-                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">terms_per_year</div>
-                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">current_academic_year</div>
-                                    </div>
-                                </div>
-                                
-                                <div style="font-size: 1.5em; color: #28a745; font-weight: bold;">→</div>
-                                
-                                <div style="background: white; border: 2px solid #17a2b8; border-radius: 8px; min-width: 180px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                                    <div style="background: #17a2b8; color: white; padding: 12px; font-weight: 600; text-align: center;">📚 ACADEMIC_TERMS</div>
-                                    <div style="padding: 15px;">
-                                        <div style="padding: 4px 0; font-size: 0.9em; color: #dc3545; font-weight: 600;">term_id (PK)</div>
-                                        <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">campus_id (FK)</div>
-                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">academic_year</div>
-                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">term_number, term_name</div>
-                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">start_date, end_date</div>
-                                    </div>
-                                </div>
-                                
-                                <div style="font-size: 1.5em; color: #28a745; font-weight: bold;">→</div>
-                                
-                                <div style="background: white; border: 2px solid #6f42c1; border-radius: 8px; min-width: 180px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                                    <div style="background: #6f42c1; color: white; padding: 12px; font-weight: 600; text-align: center;">🗓️ ACADEMIC_YEARS</div>
-                                    <div style="padding: 15px;">
-                                        <div style="padding: 4px 0; font-size: 0.9em; color: #dc3545; font-weight: 600;">year_id (PK)</div>
-                                        <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">campus_id (FK)</div>
-                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">academic_year</div>
-                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">year_start, year_end</div>
-                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">is_current</div>
                                     </div>
                                 </div>
                             </div>
@@ -2636,20 +2590,19 @@ CREATE TABLE curriculum (
 CREATE TABLE sections (
     section_id INT AUTO_INCREMENT PRIMARY KEY,
     program_id INT NOT NULL,
-    term_id INT NOT NULL,
     section_name VARCHAR(50) NOT NULL,
     year_level INT NOT NULL CHECK (year_level BETWEEN 1 AND 6),
+    semester INT NOT NULL CHECK (semester BETWEEN 1 AND 3),
+    school_year VARCHAR(20) NOT NULL,
     max_students INT DEFAULT 40,
     current_students INT DEFAULT 0,
     is_active BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (program_id) REFERENCES programs(program_id) ON DELETE CASCADE,
-    FOREIGN KEY (term_id) REFERENCES academic_terms(term_id) ON DELETE CASCADE,
-    UNIQUE KEY uk_section (program_id, section_name, term_id),
+    UNIQUE KEY uk_section (program_id, section_name, school_year),
     INDEX idx_section_program (program_id),
-    INDEX idx_section_term (term_id),
-    INDEX idx_section_year_level (year_level)
+    INDEX idx_section_year_sem (year_level, semester)
 );
 
 -- 6. STUDENT_SECTIONS TABLE (Junction table for many-to-many)
@@ -2691,23 +2644,20 @@ CREATE TABLE class_schedules (
     subject_id INT NOT NULL,
     faculty_id INT,
     room_id INT NOT NULL,
-    term_id INT NOT NULL,
     day_of_week ENUM('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday') NOT NULL,
     time_start TIME NOT NULL,
     time_end TIME NOT NULL,
+    school_year VARCHAR(20) NOT NULL,
+    semester INT NOT NULL CHECK (semester BETWEEN 1 AND 3),
     is_active BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (section_id) REFERENCES sections(section_id) ON DELETE CASCADE,
     FOREIGN KEY (subject_id) REFERENCES subjects(subject_id) ON DELETE CASCADE,
-    FOREIGN KEY (faculty_id) REFERENCES faculty(faculty_id) ON DELETE SET NULL,
     FOREIGN KEY (room_id) REFERENCES rooms(room_id) ON DELETE RESTRICT,
-    FOREIGN KEY (term_id) REFERENCES academic_terms(term_id) ON DELETE CASCADE,
-    UNIQUE KEY uk_schedule (section_id, subject_id, day_of_week, time_start),
     INDEX idx_schedule_section (section_id),
     INDEX idx_schedule_day_time (day_of_week, time_start),
-    INDEX idx_schedule_room (room_id),
-    INDEX idx_schedule_term (term_id)
+    INDEX idx_schedule_room (room_id)
 );
 
 -- 9. GRADE_COMPONENTS TABLE
@@ -2728,7 +2678,6 @@ CREATE TABLE student_grades (
     student_id BIGINT NOT NULL,
     subject_id INT NOT NULL,
     section_id INT NOT NULL,
-    term_id INT NOT NULL,
     faculty_id INT,
     prelim_grade DECIMAL(3,2),
     midterm_grade DECIMAL(3,2),
@@ -2736,17 +2685,17 @@ CREATE TABLE student_grades (
     overall_grade DECIMAL(3,2),
     letter_grade CHAR(2),
     status ENUM('passed', 'failed', 'incomplete', 'dropped') DEFAULT 'incomplete',
+    school_year VARCHAR(20) NOT NULL,
+    semester INT NOT NULL CHECK (semester BETWEEN 1 AND 3),
     remarks TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE,
     FOREIGN KEY (subject_id) REFERENCES subjects(subject_id) ON DELETE RESTRICT,
     FOREIGN KEY (section_id) REFERENCES sections(section_id) ON DELETE CASCADE,
-    FOREIGN KEY (term_id) REFERENCES academic_terms(term_id) ON DELETE CASCADE,
-    UNIQUE KEY uk_student_grade (student_id, subject_id, term_id),
+    UNIQUE KEY uk_student_grade (student_id, subject_id, school_year, semester),
     INDEX idx_grade_student (student_id),
     INDEX idx_grade_subject (subject_id),
-    INDEX idx_grade_term (term_id),
     INDEX idx_grade_status (status)
 );
 
@@ -2771,9 +2720,10 @@ CREATE TABLE student_grade_components (
 CREATE TABLE transcripts (
     transcript_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     student_id BIGINT NOT NULL,
-    term_id INT NOT NULL,
+    school_year VARCHAR(20) NOT NULL,
+    semester INT NOT NULL CHECK (semester BETWEEN 1 AND 3),
     year_level INT NOT NULL CHECK (year_level BETWEEN 1 AND 6),
-    term_gpa DECIMAL(3,2) DEFAULT 0.00,
+    semester_gpa DECIMAL(3,2) DEFAULT 0.00,
     cumulative_gpa DECIMAL(3,2) DEFAULT 0.00,
     total_units_taken INT DEFAULT 0,
     total_units_earned INT DEFAULT 0,
@@ -2784,10 +2734,8 @@ CREATE TABLE transcripts (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE,
-    FOREIGN KEY (term_id) REFERENCES academic_terms(term_id) ON DELETE CASCADE,
-    UNIQUE KEY uk_transcript (student_id, term_id),
+    UNIQUE KEY uk_transcript (student_id, school_year, semester),
     INDEX idx_transcript_student (student_id),
-    INDEX idx_transcript_term (term_id),
     INDEX idx_transcript_gpa (cumulative_gpa)
 );</code></pre>
                     </div>
@@ -2811,27 +2759,28 @@ CREATE TABLE transcripts (
 CREATE TABLE fee_structures (
     fee_id INT AUTO_INCREMENT PRIMARY KEY,
     program_id INT NOT NULL,
-    term_id INT,
     fee_type ENUM('tuition', 'miscellaneous', 'laboratory', 'library', 'registration', 'graduation', 'id_card', 'medical', 'insurance') NOT NULL,
     fee_name VARCHAR(100) NOT NULL,
     amount DECIMAL(10,2) NOT NULL CHECK (amount >= 0),
+    semester INT CHECK (semester BETWEEN 1 AND 3),
+    school_year VARCHAR(20) NOT NULL,
     year_level INT CHECK (year_level BETWEEN 1 AND 6),
     is_required BOOLEAN DEFAULT TRUE,
     is_active BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (program_id) REFERENCES programs(program_id) ON DELETE CASCADE,
-    FOREIGN KEY (term_id) REFERENCES academic_terms(term_id) ON DELETE CASCADE,
     INDEX idx_fee_program (program_id),
-    INDEX idx_fee_term (term_id),
-    INDEX idx_fee_type (fee_type)
+    INDEX idx_fee_type (fee_type),
+    INDEX idx_fee_school_year (school_year)
 );
 
 -- 2. STUDENT_ASSESSMENTS TABLE
 CREATE TABLE student_assessments (
     assessment_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     student_id BIGINT NOT NULL,
-    term_id INT NOT NULL,
+    school_year VARCHAR(20) NOT NULL,
+    semester INT NOT NULL CHECK (semester BETWEEN 1 AND 3),
     total_amount DECIMAL(10,2) NOT NULL CHECK (total_amount >= 0),
     discount_amount DECIMAL(10,2) DEFAULT 0.00,
     net_amount DECIMAL(10,2) NOT NULL CHECK (net_amount >= 0),
@@ -2843,12 +2792,10 @@ CREATE TABLE student_assessments (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE,
-    FOREIGN KEY (term_id) REFERENCES academic_terms(term_id) ON DELETE CASCADE,
-    UNIQUE KEY uk_assessment (student_id, term_id),
+    UNIQUE KEY uk_assessment (student_id, school_year, semester),
     INDEX idx_assessment_status (status),
     INDEX idx_assessment_due_date (due_date),
-    INDEX idx_assessment_balance (balance),
-    INDEX idx_assessment_term (term_id)
+    INDEX idx_assessment_balance (balance)
 );
 
 -- 3. ASSESSMENT_DETAILS TABLE
@@ -3003,7 +2950,8 @@ CREATE TABLE faculty_load (
     load_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     faculty_id INT NOT NULL,
     schedule_id INT NOT NULL,
-    term_id INT NOT NULL,
+    school_year VARCHAR(20) NOT NULL,
+    semester INT NOT NULL CHECK (semester BETWEEN 1 AND 3),
     units DECIMAL(3,1) NOT NULL CHECK (units > 0),
     load_type ENUM('regular', 'overload', 'summer') DEFAULT 'regular',
     status ENUM('assigned', 'confirmed', 'cancelled') DEFAULT 'assigned',
@@ -3011,10 +2959,9 @@ CREATE TABLE faculty_load (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (faculty_id) REFERENCES faculty(faculty_id) ON DELETE CASCADE,
     FOREIGN KEY (schedule_id) REFERENCES class_schedules(schedule_id) ON DELETE CASCADE,
-    FOREIGN KEY (term_id) REFERENCES academic_terms(term_id) ON DELETE CASCADE,
-    UNIQUE KEY uk_faculty_schedule (faculty_id, schedule_id, term_id),
+    UNIQUE KEY uk_faculty_schedule (faculty_id, schedule_id, school_year, semester),
     INDEX idx_load_faculty (faculty_id),
-    INDEX idx_load_term (term_id)
+    INDEX idx_load_semester (school_year, semester)
 );
 
 -- 4. ATTENDANCE_RECORDS TABLE
@@ -3376,176 +3323,8 @@ INSERT INTO permissions (module, action, resource, description) VALUES
                             <span class="meta-badge category">Sample Data</span>
                             <span class="meta-badge priority">High</span>
                         </div>
-                        <h3>Academic Calendar Configuration Tables</h3>
-                        <h4>Trimester and Semester System Support</h4>
-                        <pre><code>-- =============================================
--- ACADEMIC CALENDAR CONFIGURATION TABLES
--- =============================================
-
--- 1. ACADEMIC_CALENDAR_CONFIG TABLE
-CREATE TABLE academic_calendar_config (
-    config_id INT AUTO_INCREMENT PRIMARY KEY,
-    campus_id INT NOT NULL,
-    academic_system ENUM('semester', 'trimester', 'quarter') NOT NULL DEFAULT 'semester',
-    terms_per_year INT NOT NULL CHECK (terms_per_year BETWEEN 2 AND 4),
-    current_academic_year VARCHAR(20) NOT NULL,
-    enrollment_period_start DATE,
-    enrollment_period_end DATE,
-    is_active BOOLEAN DEFAULT TRUE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (campus_id) REFERENCES campuses(campus_id) ON DELETE CASCADE,
-    UNIQUE KEY uk_campus_config (campus_id, academic_system),
-    INDEX idx_campus_active (campus_id, is_active)
-);
-
--- 2. ACADEMIC_TERMS TABLE
-CREATE TABLE academic_terms (
-    term_id INT AUTO_INCREMENT PRIMARY KEY,
-    campus_id INT NOT NULL,
-    academic_year VARCHAR(20) NOT NULL,
-    term_number INT NOT NULL CHECK (term_number BETWEEN 1 AND 4),
-    term_name VARCHAR(50) NOT NULL,
-    term_type ENUM('regular', 'summer', 'special') DEFAULT 'regular',
-    start_date DATE NOT NULL,
-    end_date DATE NOT NULL,
-    enrollment_start DATE,
-    enrollment_end DATE,
-    add_drop_period_start DATE,
-    add_drop_period_end DATE,
-    final_exam_start DATE,
-    final_exam_end DATE,
-    is_active BOOLEAN DEFAULT TRUE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (campus_id) REFERENCES campuses(campus_id) ON DELETE CASCADE,
-    UNIQUE KEY uk_term_campus (campus_id, academic_year, term_number),
-    INDEX idx_term_dates (start_date, end_date),
-    INDEX idx_term_active (campus_id, is_active)
-);
-
--- 3. ACADEMIC_YEARS TABLE
-CREATE TABLE academic_years (
-    year_id INT AUTO_INCREMENT PRIMARY KEY,
-    campus_id INT NOT NULL,
-    academic_year VARCHAR(20) NOT NULL,
-    year_start DATE NOT NULL,
-    year_end DATE NOT NULL,
-    is_current BOOLEAN DEFAULT FALSE,
-    is_active BOOLEAN DEFAULT TRUE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (campus_id) REFERENCES campuses(campus_id) ON DELETE CASCADE,
-    UNIQUE KEY uk_year_campus (campus_id, academic_year),
-    INDEX idx_year_dates (year_start, year_end),
-    INDEX idx_year_current (campus_id, is_current)
-);
-
--- =============================================
--- ACADEMIC CALENDAR SAMPLE DATA
--- =============================================
-
--- Insert Academic Calendar Configuration
-INSERT INTO academic_calendar_config (campus_id, academic_system, terms_per_year, current_academic_year, enrollment_period_start, enrollment_period_end) VALUES
-(1, 'semester', 2, '2024-2025', '2024-05-01', '2024-07-31'),
-(2, 'trimester', 3, '2024-2025', '2024-05-01', '2024-07-31'),
-(3, 'semester', 2, '2024-2025', '2024-05-01', '2024-07-31'),
-(4, 'trimester', 3, '2024-2025', '2024-05-01', '2024-07-31'),
-(5, 'semester', 2, '2024-2025', '2024-05-01', '2024-07-31');
-
--- Insert Academic Years
-INSERT INTO academic_years (campus_id, academic_year, year_start, year_end, is_current) VALUES
-(1, '2024-2025', '2024-06-01', '2025-05-31', TRUE),
-(2, '2024-2025', '2024-06-01', '2025-05-31', TRUE),
-(3, '2024-2025', '2024-06-01', '2025-05-31', TRUE),
-(4, '2024-2025', '2024-06-01', '2025-05-31', TRUE),
-(5, '2024-2025', '2024-06-01', '2025-05-31', TRUE);
-
--- Insert Academic Terms for Semester System (Campus 1, 3, 5)
-INSERT INTO academic_terms (campus_id, academic_year, term_number, term_name, term_type, start_date, end_date, enrollment_start, enrollment_end, add_drop_period_start, add_drop_period_end, final_exam_start, final_exam_end) VALUES
--- Campus 1 (Semester System)
-(1, '2024-2025', 1, 'First Semester', 'regular', '2024-08-15', '2024-12-15', '2024-05-01', '2024-07-31', '2024-08-15', '2024-08-30', '2024-12-09', '2024-12-15'),
-(1, '2024-2025', 2, 'Second Semester', 'regular', '2025-01-15', '2025-05-15', '2024-11-01', '2024-12-31', '2025-01-15', '2025-01-30', '2025-05-05', '2025-05-15'),
-(1, '2024-2025', 3, 'Summer Term', 'summer', '2025-06-01', '2025-07-31', '2025-04-01', '2025-05-31', '2025-06-01', '2025-06-15', '2025-07-28', '2025-07-31'),
-
--- Campus 3 (Semester System)
-(3, '2024-2025', 1, 'First Semester', 'regular', '2024-08-15', '2024-12-15', '2024-05-01', '2024-07-31', '2024-08-15', '2024-08-30', '2024-12-09', '2024-12-15'),
-(3, '2024-2025', 2, 'Second Semester', 'regular', '2025-01-15', '2025-05-15', '2024-11-01', '2024-12-31', '2025-01-15', '2025-01-30', '2025-05-05', '2025-05-15'),
-(3, '2024-2025', 3, 'Summer Term', 'summer', '2025-06-01', '2025-07-31', '2025-04-01', '2025-05-31', '2025-06-01', '2025-06-15', '2025-07-28', '2025-07-31'),
-
--- Campus 5 (Semester System)
-(5, '2024-2025', 1, 'First Semester', 'regular', '2024-08-15', '2024-12-15', '2024-05-01', '2024-07-31', '2024-08-15', '2024-08-30', '2024-12-09', '2024-12-15'),
-(5, '2024-2025', 2, 'Second Semester', 'regular', '2025-01-15', '2025-05-15', '2024-11-01', '2024-12-31', '2025-01-15', '2025-01-30', '2025-05-05', '2025-05-15'),
-(5, '2024-2025', 3, 'Summer Term', 'summer', '2025-06-01', '2025-07-31', '2025-04-01', '2025-05-31', '2025-06-01', '2025-06-15', '2025-07-28', '2025-07-31');
-
--- Insert Academic Terms for Trimester System (Campus 2, 4)
-INSERT INTO academic_terms (campus_id, academic_year, term_number, term_name, term_type, start_date, end_date, enrollment_start, enrollment_end, add_drop_period_start, add_drop_period_end, final_exam_start, final_exam_end) VALUES
--- Campus 2 (Trimester System)
-(2, '2024-2025', 1, 'First Trimester', 'regular', '2024-08-15', '2024-11-15', '2024-05-01', '2024-07-31', '2024-08-15', '2024-08-30', '2024-11-05', '2024-11-15'),
-(2, '2024-2025', 2, 'Second Trimester', 'regular', '2024-12-01', '2025-03-15', '2024-10-01', '2024-11-30', '2024-12-01', '2024-12-15', '2025-03-05', '2025-03-15'),
-(2, '2024-2025', 3, 'Third Trimester', 'regular', '2025-04-01', '2025-07-15', '2025-02-01', '2025-03-31', '2025-04-01', '2025-04-15', '2025-07-05', '2025-07-15'),
-
--- Campus 4 (Trimester System)
-(4, '2024-2025', 1, 'First Trimester', 'regular', '2024-08-15', '2024-11-15', '2024-05-01', '2024-07-31', '2024-08-15', '2024-08-30', '2024-11-05', '2024-11-15'),
-(4, '2024-2025', 2, 'Second Trimester', 'regular', '2024-12-01', '2025-03-15', '2024-10-01', '2024-11-30', '2024-12-01', '2024-12-15', '2025-03-05', '2025-03-15'),
-(4, '2024-2025', 3, 'Third Trimester', 'regular', '2025-04-01', '2025-07-15', '2025-02-01', '2025-03-31', '2025-04-01', '2025-04-15', '2025-07-05', '2025-07-15');
-
-                        </code></pre>
-                    </div>
-                </div>
-
-                <div class="task-card">
-                    <div class="task-header">
-                        <div class="task-title">
-                            <h3>📅 Academic Calendar Management</h3>
-                            <p>Comprehensive academic calendar system supporting both semester and trimester systems</p>
-                        </div>
-                        <div class="meta">
-                            <span class="meta-badge category">Academic</span>
-                            <span class="meta-badge priority">High</span>
-                        </div>
-                    </div>
-                    <div class="task-body">
-                        <h5>📋 Features:</h5>
-                        <ul>
-                            <li><strong>Multi-System Support:</strong> Semester, Trimester, and Quarter systems</li>
-                            <li><strong>Campus-Specific Configuration:</strong> Each campus can have different academic systems</li>
-                            <li><strong>Term Management:</strong> Flexible term creation with enrollment and exam periods</li>
-                            <li><strong>Academic Year Tracking:</strong> Complete academic year management</li>
-                            <li><strong>Enrollment Periods:</strong> Configurable enrollment and add/drop periods</li>
-                        </ul>
-                        
-                        <h5>🔗 Integration Points:</h5>
-                        <ul>
-                            <li><strong>Class Scheduling:</strong> Links to CLASS_SCHEDULES for term-based scheduling</li>
-                            <li><strong>Student Enrollment:</strong> References academic terms for enrollment tracking</li>
-                            <li><strong>Grade Management:</strong> Term-based grade recording and transcripts</li>
-                            <li><strong>Fee Structures:</strong> Term-specific fee calculations</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="task-card">
-                    <div class="task-header">
-                        <div class="task-title">
-                            <h3>🎓 Student Information Sample Data</h3>
-                            <p>Comprehensive student data with education system requirements</p>
-                        </div>
-                        <div class="meta">
-                            <span class="meta-badge category">Data</span>
-                            <span class="meta-badge priority">High</span>
-                        </div>
-                    </div>
-                    <div class="task-body">
-                        <h5>📋 Task Details:</h5>
-                        <ul>
-                            <li>Build campus management dashboard</li>
-                            <li>Implement campus-specific data filtering</li>
-                            <li>Create campus switching functionality</li>
-                            <li>Build campus analytics dashboard</li>
-                        </ul>
-                    </div>
-                </div>
+                        <h3>Student Information Sample Data</h3>
+                        <h4>Comprehensive student data with education system requirements</h4>
                         <pre><code>-- =============================================
 -- STUDENT INFORMATION SAMPLE DATA
 -- =============================================
