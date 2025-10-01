@@ -5,10 +5,10 @@
 
 class TrelloIntegration {
     constructor() {
-        this.apiKey = process.env.TRELLO_API_KEY || 'YOUR_TRELLO_API_KEY';
-        this.secret = process.env.TRELLO_SECRET || 'YOUR_TRELLO_SECRET';
+        this.apiKey = 'f3cba5684e71b81cf564e204aa79df6e';
+        this.secret = '0d6d16da777fdf84f1fb7f6b88f0a9c0d8eaa6122a5adfbe6832a9737a688ce3';
         this.baseUrl = 'https://api.trello.com/1';
-        this.token = process.env.TRELLO_TOKEN || 'YOUR_TRELLO_TOKEN';
+        this.token = 'ATTAb0d5216ceefb6bfbaa9a4254337a81f3a898e6190c50cdf4ff764137cda4b06d19612FC5';
         this.boardId = null;
         this.lists = {};
     }
