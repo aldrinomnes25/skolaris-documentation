@@ -11,8 +11,7 @@ class TrelloIntegration {
         this.token = 'ATTAb0d5216ceefb6bfbaa9a4254337a81f3a898e6190c50cdf4ff764137cda4b06d19612FC5';
         this.boardId = null;
         this.lists = {};
-    }
-
+    } 
     /**
      * Initialize Trello integration
      */
