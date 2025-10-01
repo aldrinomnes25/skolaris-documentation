@@ -1083,6 +1083,185 @@ class TrelloIntegration {
     }
 
     /**
+     * Get checklist status for a specific task card
+     */
+    async getTaskChecklistStatus(cardId) {
+        try {
+            const response = await fetch(`${this.baseUrl}/cards/${cardId}/checklists?key=${this.apiKey}&token=${this.token}`);
+            if (!response.ok) {
+                return null;
+            }
+            
+            const checklists = await response.json();
+            const checklistStatus = [];
+            
+            for (const checklist of checklists) {
+                if (checklist.checkItems && checklist.checkItems.length > 0) {
+                    const items = checklist.checkItems.map(item => ({
+                        id: item.id,
+                        name: item.name,
+                        state: item.state, // 'complete' or 'incomplete'
+                        status: item.state === 'complete' ? 'completed' : 'pending'
+                    }));
+                    
+                    checklistStatus.push({
+                        checklistName: checklist.name,
+                        items: items,
+                        totalItems: items.length,
+                        completedItems: items.filter(item => item.state === 'complete').length,
+                        completionRate: items.length > 0 ? Math.round((items.filter(item => item.state === 'complete').length / items.length) * 100) : 0
+                    });
+                }
+            }
+            
+            return checklistStatus;
+        } catch (error) {
+            console.error('Error getting checklist status:', error);
+            return null;
+        }
+    }
+
+    /**
+     * Get all task cards with their checklist status
+     */
+    async getAllTasksWithChecklistStatus() {
+        try {
+            // Find SKOLARIS board
+                const boardUrl = await this.findSkolarisBoardUrl();
+                if (!boardUrl) {
+                    throw new Error('No SKOLARIS board found');
+            }
+
+            // Get all cards
+            const cardsResponse = await fetch(`${this.baseUrl}/boards/${this.boardId}/cards?key=${this.apiKey}&token=${this.token}`);
+            if (!cardsResponse.ok) {
+                throw new Error('Failed to fetch cards');
+            }
+            const cards = await cardsResponse.json();
+
+            // Get all lists
+            const lists = await this.getBoardLists();
+
+            // Get checklist status for each card
+            const tasksWithStatus = [];
+            for (const card of cards) {
+                const checklistStatus = await this.getTaskChecklistStatus(card.id);
+                const listName = lists.find(list => list.id === card.idList)?.name || 'Unknown';
+                
+                tasksWithStatus.push({
+                    cardId: card.id,
+                    cardName: card.name,
+                    listName: listName,
+                    checklistStatus: checklistStatus,
+                    url: card.url
+                });
+            }
+
+            return tasksWithStatus;
+        } catch (error) {
+            console.error('Error getting tasks with checklist status:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Get comments and activity for a specific card
+     */
+    async getCardComments(cardId) {
+        try {
+            const response = await fetch(`${this.baseUrl}/cards/${cardId}/actions?filter=commentCard,updateCard,createCard&key=${this.apiKey}&token=${this.token}`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch comments');
+            }
+            
+            const actions = await response.json();
+            const comments = [];
+            
+            actions.forEach(action => {
+                if (action.type === 'commentCard') {
+                    const memberCreator = action.memberCreator;
+                    comments.push({
+                        id: action.id,
+                        text: action.data.text,
+                        author: memberCreator ? memberCreator.fullName : 'Unknown User',
+                        username: memberCreator ? memberCreator.username : 'unknown',
+                        initials: memberCreator ? (memberCreator.initials || memberCreator.fullName.split(' ').map(n => n[0]).join('').toUpperCase()) : '??',
+                        avatarUrl: memberCreator ? memberCreator.avatarUrl : null,
+                        date: new Date(action.date),
+                        type: 'comment'
+                    });
+                } else if (action.type === 'updateCard') {
+                    if (action.data.listAfter && action.data.listBefore) {
+                        const memberCreator = action.memberCreator;
+                        comments.push({
+                            id: action.id,
+                            text: `Moved from "${action.data.listBefore.name}" to "${action.data.listAfter.name}"`,
+                            author: memberCreator ? memberCreator.fullName : 'Unknown User',
+                            username: memberCreator ? memberCreator.username : 'unknown',
+                            initials: memberCreator ? (memberCreator.initials || memberCreator.fullName.split(' ').map(n => n[0]).join('').toUpperCase()) : '??',
+                            avatarUrl: memberCreator ? memberCreator.avatarUrl : null,
+                            date: new Date(action.date),
+                            type: 'activity'
+                        });
+                    }
+                } else if (action.type === 'createCard') {
+                    const memberCreator = action.memberCreator;
+                    comments.push({
+                        id: action.id,
+                        text: 'Card created',
+                        author: memberCreator ? memberCreator.fullName : 'Unknown User',
+                        username: memberCreator ? memberCreator.username : 'unknown',
+                        initials: memberCreator ? (memberCreator.initials || memberCreator.fullName.split(' ').map(n => n[0]).join('').toUpperCase()) : '??',
+                        avatarUrl: memberCreator ? memberCreator.avatarUrl : null,
+                        date: new Date(action.date),
+                        type: 'activity'
+                    });
+                }
+            });
+            
+            // Sort by date (newest first)
+            comments.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            return comments;
+        } catch (error) {
+            console.error('Error fetching card comments:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Add a comment to a Trello card
+     */
+    async addCardComment(cardId, commentText) {
+        try {
+            const commentData = {
+                text: commentText,
+                key: this.apiKey,
+                token: this.token
+            };
+
+            const response = await fetch(`${this.baseUrl}/cards/${cardId}/actions/comments`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(commentData)
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Failed to add comment: ${errorText}`);
+            }
+
+            const result = await response.json();
+            return result;
+        } catch (error) {
+            console.error('Error adding comment:', error);
+            throw error;
+        }
+    }
+
+    /**
      * Get comprehensive status of all Trello tasks
      */
     async getAllTaskStatus() {

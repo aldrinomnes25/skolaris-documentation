@@ -193,6 +193,265 @@
         .task-details h5 { color: #2c3e50; margin-bottom: 8px; }
         .task-details ul { padding-left: 20px; }
         .task-details li { margin: 5px 0; color: #555; }
+        
+        /* Checklist Status Styles */
+        .checklist-status { margin: 15px 0; padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #17a2b8; }
+        .checklist-status h6 { color: #17a2b8; margin-bottom: 10px; font-size: 1em; }
+        .checklist-item { display: flex; align-items: center; margin: 8px 0; padding: 8px; background: white; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .checklist-item.completed { background: #d4edda; border-left: 3px solid #28a745; }
+        .checklist-item.pending { background: #fff3cd; border-left: 3px solid #ffc107; }
+        .checklist-item.ongoing { background: #cce5ff; border-left: 3px solid #007bff; }
+        .checklist-status-icon { margin-right: 10px; font-size: 1.2em; }
+        .checklist-item.completed .checklist-status-icon { color: #28a745; }
+        .checklist-item.pending .checklist-status-icon { color: #ffc107; }
+        .checklist-item.ongoing .checklist-status-icon { color: #007bff; }
+        .checklist-item-text { flex: 1; font-size: 0.9em; }
+        .checklist-progress { margin-top: 10px; }
+        .checklist-progress-bar { background: #e9ecef; height: 6px; border-radius: 3px; overflow: hidden; }
+        .checklist-progress-fill { height: 100%; background: linear-gradient(90deg, #28a745, #20c997); transition: width 0.3s ease; }
+        .checklist-summary { font-size: 0.85em; color: #6c757d; margin-top: 5px; }
+        
+        /* Comments Button for Checklist Progress */
+        .checklist-comments-btn { 
+            position: absolute; 
+            top: 10px; 
+            right: 10px; 
+            background: rgba(116, 185, 255, 0.1); 
+            color: #74b9ff; 
+            border: 1px solid rgba(116, 185, 255, 0.3); 
+            padding: 4px 8px; 
+            border-radius: 4px; 
+            font-size: 0.7em; 
+            font-weight: 500; 
+            cursor: pointer; 
+            transition: all 0.3s ease;
+            z-index: 10;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .checklist-comments-btn:hover { 
+            background: rgba(116, 185, 255, 0.2); 
+            color: #0984e3; 
+            border-color: rgba(116, 185, 255, 0.5);
+            transform: translateY(-1px);
+            text-decoration: none;
+        }
+        .checklist-status { position: relative; }
+        
+        /* Comments Modal Styles */
+        .comments-modal { 
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            height: 100%; 
+            background-color: rgba(0,0,0,0.5); 
+            backdrop-filter: blur(5px);
+        }
+        .comments-modal-content { 
+            background-color: #fefefe; 
+            margin: 2% auto; 
+            padding: 0; 
+            border-radius: 12px; 
+            width: 90%; 
+            max-width: 800px; 
+            max-height: 90vh; 
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+        @keyframes modalSlideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .comments-modal-header { 
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%); 
+            color: white; 
+            padding: 20px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+        }
+        .comments-modal-title { 
+            margin: 0; 
+            font-size: 1.3em; 
+            font-weight: 600;
+        }
+        .comments-modal-close { 
+            color: white; 
+            font-size: 28px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            background: none; 
+            border: none; 
+            padding: 0; 
+            width: 30px; 
+            height: 30px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+        .comments-modal-close:hover { 
+            background-color: rgba(255,255,255,0.2); 
+        }
+        .comments-modal-body { 
+            padding: 20px; 
+            max-height: 60vh; 
+            overflow-y: auto;
+        }
+        .comment-item { 
+            background: #f8f9fa; 
+            padding: 15px; 
+            margin-bottom: 15px; 
+            border-radius: 8px; 
+            border-left: 4px solid #74b9ff;
+        }
+        .comment-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 8px;
+        }
+        .comment-author { 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            font-weight: 600; 
+            color: #495057; 
+            font-size: 0.9em;
+        }
+        .comment-avatar { 
+            width: 32px; 
+            height: 32px; 
+            border-radius: 50%; 
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: white; 
+            font-weight: bold; 
+            font-size: 0.8em;
+            flex-shrink: 0;
+        }
+        .comment-avatar img { 
+            width: 100%; 
+            height: 100%; 
+            border-radius: 50%; 
+            object-fit: cover;
+        }
+        .comment-author-info { 
+            display: flex; 
+            flex-direction: column;
+        }
+        .comment-author-name { 
+            font-weight: 600; 
+            color: #495057; 
+            font-size: 0.9em;
+        }
+        .comment-author-username { 
+            font-weight: 400; 
+            color: #6c757d; 
+            font-size: 0.8em;
+        }
+        .comment-date { 
+            color: #6c757d; 
+            font-size: 0.8em;
+        }
+        .comment-text { 
+            color: #212529; 
+            line-height: 1.5; 
+            margin: 0;
+        }
+        .comments-loading { 
+            text-align: center; 
+            padding: 40px; 
+            color: #6c757d;
+        }
+        .comments-error { 
+            text-align: center; 
+            padding: 40px; 
+            color: #dc3545;
+        }
+        .no-comments { 
+            text-align: center; 
+            padding: 40px; 
+            color: #6c757d; 
+            font-style: italic;
+        }
+        
+        /* Comment Form Styles */
+        .comment-form { 
+            background: #f8f9fa; 
+            padding: 20px; 
+            border-radius: 8px; 
+            margin-bottom: 20px; 
+            border: 1px solid #e9ecef;
+        }
+        .comment-form h4 { 
+            margin: 0 0 15px 0; 
+            color: #495057; 
+            font-size: 1.1em;
+        }
+        .comment-form textarea { 
+            width: 100%; 
+            min-height: 80px; 
+            padding: 12px; 
+            border: 1px solid #ced4da; 
+            border-radius: 6px; 
+            font-family: inherit; 
+            font-size: 0.9em; 
+            resize: vertical; 
+            margin-bottom: 10px;
+            transition: border-color 0.3s ease;
+        }
+        .comment-form textarea:focus { 
+            outline: none; 
+            border-color: #74b9ff; 
+            box-shadow: 0 0 0 2px rgba(116, 185, 255, 0.2);
+        }
+        .comment-form-buttons { 
+            display: flex; 
+            gap: 10px; 
+            justify-content: flex-end;
+        }
+        .comment-submit-btn { 
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%); 
+            color: white; 
+            border: none; 
+            padding: 8px 16px; 
+            border-radius: 6px; 
+            font-size: 0.9em; 
+            font-weight: 500; 
+            cursor: pointer; 
+            transition: all 0.3s ease;
+        }
+        .comment-submit-btn:hover { 
+            transform: translateY(-1px); 
+            box-shadow: 0 4px 12px rgba(116, 185, 255, 0.3);
+        }
+        .comment-submit-btn:disabled { 
+            background: #6c757d; 
+            cursor: not-allowed; 
+            transform: none; 
+            box-shadow: none;
+        }
+        .comment-cancel-btn { 
+            background: #6c757d; 
+            color: white; 
+            border: none; 
+            padding: 8px 16px; 
+            border-radius: 6px; 
+            font-size: 0.9em; 
+            cursor: pointer; 
+            transition: all 0.3s ease;
+        }
+        .comment-cancel-btn:hover { 
+            background: #5a6268;
+        }
         .expected-result { background: #f8f9fa; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #17a2b8; }
         .expected-result h6 { color: #17a2b8; margin-bottom: 10px; }
         .module-section { margin: 40px 0; }
@@ -5943,6 +6202,7 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                         <h6 style="margin: 0 0 15px 0; color: #2c3e50; font-weight: 700; font-size: 1.2em;">📊 Live Project Status:</h6>
                         <div id="auto-sync-status-content" style="color: #ecf0f1; line-height: 1.6;"></div>
                     </div>
+
                     <div class="stats-row">
                         <div class="stat-box">
                             <div class="stat-number">72</div>
@@ -11417,6 +11677,305 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
     <script src="trello-integration.js"></script>
     
     <script>
+        // Function to display checklist status for task cards
+        async function displayChecklistStatus() {
+            try {
+                if (!window.trelloIntegration) {
+                    console.log('Trello integration not available');
+                    return;
+                }
+
+                // Show loading indicator
+                const taskCards = document.querySelectorAll('.task-card');
+                taskCards.forEach(card => {
+                    const existingStatus = card.querySelector('.checklist-status');
+                    if (existingStatus) {
+                        existingStatus.remove();
+                    }
+                    
+                    // Add loading indicator
+                    const loadingHTML = '<div class="checklist-status"><h6>📋 Loading Checklist Status...</h6><div style="text-align: center; padding: 20px; color: #6c757d;">🔄 Fetching data from Trello...</div></div>';
+                    const taskDetails = card.querySelector('.task-details');
+                    if (taskDetails) {
+                        taskDetails.insertAdjacentHTML('afterend', loadingHTML);
+                    }
+                });
+
+                // Get all tasks with checklist status
+                const tasksWithStatus = await window.trelloIntegration.getAllTasksWithChecklistStatus();
+                
+                // Update each task card with checklist status
+                tasksWithStatus.forEach(task => {
+                    const taskCards = document.querySelectorAll('.task-card');
+                    taskCards.forEach(card => {
+                        const taskTitle = card.querySelector('h4')?.textContent?.trim();
+                        if (taskTitle && taskTitle === task.cardName) {
+                            // Remove existing checklist status if any
+                            const existingStatus = card.querySelector('.checklist-status');
+                            if (existingStatus) {
+                                existingStatus.remove();
+                            }
+
+                            // Add checklist status if available
+                            if (task.checklistStatus && task.checklistStatus.length > 0) {
+                                const checklistHTML = generateChecklistHTML(task.checklistStatus, task.cardId, task.cardName);
+                                const taskDetails = card.querySelector('.task-details');
+                                if (taskDetails) {
+                                    taskDetails.insertAdjacentHTML('afterend', checklistHTML);
+                                }
+                            }
+                        }
+                    });
+                });
+            } catch (error) {
+                console.error('Error displaying checklist status:', error);
+            }
+        }
+
+        // Global variables for current card
+        let currentCardId = null;
+        let currentCardName = '';
+
+        // Function to open Trello comments and activity in modal
+        async function openTrelloComments(cardId, cardName) {
+            if (!cardId) {
+                alert('Card ID not available. Please sync with Trello first.');
+                return;
+            }
+            
+            // Store current card info
+            currentCardId = cardId;
+            currentCardName = cardName;
+            
+            // Show modal
+            const modal = document.getElementById('commentsModal');
+            const modalBody = document.getElementById('commentsModalBody');
+            const modalTitle = document.querySelector('.comments-modal-title');
+            const commentForm = document.getElementById('commentForm');
+            
+            modal.style.display = 'block';
+            modalTitle.textContent = `💬 Comments & Activity - ${cardName}`;
+            modalBody.innerHTML = '<div class="comments-loading">🔄 Loading comments...</div>';
+            commentForm.style.display = 'none';
+            
+            try {
+                // Fetch comments from Trello
+                const comments = await window.trelloIntegration.getCardComments(cardId);
+                
+                if (comments.length === 0) {
+                    modalBody.innerHTML = '<div class="no-comments">No comments or activity yet. Be the first to comment!</div>';
+                } else {
+                    let commentsHTML = '';
+                    comments.forEach(comment => {
+                        const dateStr = comment.date.toLocaleDateString() + ' ' + comment.date.toLocaleTimeString();
+                        const icon = comment.type === 'comment' ? '💬' : '📝';
+                        const typeClass = comment.type === 'comment' ? 'comment' : 'activity';
+                        
+                        // Create avatar HTML
+                        let avatarHTML = '';
+                        if (comment.avatarUrl) {
+                            avatarHTML = `<img src="${comment.avatarUrl}" alt="${comment.author}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />`;
+                        }
+                        avatarHTML += `<div class="comment-avatar" style="${comment.avatarUrl ? 'display: none;' : ''}">${comment.initials}</div>`;
+                        
+                        commentsHTML += `
+                            <div class="comment-item ${typeClass}">
+                                <div class="comment-header">
+                                    <div class="comment-author">
+                                        <div class="comment-avatar">
+                                            ${avatarHTML}
+                                        </div>
+                                        <div class="comment-author-info">
+                                            <div class="comment-author-name">${icon} ${comment.author}</div>
+                                            <div class="comment-author-username">@${comment.username}</div>
+                                        </div>
+                                    </div>
+                                    <span class="comment-date">${dateStr}</span>
+                                </div>
+                                <p class="comment-text">${comment.text}</p>
+                            </div>
+                        `;
+                    });
+                    modalBody.innerHTML = commentsHTML;
+                }
+                
+                // Show comment form
+                commentForm.style.display = 'block';
+                
+            } catch (error) {
+                modalBody.innerHTML = '<div class="comments-error">❌ Error loading comments: ' + error.message + '</div>';
+            }
+        }
+
+        // Function to submit a comment
+        async function submitComment() {
+            const textarea = document.getElementById('commentTextarea');
+            const commentText = textarea.value.trim();
+            
+            if (!commentText) {
+                alert('Please enter a comment.');
+                return;
+            }
+            
+            if (!currentCardId) {
+                alert('No card selected.');
+                return;
+            }
+            
+            const submitBtn = document.querySelector('.comment-submit-btn');
+            const originalText = submitBtn.textContent;
+            
+            try {
+                // Disable button and show loading
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Posting...';
+                
+                // Submit comment to Trello
+                await window.trelloIntegration.addCardComment(currentCardId, commentText);
+                
+                // Clear textarea
+                textarea.value = '';
+                
+                // Refresh comments
+                await refreshComments();
+                
+                // Show success message
+                const modalBody = document.getElementById('commentsModalBody');
+                const successMsg = document.createElement('div');
+                successMsg.style.cssText = 'background: #d4edda; color: #155724; padding: 10px; border-radius: 4px; margin-bottom: 15px; border: 1px solid #c3e6cb;';
+                successMsg.textContent = '✅ Comment posted successfully!';
+                modalBody.insertBefore(successMsg, modalBody.firstChild);
+                
+                // Remove success message after 3 seconds
+                setTimeout(() => {
+                    if (successMsg.parentNode) {
+                        successMsg.parentNode.removeChild(successMsg);
+                    }
+                }, 3000);
+                
+            } catch (error) {
+                alert('Error posting comment: ' + error.message);
+            } finally {
+                // Re-enable button
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
+        }
+
+        // Function to cancel comment
+        function cancelComment() {
+            const textarea = document.getElementById('commentTextarea');
+            textarea.value = '';
+        }
+
+        // Function to refresh comments
+        async function refreshComments() {
+            if (!currentCardId) return;
+            
+            const modalBody = document.getElementById('commentsModalBody');
+            modalBody.innerHTML = '<div class="comments-loading">🔄 Refreshing comments...</div>';
+            
+            try {
+                const comments = await window.trelloIntegration.getCardComments(currentCardId);
+                
+                if (comments.length === 0) {
+                    modalBody.innerHTML = '<div class="no-comments">No comments or activity yet. Be the first to comment!</div>';
+                } else {
+                    let commentsHTML = '';
+                    comments.forEach(comment => {
+                        const dateStr = comment.date.toLocaleDateString() + ' ' + comment.date.toLocaleTimeString();
+                        const icon = comment.type === 'comment' ? '💬' : '📝';
+                        const typeClass = comment.type === 'comment' ? 'comment' : 'activity';
+                        
+                        // Create avatar HTML
+                        let avatarHTML = '';
+                        if (comment.avatarUrl) {
+                            avatarHTML = `<img src="${comment.avatarUrl}" alt="${comment.author}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />`;
+                        }
+                        avatarHTML += `<div class="comment-avatar" style="${comment.avatarUrl ? 'display: none;' : ''}">${comment.initials}</div>`;
+                        
+                        commentsHTML += `
+                            <div class="comment-item ${typeClass}">
+                                <div class="comment-header">
+                                    <div class="comment-author">
+                                        <div class="comment-avatar">
+                                            ${avatarHTML}
+                                        </div>
+                                        <div class="comment-author-info">
+                                            <div class="comment-author-name">${icon} ${comment.author}</div>
+                                            <div class="comment-author-username">@${comment.username}</div>
+                                        </div>
+                                    </div>
+                                    <span class="comment-date">${dateStr}</span>
+                                </div>
+                                <p class="comment-text">${comment.text}</p>
+                            </div>
+                        `;
+                    });
+                    modalBody.innerHTML = commentsHTML;
+                }
+            } catch (error) {
+                modalBody.innerHTML = '<div class="comments-error">❌ Error refreshing comments: ' + error.message + '</div>';
+            }
+        }
+
+        // Function to close comments modal
+        function closeCommentsModal() {
+            const modal = document.getElementById('commentsModal');
+            const textarea = document.getElementById('commentTextarea');
+            modal.style.display = 'none';
+            textarea.value = '';
+            currentCardId = null;
+            currentCardName = '';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('commentsModal');
+            if (event.target === modal) {
+                closeCommentsModal();
+            }
+        }
+
+        // Generate HTML for checklist status
+        function generateChecklistHTML(checklistStatus, cardId = null, cardName = '') {
+            let html = '<div class="checklist-status">';
+            html += '<h6>📋 Checklist Progress</h6>';
+            
+            // Add comments button if cardId is available
+            if (cardId) {
+                html += `<a href="#" class="checklist-comments-btn" onclick="openTrelloComments('${cardId}', '${cardName}'); return false;" title="View Comments & Activity on Trello">💬 Comments</a>`;
+            }
+            
+            checklistStatus.forEach(checklist => {
+                html += `<div style="margin-bottom: 15px;">`;
+                html += `<div style="font-weight: 600; margin-bottom: 8px; color: #495057;">${checklist.checklistName}</div>`;
+                
+                // Progress bar
+                html += `<div class="checklist-progress">`;
+                html += `<div class="checklist-progress-bar">`;
+                html += `<div class="checklist-progress-fill" style="width: ${checklist.completionRate}%;"></div>`;
+                html += `</div>`;
+                html += `<div class="checklist-summary">${checklist.completedItems}/${checklist.totalItems} completed (${checklist.completionRate}%)</div>`;
+                html += `</div>`;
+                
+                // Checklist items
+                checklist.items.forEach(item => {
+                    const statusClass = item.status === 'completed' ? 'completed' : 'pending';
+                    const icon = item.status === 'completed' ? '✅' : '⏳';
+                    html += `<div class="checklist-item ${statusClass}">`;
+                    html += `<span class="checklist-status-icon">${icon}</span>`;
+                    html += `<span class="checklist-item-text">${item.name}</span>`;
+                    html += `</div>`;
+                });
+                
+                html += `</div>`;
+            });
+            
+            html += '</div>';
+            return html;
+        }
+
         // Auto-load sync status function
         async function loadAutoSyncStatus() {
             try {
@@ -11607,7 +12166,7 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                 // Add Checklist Statistics if available
                 if (status.checklistStats) {
                     statusMessage += `
-                        <div style="background: linear-gradient(135deg, #e67e22 0%, #d35400 100%); padding: 25px; border-radius: 15px; margin-bottom: 25px; color: white; border: 1px solid #e67e22; box-shadow: 0 4px 15px rgba(230, 126, 34, 0.3);">
+                        <div style="background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%); padding: 25px; border-radius: 15px; margin-bottom: 25px; color: white; border: 1px solid #74b9ff; box-shadow: 0 4px 15px rgba(116, 185, 255, 0.3);">
                             <h4 style="margin: 0 0 20px 0; font-size: 1.3em; display: flex; align-items: center; gap: 12px; color: #f8f9fa; font-weight: 600;">
                                 ✅ Checklist Progress
                             </h4>
@@ -11617,7 +12176,7 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                                     <span style="font-size: 1.4em; font-weight: bold; color: #f8f9fa;">${status.checklistStats.completionRate}%</span>
                                 </div>
                                 <div style="background: rgba(0,0,0,0.4); height: 12px; border-radius: 6px; overflow: hidden; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);">
-                                    <div style="background: linear-gradient(90deg, #f39c12 0%, #e67e22 100%); height: 100%; width: ${status.checklistStats.completionRate}%; transition: width 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.2);"></div>
+                                    <div style="background: linear-gradient(90deg, #a29bfe 0%, #6c5ce7 100%); height: 100%; width: ${status.checklistStats.completionRate}%; transition: width 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.2);"></div>
                                 </div>
                             </div>
                             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;">
@@ -11639,6 +12198,15 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                 }
                 
                 autoStatusContent.innerHTML = statusMessage;
+                
+                // Automatically load checklist status after Live Project Status is loaded
+                setTimeout(async () => {
+                    try {
+                        await displayChecklistStatus();
+                    } catch (error) {
+                        console.log('Checklist status loading failed:', error);
+                    }
+                }, 1000); // Wait 1 second after status is displayed
                 
             } catch (error) {
                 const autoStatusContent = document.getElementById('auto-sync-status-content');
@@ -11874,7 +12442,7 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                     // Checklist Statistics
                     if (status.checklistStats) {
                         statusMessage += `
-                            <div style="background: linear-gradient(135deg, #16a085 0%, #1abc9c 100%); padding: 25px; border-radius: 15px; margin-bottom: 25px; color: white; border: 1px solid #48c9b0; box-shadow: 0 4px 15px rgba(22, 160, 133, 0.2);">
+                            <div style="background: linear-gradient(135deg, #00b894 0%, #00a085 100%); padding: 25px; border-radius: 15px; margin-bottom: 25px; color: white; border: 1px solid #00b894; box-shadow: 0 4px 15px rgba(0, 184, 148, 0.3);">
                                 <h4 style="margin: 0 0 20px 0; font-size: 1.3em; display: flex; align-items: center; gap: 12px; color: #f8f9fa; font-weight: 600;">
                                     ✅ Checklist Progress
                                 </h4>
@@ -11884,7 +12452,7 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                                         <span style="font-size: 1.3em; font-weight: bold; color: #f8f9fa;">${status.checklistStats.completionRate}%</span>
                                     </div>
                                     <div style="background: rgba(0,0,0,0.3); height: 12px; border-radius: 6px; overflow: hidden;">
-                                        <div style="background: linear-gradient(90deg, #27ae60 0%, #2ecc71 100%); height: 100%; width: ${status.checklistStats.completionRate}%; transition: width 0.3s ease;"></div>
+                                        <div style="background: linear-gradient(90deg, #55efc4 0%, #00b894 100%); height: 100%; width: ${status.checklistStats.completionRate}%; transition: width 0.3s ease;"></div>
                                     </div>
                                 </div>
                                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;">
@@ -12101,6 +12669,27 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
             });
         });
     </script>
+
+    <!-- Comments Modal -->
+    <div id="commentsModal" class="comments-modal">
+        <div class="comments-modal-content">
+            <div class="comments-modal-header">
+                <h3 class="comments-modal-title">💬 Comments & Activity</h3>
+                <button class="comments-modal-close" onclick="closeCommentsModal()">&times;</button>
+            </div>
+            <div class="comments-modal-body" id="commentsModalBody">
+                <div class="comments-loading">🔄 Loading comments...</div>
+            </div>
+            <div class="comment-form" id="commentForm" style="display: none;">
+                <h4>💬 Add a Comment</h4>
+                <textarea id="commentTextarea" placeholder="Write your comment here..."></textarea>
+                <div class="comment-form-buttons">
+                    <button class="comment-cancel-btn" onclick="cancelComment()">Cancel</button>
+                    <button class="comment-submit-btn" onclick="submitComment()">Post Comment</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
 
