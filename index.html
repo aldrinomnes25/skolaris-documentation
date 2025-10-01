@@ -388,11 +388,11 @@
             <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
             <div class="nav-links" id="navLinks">
                 <a href="#" class="nav-link active" data-section="overview">📊 Overview</a>
+                <a href="#" class="nav-link" data-section="task-management">📋 Task Management</a>
                 <a href="#" class="nav-link" data-section="3month-timeline">📅 Phase 1 Timeline</a>
                 <a href="#" class="nav-link" data-section="phase2-timeline">🚀 Phase 2 Timeline</a>
                 <a href="#" class="nav-link" data-section="process-flow">🔄 Process Flow</a>
                 <a href="#" class="nav-link" data-section="implementation-roadmap">🚀 Implementation</a>
-                <a href="#" class="nav-link" data-section="task-management">📋 Task Management</a>
                 <a href="#" class="nav-link" data-section="database-structure">🗄️ Database</a>
                 <a href="#" class="nav-link" data-section="sql-scripts">💾 SQL Scripts</a>
                 <a href="#" class="nav-link" data-section="ui-ux">⚛️ Frontend</a>
@@ -830,7 +830,7 @@
                         <p><strong>Status:</strong> <span style="color: #ffc107; font-weight: 600;">Active Development</span></p>
                         <p><strong>Version:</strong> 1.0.0 (Development Phase)</p>
                         <p><strong>Development Phase:</strong> Core Module Implementation</p>
-                        <p><strong>Expected Completion:</strong> 8 Months (Q4 2024)</p>
+                        <p><strong>Expected Completion:</strong> Phase 1: January 2026 (Pilot Launch)</p>
                         <p><strong>License:</strong> Proprietary - ICCT Colleges</p>
                     </div>
                     
@@ -878,10 +878,10 @@
                                 <div style="font-size: 2em; font-weight: bold; color: #ffc107; margin-bottom: 5px;">0%</div>
                                 <div style="color: #666; font-size: 0.9em;">Development Phases</div>
                             </div>
-                            <div style="background: white; padding: 15px; border-radius: 8px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                                <div style="font-size: 2em; font-weight: bold; color: #667eea; margin-bottom: 5px;">24</div>
-                                <div style="color: #666; font-size: 0.9em;">Tasks Ready</div>
-                            </div>
+                        <div style="background: white; padding: 15px; border-radius: 8px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <div style="font-size: 2em; font-weight: bold; color: #667eea; margin-bottom: 5px;">72</div>
+                            <div style="color: #666; font-size: 0.9em;">Phase 1 Tasks</div>
+                        </div>
                             <div style="background: white; padding: 15px; border-radius: 8px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
                                 <div style="font-size: 2em; font-weight: bold; color: #17a2b8; margin-bottom: 5px;">8</div>
                                 <div style="color: #666; font-size: 0.9em;">User Roles</div>
@@ -892,8 +892,8 @@
                             <h6 style="color: #2c3e50; margin: 0 0 15px 0;">🎯 Current Development Status</h6>
                             <ul style="margin: 0; padding-left: 20px; color: #495057;">
                                 <li><strong>Database Schema:</strong> ✅ Complete with 40 tables covering all system modules</li>
-                                <li><strong>Development Phases:</strong> 🔄 Ready to start - All 6 phases at 0% completion</li>
-                                <li><strong>Task Management:</strong> ✅ 24 development tasks ready for implementation</li>
+                                <li><strong>Development Phases:</strong> 🔄 Ready to start - 6 development phases (Phase 1-6) at 0% completion</li>
+                                <li><strong>Task Management:</strong> ✅ 72 Phase 1 development tasks ready for implementation (36 Frontend + 36 Backend)</li>
                                 <li><strong>System Architecture:</strong> ✅ Complete design with 18 core modules defined</li>
                                 <li><strong>User Roles:</strong> ✅ 8 roles defined with permission structure</li>
                             </ul>
@@ -902,12 +902,12 @@
                         <div style="background: #fff3cd; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #ffc107;">
                             <h6 style="color: #856404; margin: 0 0 15px 0;">📋 Development Phases Status</h6>
                             <ul style="margin: 0; padding-left: 20px; color: #856404;">
-                                <li><strong>Phase 0 (Core System):</strong> 0% - Ready for development</li>
-                                <li><strong>Phase 1 (Student Entry):</strong> 0% - Ready for development</li>
-                                <li><strong>Phase 2 (Academic Management):</strong> 0% - Ready for development</li>
-                                <li><strong>Phase 3 (Financial Management):</strong> 0% - Ready for development</li>
-                                <li><strong>Phase 4 (Support Services):</strong> 0% - Ready for development</li>
-                                <li><strong>Phase 5 (Mobile & Communication):</strong> 0% - Ready for development</li>
+                                <li><strong>Phase 1 (3-Month Core Implementation):</strong> 0% - Ready for development (72 tasks planned, Oct-Dec 2025)</li>
+                                <li><strong>Phase 2 (3-Month Advanced Features):</strong> 0% - Ready for development (Feb-Apr 2026)</li>
+                                <li><strong>Phase 3 (Extended Academic Features):</strong> 0% - Ready for development (May-Jul 2026)</li>
+                                <li><strong>Phase 4 (Advanced Financial & Administrative):</strong> 0% - Ready for development (Aug-Oct 2026)</li>
+                                <li><strong>Phase 5 (Enterprise Integration):</strong> 0% - Ready for development (Nov 2026 - Jan 2027)</li>
+                                <li><strong>Phase 6 (AI & Machine Learning):</strong> 0% - Ready for development (Feb-Apr 2027)</li>
                             </ul>
                         </div>
                     </div>
@@ -5932,558 +5932,1375 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
 
             <!-- Task Management Section -->
             <div class="content-section" id="task-management">
-                <h2 class="section-title">📋 Task Management</h2>
+                <h2 class="section-title">📋 Task Management - Phase 1 (3-Month) Implementation</h2>
                 
                 <div class="highlight-box">
-                    <h4>🎯 SKOLARIS Development Task Tracker</h4>
-                    <p>Comprehensive task management system with separate frontend (React JS) and backend (Laravel API) development tasks for each module. Each task includes ticket numbers, priority levels, assigned developers, and expected results.</p>
+                    <h4>🎯 SKOLARIS Phase 1 Development Task Tracker</h4>
+                    <p>Comprehensive task management system for Phase 1 implementation (October-December 2025) with Pilot Launch in January 2026. Tasks are organized by priority levels and weekly sprints, covering essential student, faculty, and admin workflows.</p>
+                    
+                    <!-- Auto-loading Sync Status -->
+                    <div id="auto-sync-status" style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 10px; margin: 20px 0; border: 1px solid rgba(255,255,255,0.2); display: none;">
+                        <h6 style="margin: 0 0 15px 0; color: #2c3e50; font-weight: 700; font-size: 1.2em;">📊 Live Project Status:</h6>
+                        <div id="auto-sync-status-content" style="color: #ecf0f1; line-height: 1.6;"></div>
+                    </div>
                     <div class="stats-row">
                         <div class="stat-box">
-                            <div class="stat-number">159+</div>
-                            <div class="stat-label">Total Tasks</div>
+                            <div class="stat-number">72</div>
+                            <div class="stat-label">Phase 1 Tasks</div>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-number">52</div>
+                            <div class="stat-number">36</div>
                             <div class="stat-label">Frontend Tasks</div>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-number">52</div>
+                            <div class="stat-number">36</div>
                             <div class="stat-label">Backend Tasks</div>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-number">30</div>
-                            <div class="stat-label">Mobile Tasks</div>
-                        </div>
-                        <div class="stat-box">
-                            <div class="stat-number">20</div>
-                            <div class="stat-label">Testing Tasks</div>
+                            <div class="stat-number">6</div>
+                            <div class="stat-label">Priority Levels</div>
                         </div>
                         <div class="stat-box">
                             <div class="stat-number">12</div>
-                            <div class="stat-label">Core Modules</div>
+                            <div class="stat-label">Weekly Sprints</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number">8</div>
+                            <div class="stat-label">ICCT Campuses</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Phase 0: Platform Foundations -->
+                <!-- Priority 1: System Foundation (Week 1-2) -->
                 <div class="module-section">
-                    <div class="module-header">
-                        <h3>🏗️ Phase 0 - Platform Foundations</h3>
-                        <p>Core system infrastructure and authentication framework</p>
+                    <div class="module-header" style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);">
+                        <h3>🔥 Priority 1: System Foundation (Week 1-2: Oct 1-15)</h3>
+                        <p>Core infrastructure, database schema, and security implementation</p>
                     </div>
                     
                     <div class="task-grid">
-                        <!-- Authentication System - Frontend -->
+                        <!-- Week 1: Core Infrastructure - Frontend -->
                         <div class="task-card frontend">
                             <div class="task-header">
                                 <div class="task-ticket frontend">SKOL-001-FE</div>
-                                <div class="task-status for-development">For Development</div>
+                                <div class="task-status for-development">Week 1</div>
                             </div>
-                            <h4>Authentication System - Frontend</h4>
-                            <div class="task-priority high">Priority: High</div>
+                            <h4>Core Infrastructure - Frontend</h4>
+                            <div class="task-priority high">Priority: Critical</div>
                             <div class="task-details">
                                 <h5>📋 Task Details:</h5>
                                 <ul>
-                                    <li>Create login/logout components</li>
-                                    <li>Implement JWT token management</li>
-                                    <li>Build role-based route protection</li>
-                                    <li>Create session timeout handling</li>
-                                    <li>Implement remember me functionality</li>
+                                    <li>React.js project setup and configuration</li>
+                                    <li>Multi-campus UI framework setup</li>
+                                    <li>Development environment configuration</li>
+                                    <li>Basic routing and navigation structure</li>
+                                    <li>Component library foundation</li>
                                 </ul>
                             </div>
                             <div class="expected-result">
                                 <h6>🎯 Expected Result:</h6>
-                                <p>Complete authentication system with secure login, role-based access control, and session management. Users can log in, access appropriate dashboards based on roles, and maintain secure sessions.</p>
+                                <p>Complete React.js development environment with multi-campus support, routing system, and component foundation ready for Phase 1 development.</p>
                             </div>
                         </div>
 
-                        <!-- Authentication System - Backend -->
+                        <!-- Week 1: Core Infrastructure - Backend -->
                         <div class="task-card backend">
                             <div class="task-header">
                                 <div class="task-ticket backend">SKOL-001-BE</div>
-                                <div class="task-status for-development">For Development</div>
+                                <div class="task-status for-development">Week 1</div>
                             </div>
-                            <h4>Authentication API - Backend</h4>
-                            <div class="task-priority high">Priority: High</div>
+                            <h4>Core Infrastructure - Backend</h4>
+                            <div class="task-priority high">Priority: Critical</div>
                             <div class="task-details">
                                 <h5>📋 Task Details:</h5>
                                 <ul>
-                                    <li>Create JWT authentication system</li>
-                                    <li>Build login/logout API endpoints</li>
-                                    <li>Implement password hashing & validation</li>
-                                    <li>Create middleware for route protection</li>
-                                    <li>Build session management system</li>
+                                    <li>Laravel project setup and configuration</li>
+                                    <li>Database schema design and implementation</li>
+                                    <li>Multi-campus setup and configuration</li>
+                                    <li>Basic API structure and routing</li>
+                                    <li>Development environment setup</li>
                                 </ul>
                             </div>
                             <div class="expected-result">
                                 <h6>🎯 Expected Result:</h6>
-                                <p>Secure API authentication system with JWT tokens, password encryption, role-based middleware, and comprehensive session management for all user types.</p>
+                                <p>Complete Laravel backend with database schema, multi-campus support, API structure, and development environment ready for Phase 1 implementation.</p>
                             </div>
                         </div>
 
-                        <!-- Database Schema Implementation -->
+                        <!-- Week 2: Security & Auth - Frontend -->
+                        <div class="task-card frontend">
+                            <div class="task-header">
+                                <div class="task-ticket frontend">SKOL-002-FE</div>
+                                <div class="task-status for-development">Week 2</div>
+                            </div>
+                            <h4>Security & Authentication - Frontend</h4>
+                            <div class="task-priority high">Priority: Critical</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>JWT token management system</li>
+                                    <li>Login/logout components</li>
+                                    <li>Role-based route protection</li>
+                                    <li>Session timeout handling</li>
+                                    <li>User management interface</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Secure authentication frontend with JWT management, role-based access control, and comprehensive user management capabilities.</p>
+                            </div>
+                        </div>
+
+                        <!-- Week 2: Security & Auth - Backend -->
                         <div class="task-card backend">
                             <div class="task-header">
                                 <div class="task-ticket backend">SKOL-002-BE</div>
-                                <div class="task-status for-development">For Development</div>
+                                <div class="task-status for-development">Week 2</div>
                             </div>
-                            <h4>Database Schema Implementation</h4>
-                            <div class="task-priority high">Priority: High</div>
+                            <h4>Security & Authentication - Backend</h4>
+                            <div class="task-priority high">Priority: Critical</div>
                             <div class="task-details">
                                 <h5>📋 Task Details:</h5>
                                 <ul>
-                                    <li>Create Laravel migrations for all tables</li>
-                                    <li>Implement Eloquent models with relationships</li>
-                                    <li>Set up database seeders with sample data</li>
-                                    <li>Create database indexes for performance</li>
-                                    <li>Implement soft deletes and timestamps</li>
+                                    <li>JWT authentication system implementation</li>
+                                    <li>Role-based access control (RBAC)</li>
+                                    <li>User management & roles API</li>
+                                    <li>API security & validation</li>
+                                    <li>Password hashing and security</li>
                                 </ul>
                             </div>
                             <div class="expected-result">
                                 <h6>🎯 Expected Result:</h6>
-                                <p>Complete database schema with 40+ tables, proper relationships, indexes, and sample data for development and testing purposes.</p>
+                                <p>Complete authentication backend with JWT tokens, RBAC system, user management APIs, and comprehensive security validation.</p>
+                            </div>
+                        </div>
                             </div>
                         </div>
 
-                        <!-- Multi-Campus Management -->
+                <!-- Priority 2: Maintenance Features (Week 3-4) -->
+                <div class="module-section">
+                    <div class="module-header" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%);">
+                        <h3>🛠️ Priority 2: Maintenance Features (Week 3-4: Oct 16-31)</h3>
+                        <p>Subject management, user management, schedule management, and clinic management</p>
+                    </div>
+                    
+                    <div class="task-grid">
+                        <!-- Week 3: Subject Management - Frontend -->
                         <div class="task-card frontend">
                             <div class="task-header">
                                 <div class="task-ticket frontend">SKOL-003-FE</div>
-                                <div class="task-status for-development">For Development</div>
+                                <div class="task-status for-development">Week 3</div>
                             </div>
-                            <h4>Multi-Campus Management UI</h4>
+                            <h4>Subject Management - Frontend</h4>
                             <div class="task-priority high">Priority: High</div>
                             <div class="task-details">
                                 <h5>📋 Task Details:</h5>
                                 <ul>
-                                    <li>Build campus management dashboard</li>
-                                    <li>Implement campus-specific data filtering</li>
-                                    <li>Create campus switching functionality</li>
-                                    <li>Build campus analytics dashboard</li>
+                                    <li>Subject file upload interface</li>
+                                    <li>Bulk subject import UI (Excel/CSV)</li>
+                                    <li>Subject data validation forms</li>
+                                    <li>Multi-campus subject sync interface</li>
+                                    <li>Subject management dashboard</li>
                                 </ul>
                             </div>
                             <div class="expected-result">
                                 <h6>🎯 Expected Result:</h6>
-                                <p>Intuitive multi-campus interface allowing users to switch between campuses, view campus-specific data, and manage campus operations efficiently.</p>
+                                <p>Complete subject management interface with file upload, bulk import, data validation, and multi-campus synchronization capabilities.</p>
+                            </div>
+                        </div>
+
+                        <!-- Week 3: Subject Management - Backend -->
+                        <div class="task-card backend">
+                            <div class="task-header">
+                                <div class="task-ticket backend">SKOL-003-BE</div>
+                                <div class="task-status for-development">Week 3</div>
+                            </div>
+                            <h4>Subject Management - Backend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Subject file upload system API</li>
+                                    <li>Bulk subject import processing</li>
+                                    <li>Subject data validation logic</li>
+                                    <li>Multi-campus subject sync API</li>
+                                    <li>Subject CRUD operations</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Robust subject management API with file processing, bulk import, validation, and multi-campus synchronization functionality.</p>
+                    </div>
+                </div>
+
+                        <!-- Week 3: User Management - Frontend -->
+                        <div class="task-card frontend">
+                            <div class="task-header">
+                                <div class="task-ticket frontend">SKOL-004-FE</div>
+                                <div class="task-status for-development">Week 3</div>
+                            </div>
+                            <h4>User Management - Frontend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Create & manage user accounts interface</li>
+                                    <li>Assign roles & permissions UI</li>
+                                    <li>User profile management forms</li>
+                                    <li>Account status management interface</li>
+                                    <li>User activity monitoring dashboard</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Comprehensive user management interface with account creation, role assignment, profile management, and activity monitoring capabilities.</p>
+                            </div>
+                        </div>
+
+                        <!-- Week 3: User Management - Backend -->
+                        <div class="task-card backend">
+                            <div class="task-header">
+                                <div class="task-ticket backend">SKOL-004-BE</div>
+                                <div class="task-status for-development">Week 3</div>
+                            </div>
+                            <h4>User Management - Backend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Create & manage user accounts API</li>
+                                    <li>Assign roles & permissions API</li>
+                                    <li>User profile management API</li>
+                                    <li>Account status management API</li>
+                                    <li>User activity monitoring system</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Complete user management API with account operations, role management, profile handling, and comprehensive activity tracking.</p>
+                            </div>
+                        </div>
+
+                        <!-- Week 4: Schedule Management - Frontend -->
+                        <div class="task-card frontend">
+                            <div class="task-header">
+                                <div class="task-ticket frontend">SKOL-005-FE</div>
+                                <div class="task-status for-development">Week 4</div>
+                            </div>
+                            <h4>Schedule Management - Frontend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Create class schedules interface</li>
+                                    <li>Assign faculty to classes UI</li>
+                                    <li>Manage room assignments interface</li>
+                                    <li>Handle schedule conflicts UI</li>
+                                    <li>Schedule visualization dashboard</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Intuitive schedule management interface with class creation, faculty assignment, room management, and conflict resolution capabilities.</p>
+                            </div>
+                        </div>
+
+                        <!-- Week 4: Schedule Management - Backend -->
+                        <div class="task-card backend">
+                            <div class="task-header">
+                                <div class="task-ticket backend">SKOL-005-BE</div>
+                                <div class="task-status for-development">Week 4</div>
+                            </div>
+                            <h4>Schedule Management - Backend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Create class schedules API</li>
+                                    <li>Assign faculty to classes API</li>
+                                    <li>Manage room assignments API</li>
+                                    <li>Handle schedule conflicts logic</li>
+                                    <li>Schedule optimization algorithms</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Advanced schedule management API with class creation, faculty assignment, room management, and intelligent conflict resolution.</p>
+                            </div>
+                        </div>
+
+                        <!-- Week 4: Clinic Management - Frontend -->
+                        <div class="task-card frontend">
+                            <div class="task-header">
+                                <div class="task-ticket frontend">SKOL-006-FE</div>
+                                <div class="task-status for-development">Week 4</div>
+                            </div>
+                            <h4>Clinic Management - Frontend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Clinic staff management interface</li>
+                                    <li>Medical records administration UI</li>
+                                    <li>Health report generation interface</li>
+                                    <li>Medical emergency protocols UI</li>
+                                    <li>Clinic dashboard and analytics</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Complete clinic management interface with staff management, medical records, health reports, and emergency protocol handling.</p>
+                            </div>
+                        </div>
+
+                        <!-- Week 4: Clinic Management - Backend -->
+                        <div class="task-card backend">
+                            <div class="task-header">
+                                <div class="task-ticket backend">SKOL-006-BE</div>
+                                <div class="task-status for-development">Week 4</div>
+                            </div>
+                            <h4>Clinic Management - Backend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Clinic staff management API</li>
+                                    <li>Medical records administration API</li>
+                                    <li>Health report generation system</li>
+                                    <li>Medical emergency protocols API</li>
+                                    <li>Clinic analytics and reporting</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Comprehensive clinic management API with staff operations, medical records, health reporting, and emergency protocol management.</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Phase 1: Student Management Module -->
+                <!-- Priority 3: Student Core Processes (Week 5-6) -->
                 <div class="module-section">
-                    <div class="module-header">
-                        <h3>👥 Phase 1 - Student Management Module</h3>
-                        <p>Student enrollment, profile management, and academic records</p>
+                    <div class="module-header" style="background: linear-gradient(135deg, #ffc107 0%, #ffb300 100%); color: #2c3e50;">
+                        <h3>🎯 Priority 3: Student Core Processes (Week 5-6: Nov 1-15)</h3>
+                        <p>Student registration, course enrollment, payment process, and medical records</p>
                     </div>
                     
                     <div class="task-grid">
-                        <!-- Student Enrollment Frontend -->
+                        <!-- Week 5: Student Registration - Frontend -->
+                        <div class="task-card frontend">
+                            <div class="task-header">
+                                <div class="task-ticket frontend">SKOL-007-FE</div>
+                                <div class="task-status for-development">Week 5</div>
+                            </div>
+                            <h4>Student Registration - Frontend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Account creation & profile setup interface</li>
+                                    <li>Personal information management forms</li>
+                                    <li>Document upload system interface</li>
+                                    <li>Student dashboard development</li>
+                                    <li>Registration wizard implementation</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Complete student registration interface with account creation, profile setup, document upload, and intuitive dashboard for student management.</p>
+                            </div>
+                        </div>
+
+                        <!-- Week 5: Student Registration - Backend -->
+                        <div class="task-card backend">
+                            <div class="task-header">
+                                <div class="task-ticket backend">SKOL-007-BE</div>
+                                <div class="task-status for-development">Week 5</div>
+                            </div>
+                            <h4>Student Registration - Backend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Account creation & profile setup API</li>
+                                    <li>Personal information management API</li>
+                                    <li>Document upload system API</li>
+                                    <li>Student dashboard data API</li>
+                                    <li>Registration validation logic</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Robust student registration API with account management, profile handling, document processing, and comprehensive validation.</p>
+                            </div>
+                        </div>
+
+                        <!-- Week 5: Course Enrollment - Frontend -->
+                        <div class="task-card frontend">
+                            <div class="task-header">
+                                <div class="task-ticket frontend">SKOL-008-FE</div>
+                                <div class="task-status for-development">Week 5</div>
+                            </div>
+                            <h4>Course Enrollment - Frontend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Browse available courses interface</li>
+                                    <li>Subject selection interface</li>
+                                    <li>Enrollment request submission forms</li>
+                                    <li>Schedule conflict detection UI</li>
+                                    <li>Enrollment status tracking</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Intuitive course enrollment interface with course browsing, subject selection, enrollment submission, and conflict detection capabilities.</p>
+                            </div>
+                        </div>
+
+                        <!-- Week 5: Course Enrollment - Backend -->
+                        <div class="task-card backend">
+                            <div class="task-header">
+                                <div class="task-ticket backend">SKOL-008-BE</div>
+                                <div class="task-status for-development">Week 5</div>
+                            </div>
+                            <h4>Course Enrollment - Backend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Browse available courses API</li>
+                                    <li>Subject selection processing API</li>
+                                    <li>Enrollment request submission API</li>
+                                    <li>Schedule conflict detection logic</li>
+                                    <li>Enrollment status management</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Complete course enrollment API with course management, enrollment processing, conflict detection, and status tracking.</p>
+                            </div>
+                        </div>
+
+                        <!-- Week 6: Payment Process - Frontend -->
+                        <div class="task-card frontend">
+                            <div class="task-header">
+                                <div class="task-ticket frontend">SKOL-009-FE</div>
+                                <div class="task-status for-development">Week 6</div>
+                            </div>
+                            <h4>Payment Process - Frontend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Fee assessment & calculation interface</li>
+                                    <li>Payment method selection UI</li>
+                                    <li>Online payment integration interface</li>
+                                    <li>Payment status tracking dashboard</li>
+                                    <li>Receipt generation interface</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Complete payment interface with fee calculation, payment method selection, online integration, and status tracking capabilities.</p>
+                            </div>
+                        </div>
+
+                        <!-- Week 6: Payment Process - Backend -->
+                        <div class="task-card backend">
+                            <div class="task-header">
+                                <div class="task-ticket backend">SKOL-009-BE</div>
+                                <div class="task-status for-development">Week 6</div>
+                            </div>
+                            <h4>Payment Process - Backend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Fee assessment & calculation API</li>
+                                    <li>Payment method processing API</li>
+                                    <li>Online payment integration API</li>
+                                    <li>Payment status tracking system</li>
+                                    <li>Receipt generation system</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Robust payment processing API with fee calculation, payment processing, online integration, and comprehensive status tracking.</p>
+                            </div>
+                        </div>
+
+                        <!-- Week 6: Medical Records - Frontend -->
                         <div class="task-card frontend">
                             <div class="task-header">
                                 <div class="task-ticket frontend">SKOL-010-FE</div>
-                                <div class="task-status for-development">For Development</div>
+                                <div class="task-status for-development">Week 6</div>
                             </div>
-                            <h4>Student Enrollment Interface</h4>
+                            <h4>Medical Records - Frontend</h4>
                             <div class="task-priority high">Priority: High</div>
                             <div class="task-details">
                                 <h5>📋 Task Details:</h5>
                                 <ul>
-                                    <li>Create online application form</li>
-                                    <li>Build document upload component</li>
-                                    <li>Implement enrollment wizard</li>
-                                    <li>Create application status tracking</li>
-                                    <li>Build enrollment confirmation page</li>
+                                    <li>Medical history tracking interface</li>
+                                    <li>Clinic visit records UI</li>
+                                    <li>Health status monitoring dashboard</li>
+                                    <li>Medical document upload interface</li>
+                                    <li>Health report viewing system</li>
                                 </ul>
                             </div>
                             <div class="expected-result">
                                 <h6>🎯 Expected Result:</h6>
-                                <p>Complete enrollment interface allowing students to apply online, upload documents, track application status, and confirm enrollment with intuitive step-by-step process.</p>
+                                <p>Comprehensive medical records interface with history tracking, visit records, health monitoring, and document management capabilities.</p>
                             </div>
                         </div>
 
-                        <!-- Student Enrollment Backend -->
+                        <!-- Week 6: Medical Records - Backend -->
                         <div class="task-card backend">
                             <div class="task-header">
                                 <div class="task-ticket backend">SKOL-010-BE</div>
-                                <div class="task-status for-development">For Development</div>
+                                <div class="task-status for-development">Week 6</div>
                             </div>
-                            <h4>Student Enrollment API</h4>
+                            <h4>Medical Records - Backend</h4>
                             <div class="task-priority high">Priority: High</div>
                             <div class="task-details">
                                 <h5>📋 Task Details:</h5>
                                 <ul>
-                                    <li>Create application submission API</li>
-                                    <li>Implement document upload handling</li>
-                                    <li>Build application status management</li>
-                                    <li>Create enrollment confirmation system</li>
-                                    <li>Implement notification triggers</li>
+                                    <li>Medical history tracking API</li>
+                                    <li>Clinic visit records API</li>
+                                    <li>Health status monitoring system</li>
+                                    <li>Medical document upload API</li>
+                                    <li>Health report generation system</li>
                                 </ul>
                             </div>
                             <div class="expected-result">
                                 <h6>🎯 Expected Result:</h6>
-                                <p>Robust enrollment API handling application submissions, document processing, status updates, and automated notifications throughout the enrollment process.</p>
+                                <p>Complete medical records API with history tracking, visit management, health monitoring, and document processing capabilities.</p>
+                            </div>
+                        </div>
                             </div>
                         </div>
 
-                        <!-- Student Profile Management -->
+                <!-- Priority 4: Faculty Core Processes (Week 7-8) -->
+                <div class="module-section">
+                    <div class="module-header" style="background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);">
+                        <h3>👨‍🏫 Priority 4: Faculty Core Processes (Week 7-8: Nov 16-30)</h3>
+                        <p>Class management, grade entry, student management, and academic reports</p>
+                    </div>
+                    
+                    <div class="task-grid">
+                        <!-- Week 7: Class Management - Frontend -->
                         <div class="task-card frontend">
                             <div class="task-header">
                                 <div class="task-ticket frontend">SKOL-011-FE</div>
-                                <div class="task-status for-development">For Development</div>
+                                <div class="task-status for-development">Week 7</div>
                             </div>
-                            <h4>Student Profile Dashboard</h4>
+                            <h4>Class Management - Frontend</h4>
                             <div class="task-priority high">Priority: High</div>
                             <div class="task-details">
                                 <h5>📋 Task Details:</h5>
                                 <ul>
-                                    <li>Create student profile overview</li>
-                                    <li>Build personal information editor</li>
-                                    <li>Implement emergency contact management</li>
-                                    <li>Create academic history display</li>
-                                    <li>Build document management interface</li>
+                                    <li>View assigned classes interface</li>
+                                    <li>Access student rosters UI</li>
+                                    <li>Manage class attendance interface</li>
+                                    <li>Post class announcements UI</li>
+                                    <li>Class management dashboard</li>
                                 </ul>
                             </div>
                             <div class="expected-result">
                                 <h6>🎯 Expected Result:</h6>
-                                <p>Comprehensive student profile dashboard with editable personal information, contact management, academic history, and document storage capabilities.</p>
+                                <p>Complete class management interface with class viewing, student roster access, attendance management, and announcement capabilities.</p>
                             </div>
                         </div>
 
-                        <!-- Student Profile API -->
+                        <!-- Week 7: Class Management - Backend -->
                         <div class="task-card backend">
                             <div class="task-header">
                                 <div class="task-ticket backend">SKOL-011-BE</div>
-                                <div class="task-status for-development">For Development</div>
+                                <div class="task-status for-development">Week 7</div>
                             </div>
-                            <h4>Student Profile Management API</h4>
+                            <h4>Class Management - Backend</h4>
                             <div class="task-priority high">Priority: High</div>
                             <div class="task-details">
                                 <h5>📋 Task Details:</h5>
                                 <ul>
-                                    <li>Create profile CRUD operations</li>
-                                    <li>Implement data validation rules</li>
-                                    <li>Build emergency contact management</li>
-                                    <li>Create academic history tracking</li>
-                                    <li>Implement audit logging</li>
+                                    <li>View assigned classes API</li>
+                                    <li>Access student rosters API</li>
+                                    <li>Manage class attendance API</li>
+                                    <li>Post class announcements API</li>
+                                    <li>Class management system</li>
                                 </ul>
                             </div>
                             <div class="expected-result">
                                 <h6>🎯 Expected Result:</h6>
-                                <p>Complete student profile API with secure data management, validation, emergency contacts, academic history, and comprehensive audit trails.</p>
+                                <p>Robust class management API with class access, student roster management, attendance tracking, and announcement system.</p>
                             </div>
                         </div>
 
-                        <!-- Student Information Frontend -->
+                        <!-- Week 7: Grade Entry System - Frontend -->
                         <div class="task-card frontend">
                             <div class="task-header">
-                                <div class="task-ticket frontend">SKOL-011-FE</div>
-                                <div class="task-status for-development">For Development</div>
+                                <div class="task-ticket frontend">SKOL-012-FE</div>
+                                <div class="task-status for-development">Week 7</div>
                             </div>
-                            <h4>🇵🇭 Student Information Interface</h4>
+                            <h4>Grade Entry System - Frontend</h4>
                             <div class="task-priority high">Priority: High</div>
                             <div class="task-details">
                                 <h5>📋 Task Details:</h5>
                                 <ul>
-                                    <li>Create LRN (Learner Reference Number) input form</li>
-                                    <li>Build DSWD 4Ps beneficiary registration</li>
-                                    <li>Implement educational background tracking</li>
-                                    <li>Create family information management</li>
-                                    <li>Build address information system (Barangay, City, Province, Region)</li>
-                                    <li>Implement contact information management</li>
-                                    <li>Create scholarship tracking interface</li>
+                                    <li>Enter student grades interface</li>
+                                    <li>Calculate final grades UI</li>
+                                    <li>Submit grades for approval forms</li>
+                                    <li>View grade history interface</li>
+                                    <li>Grade management dashboard</li>
                                 </ul>
                             </div>
                             <div class="expected-result">
                                 <h6>🎯 Expected Result:</h6>
-                                <p>Comprehensive student information system with DepEd compliance, DSWD integration, and complete student data management following education standards.</p>
+                                <p>Intuitive grade entry interface with grade input, calculation, submission, and history tracking capabilities.</p>
                             </div>
                         </div>
 
-                        <!-- Student Information Backend -->
+                        <!-- Week 7: Grade Entry System - Backend -->
                         <div class="task-card backend">
                             <div class="task-header">
-                                <div class="task-ticket backend">SKOL-011-BE</div>
-                                <div class="task-status for-development">For Development</div>
+                                <div class="task-ticket backend">SKOL-012-BE</div>
+                                <div class="task-status for-development">Week 7</div>
                             </div>
-                            <h4>🇵🇭 Student Information API</h4>
+                            <h4>Grade Entry System - Backend</h4>
                             <div class="task-priority high">Priority: High</div>
                             <div class="task-details">
                                 <h5>📋 Task Details:</h5>
                                 <ul>
-                                    <li>Create student_personal_information table and API</li>
-                                    <li>Build student_educational_background API</li>
-                                    <li>Implement student_family_information API</li>
-                                    <li>Create student_address_information API</li>
-                                    <li>Build student_contact_information API</li>
-                                    <li>Implement LRN validation and uniqueness</li>
-                                    <li>Create DSWD 4Ps integration endpoints</li>
-                                    <li>Build scholarship management API</li>
+                                    <li>Enter student grades API</li>
+                                    <li>Calculate final grades logic</li>
+                                    <li>Submit grades for approval API</li>
+                                    <li>View grade history API</li>
+                                    <li>Grade management system</li>
                                 </ul>
                             </div>
                             <div class="expected-result">
                                 <h6>🎯 Expected Result:</h6>
-                                <p>Complete backend API system for student information management with data validation, DepEd compliance, and integration with government programs.</p>
+                                <p>Complete grade entry API with grade processing, calculation, approval workflow, and comprehensive history tracking.</p>
+                            </div>
+                        </div>
+
+                        <!-- Week 8: Student Management - Frontend -->
+                        <div class="task-card frontend">
+                            <div class="task-header">
+                                <div class="task-ticket frontend">SKOL-013-FE</div>
+                                <div class="task-status for-development">Week 8</div>
+                            </div>
+                            <h4>Student Management - Frontend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Approve student enrollments interface</li>
+                                    <li>Manage student records UI</li>
+                                    <li>Handle academic issues forms</li>
+                                    <li>Student communication interface</li>
+                                    <li>Student management dashboard</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Comprehensive student management interface with enrollment approval, record management, issue handling, and communication tools.</p>
+                    </div>
+                </div>
+
+                        <!-- Week 8: Student Management - Backend -->
+                        <div class="task-card backend">
+                            <div class="task-header">
+                                <div class="task-ticket backend">SKOL-013-BE</div>
+                                <div class="task-status for-development">Week 8</div>
+                            </div>
+                            <h4>Student Management - Backend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Approve student enrollments API</li>
+                                    <li>Manage student records API</li>
+                                    <li>Handle academic issues API</li>
+                                    <li>Student communication system</li>
+                                    <li>Student management system</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Complete student management API with enrollment approval, record handling, issue management, and communication system.</p>
+                            </div>
+                        </div>
+
+                        <!-- Week 8: Academic Reports - Frontend -->
+                        <div class="task-card frontend">
+                            <div class="task-header">
+                                <div class="task-ticket frontend">SKOL-014-FE</div>
+                                <div class="task-status for-development">Week 8</div>
+                            </div>
+                            <h4>Academic Reports - Frontend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Class performance reports interface</li>
+                                    <li>Grade distribution analysis UI</li>
+                                    <li>Student progress tracking dashboard</li>
+                                    <li>Academic standing updates interface</li>
+                                    <li>Reports generation system</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Comprehensive academic reports interface with performance analysis, grade distribution, progress tracking, and standing updates.</p>
+                            </div>
+                        </div>
+
+                        <!-- Week 8: Academic Reports - Backend -->
+                        <div class="task-card backend">
+                            <div class="task-header">
+                                <div class="task-ticket backend">SKOL-014-BE</div>
+                                <div class="task-status for-development">Week 8</div>
+                            </div>
+                            <h4>Academic Reports - Backend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Class performance reports API</li>
+                                    <li>Grade distribution analysis logic</li>
+                                    <li>Student progress tracking system</li>
+                                    <li>Academic standing updates API</li>
+                                    <li>Reports generation system</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Advanced academic reports API with performance analysis, grade distribution, progress tracking, and automated standing updates.</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Phase 2: Academic Module -->
+                <!-- Priority 5: Admin Core Processes (Week 9-10) -->
                 <div class="module-section">
-                    <div class="module-header">
-                        <h3>📚 Phase 2 - Academic Management Module</h3>
-                        <p>Curriculum, scheduling, grades, and transcript management</p>
+                    <div class="module-header" style="background: linear-gradient(135deg, #6f42c1 0%, #5a32a3 100%);">
+                        <h3>⚙️ Priority 5: Admin Core Processes (Week 9-10: Dec 1-15)</h3>
+                        <p>User management, payment management, system administration, and reports</p>
                     </div>
                     
                     <div class="task-grid">
-                        <!-- Grade Management Frontend -->
+                        <!-- Week 9: User Management - Frontend -->
+                        <div class="task-card frontend">
+                            <div class="task-header">
+                                <div class="task-ticket frontend">SKOL-015-FE</div>
+                                <div class="task-status for-development">Week 9</div>
+                            </div>
+                            <h4>Admin User Management - Frontend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Create & manage user accounts interface</li>
+                                    <li>Assign roles & permissions UI</li>
+                                    <li>Reset passwords & unlock accounts interface</li>
+                                    <li>User activity monitoring dashboard</li>
+                                    <li>Admin user management system</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Complete admin user management interface with account creation, role assignment, password management, and activity monitoring.</p>
+                            </div>
+                        </div>
+
+                        <!-- Week 9: User Management - Backend -->
+                        <div class="task-card backend">
+                            <div class="task-header">
+                                <div class="task-ticket backend">SKOL-015-BE</div>
+                                <div class="task-status for-development">Week 9</div>
+                            </div>
+                            <h4>Admin User Management - Backend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Create & manage user accounts API</li>
+                                    <li>Assign roles & permissions API</li>
+                                    <li>Reset passwords & unlock accounts API</li>
+                                    <li>User activity monitoring system</li>
+                                    <li>Admin user management system</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Robust admin user management API with account operations, role management, password handling, and comprehensive activity tracking.</p>
+                            </div>
+                        </div>
+
+                        <!-- Week 9: Payment Management - Frontend -->
+                        <div class="task-card frontend">
+                            <div class="task-header">
+                                <div class="task-ticket frontend">SKOL-016-FE</div>
+                                <div class="task-status for-development">Week 9</div>
+                            </div>
+                            <h4>Payment Management - Frontend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Fee structure configuration interface</li>
+                                    <li>Payment approval & processing UI</li>
+                                    <li>Financial reports & analytics dashboard</li>
+                                    <li>Payment dispute resolution interface</li>
+                                    <li>Payment management system</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Comprehensive payment management interface with fee configuration, payment processing, financial analytics, and dispute resolution.</p>
+                            </div>
+                        </div>
+
+                        <!-- Week 9: Payment Management - Backend -->
+                        <div class="task-card backend">
+                            <div class="task-header">
+                                <div class="task-ticket backend">SKOL-016-BE</div>
+                                <div class="task-status for-development">Week 9</div>
+                            </div>
+                            <h4>Payment Management - Backend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Fee structure configuration API</li>
+                                    <li>Payment approval & processing API</li>
+                                    <li>Financial reports & analytics system</li>
+                                    <li>Payment dispute resolution API</li>
+                                    <li>Payment management system</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Advanced payment management API with fee configuration, payment processing, financial analytics, and dispute resolution.</p>
+                            </div>
+                        </div>
+
+                        <!-- Week 10: System Administration - Frontend -->
+                        <div class="task-card frontend">
+                            <div class="task-header">
+                                <div class="task-ticket frontend">SKOL-017-FE</div>
+                                <div class="task-status for-development">Week 10</div>
+                            </div>
+                            <h4>System Administration - Frontend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>System configuration interface</li>
+                                    <li>Multi-campus coordination dashboard</li>
+                                    <li>Data backup & recovery UI</li>
+                                    <li>System monitoring & alerts interface</li>
+                                    <li>Admin system management</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Complete system administration interface with configuration, multi-campus coordination, backup management, and monitoring capabilities.</p>
+                            </div>
+                        </div>
+
+                        <!-- Week 10: System Administration - Backend -->
+                        <div class="task-card backend">
+                            <div class="task-header">
+                                <div class="task-ticket backend">SKOL-017-BE</div>
+                                <div class="task-status for-development">Week 10</div>
+                            </div>
+                            <h4>System Administration - Backend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>System configuration API</li>
+                                    <li>Multi-campus coordination system</li>
+                                    <li>Data backup & recovery system</li>
+                                    <li>System monitoring & alerts system</li>
+                                    <li>Admin system management</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Robust system administration API with configuration management, multi-campus coordination, backup systems, and comprehensive monitoring.</p>
+                            </div>
+                        </div>
+
+                        <!-- Week 10: Reports & Analytics - Frontend -->
+                        <div class="task-card frontend">
+                            <div class="task-header">
+                                <div class="task-ticket frontend">SKOL-018-FE</div>
+                                <div class="task-status for-development">Week 10</div>
+                            </div>
+                            <h4>Reports & Analytics - Frontend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Comprehensive system reports interface</li>
+                                    <li>Performance analytics dashboard</li>
+                                    <li>User activity reports UI</li>
+                                    <li>Financial analytics dashboard</li>
+                                    <li>Reports generation system</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Advanced reports and analytics interface with system reports, performance analytics, user activity tracking, and financial analytics.</p>
+                            </div>
+                        </div>
+
+                        <!-- Week 10: Reports & Analytics - Backend -->
+                        <div class="task-card backend">
+                            <div class="task-header">
+                                <div class="task-ticket backend">SKOL-018-BE</div>
+                                <div class="task-status for-development">Week 10</div>
+                            </div>
+                            <h4>Reports & Analytics - Backend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Comprehensive system reports API</li>
+                                    <li>Performance analytics system</li>
+                                    <li>User activity reports system</li>
+                                    <li>Financial analytics system</li>
+                                    <li>Reports generation system</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Complete reports and analytics API with system reporting, performance analytics, user activity tracking, and financial analytics.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Priority 6: Integration & Testing (Week 11-12) -->
+                <div class="module-section">
+                    <div class="module-header" style="background: linear-gradient(135deg, #fd7e14 0%, #e55a00 100%);">
+                        <h3>🔗 Priority 6: Integration & Testing (Week 11-12: Dec 16-31)</h3>
+                        <p>Process integration, system testing, security audit, and deployment preparation</p>
+                    </div>
+                    
+                    <div class="task-grid">
+                        <!-- Week 11: Process Integration - Frontend -->
+                        <div class="task-card frontend">
+                            <div class="task-header">
+                                <div class="task-ticket frontend">SKOL-019-FE</div>
+                                <div class="task-status for-development">Week 11</div>
+                            </div>
+                            <h4>Process Integration - Frontend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Student-Faculty-Admin workflow integration</li>
+                                    <li>End-to-end process testing interface</li>
+                                    <li>Multi-campus process validation UI</li>
+                                    <li>Data flow optimization dashboard</li>
+                                    <li>Integration testing system</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Complete process integration interface with workflow management, testing capabilities, multi-campus validation, and data flow optimization.</p>
+                            </div>
+                        </div>
+
+                        <!-- Week 11: Process Integration - Backend -->
+                        <div class="task-card backend">
+                            <div class="task-header">
+                                <div class="task-ticket backend">SKOL-019-BE</div>
+                                <div class="task-status for-development">Week 11</div>
+                            </div>
+                            <h4>Process Integration - Backend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Student-Faculty-Admin workflow API</li>
+                                    <li>End-to-end process testing system</li>
+                                    <li>Multi-campus process validation API</li>
+                                    <li>Data flow optimization system</li>
+                                    <li>Integration testing system</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Robust process integration API with workflow management, testing systems, multi-campus validation, and data flow optimization.</p>
+                            </div>
+                        </div>
+
+                        <!-- Week 11: System Testing - Frontend -->
                         <div class="task-card frontend">
                             <div class="task-header">
                                 <div class="task-ticket frontend">SKOL-020-FE</div>
-                                <div class="task-status for-development">For Development</div>
+                                <div class="task-status for-development">Week 11</div>
                             </div>
-                            <h4>Grade Management Interface</h4>
+                            <h4>System Testing - Frontend</h4>
                             <div class="task-priority high">Priority: High</div>
                             <div class="task-details">
                                 <h5>📋 Task Details:</h5>
                                 <ul>
-                                    <li>Create grade entry forms for faculty</li>
-                                    <li>Build student grade viewing interface</li>
-                                    <li>Implement GPA calculation display</li>
-                                    <li>Create grade history tracking</li>
-                                    <li>Build transcript generation interface</li>
+                                    <li>Complete process testing interface</li>
+                                    <li>Payment system testing UI</li>
+                                    <li>Subject upload & import testing interface</li>
+                                    <li>Medical records system testing UI</li>
+                                    <li>Testing dashboard and reports</li>
                                 </ul>
                             </div>
                             <div class="expected-result">
                                 <h6>🎯 Expected Result:</h6>
-                                <p>Comprehensive grade management system allowing faculty to enter grades, students to view academic performance, and automated GPA calculations with transcript generation.</p>
+                                <p>Comprehensive testing interface with process testing, payment testing, subject management testing, and medical records testing capabilities.</p>
                             </div>
                         </div>
 
-                        <!-- Grade Management Backend -->
+                        <!-- Week 11: System Testing - Backend -->
                         <div class="task-card backend">
                             <div class="task-header">
                                 <div class="task-ticket backend">SKOL-020-BE</div>
-                                <div class="task-status for-development">For Development</div>
+                                <div class="task-status for-development">Week 11</div>
                             </div>
-                            <h4>Grade Management API</h4>
+                            <h4>System Testing - Backend</h4>
                             <div class="task-priority high">Priority: High</div>
                             <div class="task-details">
                                 <h5>📋 Task Details:</h5>
                                 <ul>
-                                    <li>Create grade CRUD operations</li>
-                                    <li>Implement GPA calculation algorithms</li>
-                                    <li>Build grade validation rules</li>
-                                    <li>Create transcript generation logic</li>
-                                    <li>Implement grade change audit trails</li>
+                                    <li>Complete process testing system</li>
+                                    <li>Payment system testing API</li>
+                                    <li>Subject upload & import testing system</li>
+                                    <li>Medical records system testing API</li>
+                                    <li>Testing automation system</li>
                                 </ul>
                             </div>
                             <div class="expected-result">
                                 <h6>🎯 Expected Result:</h6>
-                                <p>Robust grade management API with automated calculations, validation, transcript generation, and comprehensive audit logging for academic integrity.</p>
+                                <p>Advanced testing system with process testing, payment testing, subject management testing, and medical records testing automation.</p>
                             </div>
                         </div>
 
-                        <!-- Class Scheduling Frontend -->
+                        <!-- Week 12: Security & Performance - Frontend -->
                         <div class="task-card frontend">
                             <div class="task-header">
                                 <div class="task-ticket frontend">SKOL-021-FE</div>
-                                <div class="task-status for-development">For Development</div>
+                                <div class="task-status for-development">Week 12</div>
                             </div>
-                            <h4>Class Scheduling Interface</h4>
-                            <div class="task-priority medium">Priority: Medium</div>
+                            <h4>Security & Performance - Frontend</h4>
+                            <div class="task-priority high">Priority: High</div>
                             <div class="task-details">
                                 <h5>📋 Task Details:</h5>
                                 <ul>
-                                    <li>Create schedule visualization component</li>
-                                    <li>Build drag-and-drop schedule editor</li>
-                                    <li>Implement conflict detection UI</li>
-                                    <li>Create room allocation interface</li>
-                                    <li>Build faculty load management</li>
+                                    <li>Security audit & testing interface</li>
+                                    <li>System performance optimization UI</li>
+                                    <li>Load testing dashboard</li>
+                                    <li>Bug fixes & improvements interface</li>
+                                    <li>Security monitoring system</li>
                                 </ul>
                             </div>
                             <div class="expected-result">
                                 <h6>🎯 Expected Result:</h6>
-                                <p>Interactive scheduling interface with visual calendar, drag-and-drop functionality, conflict detection, and efficient room and faculty management.</p>
+                                <p>Complete security and performance interface with audit capabilities, performance optimization, load testing, and bug management.</p>
                             </div>
                         </div>
 
-                        <!-- Class Scheduling Backend -->
+                        <!-- Week 12: Security & Performance - Backend -->
                         <div class="task-card backend">
                             <div class="task-header">
                                 <div class="task-ticket backend">SKOL-021-BE</div>
-                                <div class="task-status for-development">For Development</div>
+                                <div class="task-status for-development">Week 12</div>
                             </div>
-                            <h4>Class Scheduling API</h4>
-                            <div class="task-priority medium">Priority: Medium</div>
+                            <h4>Security & Performance - Backend</h4>
+                            <div class="task-priority high">Priority: High</div>
                             <div class="task-details">
                                 <h5>📋 Task Details:</h5>
                                 <ul>
-                                    <li>Create schedule management APIs</li>
-                                    <li>Implement conflict detection algorithms</li>
-                                    <li>Build room availability checking</li>
-                                    <li>Create faculty load calculations</li>
-                                    <li>Implement schedule optimization</li>
+                                    <li>Security audit & testing system</li>
+                                    <li>System performance optimization API</li>
+                                    <li>Load testing system</li>
+                                    <li>Bug fixes & improvements system</li>
+                                    <li>Security monitoring system</li>
                                 </ul>
                             </div>
                             <div class="expected-result">
                                 <h6>🎯 Expected Result:</h6>
-                                <p>Advanced scheduling API with conflict detection, resource optimization, faculty load balancing, and automated schedule generation capabilities.</p>
+                                <p>Advanced security and performance system with audit capabilities, performance optimization, load testing, and comprehensive security monitoring.</p>
+                            </div>
+                        </div>
+
+                        <!-- Week 12: Deployment Preparation - Frontend -->
+                        <div class="task-card frontend">
+                            <div class="task-header">
+                                <div class="task-ticket frontend">SKOL-022-FE</div>
+                                <div class="task-status for-development">Week 12</div>
+                            </div>
+                            <h4>Deployment Preparation - Frontend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Pilot deployment preparation interface</li>
+                                    <li>Documentation & training materials UI</li>
+                                    <li>User manual & guides interface</li>
+                                    <li>Final system validation dashboard</li>
+                                    <li>Deployment monitoring system</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Complete deployment preparation interface with pilot setup, documentation management, user guides, and system validation capabilities.</p>
+                    </div>
+                </div>
+
+                        <!-- Week 12: Deployment Preparation - Backend -->
+                        <div class="task-card backend">
+                            <div class="task-header">
+                                <div class="task-ticket backend">SKOL-022-BE</div>
+                                <div class="task-status for-development">Week 12</div>
+                            </div>
+                            <h4>Deployment Preparation - Backend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Pilot deployment preparation system</li>
+                                    <li>Documentation & training materials API</li>
+                                    <li>User manual & guides system</li>
+                                    <li>Final system validation API</li>
+                                    <li>Deployment monitoring system</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Complete deployment preparation system with pilot setup, documentation management, user guides, and comprehensive system validation.</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Phase 3: Financial Module -->
+                <!-- Pilot Launch (January 2026) -->
                 <div class="module-section">
-                    <div class="module-header">
-                        <h3>💰 Phase 3 - Financial Management Module</h3>
-                        <p>Fee assessment, payment processing, and financial reporting</p>
+                    <div class="module-header" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%);">
+                        <h3>🎉 Pilot Launch: January 6-10, 2026</h3>
+                        <p>System deployment, user training, and live monitoring across ICCT campuses</p>
                     </div>
                     
                     <div class="task-grid">
-                        <!-- Payment System Frontend -->
+                        <!-- System Deployment - Frontend -->
                         <div class="task-card frontend">
                             <div class="task-header">
-                                <div class="task-ticket frontend">SKOL-030-FE</div>
-                                <div class="task-status for-development">For Development</div>
+                                <div class="task-ticket frontend">SKOL-023-FE</div>
+                                <div class="task-status for-development">Pilot Launch</div>
                             </div>
-                            <h4>Payment Processing Interface</h4>
-                            <div class="task-priority high">Priority: High</div>
+                            <h4>System Deployment - Frontend</h4>
+                            <div class="task-priority high">Priority: Critical</div>
                             <div class="task-details">
                                 <h5>📋 Task Details:</h5>
                                 <ul>
-                                    <li>Create payment gateway integration</li>
-                                    <li>Build payment method selection</li>
-                                    <li>Implement payment confirmation UI</li>
-                                    <li>Create payment history display</li>
-                                    <li>Build installment management interface</li>
+                                    <li>Production environment setup interface</li>
+                                    <li>Multi-campus system deployment UI</li>
+                                    <li>User training & onboarding interface</li>
+                                    <li>Live system monitoring dashboard</li>
+                                    <li>Pilot launch management system</li>
                                 </ul>
                             </div>
                             <div class="expected-result">
                                 <h6>🎯 Expected Result:</h6>
-                                <p>Secure payment interface with multiple payment methods, real-time processing, payment history, and flexible installment options for students.</p>
+                                <p>Complete pilot launch interface with production setup, multi-campus deployment, user training, and live monitoring capabilities.</p>
                             </div>
                         </div>
 
-                        <!-- Payment System Backend -->
+                        <!-- System Deployment - Backend -->
                         <div class="task-card backend">
                             <div class="task-header">
-                                <div class="task-ticket backend">SKOL-030-BE</div>
-                                <div class="task-status for-development">For Development</div>
+                                <div class="task-ticket backend">SKOL-023-BE</div>
+                                <div class="task-status for-development">Pilot Launch</div>
                             </div>
-                            <h4>Payment Processing API</h4>
-                            <div class="task-priority high">Priority: High</div>
+                            <h4>System Deployment - Backend</h4>
+                            <div class="task-priority high">Priority: Critical</div>
                             <div class="task-details">
                                 <h5>📋 Task Details:</h5>
                                 <ul>
-                                    <li>Integrate payment gateways (GCash, PayMaya)</li>
-                                    <li>Implement payment validation</li>
-                                    <li>Create receipt generation</li>
-                                    <li>Build installment calculation</li>
-                                    <li>Implement payment reconciliation</li>
+                                    <li>Production environment setup system</li>
+                                    <li>Multi-campus system deployment API</li>
+                                    <li>User training & onboarding system</li>
+                                    <li>Live system monitoring system</li>
+                                    <li>Pilot launch management system</li>
                                 </ul>
                             </div>
                             <div class="expected-result">
                                 <h6>🎯 Expected Result:</h6>
-                                <p>Secure payment API with multiple gateway support, automated receipt generation, installment management, and comprehensive payment reconciliation.</p>
+                                <p>Complete pilot launch system with production setup, multi-campus deployment, user training, and comprehensive live monitoring.</p>
                             </div>
                         </div>
 
-                        <!-- Financial Reports Frontend -->
+                        <!-- Pilot Monitoring - Frontend -->
                         <div class="task-card frontend">
                             <div class="task-header">
-                                <div class="task-ticket frontend">SKOL-031-FE</div>
-                                <div class="task-status for-development">For Development</div>
+                                <div class="task-ticket frontend">SKOL-024-FE</div>
+                                <div class="task-status for-development">Pilot Launch</div>
                             </div>
-                            <h4>Financial Reports Dashboard</h4>
-                            <div class="task-priority medium">Priority: Medium</div>
+                            <h4>Pilot Monitoring - Frontend</h4>
+                            <div class="task-priority high">Priority: Critical</div>
                             <div class="task-details">
                                 <h5>📋 Task Details:</h5>
                                 <ul>
-                                    <li>Create financial analytics dashboard</li>
-                                    <li>Build revenue reports interface</li>
-                                    <li>Implement payment tracking charts</li>
-                                    <li>Create outstanding balance reports</li>
-                                    <li>Build scholarship management UI</li>
+                                    <li>Real-time system monitoring dashboard</li>
+                                    <li>User feedback collection interface</li>
+                                    <li>Performance metrics tracking UI</li>
+                                    <li>Issue resolution & support interface</li>
+                                    <li>Pilot monitoring system</li>
                                 </ul>
                             </div>
                             <div class="expected-result">
                                 <h6>🎯 Expected Result:</h6>
-                                <p>Comprehensive financial dashboard with analytics, revenue tracking, payment charts, balance reports, and scholarship management capabilities.</p>
+                                <p>Comprehensive pilot monitoring interface with real-time monitoring, feedback collection, performance tracking, and support management.</p>
                             </div>
                         </div>
 
-                        <!-- Financial Reports Backend -->
+                        <!-- Pilot Monitoring - Backend -->
                         <div class="task-card backend">
                             <div class="task-header">
-                                <div class="task-ticket backend">SKOL-031-BE</div>
-                                <div class="task-status for-development">For Development</div>
+                                <div class="task-ticket backend">SKOL-024-BE</div>
+                                <div class="task-status for-development">Pilot Launch</div>
                             </div>
-                            <h4>Financial Reports API</h4>
-                            <div class="task-priority medium">Priority: Medium</div>
+                            <h4>Pilot Monitoring - Backend</h4>
+                            <div class="task-priority high">Priority: Critical</div>
                             <div class="task-details">
                                 <h5>📋 Task Details:</h5>
                                 <ul>
-                                    <li>Create financial analytics queries</li>
-                                    <li>Implement revenue calculation APIs</li>
-                                    <li>Build payment tracking systems</li>
-                                    <li>Create balance calculation logic</li>
-                                    <li>Implement scholarship management</li>
+                                    <li>Real-time system monitoring API</li>
+                                    <li>User feedback collection system</li>
+                                    <li>Performance metrics tracking system</li>
+                                    <li>Issue resolution & support system</li>
+                                    <li>Pilot monitoring system</li>
                                 </ul>
                             </div>
                             <div class="expected-result">
                                 <h6>🎯 Expected Result:</h6>
-                                <p>Advanced financial API with real-time analytics, revenue calculations, payment tracking, balance management, and automated scholarship processing.</p>
+                                <p>Advanced pilot monitoring system with real-time monitoring, feedback collection, performance tracking, and comprehensive support management.</p>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Trello Integration -->
+                <div class="highlight-box" style="background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); color: white; margin-bottom: 30px; border: 1px solid #bdc3c7;">
+                    <h4 style="color: #ecf0f1; margin-bottom: 20px; font-weight: 600;">🔗 Trello Integration</h4>
+                    <p style="margin-bottom: 20px; opacity: 0.95; color: #ecf0f1; line-height: 1.6;">Sync all Phase 1 tasks to Trello with status tracking (TO DO → ON-GOING → FOR TESTING → DONE) for better project management and collaboration.</p>
+                    
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap; align-items: center; margin-bottom: 20px;">
+                        <div style="background: #27ae60; color: white; padding: 12px 24px; border-radius: 8px; font-weight: 600; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            ✅ Authenticated with Trello
+                        </div>
+                        
+                        
+                        <a href="https://trello.com/invite/b/68dbab56455d78964be31955/ATTId094dde52d56baed3fad5a2ae7713876EDAC2BDD/skolaris-phase-1-development" target="_blank" id="trello-board-btn" class="trello-btn" style="background: #3498db; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; display: none; box-shadow: 0 2px 4px rgba(0,0,0,0.1); text-decoration: none; align-items: center; gap: 8px;">
+                            🔗 Join Trello Board
+                        </a>
+                        
+                        <button id="trello-status-btn" class="trello-btn" style="background: #8e44ad; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            📊 Get All Task Status
+                        </button>
+                    </div>
+                    
+                    <!-- Priority Sync Buttons -->
+                    <div style="margin-top: 20px;">
+                        <h6 style="color: #ecf0f1; margin-bottom: 15px; font-size: 1.1em; font-weight: 600;">🎯 Sync by Priority Category:</h6>
+                        <div id="current-week-status" style="background: rgba(255,255,255,0.15); padding: 12px; border-radius: 8px; margin-bottom: 15px; font-size: 0.9em; border: 1px solid rgba(255,255,255,0.2);">
+                            <div style="color: #3498db; font-weight: 600;">📅 Current Week Status</div>
+                            <div id="week-status-text" style="color: #ecf0f1; margin-top: 5px;">Loading...</div>
+                        </div>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+                            <button id="sync-priority-1" class="priority-sync-btn" data-priority="🔥 Priority 1: System Foundation" style="background: #c0392b; color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.9em; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                                🔥 Priority 1
+                            </button>
+                            <button id="sync-priority-2" class="priority-sync-btn" data-priority="🛠️ Priority 2: Maintenance Features" style="background: #d68910; color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.9em; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                                🛠️ Priority 2
+                            </button>
+                            <button id="sync-priority-3" class="priority-sync-btn" data-priority="🎯 Priority 3: Student Core Processes" style="background: #27ae60; color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.9em; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                                🎯 Priority 3
+                            </button>
+                            <button id="sync-priority-4" class="priority-sync-btn" data-priority="👨‍🏫 Priority 4: Faculty Core Processes" style="background: #8e44ad; color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.9em; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                                👨‍🏫 Priority 4
+                            </button>
+                            <button id="sync-priority-5" class="priority-sync-btn" data-priority="⚙️ Priority 5: Admin Core Processes" style="background: #2c3e50; color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.9em; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                                ⚙️ Priority 5
+                            </button>
+                            <button id="sync-priority-6" class="priority-sync-btn" data-priority="🔗 Priority 6: Integration & Testing" style="background: #16a085; color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.9em; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                                🔗 Priority 6
+                            </button>
+                            <button id="sync-pilot" class="priority-sync-btn" data-priority="🎉 Pilot Launch (Jan 2026)" style="background: #e67e22; color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.9em; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                                🎉 Pilot Launch
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="trello-status" style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 10px; margin-top: 20px; display: none; border: 1px solid rgba(255,255,255,0.2);">
+                        <h6 style="margin: 0 0 15px 0; color: #ecf0f1; font-weight: 600; font-size: 1.1em;">📊 Sync Status:</h6>
+                        <div id="trello-status-content" style="color: #ecf0f1; line-height: 1.6;"></div>
+                    </div>
+                    
+                    <div style="font-size: 0.9em; opacity: 0.9; margin-top: 20px; color: #ecf0f1; line-height: 1.6; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                        <strong style="color: #3498db;">Features:</strong> Status workflow (TO DO → ON-GOING → FOR TESTING → DONE) • Priority-based organization • Color-coded labels • Task details sync • Real-time collaboration
                     </div>
                 </div>
 
                 <!-- Task Summary -->
                 <div class="highlight-box">
-                    <h4>📊 Task Summary & Progress</h4>
+                    <h4>📊 Phase 1 Task Summary & Progress</h4>
                     <div class="category-grid">
                         <div class="category-card">
-                            <h3>🎯 Task Status Distribution</h3>
+                            <h3>🎯 Phase 1 Task Distribution</h3>
                             <ul>
-                                <li><strong>For Development:</strong> 24 tasks (All development tasks ready)</li>
-                                <li><strong>High Priority:</strong> 12 tasks (Core system and authentication)</li>
-                                <li><strong>Medium Priority:</strong> 12 tasks (Mobile and advanced features)</li>
-                                <li><strong>Low Priority:</strong> 0 tasks</li>
+                                <li><strong>Total Tasks:</strong> 72 tasks (36 Frontend + 36 Backend)</li>
+                                <li><strong>Priority 1 (Foundation):</strong> 4 tasks (Week 1-2)</li>
+                                <li><strong>Priority 2 (Maintenance):</strong> 8 tasks (Week 3-4)</li>
+                                <li><strong>Priority 3 (Student Core):</strong> 8 tasks (Week 5-6)</li>
+                                <li><strong>Priority 4 (Faculty Core):</strong> 8 tasks (Week 7-8)</li>
+                                <li><strong>Priority 5 (Admin Core):</strong> 8 tasks (Week 9-10)</li>
+                                <li><strong>Priority 6 (Integration):</strong> 8 tasks (Week 11-12)</li>
+                                <li><strong>Pilot Launch:</strong> 4 tasks (January 2026)</li>
                             </ul>
                         </div>
                         
                         <div class="category-card">
                             <h3>⚛️ Technology Stack Distribution</h3>
                             <ul>
-                                <li><strong>Frontend (React JS):</strong> 10 tasks - Web interface development + Module Management UI</li>
-                                <li><strong>Backend (Laravel API):</strong> 10 tasks - API development + Module Management System</li>
-                                <li><strong>Mobile (React Native):</strong> 8 tasks - Cross-platform mobile app</li>
-                                <li><strong>Database (MySQL):</strong> 0 tasks - Schema completed</li>
+                                <li><strong>Frontend (React JS):</strong> 36 tasks - Complete web interface development</li>
+                                <li><strong>Backend (Laravel API):</strong> 36 tasks - Complete API development</li>
+                                <li><strong>Database (MySQL):</strong> Integrated with all backend tasks</li>
+                                <li><strong>Security (JWT):</strong> Integrated with authentication tasks</li>
                             </ul>
                         </div>
                         
                         <div class="category-card">
-                            <h3>📈 Development Phases Progress</h3>
+                            <h3>📈 Development Timeline Progress</h3>
                             <ul>
-                                <li><strong>Phase 0 (Core System):</strong> 0% - Ready for development</li>
-                                <li><strong>Phase 1 (Student Entry):</strong> 0% - Ready for development</li>
-                                <li><strong>Phase 2 (Academic Management):</strong> 0% - Ready for development</li>
-                                <li><strong>Phase 3 (Financial Management):</strong> 0% - Ready for development</li>
-                                <li><strong>Phase 4 (Support Services):</strong> 0% - Ready for development</li>
-                                <li><strong>Phase 5 (Mobile & Communication):</strong> 0% - Ready for development</li>
+                                <li><strong>October 2025:</strong> Foundation & Maintenance (Weeks 1-4)</li>
+                                <li><strong>November 2025:</strong> Student & Faculty Core (Weeks 5-8)</li>
+                                <li><strong>December 2025:</strong> Admin Core & Integration (Weeks 9-12)</li>
+                                <li><strong>January 2026:</strong> Pilot Launch (Week 13)</li>
+                                <li><strong>Total Duration:</strong> 3 months + 1 week pilot</li>
                             </ul>
                         </div>
                         
                         <div class="category-card">
                             <h3>📅 Next Sprint Planning</h3>
                             <ul>
-                                <li><strong>Sprint 1:</strong> Authentication system (SKOL-001-FE/BE)</li>
-                                <li><strong>Sprint 2:</strong> Student dashboard and enrollment (SKOL-003-FE/BE)</li>
-                                <li><strong>Sprint 3:</strong> Grade management system (SKOL-005-FE/BE)</li>
-                                <li><strong>Sprint 4:</strong> Mobile app foundation (MOB-001/MOB-002)</li>
+                                <li><strong>Week 1-2:</strong> System Foundation (SKOL-001 to SKOL-002)</li>
+                                <li><strong>Week 3-4:</strong> Maintenance Features (SKOL-003 to SKOL-006)</li>
+                                <li><strong>Week 5-6:</strong> Student Core Processes (SKOL-007 to SKOL-010)</li>
+                                <li><strong>Week 7-8:</strong> Faculty Core Processes (SKOL-011 to SKOL-014)</li>
                             </ul>
                         </div>
                     </div>
@@ -10595,5 +11412,695 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
             window.location.href = "skolaris.html"; // balik sa login page
         } 
     </script>
+
+    <!-- Trello Integration Script -->
+    <script src="trello-integration.js"></script>
+    
+    <script>
+        // Auto-load sync status function
+        async function loadAutoSyncStatus() {
+            try {
+                const autoStatusDiv = document.getElementById('auto-sync-status');
+                const autoStatusContent = document.getElementById('auto-sync-status-content');
+                
+                if (!autoStatusDiv || !autoStatusContent) return;
+                
+                // Show loading state
+                autoStatusContent.innerHTML = '<div style="color: #3498db; text-align: center; padding: 20px;">🔄 Loading project status...</div>';
+                autoStatusDiv.style.display = 'block';
+                
+                // Wait a bit for Trello integration to be ready
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                // Check if Trello integration is available
+                if (!window.trelloIntegration) {
+                    autoStatusContent.innerHTML = '<div style="color: #e74c3c; text-align: center; padding: 20px;">❌ Trello integration not available</div>';
+                    return;
+                }
+                
+                // Get the status
+                const status = await window.trelloIntegration.getAllTaskStatus();
+                
+                // Calculate progress percentage
+                const totalTasks = status.todoCards + status.inProgressCards + status.testingCards + status.completedCards;
+                const completedTasks = status.completedCards;
+                const progressPercentage = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+                
+                // Get current priority/week status
+                const currentDate = new Date();
+                const currentWeek = getCurrentWeek(currentDate);
+                
+                // Priority schedule mapping
+                const prioritySchedule = {
+                    '🔥 Priority 1: System Foundation': { startWeek: 1, endWeek: 2, startDate: new Date('2025-10-01'), endDate: new Date('2025-10-15'), name: 'System Foundation' },
+                    '🛠️ Priority 2: Maintenance Features': { startWeek: 3, endWeek: 4, startDate: new Date('2025-10-16'), endDate: new Date('2025-10-31'), name: 'Maintenance Features' },
+                    '🎯 Priority 3: Student Core Processes': { startWeek: 5, endWeek: 6, startDate: new Date('2025-11-01'), endDate: new Date('2025-11-15'), name: 'Student Core Processes' },
+                    '👨‍🏫 Priority 4: Faculty Core Processes': { startWeek: 7, endWeek: 8, startDate: new Date('2025-11-16'), endDate: new Date('2025-11-30'), name: 'Faculty Core Processes' },
+                    '⚙️ Priority 5: Admin Core Processes': { startWeek: 9, endWeek: 10, startDate: new Date('2025-12-01'), endDate: new Date('2025-12-15'), name: 'Admin Core Processes' },
+                    '🔗 Priority 6: Integration & Testing': { startWeek: 11, endWeek: 12, startDate: new Date('2025-12-16'), endDate: new Date('2025-12-31'), name: 'Integration & Testing' },
+                    '🎉 Pilot Launch (Jan 2026)': { startWeek: 13, endWeek: 13, startDate: new Date('2026-01-06'), endDate: new Date('2026-01-10'), name: 'Pilot Launch' }
+                };
+                
+                // Find current active priority
+                let currentPriority = null;
+                let nextPriority = null;
+                let statusText = '';
+                let statusColor = '#3498db';
+                
+                for (const [key, schedule] of Object.entries(prioritySchedule)) {
+                    const isCurrentWeek = isWithinSchedule(currentDate, schedule);
+                    const isPastWeek = currentDate > schedule.endDate;
+                    const isFutureWeek = currentDate < schedule.startDate;
+                    
+                    if (isCurrentWeek) {
+                        currentPriority = schedule;
+                        statusText = `✅ Currently Active: ${schedule.name} (Week ${schedule.startWeek}-${schedule.endWeek})`;
+                        statusColor = '#27ae60';
+                    } else if (isFutureWeek && !nextPriority) {
+                        nextPriority = schedule;
+                    }
+                }
+                
+                if (!currentPriority && nextPriority) {
+                    statusText = `⏳ Next Up: ${nextPriority.name} starting ${formatDate(nextPriority.startDate)} (Week ${nextPriority.startWeek}-${nextPriority.endWeek})`;
+                    statusColor = '#f39c12';
+                } else if (!currentPriority && !nextPriority) {
+                    statusText = `🎉 All phases completed! Pilot launch period.`;
+                    statusColor = '#8e44ad';
+                }
+
+                // Create the status display (same as the manual status but auto-loaded)
+                let statusMessage = `
+                    <div style="background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); padding: 25px; border-radius: 15px; margin-bottom: 25px; color: white; border: 1px solid #bdc3c7; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                            <div>
+                                <h3 style="margin: 0; font-size: 1.5em; color: #ecf0f1; font-weight: 600;">📊 ${status.boardName}</h3>
+                                <p style="margin: 8px 0 0 0; opacity: 0.9; font-size: 0.95em; color: #bdc3c7;">Project Status Dashboard</p>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 2.2em; font-weight: bold; color: #27ae60;">${progressPercentage}%</div>
+                                <div style="font-size: 0.85em; opacity: 0.8; color: #bdc3c7;">Complete</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Current Priority/Week Status -->
+                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.2);">
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                                <div style="font-size: 1.2em;">📅</div>
+                                <div style="font-weight: 600; color: #ecf0f1;">Current Phase Status</div>
+                            </div>
+                            <div style="color: ${statusColor}; font-weight: 600; font-size: 1.1em;">${statusText}</div>
+                            <div style="color: #bdc3c7; font-size: 0.9em; margin-top: 5px;">Week ${currentWeek} of 13 • ${currentDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</div>
+                        </div>
+                        
+                        <div style="background: rgba(255,255,255,0.1); padding: 18px; border-radius: 10px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.2);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                <span style="font-weight: 600; color: #ecf0f1;">Overall Progress</span>
+                                <span style="font-size: 0.9em; color: #bdc3c7;">${completedTasks}/${totalTasks} tasks</span>
+                            </div>
+                            <div style="background: rgba(0,0,0,0.3); height: 10px; border-radius: 5px; overflow: hidden;">
+                                <div style="background: linear-gradient(90deg, #27ae60 0%, #2ecc71 100%); height: 100%; width: ${progressPercentage}%; transition: width 0.3s ease;"></div>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; gap: 15px; align-items: center;">
+                            <a href="https://trello.com/invite/b/68dbab56455d78964be31955/ATTId094dde52d56baed3fad5a2ae7713876EDAC2BDD/skolaris-phase-1-development" target="_blank" style="background: #3498db; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);">
+                                🔗 Join Board
+                            </a>
+                            <div style="font-size: 0.9em; opacity: 0.9; color: #bdc3c7;">
+                                📝 ${status.totalCards} total cards
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                        <div style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); padding: 20px; border-radius: 12px; color: white; text-align: center; box-shadow: 0 4px 12px rgba(231, 76, 60, 0.2);">
+                            <div style="font-size: 2em; font-weight: bold; margin-bottom: 8px;">${status.todoCards}</div>
+                            <div style="font-size: 0.9em; opacity: 0.9;">📋 TO DO</div>
+                        </div>
+                        <div style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); padding: 20px; border-radius: 12px; color: white; text-align: center; box-shadow: 0 4px 12px rgba(243, 156, 18, 0.2);">
+                            <div style="font-size: 2em; font-weight: bold; margin-bottom: 8px;">${status.inProgressCards}</div>
+                            <div style="font-size: 0.9em; opacity: 0.9;">🔄 ON-GOING</div>
+                        </div>
+                        <div style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); padding: 20px; border-radius: 12px; color: white; text-align: center; box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);">
+                            <div style="font-size: 2em; font-weight: bold; margin-bottom: 8px;">${status.testingCards}</div>
+                            <div style="font-size: 0.9em; opacity: 0.9;">🧪 FOR TESTING</div>
+                        </div>
+                        <div style="background: linear-gradient(135deg, #27ae60 0%, #229954 100%); padding: 20px; border-radius: 12px; color: white; text-align: center; box-shadow: 0 4px 12px rgba(39, 174, 96, 0.2);">
+                            <div style="font-size: 2em; font-weight: bold; margin-bottom: 8px;">${status.completedCards}</div>
+                            <div style="font-size: 0.9em; opacity: 0.9;">✅ DONE</div>
+                        </div>
+                    </div>
+                `;
+                
+                // Add Priority Breakdown if available
+                if (status.priorityBreakdown) {
+                    statusMessage += `
+                        <div style="background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%); padding: 20px; border-radius: 12px; margin-bottom: 20px; color: white; border: 1px solid #a569bd; box-shadow: 0 4px 15px rgba(142, 68, 173, 0.2);">
+                            <h4 style="margin: 0 0 15px 0; font-size: 1.2em; display: flex; align-items: center; gap: 10px; color: #f8f9fa; font-weight: 600;">
+                                🎯 Priority Distribution
+                            </h4>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px;">
+                    `;
+                    
+                    for (const [priority, count] of Object.entries(status.priorityBreakdown)) {
+                        const priorityEmoji = priority.includes('Priority 1') ? '🔥' : 
+                                           priority.includes('Priority 2') ? '🛠️' : 
+                                           priority.includes('Priority 3') ? '🎯' : 
+                                           priority.includes('Priority 4') ? '👨‍🏫' : 
+                                           priority.includes('Priority 5') ? '⚙️' : 
+                                           priority.includes('Priority 6') ? '🔗' : '🎉';
+                        
+                        statusMessage += `
+                            <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 10px; text-align: center; border: 1px solid rgba(255,255,255,0.2);">
+                                <div style="font-size: 1.5em; margin-bottom: 6px;">${priorityEmoji}</div>
+                                <div style="font-size: 1.3em; font-weight: bold; color: #f8f9fa; margin-bottom: 4px;">${count}</div>
+                                <div style="font-size: 0.8em; opacity: 0.9; color: #e8daef; font-weight: 500;">${priority.replace(/[🔥🛠️🎯👨‍🏫⚙️🔗🎉]/g, '').trim()}</div>
+                            </div>
+                        `;
+                    }
+                    
+                    statusMessage += `</div></div>`;
+                }
+                
+                // Add Task Type Breakdown if available
+                if (status.typeBreakdown) {
+                    statusMessage += `
+                        <div style="background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%); padding: 20px; border-radius: 12px; margin-bottom: 20px; color: white; border: 1px solid #bdc3c7; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                            <h4 style="margin: 0 0 15px 0; font-size: 1.2em; display: flex; align-items: center; gap: 10px; color: #ecf0f1; font-weight: 600;">
+                                🎨 Task Type Distribution
+                            </h4>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                <div style="background: rgba(255,255,255,0.15); padding: 18px; border-radius: 10px; text-align: center; border: 1px solid rgba(255,255,255,0.2);">
+                                    <div style="font-size: 2em; font-weight: bold; color: #27ae60; margin-bottom: 6px;">${status.typeBreakdown.Frontend}</div>
+                                    <div style="font-size: 0.9em; opacity: 0.9; color: #bdc3c7; font-weight: 500;">Frontend Tasks</div>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.15); padding: 18px; border-radius: 10px; text-align: center; border: 1px solid rgba(255,255,255,0.2);">
+                                    <div style="font-size: 2em; font-weight: bold; color: #e74c3c; margin-bottom: 6px;">${status.typeBreakdown.Backend}</div>
+                                    <div style="font-size: 0.9em; opacity: 0.9; color: #bdc3c7; font-weight: 500;">Backend Tasks</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                // Add Checklist Statistics if available
+                if (status.checklistStats) {
+                    statusMessage += `
+                        <div style="background: linear-gradient(135deg, #e67e22 0%, #d35400 100%); padding: 25px; border-radius: 15px; margin-bottom: 25px; color: white; border: 1px solid #e67e22; box-shadow: 0 4px 15px rgba(230, 126, 34, 0.3);">
+                            <h4 style="margin: 0 0 20px 0; font-size: 1.3em; display: flex; align-items: center; gap: 12px; color: #f8f9fa; font-weight: 600;">
+                                ✅ Checklist Progress
+                            </h4>
+                            <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.3);">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                    <span style="font-weight: 600; color: #ecf0f1; font-size: 1.1em;">Overall Checklist Completion</span>
+                                    <span style="font-size: 1.4em; font-weight: bold; color: #f8f9fa;">${status.checklistStats.completionRate}%</span>
+                                </div>
+                                <div style="background: rgba(0,0,0,0.4); height: 12px; border-radius: 6px; overflow: hidden; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);">
+                                    <div style="background: linear-gradient(90deg, #f39c12 0%, #e67e22 100%); height: 100%; width: ${status.checklistStats.completionRate}%; transition: width 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.2);"></div>
+                                </div>
+                            </div>
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;">
+                                <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 12px; text-align: center; border: 1px solid rgba(255,255,255,0.3); box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                    <div style="font-size: 2.2em; font-weight: bold; color: #3498db; margin-bottom: 8px;">${status.checklistStats.totalItems}</div>
+                                    <div style="font-size: 0.95em; opacity: 0.9; color: #ecf0f1; font-weight: 600;">Total Items</div>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 12px; text-align: center; border: 1px solid rgba(255,255,255,0.3); box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                    <div style="font-size: 2.2em; font-weight: bold; color: #27ae60; margin-bottom: 8px;">${status.checklistStats.completedItems}</div>
+                                    <div style="font-size: 0.95em; opacity: 0.9; color: #ecf0f1; font-weight: 600;">Completed</div>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 12px; text-align: center; border: 1px solid rgba(255,255,255,0.3); box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                    <div style="font-size: 2.2em; font-weight: bold; color: #e74c3c; margin-bottom: 8px;">${status.checklistStats.totalItems - status.checklistStats.completedItems}</div>
+                                    <div style="font-size: 0.95em; opacity: 0.9; color: #ecf0f1; font-weight: 600;">Remaining</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                autoStatusContent.innerHTML = statusMessage;
+                
+            } catch (error) {
+                const autoStatusContent = document.getElementById('auto-sync-status-content');
+                if (autoStatusContent) {
+                    autoStatusContent.innerHTML = `<div style="color: #e74c3c; text-align: center; padding: 20px;">❌ Error loading status: ${error.message}</div>`;
+                }
+            }
+        }
+
+        // Trello Integration Functions
+        function initializeTrelloIntegration() {
+            const cleanupBtn = document.getElementById('trello-cleanup-btn');
+            const cleanSyncBtn = document.getElementById('trello-clean-sync-btn');
+            const syncBtn = document.getElementById('trello-sync-btn');
+            const boardBtn = document.getElementById('trello-board-btn');
+            const statusBtn = document.getElementById('trello-status-btn');
+            const statusDiv = document.getElementById('trello-status');
+            const statusContent = document.getElementById('trello-status-content');
+
+            // Show initial status and check for existing board
+            statusDiv.style.display = 'block';
+            showTrelloStatus('✅ Ready to work with Trello! Use "Get All Task Status" to view current progress or sync by priority category below.', 'success');
+            
+            // Check for existing board on page load
+            checkForExistingBoard();
+
+            // Initialize priority button validation
+            initializePriorityButtonValidation();
+            
+            // Auto-load sync status
+            loadAutoSyncStatus();
+
+            // Priority sync buttons
+            const prioritySyncBtns = document.querySelectorAll('.priority-sync-btn');
+            prioritySyncBtns.forEach(btn => {
+                btn.addEventListener('click', async () => {
+                    const priorityCategory = btn.getAttribute('data-priority');
+                    const originalText = btn.textContent;
+                    
+                    try {
+                        btn.textContent = '🔄 Syncing...';
+                        btn.disabled = true;
+                        
+                        showTrelloStatus(`🔄 Syncing ${priorityCategory} tasks...`, 'info');
+                        
+                        const results = await window.trelloIntegration.syncPriorityTasks(priorityCategory);
+                        
+                    const successCount = results.filter(r => r.success).length;
+                    const errorCount = results.filter(r => !r.success).length;
+                    const createdCount = results.filter(r => r.success && r.action === 'created').length;
+                    const updatedCount = results.filter(r => r.success && r.action === 'updated').length;
+                    const skippedCount = results.filter(r => r.success && r.action === 'skipped').length;
+                    const totalDetails = results.filter(r => r.success && r.detailsCount).reduce((sum, r) => sum + (r.detailsCount || 0), 0);
+                    
+                    const statusMessage = `<div style="color: #4ecdc4; margin: 5px 0;">✅ ${priorityCategory} sync completed!</div>` +
+                                        `<div style="color: #4ecdc4; margin: 5px 0;">• Tasks processed: ${successCount}</div>` +
+                                        `<div style="color: #27ae60; margin: 5px 0;">• New cards: ${createdCount}</div>` +
+                                        `<div style="color: #f39c12; margin: 5px 0;">• Updated cards: ${updatedCount}</div>` +
+                                        (skippedCount > 0 ? `<div style="color: #95a5a6; margin: 5px 0;">• Skipped (in other lists): ${skippedCount}</div>` : '') +
+                                        (errorCount > 0 ? `<div style="color: #ff6b6b; margin: 5px 0;">• Errors: ${errorCount}</div>` : '') +
+                                        `<div style="color: #3498db; margin: 5px 0;">📋 Total checklist items created: ${totalDetails}</div>` +
+                                        `<div style="color: #9b59b6; margin: 5px 0;">✨ Enhanced with comprehensive task details as checklists!</div>`;
+                        
+                        showTrelloStatus(statusMessage, errorCount > 0 ? 'warning' : 'success');
+                        
+                    } catch (error) {
+                        console.error('Priority sync error:', error);
+                        showTrelloStatus(`❌ ${priorityCategory} sync error: ${error.message}`, 'error');
+                    } finally {
+                        btn.textContent = originalText;
+                        btn.disabled = false;
+                    }
+                });
+            });
+
+
+
+
+            // Open board button
+            boardBtn.addEventListener('click', async () => {
+                try {
+                    showTrelloStatus('🔄 Looking for SKOLARIS board...', 'info');
+                    
+                    // Try to find SKOLARIS board
+                    const boardUrl = await window.trelloIntegration.findSkolarisBoardUrl();
+                    
+                    if (boardUrl) {
+                        window.open(boardUrl, '_blank');
+                        showTrelloStatus('✅ Opening Trello board...', 'success');
+                    } else {
+                        showTrelloStatus('❌ No SKOLARIS board found. Please sync tasks first to create the board.', 'error');
+                    }
+                } catch (error) {
+                    showTrelloStatus(`❌ Error finding board: ${error.message}`, 'error');
+                }
+            });
+
+            // Status button
+            statusBtn.addEventListener('click', async () => {
+                try {
+                    statusBtn.textContent = '🔄 Analyzing...';
+                    statusBtn.disabled = true;
+                    statusDiv.style.display = 'block';
+                    showTrelloStatus('🔄 Analyzing Trello board status...', 'info');
+
+                    const status = await window.trelloIntegration.getAllTaskStatus();
+                    
+                    // Calculate progress percentage
+                    const totalTasks = status.todoCards + status.inProgressCards + status.testingCards + status.completedCards;
+                    const completedTasks = status.completedCards;
+                    const progressPercentage = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+                    
+                    let statusMessage = `
+                        <div style="background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); padding: 25px; border-radius: 15px; margin-bottom: 25px; color: white; border: 1px solid #bdc3c7; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                                <div>
+                                    <h3 style="margin: 0; font-size: 1.5em; color: #ecf0f1; font-weight: 600;">📊 ${status.boardName}</h3>
+                                    <p style="margin: 8px 0 0 0; opacity: 0.9; font-size: 0.95em; color: #bdc3c7;">Project Status Dashboard</p>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div style="font-size: 2.2em; font-weight: bold; color: #27ae60;">${progressPercentage}%</div>
+                                    <div style="font-size: 0.85em; opacity: 0.8; color: #bdc3c7;">Complete</div>
+                                </div>
+                            </div>
+                            
+                            <div style="background: rgba(255,255,255,0.1); padding: 18px; border-radius: 10px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.2);">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                    <span style="font-weight: 600; color: #ecf0f1;">Overall Progress</span>
+                                    <span style="font-size: 0.9em; color: #bdc3c7;">${completedTasks}/${totalTasks} tasks</span>
+                                </div>
+                                <div style="background: rgba(0,0,0,0.3); height: 10px; border-radius: 5px; overflow: hidden;">
+                                    <div style="background: linear-gradient(90deg, #27ae60 0%, #2ecc71 100%); height: 100%; width: ${progressPercentage}%; transition: width 0.3s ease;"></div>
+                                </div>
+                            </div>
+                            
+                            <div style="display: flex; gap: 15px; align-items: center;">
+                                <a href="${status.boardUrl}" target="_blank" style="background: #3498db; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);">
+                                    🔗 Open Board
+                                </a>
+                                <div style="font-size: 0.9em; opacity: 0.9; color: #bdc3c7;">
+                                    📝 ${status.totalCards} total cards
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px; margin-bottom: 25px;">
+                            <!-- Task Status Cards -->
+                            <div style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); padding: 22px; border-radius: 15px; color: white; box-shadow: 0 4px 12px rgba(231, 76, 60, 0.2); border: 1px solid rgba(255,255,255,0.1);">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                    <h4 style="margin: 0; font-size: 1.2em; font-weight: 600;">📋 TO DO</h4>
+                                    <div style="font-size: 2.2em; font-weight: bold; color: #f8f9fa;">${status.todoCards}</div>
+                                </div>
+                                <div style="font-size: 0.9em; opacity: 0.9; color: #f8f9fa;">Pending tasks</div>
+                            </div>
+                            
+                            <div style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); padding: 22px; border-radius: 15px; color: white; box-shadow: 0 4px 12px rgba(243, 156, 18, 0.2); border: 1px solid rgba(255,255,255,0.1);">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                    <h4 style="margin: 0; font-size: 1.2em; font-weight: 600;">🔄 ON-GOING</h4>
+                                    <div style="font-size: 2.2em; font-weight: bold; color: #f8f9fa;">${status.inProgressCards}</div>
+                                </div>
+                                <div style="font-size: 0.9em; opacity: 0.9; color: #f8f9fa;">In progress</div>
+                            </div>
+                            
+                            <div style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); padding: 22px; border-radius: 15px; color: white; box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2); border: 1px solid rgba(255,255,255,0.1);">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                    <h4 style="margin: 0; font-size: 1.2em; font-weight: 600;">🧪 FOR TESTING</h4>
+                                    <div style="font-size: 2.2em; font-weight: bold; color: #f8f9fa;">${status.testingCards}</div>
+                                </div>
+                                <div style="font-size: 0.9em; opacity: 0.9; color: #f8f9fa;">Ready for testing</div>
+                            </div>
+                            
+                            <div style="background: linear-gradient(135deg, #27ae60 0%, #229954 100%); padding: 22px; border-radius: 15px; color: white; box-shadow: 0 4px 12px rgba(39, 174, 96, 0.2); border: 1px solid rgba(255,255,255,0.1);">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                    <h4 style="margin: 0; font-size: 1.2em; font-weight: 600;">✅ DONE</h4>
+                                    <div style="font-size: 2.2em; font-weight: bold; color: #f8f9fa;">${status.completedCards}</div>
+                                </div>
+                                <div style="font-size: 0.9em; opacity: 0.9; color: #f8f9fa;">Completed tasks</div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Task Type Breakdown
+                    if (status.typeBreakdown) {
+                        statusMessage += `
+                            <div style="background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%); padding: 25px; border-radius: 15px; margin-bottom: 25px; color: white; border: 1px solid #bdc3c7; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                                <h4 style="margin: 0 0 20px 0; font-size: 1.3em; display: flex; align-items: center; gap: 12px; color: #ecf0f1; font-weight: 600;">
+                                    🎨 Task Type Distribution
+                                </h4>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px;">
+                                    <div style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 12px; text-align: center; border: 1px solid rgba(255,255,255,0.2);">
+                                        <div style="font-size: 2.2em; font-weight: bold; color: #27ae60; margin-bottom: 8px;">${status.typeBreakdown.Frontend}</div>
+                                        <div style="font-size: 0.95em; opacity: 0.9; color: #bdc3c7; font-weight: 500;">Frontend Tasks</div>
+                                    </div>
+                                    <div style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 12px; text-align: center; border: 1px solid rgba(255,255,255,0.2);">
+                                        <div style="font-size: 2.2em; font-weight: bold; color: #e74c3c; margin-bottom: 8px;">${status.typeBreakdown.Backend}</div>
+                                        <div style="font-size: 0.95em; opacity: 0.9; color: #bdc3c7; font-weight: 500;">Backend Tasks</div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    
+                    // Priority Breakdown
+                    if (status.priorityBreakdown) {
+                        statusMessage += `
+                            <div style="background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%); padding: 25px; border-radius: 15px; margin-bottom: 25px; color: white; border: 1px solid #a569bd; box-shadow: 0 4px 15px rgba(142, 68, 173, 0.2);">
+                                <h4 style="margin: 0 0 20px 0; font-size: 1.3em; display: flex; align-items: center; gap: 12px; color: #f8f9fa; font-weight: 600;">
+                                    🎯 Priority Distribution
+                                </h4>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        `;
+                        
+                        for (const [priority, count] of Object.entries(status.priorityBreakdown)) {
+                            const priorityEmoji = priority.includes('Priority 1') ? '🔥' : 
+                                               priority.includes('Priority 2') ? '🛠️' : 
+                                               priority.includes('Priority 3') ? '🎯' : 
+                                               priority.includes('Priority 4') ? '👨‍🏫' : 
+                                               priority.includes('Priority 5') ? '⚙️' : 
+                                               priority.includes('Priority 6') ? '🔗' : '🎉';
+                            
+                            statusMessage += `
+                                <div style="background: rgba(255,255,255,0.15); padding: 18px; border-radius: 12px; text-align: center; border: 1px solid rgba(255,255,255,0.2);">
+                                    <div style="font-size: 1.8em; margin-bottom: 8px;">${priorityEmoji}</div>
+                                    <div style="font-size: 1.4em; font-weight: bold; color: #f8f9fa; margin-bottom: 5px;">${count}</div>
+                                    <div style="font-size: 0.85em; opacity: 0.9; color: #e8daef; font-weight: 500;">${priority.replace(/[🔥🛠️🎯👨‍🏫⚙️🔗🎉]/g, '').trim()}</div>
+                                </div>
+                            `;
+                        }
+                        
+                        statusMessage += `</div></div>`;
+                    }
+                    
+                    // Checklist Statistics
+                    if (status.checklistStats) {
+                        statusMessage += `
+                            <div style="background: linear-gradient(135deg, #16a085 0%, #1abc9c 100%); padding: 25px; border-radius: 15px; margin-bottom: 25px; color: white; border: 1px solid #48c9b0; box-shadow: 0 4px 15px rgba(22, 160, 133, 0.2);">
+                                <h4 style="margin: 0 0 20px 0; font-size: 1.3em; display: flex; align-items: center; gap: 12px; color: #f8f9fa; font-weight: 600;">
+                                    ✅ Checklist Progress
+                                </h4>
+                                <div style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.2);">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                        <span style="font-weight: 600; color: #ecf0f1;">Overall Checklist Completion</span>
+                                        <span style="font-size: 1.3em; font-weight: bold; color: #f8f9fa;">${status.checklistStats.completionRate}%</span>
+                                    </div>
+                                    <div style="background: rgba(0,0,0,0.3); height: 12px; border-radius: 6px; overflow: hidden;">
+                                        <div style="background: linear-gradient(90deg, #27ae60 0%, #2ecc71 100%); height: 100%; width: ${status.checklistStats.completionRate}%; transition: width 0.3s ease;"></div>
+                                    </div>
+                                </div>
+                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;">
+                                    <div style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 12px; text-align: center; border: 1px solid rgba(255,255,255,0.2);">
+                                        <div style="font-size: 2em; font-weight: bold; color: #85c1e9; margin-bottom: 8px;">${status.checklistStats.totalItems}</div>
+                                        <div style="font-size: 0.95em; opacity: 0.9; color: #bdc3c7; font-weight: 500;">Total Items</div>
+                                    </div>
+                                    <div style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 12px; text-align: center; border: 1px solid rgba(255,255,255,0.2);">
+                                        <div style="font-size: 2em; font-weight: bold; color: #27ae60; margin-bottom: 8px;">${status.checklistStats.completedItems}</div>
+                                        <div style="font-size: 0.95em; opacity: 0.9; color: #bdc3c7; font-weight: 500;">Completed</div>
+                                    </div>
+                                    <div style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 12px; text-align: center; border: 1px solid rgba(255,255,255,0.2);">
+                                        <div style="font-size: 2em; font-weight: bold; color: #f39c12; margin-bottom: 8px;">${status.checklistStats.totalItems - status.checklistStats.completedItems}</div>
+                                        <div style="font-size: 0.95em; opacity: 0.9; color: #bdc3c7; font-weight: 500;">Remaining</div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    
+                    showTrelloStatus(statusMessage, 'success');
+                    
+                } catch (error) {
+                    showTrelloStatus(`❌ Status check error: ${error.message}`, 'error');
+                } finally {
+                    statusBtn.textContent = '📊 Get All Task Status';
+                    statusBtn.disabled = false;
+                }
+            });
+        }
+
+
+        /**
+         * Check for existing SKOLARIS board on page load
+         */
+        async function checkForExistingBoard() {
+            try {
+                const boardUrl = await window.trelloIntegration.findSkolarisBoardUrl();
+                if (boardUrl) {
+                    const boardBtn = document.getElementById('trello-board-btn');
+                    if (boardBtn) {
+                        boardBtn.style.display = 'inline-block';
+                        boardBtn.title = 'Open existing SKOLARIS board';
+                    }
+                    showTrelloStatus('✅ SKOLARIS board found! You can open it or sync additional tasks.', 'success');
+                } else {
+                    showTrelloStatus('ℹ️ No existing SKOLARIS board found. Sync tasks to create a new board.', 'info');
+                }
+            } catch (error) {
+                console.log('Could not check for existing board:', error.message);
+            }
+        }
+
+        /**
+         * Initialize priority button validation based on current week
+         */
+        function initializePriorityButtonValidation() {
+            const currentDate = new Date();
+            const currentWeek = getCurrentWeek(currentDate);
+            
+            // Priority schedule mapping
+            const prioritySchedule = {
+                '🔥 Priority 1: System Foundation': { startWeek: 1, endWeek: 2, startDate: new Date('2025-10-01'), endDate: new Date('2025-10-15'), name: 'System Foundation' },
+                '🛠️ Priority 2: Maintenance Features': { startWeek: 3, endWeek: 4, startDate: new Date('2025-10-16'), endDate: new Date('2025-10-31'), name: 'Maintenance Features' },
+                '🎯 Priority 3: Student Core Processes': { startWeek: 5, endWeek: 6, startDate: new Date('2025-11-01'), endDate: new Date('2025-11-15'), name: 'Student Core Processes' },
+                '👨‍🏫 Priority 4: Faculty Core Processes': { startWeek: 7, endWeek: 8, startDate: new Date('2025-11-16'), endDate: new Date('2025-11-30'), name: 'Faculty Core Processes' },
+                '⚙️ Priority 5: Admin Core Processes': { startWeek: 9, endWeek: 10, startDate: new Date('2025-12-01'), endDate: new Date('2025-12-15'), name: 'Admin Core Processes' },
+                '🔗 Priority 6: Integration & Testing': { startWeek: 11, endWeek: 12, startDate: new Date('2025-12-16'), endDate: new Date('2025-12-31'), name: 'Integration & Testing' },
+                '🎉 Pilot Launch (Jan 2026)': { startWeek: 13, endWeek: 13, startDate: new Date('2026-01-06'), endDate: new Date('2026-01-10'), name: 'Pilot Launch' }
+            };
+            
+            // Find current active priority
+            let currentPriority = null;
+            let nextPriority = null;
+            let statusText = '';
+            
+            for (const [key, schedule] of Object.entries(prioritySchedule)) {
+                const isCurrentWeek = isWithinSchedule(currentDate, schedule);
+                const isPastWeek = currentDate > schedule.endDate;
+                const isFutureWeek = currentDate < schedule.startDate;
+                
+                if (isCurrentWeek) {
+                    currentPriority = schedule;
+                } else if (isFutureWeek && !nextPriority) {
+                    nextPriority = schedule;
+                }
+            }
+            
+            // Update status display
+            const weekStatusText = document.getElementById('week-status-text');
+            if (currentPriority) {
+                statusText = `✅ Currently active: ${currentPriority.name} (Week ${currentPriority.startWeek}-${currentPriority.endWeek})`;
+            } else if (nextPriority) {
+                statusText = `⏳ Next up: ${nextPriority.name} starting ${formatDate(nextPriority.startDate)} (Week ${nextPriority.startWeek}-${nextPriority.endWeek})`;
+                } else {
+                statusText = `🎉 All phases completed! Pilot launch period.`;
+            }
+            
+            if (weekStatusText) {
+                weekStatusText.innerHTML = statusText;
+            }
+            
+            // Update button states
+            const prioritySyncBtns = document.querySelectorAll('.priority-sync-btn');
+            prioritySyncBtns.forEach(btn => {
+                const priorityCategory = btn.getAttribute('data-priority');
+                const schedule = prioritySchedule[priorityCategory];
+                
+                if (schedule) {
+                    const isCurrentWeek = isWithinSchedule(currentDate, schedule);
+                    const isPastWeek = currentDate > schedule.endDate;
+                    const isFutureWeek = currentDate < schedule.startDate;
+                    
+                    if (isCurrentWeek) {
+                        // Current week - enable button with active styling
+                        btn.disabled = false;
+                        btn.style.opacity = '1';
+                        btn.style.cursor = 'pointer';
+                        btn.style.boxShadow = '0 0 15px rgba(255,255,255,0.3)';
+                        btn.style.transform = 'scale(1.05)';
+                        btn.title = `✅ Active this week (Week ${schedule.startWeek}-${schedule.endWeek})`;
+                    } else if (isPastWeek) {
+                        // Past week - disable but allow (for catch-up)
+                        btn.disabled = false;
+                        btn.style.opacity = '0.8';
+                        btn.style.cursor = 'pointer';
+                        btn.style.boxShadow = 'none';
+                        btn.style.transform = 'scale(1)';
+                        btn.title = `⚠️ Past due (Week ${schedule.startWeek}-${schedule.endWeek}) - Available for catch-up`;
+                    } else if (isFutureWeek) {
+                        // Future week - disable
+                        btn.disabled = true;
+                        btn.style.opacity = '0.4';
+                        btn.style.cursor = 'not-allowed';
+                        btn.style.boxShadow = 'none';
+                        btn.style.transform = 'scale(1)';
+                        btn.title = `⏳ Not yet scheduled (Week ${schedule.startWeek}-${schedule.endWeek}) - Available ${formatDate(schedule.startDate)}`;
+                    }
+                }
+            });
+        }
+
+        /**
+         * Get current week number based on project start date
+         */
+        function getCurrentWeek(currentDate) {
+            const projectStart = new Date('2025-10-01');
+            const timeDiff = currentDate - projectStart;
+            const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+            return Math.ceil(daysDiff / 7);
+        }
+        
+        /**
+         * Check if current date is within the priority schedule
+         */
+        function isWithinSchedule(currentDate, schedule) {
+            return currentDate >= schedule.startDate && currentDate <= schedule.endDate;
+        }
+        
+        /**
+         * Format date for display
+         */
+        function formatDate(date) {
+            return date.toLocaleDateString('en-US', { 
+                month: 'short', 
+                day: 'numeric', 
+                year: 'numeric' 
+            });
+        }
+
+        function showTrelloStatus(message, type) {
+            const statusDiv = document.getElementById('trello-status');
+            const statusContent = document.getElementById('trello-status-content');
+            
+            statusDiv.style.display = 'block';
+            statusContent.innerHTML = message;
+            
+            // Add type-specific styling
+            statusDiv.style.borderLeft = type === 'success' ? '4px solid #4ecdc4' : 
+                                       type === 'error' ? '4px solid #ff6b6b' : 
+                                       type === 'warning' ? '4px solid #ffd93d' : 
+                                       '4px solid #45b7d1';
+        }
+
+        // Initialize Trello integration when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add hover effects to Trello buttons
+            const trelloBtns = document.querySelectorAll('.trello-btn');
+            trelloBtns.forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px)';
+                    this.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
+                });
+                btn.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'none';
+                });
+            });
+
+            // Initialize Trello integration
+            initializeTrelloIntegration();
+            
+            // Add hover effects to priority sync buttons
+            const prioritySyncBtns = document.querySelectorAll('.priority-sync-btn');
+            prioritySyncBtns.forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px)';
+                    this.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+                });
+                btn.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'none';
+                });
+            });
+        });
+    </script>
 </body>
 </html>
+
