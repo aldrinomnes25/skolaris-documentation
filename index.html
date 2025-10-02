@@ -12154,24 +12154,43 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                         avatarHTML += `<div class="comment-avatar" style="${comment.avatarUrl ? 'display: none;' : ''}">${comment.initials}</div>`;
                         
                         if (comment.type === 'activity') {
-                            // Activity messages - with avatar showing who performed the action
-                        commentsHTML += `
-                                <div class="comment-item activity ${activityClass} ${isCurrentUser ? 'current-user' : ''}" data-comment-id="${comment.id}">
-                                    <div class="comment-avatar" style="width: 28px; height: 28px; font-size: 0.75em;">
-                                        ${avatarHTML}
-                                    </div>
-                                    <div class="message-container">
-                                <div class="comment-header">
-                                            <span class="comment-author">${comment.author}</span>
-                                            <span class="comment-date">${formatSmartDate(comment.date)}</span>
+                            if (isCurrentUser) {
+                                // Current user activity messages - render as chat bubbles
+                                commentsHTML += `
+                                    <div class="comment-item comment ${isCurrentUser ? 'current-user' : ''}" data-comment-id="${comment.id}">
+                                        <div class="comment-avatar">
+                                            ${avatarHTML}
                                         </div>
-                                        <div class="activity-bubble">
-                                            ${comment.text}
-                                            <div class="message-time">${formatSmartDate(comment.date)} ${comment.date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</div>
+                                        <div class="message-container">
+                                            <div class="message-row own">
+                                                <div class="comment-bubble own-message">
+                                                    <p class="comment-text">${comment.text}</p>
+                                                    <div class="message-time">${formatSmartDate(comment.date)} ${comment.date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            `;
+                                `;
+                            } else {
+                                // Other users' activity messages - keep as activity bubbles
+                                commentsHTML += `
+                                    <div class="comment-item activity ${activityClass}" data-comment-id="${comment.id}">
+                                        <div class="comment-avatar" style="width: 28px; height: 28px; font-size: 0.75em;">
+                                            ${avatarHTML}
+                                        </div>
+                                        <div class="message-container">
+                                    <div class="comment-header">
+                                                <span class="comment-author">${comment.author}</span>
+                                                <span class="comment-date">${formatSmartDate(comment.date)}</span>
+                                            </div>
+                                            <div class="activity-bubble">
+                                                ${comment.text}
+                                                <div class="message-time">${formatSmartDate(comment.date)} ${comment.date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `;
+                            }
                         } else {
                             // Regular comments - chat bubble style
                             const bubbleClass = isCurrentUser ? 'own-message' : 'other-message';
@@ -12377,24 +12396,43 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                         avatarHTML += `<div class="comment-avatar" style="${comment.avatarUrl ? 'display: none;' : ''}">${comment.initials}</div>`;
                         
                         if (comment.type === 'activity') {
-                            // Activity messages - with avatar showing who performed the action
-                        commentsHTML += `
-                                <div class="comment-item activity ${activityClass} ${isCurrentUser ? 'current-user' : ''}" data-comment-id="${comment.id}">
-                                    <div class="comment-avatar" style="width: 28px; height: 28px; font-size: 0.75em;">
-                                        ${avatarHTML}
-                                    </div>
-                                    <div class="message-container">
-                                <div class="comment-header">
-                                            <span class="comment-author">${comment.author}</span>
-                                            <span class="comment-date">${formatSmartDate(comment.date)}</span>
+                            if (isCurrentUser) {
+                                // Current user activity messages - render as chat bubbles
+                                commentsHTML += `
+                                    <div class="comment-item comment ${isCurrentUser ? 'current-user' : ''}" data-comment-id="${comment.id}">
+                                        <div class="comment-avatar">
+                                            ${avatarHTML}
                                         </div>
-                                        <div class="activity-bubble">
-                                            ${comment.text}
-                                            <div class="message-time">${formatSmartDate(comment.date)} ${comment.date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</div>
+                                        <div class="message-container">
+                                            <div class="message-row own">
+                                                <div class="comment-bubble own-message">
+                                                    <p class="comment-text">${comment.text}</p>
+                                                    <div class="message-time">${formatSmartDate(comment.date)} ${comment.date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            `;
+                                `;
+                            } else {
+                                // Other users' activity messages - keep as activity bubbles
+                                commentsHTML += `
+                                    <div class="comment-item activity ${activityClass}" data-comment-id="${comment.id}">
+                                        <div class="comment-avatar" style="width: 28px; height: 28px; font-size: 0.75em;">
+                                            ${avatarHTML}
+                                        </div>
+                                        <div class="message-container">
+                                    <div class="comment-header">
+                                                <span class="comment-author">${comment.author}</span>
+                                                <span class="comment-date">${formatSmartDate(comment.date)}</span>
+                                            </div>
+                                            <div class="activity-bubble">
+                                                ${comment.text}
+                                                <div class="message-time">${formatSmartDate(comment.date)} ${comment.date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `;
+                            }
                         } else {
                             // Regular comments - chat bubble style
                             const bubbleClass = isCurrentUser ? 'own-message' : 'other-message';
