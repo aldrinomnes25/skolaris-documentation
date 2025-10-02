@@ -8,7 +8,10 @@ class TrelloIntegration {
         this.apiKey = 'f3cba5684e71b81cf564e204aa79df6e';
         this.secret = '0d6d16da777fdf84f1fb7f6b88f0a9c0d8eaa6122a5adfbe6832a9737a688ce3';
         this.baseUrl = 'https://api.trello.com/1';
-        this.token = 'ATTAb0d5216ceefb6bfbaa9a4254337a81f3a898e6190c50cdf4ff764137cda4b06d19612FC5';
+        // Use admin token for reading data (board, cards, etc.)
+        this.adminToken = 'ATTAb0d5216ceefb6bfbaa9a4254337a81f3a898e6190c50cdf4ff764137cda4b06d19612FC5';
+        // User token for comments (will be set per user)
+        this.userToken = localStorage.getItem('trello_user_token') || null;
         this.boardId = null;
         this.lists = {};
     } 
@@ -31,7 +34,101 @@ class TrelloIntegration {
     }
 
     /**
-     * Authenticate with Trello
+     * Authenticate individual user with Trello for commenting
+     */
+    async authenticateUser() {
+        return new Promise((resolve, reject) => {
+            // Use Trello's client.js for authentication
+            if (typeof Trello !== 'undefined') {
+                // Use official Trello client
+                Trello.setKey(this.apiKey);
+                Trello.authorize({
+                    type: 'popup',
+                    name: 'SKOLARIS Comments',
+                    scope: {
+                        read: true,
+                        write: true
+                    },
+                    expiration: 'never',
+                    success: () => {
+                        this.userToken = Trello.token();
+                        localStorage.setItem('trello_user_token', this.userToken);
+                        resolve(true);
+                    },
+                    error: (error) => {
+                        reject(new Error('Authentication failed: ' + error));
+                    }
+                });
+            } else {
+                // Fallback: Simple popup without return URL
+                const authUrl = `https://trello.com/1/authorize?expiration=never&scope=read,write&name=SKOLARIS%20Comments&key=${this.apiKey}&response_type=token`;
+                
+                // Open authentication window
+                const authWindow = window.open(authUrl, 'trello_user_auth', 'width=500,height=600,scrollbars=yes,resizable=yes');
+                
+                // Check if window is closed and show token modal
+                const checkClosed = setInterval(() => {
+                    if (authWindow.closed) {
+                        clearInterval(checkClosed);
+                        
+                        // Show token input section instead of prompt
+                        setTimeout(() => {
+                            if (typeof showTokenInput === 'function') {
+                                showTokenInput();
+                                resolve(true); // Resolve immediately, token will be handled by input section
+                            } else {
+                                // Fallback to prompt if modal function is not available
+                                const token = prompt('Please paste your Trello token here:');
+                                if (token && token.trim()) {
+                                    const cleanToken = token.trim();
+                                    this.userToken = cleanToken;
+                                    localStorage.setItem('trello_user_token', cleanToken);
+                                    resolve(true);
+                                } else {
+                                    reject(new Error('No token provided'));
+                                }
+                            }
+                        }, 500);
+                    }
+                }, 1000);
+            }
+        });
+    }
+
+    /**
+     * Check if user is authenticated for commenting
+     */
+    isUserAuthenticated() {
+        return !!this.userToken;
+    }
+
+    /**
+     * Get current user info
+     */
+    async getCurrentUser() {
+        if (!this.userToken) return null;
+        
+        try {
+            const response = await fetch(`${this.baseUrl}/members/me?key=${this.apiKey}&token=${this.userToken}`);
+            if (response.ok) {
+                return await response.json();
+            }
+        } catch (error) {
+            console.error('Error getting current user:', error);
+        }
+        return null;
+    }
+
+    /**
+     * Logout user (clear their token)
+     */
+    logoutUser() {
+        this.userToken = null;
+        localStorage.removeItem('trello_user_token');
+    }
+
+    /**
+     * Authenticate with Trello (admin functions)
      */
     async authenticate() {
         return new Promise((resolve, reject) => {
@@ -46,7 +143,7 @@ class TrelloIntegration {
                     clearInterval(checkClosed);
                     const token = localStorage.getItem('trello_token');
                     if (token) {
-                        this.token = token;
+                        this.adminToken = token;
                         resolve(true);
                     } else {
                         reject(new Error('Authentication cancelled'));
@@ -61,7 +158,7 @@ class TrelloIntegration {
      */
     async verifyToken() {
         try {
-            const response = await fetch(`${this.baseUrl}/tokens/${this.token}?key=${this.apiKey}`);
+            const response = await fetch(`${this.baseUrl}/tokens/${this.adminToken}?key=${this.apiKey}`);
             return response.ok;
         } catch (error) {
             return false;
@@ -91,7 +188,7 @@ class TrelloIntegration {
                 desc: 'Phase 1 (3-Month) Core Process Implementation - October to December 2025',
                 defaultLists: false,
                 key: this.apiKey,
-                token: this.token
+                token: this.adminToken
             };
 
             const response = await fetch(`${this.baseUrl}/boards`, {
@@ -120,7 +217,7 @@ class TrelloIntegration {
      */
     async getBoards() {
         try {
-            const response = await fetch(`${this.baseUrl}/members/me/boards?key=${this.apiKey}&token=${this.token}`);
+            const response = await fetch(`${this.baseUrl}/members/me/boards?key=${this.apiKey}&token=${this.adminToken}`);
             if (response.ok) {
                 return await response.json();
             }
@@ -256,7 +353,7 @@ class TrelloIntegration {
      */
     async getBoardLists() {
         try {
-            const response = await fetch(`${this.baseUrl}/boards/${this.boardId}/lists?key=${this.apiKey}&token=${this.token}`);
+            const response = await fetch(`${this.baseUrl}/boards/${this.boardId}/lists?key=${this.apiKey}&token=${this.adminToken}`);
             if (response.ok) {
                 const lists = await response.json();
                 lists.forEach(list => {
@@ -318,7 +415,7 @@ class TrelloIntegration {
      */
     async findExistingCard(title, listId) {
         try {
-            const response = await fetch(`${this.baseUrl}/lists/${listId}/cards?key=${this.apiKey}&token=${this.token}`);
+            const response = await fetch(`${this.baseUrl}/lists/${listId}/cards?key=${this.apiKey}&token=${this.adminToken}`);
             if (!response.ok) {
                 return null;
             }
@@ -340,7 +437,7 @@ class TrelloIntegration {
             const lists = await this.getBoardLists();
             
             for (const list of lists) {
-                const response = await fetch(`${this.baseUrl}/lists/${list.id}/cards?key=${this.apiKey}&token=${this.token}`);
+                const response = await fetch(`${this.baseUrl}/lists/${list.id}/cards?key=${this.apiKey}&token=${this.adminToken}`);
                 if (response.ok) {
                     const cards = await response.json();
                     const card = cards.find(card => card.name === title);
@@ -448,7 +545,7 @@ class TrelloIntegration {
                 name: '📋 Requirements & Specifications',
                 idCard: cardId,
                 key: this.apiKey,
-                token: this.token
+                token: this.adminToken
             };
 
             const response = await fetch(`${this.baseUrl}/checklists`, {
@@ -483,7 +580,7 @@ class TrelloIntegration {
     async updateChecklist(cardId, details) {
         try {
             // Get existing checklists for the card
-            const response = await fetch(`${this.baseUrl}/cards/${cardId}/checklists?key=${this.apiKey}&token=${this.token}`);
+            const response = await fetch(`${this.baseUrl}/cards/${cardId}/checklists?key=${this.apiKey}&token=${this.adminToken}`);
             if (!response.ok) {
                 return;
             }
@@ -499,7 +596,7 @@ class TrelloIntegration {
 
             // Clear existing items
             for (const item of checklist.checkItems) {
-                await fetch(`${this.baseUrl}/checklists/${checklist.id}/checkItems/${item.id}?key=${this.apiKey}&token=${this.token}`, {
+                await fetch(`${this.baseUrl}/checklists/${checklist.id}/checkItems/${item.id}?key=${this.apiKey}&token=${this.adminToken}`, {
                     method: 'DELETE'
                 });
             }
@@ -525,7 +622,7 @@ class TrelloIntegration {
             const itemData = {
                 name: itemName,
                 key: this.apiKey,
-                token: this.token
+                token: this.adminToken
             };
 
             const response = await fetch(`${this.baseUrl}/checklists/${checklistId}/checkItems`, {
@@ -933,7 +1030,7 @@ class TrelloIntegration {
             ];
 
             // Get all lists from the board
-            const listsResponse = await fetch(`${this.baseUrl}/boards/${this.boardId}/lists?key=${this.apiKey}&token=${this.token}`);
+            const listsResponse = await fetch(`${this.baseUrl}/boards/${this.boardId}/lists?key=${this.apiKey}&token=${this.adminToken}`);
             if (!listsResponse.ok) {
                 throw new Error('Failed to fetch board lists');
             }
@@ -973,7 +1070,7 @@ class TrelloIntegration {
             }
 
             // Get remaining cards from the kept lists
-            const cardsResponse = await fetch(`${this.baseUrl}/boards/${this.boardId}/cards?key=${this.apiKey}&token=${this.token}`);
+            const cardsResponse = await fetch(`${this.baseUrl}/boards/${this.boardId}/cards?key=${this.apiKey}&token=${this.adminToken}`);
             if (!cardsResponse.ok) {
                 throw new Error('Failed to fetch board cards');
             }
@@ -1000,7 +1097,7 @@ class TrelloIntegration {
                     await new Promise(resolve => setTimeout(resolve, index * 100));
                     
                     try {
-                        const deleteResponse = await fetch(`${this.baseUrl}/cards/${card.id}?key=${this.apiKey}&token=${this.token}`, {
+                        const deleteResponse = await fetch(`${this.baseUrl}/cards/${card.id}?key=${this.apiKey}&token=${this.adminToken}`, {
                             method: 'DELETE'
                         });
                         
@@ -1087,7 +1184,7 @@ class TrelloIntegration {
      */
     async getTaskChecklistStatus(cardId) {
         try {
-            const response = await fetch(`${this.baseUrl}/cards/${cardId}/checklists?key=${this.apiKey}&token=${this.token}`);
+            const response = await fetch(`${this.baseUrl}/cards/${cardId}/checklists?key=${this.apiKey}&token=${this.adminToken}`);
             if (!response.ok) {
                 return null;
             }
@@ -1133,7 +1230,7 @@ class TrelloIntegration {
             }
 
             // Get all cards
-            const cardsResponse = await fetch(`${this.baseUrl}/boards/${this.boardId}/cards?key=${this.apiKey}&token=${this.token}`);
+            const cardsResponse = await fetch(`${this.baseUrl}/boards/${this.boardId}/cards?key=${this.apiKey}&token=${this.adminToken}`);
             if (!cardsResponse.ok) {
                 throw new Error('Failed to fetch cards');
             }
@@ -1169,7 +1266,8 @@ class TrelloIntegration {
      */
     async getCardComments(cardId) {
         try {
-            const response = await fetch(`${this.baseUrl}/cards/${cardId}/actions?filter=commentCard,updateCard,createCard&key=${this.apiKey}&token=${this.token}`);
+            // Fetch comprehensive activity types for detailed logs
+            const response = await fetch(`${this.baseUrl}/cards/${cardId}/actions?filter=commentCard,updateCard,createCard,addChecklistToCard,updateCheckItemStateOnCard,addMemberToCard,removeMemberFromCard,addAttachmentToCard,deleteAttachmentFromCard,addLabelToCard,removeLabelFromCard,copyCard,moveCardToBoard&key=${this.apiKey}&token=${this.adminToken}`);
             if (!response.ok) {
                 throw new Error('Failed to fetch comments');
             }
@@ -1178,43 +1276,188 @@ class TrelloIntegration {
             const comments = [];
             
             actions.forEach(action => {
+                const memberCreator = action.memberCreator;
+                const baseData = {
+                    id: action.id,
+                    author: memberCreator ? memberCreator.fullName : 'Unknown User',
+                    username: memberCreator ? memberCreator.username : 'unknown',
+                    initials: memberCreator ? (memberCreator.initials || memberCreator.fullName.split(' ').map(n => n[0]).join('').toUpperCase()) : '??',
+                    avatarUrl: memberCreator ? memberCreator.avatarUrl : null,
+                    date: new Date(action.date)
+                };
+
                 if (action.type === 'commentCard') {
-                    const memberCreator = action.memberCreator;
                     comments.push({
-                        id: action.id,
+                        ...baseData,
                         text: action.data.text,
-                        author: memberCreator ? memberCreator.fullName : 'Unknown User',
-                        username: memberCreator ? memberCreator.username : 'unknown',
-                        initials: memberCreator ? (memberCreator.initials || memberCreator.fullName.split(' ').map(n => n[0]).join('').toUpperCase()) : '??',
-                        avatarUrl: memberCreator ? memberCreator.avatarUrl : null,
-                        date: new Date(action.date),
                         type: 'comment'
                     });
                 } else if (action.type === 'updateCard') {
                     if (action.data.listAfter && action.data.listBefore) {
-                        const memberCreator = action.memberCreator;
                         comments.push({
-                            id: action.id,
-                            text: `Moved from "${action.data.listBefore.name}" to "${action.data.listAfter.name}"`,
-                            author: memberCreator ? memberCreator.fullName : 'Unknown User',
-                            username: memberCreator ? memberCreator.username : 'unknown',
-                            initials: memberCreator ? (memberCreator.initials || memberCreator.fullName.split(' ').map(n => n[0]).join('').toUpperCase()) : '??',
-                            avatarUrl: memberCreator ? memberCreator.avatarUrl : null,
-                            date: new Date(action.date),
-                            type: 'activity'
+                            ...baseData,
+                            text: `📋 Moved from "${action.data.listBefore.name}" to "${action.data.listAfter.name}"`,
+                            type: 'activity',
+                            activityType: 'move'
                         });
+                    } else if (action.data.card && action.data.old) {
+                        // Handle other card updates with specific details
+                        let updateText = '';
+                        let updateDetails = [];
+                        
+                        // Check for name changes
+                        if (action.data.old.name !== undefined && action.data.card.name !== action.data.old.name) {
+                            updateText = `📝 Renamed card from "${action.data.old.name}" to "${action.data.card.name}"`;
+                        }
+                        // Check for description changes
+                        else if (action.data.old.desc !== undefined) {
+                            if (action.data.old.desc === '' && action.data.card.desc) {
+                                updateText = `📄 Added card description`;
+                            } else if (action.data.old.desc && action.data.card.desc === '') {
+                                updateText = `📄 Removed card description`;
+                            } else {
+                                updateText = `📄 Updated card description`;
+                            }
+                        }
+                        // Check for due date changes
+                        else if (action.data.old.due !== undefined) {
+                            if (action.data.old.due === null && action.data.card.due) {
+                                const dueDate = new Date(action.data.card.due).toLocaleDateString();
+                                updateText = `📅 Set due date to ${dueDate}`;
+                            } else if (action.data.old.due && action.data.card.due === null) {
+                                updateText = `📅 Removed due date`;
+                            } else if (action.data.old.due && action.data.card.due) {
+                                const oldDate = new Date(action.data.old.due).toLocaleDateString();
+                                const newDate = new Date(action.data.card.due).toLocaleDateString();
+                                updateText = `📅 Changed due date from ${oldDate} to ${newDate}`;
+                            }
+                        }
+                        // Check for position changes (within same list)
+                        else if (action.data.old.pos !== undefined && action.data.card.pos !== action.data.old.pos) {
+                            updateText = `🔄 Changed card position in list`;
+                        }
+                        // Check for closed/archived status
+                        else if (action.data.old.closed !== undefined) {
+                            if (action.data.card.closed && !action.data.old.closed) {
+                                updateText = `📦 Archived card`;
+                            } else if (!action.data.card.closed && action.data.old.closed) {
+                                updateText = `📤 Unarchived card`;
+                            }
+                        }
+                        // Generic fallback with more details
+                        else {
+                            const changedFields = [];
+                            Object.keys(action.data.old).forEach(key => {
+                                if (key !== 'dateLastActivity') {
+                                    changedFields.push(key);
+                                }
+                            });
+                            
+                            if (changedFields.length > 0) {
+                                updateText = `✏️ Updated card ${changedFields.join(', ').replace(/([A-Z])/g, ' $1').toLowerCase()}`;
+                            } else {
+                                updateText = `✏️ Updated card properties`;
+                            }
+                        }
+                        
+                        if (updateText) {
+                            comments.push({
+                                ...baseData,
+                                text: updateText,
+                                type: 'activity',
+                                activityType: 'update'
+                            });
+                        }
                     }
                 } else if (action.type === 'createCard') {
-                    const memberCreator = action.memberCreator;
                     comments.push({
-                        id: action.id,
-                        text: 'Card created',
-                        author: memberCreator ? memberCreator.fullName : 'Unknown User',
-                        username: memberCreator ? memberCreator.username : 'unknown',
-                        initials: memberCreator ? (memberCreator.initials || memberCreator.fullName.split(' ').map(n => n[0]).join('').toUpperCase()) : '??',
-                        avatarUrl: memberCreator ? memberCreator.avatarUrl : null,
-                        date: new Date(action.date),
-                        type: 'activity'
+                        ...baseData,
+                        text: '🎯 Card created',
+                        type: 'activity',
+                        activityType: 'create'
+                    });
+                } else if (action.type === 'addChecklistToCard') {
+                    comments.push({
+                        ...baseData,
+                        text: `📋 Added checklist "${action.data.checklist.name}"`,
+                        type: 'activity',
+                        activityType: 'checklist'
+                    });
+                } else if (action.type === 'updateCheckItemStateOnCard') {
+                    const checkItem = action.data.checkItem;
+                    const checklist = action.data.checklist;
+                    const isCompleted = checkItem.state === 'complete';
+                    comments.push({
+                        ...baseData,
+                        text: `${isCompleted ? '✅' : '⬜'} ${isCompleted ? 'Completed' : 'Unchecked'} "${checkItem.name}" in "${checklist.name}"`,
+                        type: 'activity',
+                        activityType: 'checklist',
+                        isCompleted: isCompleted
+                    });
+                } else if (action.type === 'addMemberToCard') {
+                    const member = action.data.member;
+                    comments.push({
+                        ...baseData,
+                        text: `👤 Added ${member.fullName} to the card`,
+                        type: 'activity',
+                        activityType: 'member'
+                    });
+                } else if (action.type === 'removeMemberFromCard') {
+                    const member = action.data.member;
+                    comments.push({
+                        ...baseData,
+                        text: `👤 Removed ${member.fullName} from the card`,
+                        type: 'activity',
+                        activityType: 'member'
+                    });
+                } else if (action.type === 'addAttachmentToCard') {
+                    const attachment = action.data.attachment;
+                    comments.push({
+                        ...baseData,
+                        text: `📎 Added attachment "${attachment.name}"`,
+                        type: 'activity',
+                        activityType: 'attachment'
+                    });
+                } else if (action.type === 'deleteAttachmentFromCard') {
+                    const attachment = action.data.attachment;
+                    comments.push({
+                        ...baseData,
+                        text: `🗑️ Removed attachment "${attachment.name}"`,
+                        type: 'activity',
+                        activityType: 'attachment'
+                    });
+                } else if (action.type === 'addLabelToCard') {
+                    const label = action.data.label;
+                    comments.push({
+                        ...baseData,
+                        text: `🏷️ Added label "${label.name || 'Unnamed'}" (${label.color})`,
+                        type: 'activity',
+                        activityType: 'label'
+                    });
+                } else if (action.type === 'removeLabelFromCard') {
+                    const label = action.data.label;
+                    comments.push({
+                        ...baseData,
+                        text: `🏷️ Removed label "${label.name || 'Unnamed'}" (${label.color})`,
+                        type: 'activity',
+                        activityType: 'label'
+                    });
+                } else if (action.type === 'copyCard') {
+                    const card = action.data.card;
+                    comments.push({
+                        ...baseData,
+                        text: `📋 Copied card to "${card.name}"`,
+                        type: 'activity',
+                        activityType: 'copy'
+                    });
+                } else if (action.type === 'moveCardToBoard') {
+                    const board = action.data.board;
+                    const boardAfter = action.data.boardTarget;
+                    comments.push({
+                        ...baseData,
+                        text: `🔄 Moved card to board "${boardAfter.name}"`,
+                        type: 'activity',
+                        activityType: 'move'
                     });
                 }
             });
@@ -1233,11 +1476,15 @@ class TrelloIntegration {
      * Add a comment to a Trello card
      */
     async addCardComment(cardId, commentText) {
+        if (!this.userToken) {
+            throw new Error('Please connect your Trello account first to add comments.');
+        }
+        
         try {
             const commentData = {
                 text: commentText,
                 key: this.apiKey,
-                token: this.token
+                token: this.userToken
             };
 
             const response = await fetch(`${this.baseUrl}/cards/${cardId}/actions/comments`, {
@@ -1262,6 +1509,67 @@ class TrelloIntegration {
     }
 
     /**
+     * Update a comment on a Trello card
+     */
+    async updateCardComment(actionId, newText) {
+        if (!this.userToken) {
+            throw new Error('Please connect your Trello account first to edit comments.');
+        }
+        
+        try {
+            const updateData = {
+                text: newText,
+                key: this.apiKey,
+                token: this.userToken
+            };
+
+            const response = await fetch(`${this.baseUrl}/actions/${actionId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updateData)
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Failed to update comment: ${errorText}`);
+            }
+
+            const result = await response.json();
+            return result;
+        } catch (error) {
+            console.error('Error updating comment:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Delete a comment from a Trello card
+     */
+    async deleteCardComment(actionId) {
+        if (!this.userToken) {
+            throw new Error('Please connect your Trello account first to delete comments.');
+        }
+        
+        try {
+            const response = await fetch(`${this.baseUrl}/actions/${actionId}?key=${this.apiKey}&token=${this.userToken}`, {
+                method: 'DELETE'
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Failed to delete comment: ${errorText}`);
+            }
+
+            return true;
+        } catch (error) {
+            console.error('Error deleting comment:', error);
+            throw error;
+        }
+    }
+
+    /**
      * Get comprehensive status of all Trello tasks
      */
     async getAllTaskStatus() {
@@ -1273,7 +1581,7 @@ class TrelloIntegration {
             }
 
             // Get board details
-            const boardResponse = await fetch(`${this.baseUrl}/boards/${this.boardId}?key=${this.apiKey}&token=${this.token}`);
+            const boardResponse = await fetch(`${this.baseUrl}/boards/${this.boardId}?key=${this.apiKey}&token=${this.adminToken}`);
             if (!boardResponse.ok) {
                 throw new Error('Failed to fetch board details');
             }
@@ -1283,7 +1591,7 @@ class TrelloIntegration {
             const lists = await this.getBoardLists();
             
             // Get all cards
-            const cardsResponse = await fetch(`${this.baseUrl}/boards/${this.boardId}/cards?key=${this.apiKey}&token=${this.token}`);
+            const cardsResponse = await fetch(`${this.baseUrl}/boards/${this.boardId}/cards?key=${this.apiKey}&token=${this.adminToken}`);
             if (!cardsResponse.ok) {
                 throw new Error('Failed to fetch cards');
             }
@@ -1332,7 +1640,7 @@ class TrelloIntegration {
             // Get checklist statistics
             let checklistStats = null;
             try {
-                const checklistResponse = await fetch(`${this.baseUrl}/boards/${this.boardId}/checklists?key=${this.apiKey}&token=${this.token}`);
+                const checklistResponse = await fetch(`${this.baseUrl}/boards/${this.boardId}/checklists?key=${this.apiKey}&token=${this.adminToken}`);
                 if (checklistResponse.ok) {
                     const checklists = await checklistResponse.json();
                     let totalItems = 0;

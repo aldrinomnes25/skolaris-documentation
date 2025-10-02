@@ -261,6 +261,8 @@
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             animation: modalSlideIn 0.3s ease-out;
+            display: flex;
+            flex-direction: column;
         }
         @keyframes modalSlideIn {
             from { transform: translateY(-50px); opacity: 0; }
@@ -300,29 +302,43 @@
         }
         .comments-modal-body { 
             padding: 20px; 
-            max-height: 60vh; 
+            flex: 1;
             overflow-y: auto;
+            min-height: 0;
+            scroll-behavior: smooth;
         }
         .comment-item { 
+            background: #ffffff; 
+            padding: 16px; 
+            margin-bottom: 16px; 
+            border-radius: 10px; 
+            border: 1px solid #e9ecef;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: box-shadow 0.2s ease;
+        }
+        .comment-item:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .comment-item.activity {
             background: #f8f9fa; 
-            padding: 15px; 
-            margin-bottom: 15px; 
-            border-radius: 8px; 
+            border-left: 4px solid #6c757d;
+        }
+        .comment-item.comment {
             border-left: 4px solid #74b9ff;
         }
         .comment-header { 
             display: flex; 
             justify-content: space-between; 
-            align-items: center; 
-            margin-bottom: 8px;
+            align-items: flex-start; 
+            margin-bottom: 12px;
         }
         .comment-author { 
             display: flex; 
             align-items: center; 
-            gap: 8px; 
+            gap: 10px; 
             font-weight: 600; 
             color: #495057; 
-            font-size: 0.9em;
+            font-size: 0.95em;
         }
         .comment-avatar { 
             width: 32px; 
@@ -363,8 +379,59 @@
         }
         .comment-text { 
             color: #212529; 
-            line-height: 1.5; 
+            line-height: 1.6; 
             margin: 0;
+            font-size: 0.95em;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .comment-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+            font-size: 0.8em;
+            color: #6c757d;
+        }
+        .comment-type-badge {
+            background: #e9ecef;
+            color: #495057;
+            padding: 2px 6px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 500;
+        }
+        .comment-type-badge.comment {
+            background: #cce5ff;
+            color: #0056b3;
+        }
+        .comment-type-badge.activity {
+            background: #f8f9fa;
+            color: #6c757d;
+        }
+        .comment-item.activity.move {
+            border-left-color: #17a2b8;
+        }
+        .comment-item.activity.checklist {
+            border-left-color: #28a745;
+        }
+        .comment-item.activity.member {
+            border-left-color: #6f42c1;
+        }
+        .comment-item.activity.attachment {
+            border-left-color: #fd7e14;
+        }
+        .comment-item.activity.create {
+            border-left-color: #20c997;
+        }
+        .comment-item.activity.update {
+            border-left-color: #ffc107;
+        }
+        .comment-item.activity.label {
+            border-left-color: #e83e8c;
+        }
+        .comment-item.activity.copy {
+            border-left-color: #6610f2;
         }
         .comments-loading { 
             text-align: center; 
@@ -388,8 +455,12 @@
             background: #f8f9fa; 
             padding: 20px; 
             border-radius: 8px; 
-            margin-bottom: 20px; 
+            margin: 10px 20px 20px 20px; 
             border: 1px solid #e9ecef;
+            flex-shrink: 0;
+        }
+        .user-auth-section, .user-info-section {
+            margin: 20px 20px 10px 20px;
         }
         .comment-form h4 { 
             margin: 0 0 15px 0; 
@@ -450,6 +521,79 @@
             transition: all 0.3s ease;
         }
         .comment-cancel-btn:hover { 
+            background: #5a6268;
+        }
+        
+        /* Comment Action Buttons */
+        .comment-actions { 
+            display: flex; 
+            gap: 5px; 
+            margin-left: auto;
+        }
+        .comment-action-btn { 
+            background: none; 
+            border: 1px solid #dee2e6; 
+            color: #6c757d; 
+            padding: 4px 8px; 
+            border-radius: 4px; 
+            font-size: 0.75em; 
+            cursor: pointer; 
+            transition: all 0.3s ease;
+        }
+        .comment-action-btn:hover { 
+            background: #f8f9fa; 
+            border-color: #adb5bd;
+        }
+        .comment-edit-btn:hover { 
+            color: #007bff; 
+            border-color: #007bff;
+        }
+        .comment-delete-btn:hover { 
+            color: #dc3545; 
+            border-color: #dc3545;
+        }
+        .comment-edit-form { 
+            margin-top: 10px; 
+            display: none;
+        }
+        .comment-edit-textarea { 
+            width: 100%; 
+            min-height: 60px; 
+            padding: 8px; 
+            border: 1px solid #ced4da; 
+            border-radius: 4px; 
+            font-family: inherit; 
+            font-size: 0.9em; 
+            resize: vertical;
+        }
+        .comment-edit-buttons { 
+            display: flex; 
+            gap: 8px; 
+            margin-top: 8px; 
+            justify-content: flex-end;
+        }
+        .comment-save-btn { 
+            background: #28a745; 
+            color: white; 
+            border: none; 
+            padding: 4px 12px; 
+            border-radius: 4px; 
+            font-size: 0.8em; 
+            cursor: pointer;
+        }
+        .comment-save-btn:hover { 
+            background: #218838;
+        }
+        .comment-cancel-edit-btn { 
+            background: #6c757d; 
+            color: white; 
+            border: none; 
+            padding: 4px 12px; 
+            border-radius: 4px; 
+            font-size: 0.8em; 
+            cursor: pointer;
+        }
+        .comment-cancel-edit-btn:hover { 
             background: #5a6268;
         }
         .expected-result { background: #f8f9fa; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #17a2b8; }
@@ -11673,6 +11817,9 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
         } 
     </script>
 
+    <!-- Trello Client Library -->
+    <script src="https://trello.com/1/client.js?key=f3cba5684e71b81cf564e204aa79df6e"></script>
+    
     <!-- Trello Integration Script -->
     <script src="trello-integration.js"></script>
     
@@ -11736,6 +11883,83 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
         let currentCardId = null;
         let currentCardName = '';
 
+        // Function to connect user's Trello account
+        async function connectTrelloAccount() {
+            const statusSpan = document.getElementById('userStatus');
+            statusSpan.textContent = 'Opening Trello authorization...';
+            
+            try {
+                await window.trelloIntegration.authenticateUser();
+                statusSpan.textContent = 'Please paste your token below to complete the connection...';
+                
+                // Note: The success handling is now done in the connectWithToken function
+                // when the user completes the token input
+                
+            } catch (error) {
+                    statusSpan.textContent = 'Connection failed. Please try again.';
+                console.error('Trello authentication failed:', error);
+                
+                // Make sure connect section is visible if there was an error
+                const connectSection = document.getElementById('connectSection');
+                const tokenSection = document.getElementById('tokenInputSection');
+                if (connectSection && tokenSection) {
+                    connectSection.style.display = 'block';
+                    tokenSection.style.display = 'none';
+                }
+            }
+        }
+
+        // Function to disconnect user's Trello account
+        function disconnectTrelloAccount() {
+            if (confirm('Are you sure you want to disconnect your Trello account? You will no longer be able to add, edit, or delete comments.')) {
+                window.trelloIntegration.logoutUser();
+                updateUserAuthStatus();
+            }
+        }
+
+        // Function to update user authentication status
+        async function updateUserAuthStatus() {
+            const userAuthSection = document.getElementById('userAuthSection');
+            const userInfoSection = document.getElementById('userInfoSection');
+            const commentForm = document.getElementById('commentForm');
+            
+            if (window.trelloIntegration.isUserAuthenticated()) {
+                // User is authenticated
+                try {
+                    const user = await window.trelloIntegration.getCurrentUser();
+                    if (user) {
+                        const userInfoDiv = document.getElementById('currentUserInfo');
+                        userInfoDiv.innerHTML = `
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <div style="width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.7em;">
+                                    ${user.initials || user.fullName.split(' ').map(n => n[0]).join('').toUpperCase()}
+                                </div>
+                                <div>
+                                    <div style="font-weight: 600;">${user.fullName}</div>
+                                    <div style="font-size: 0.8em; opacity: 0.8;">@${user.username}</div>
+                                </div>
+                            </div>
+                        `;
+                        
+                        userAuthSection.style.display = 'none';
+                        userInfoSection.style.display = 'block';
+                        commentForm.style.display = 'block';
+                    }
+                } catch (error) {
+                    console.error('Error getting user info:', error);
+                    // Show auth section if there's an error
+                    userAuthSection.style.display = 'block';
+                    userInfoSection.style.display = 'none';
+                    commentForm.style.display = 'none';
+                }
+            } else {
+                // User is not authenticated
+                userAuthSection.style.display = 'block';
+                userInfoSection.style.display = 'none';
+                commentForm.style.display = 'none';
+            }
+        }
+
         // Function to open Trello comments and activity in modal
         async function openTrelloComments(cardId, cardName) {
             if (!cardId) {
@@ -11752,11 +11976,17 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
             const modalBody = document.getElementById('commentsModalBody');
             const modalTitle = document.querySelector('.comments-modal-title');
             const commentForm = document.getElementById('commentForm');
+            const openInTrelloBtn = document.getElementById('openInTrelloBtn');
             
             modal.style.display = 'block';
             modalTitle.textContent = `💬 Comments & Activity - ${cardName}`;
             modalBody.innerHTML = '<div class="comments-loading">🔄 Loading comments...</div>';
             commentForm.style.display = 'none';
+            
+            // Show "Open in Trello" button
+            if (openInTrelloBtn) {
+                openInTrelloBtn.style.display = 'block';
+            }
             
             try {
                 // Fetch comments from Trello
@@ -11765,11 +11995,34 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                 if (comments.length === 0) {
                     modalBody.innerHTML = '<div class="no-comments">No comments or activity yet. Be the first to comment!</div>';
                 } else {
-                    let commentsHTML = '';
+                    // Count different types of activities
+                    const commentCount = comments.filter(c => c.type === 'comment').length;
+                    const activityCount = comments.filter(c => c.type === 'activity').length;
+                    const checklistCount = comments.filter(c => c.activityType === 'checklist').length;
+                    const moveCount = comments.filter(c => c.activityType === 'move').length;
+                    
+                    let commentsHTML = `
+                        <div style="background: #f8f9fa; padding: 12px; border-radius: 6px; margin-bottom: 16px; font-size: 0.9em; color: #6c757d; border-left: 4px solid #74b9ff;">
+                            📊 <strong>Activity Summary:</strong> ${commentCount} comment${commentCount !== 1 ? 's' : ''} • ${activityCount} activit${activityCount !== 1 ? 'ies' : 'y'} • ${checklistCount} checklist update${checklistCount !== 1 ? 's' : ''} • ${moveCount} move${moveCount !== 1 ? 's' : ''} • ${comments.length} total entries
+                        </div>
+                    `;
+                    
+                    // Add info message for non-authenticated users
+                    if (!window.trelloIntegration.isUserAuthenticated()) {
+                        commentsHTML += `
+                            <div style="background: #e3f2fd; padding: 12px; border-radius: 6px; margin-bottom: 15px; border-left: 3px solid #2196f3;">
+                                <div style="color: #1976d2; font-size: 0.85em;">
+                                    ℹ️ <strong>Connect your Trello account</strong> to add, edit, or delete comments
+                                </div>
+                            </div>
+                        `;
+                    }
+                    
                     comments.forEach(comment => {
                         const dateStr = comment.date.toLocaleDateString() + ' ' + comment.date.toLocaleTimeString();
                         const icon = comment.type === 'comment' ? '💬' : '📝';
                         const typeClass = comment.type === 'comment' ? 'comment' : 'activity';
+                        const activityClass = comment.activityType ? comment.activityType : '';
                         
                         // Create avatar HTML
                         let avatarHTML = '';
@@ -11779,7 +12032,7 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                         avatarHTML += `<div class="comment-avatar" style="${comment.avatarUrl ? 'display: none;' : ''}">${comment.initials}</div>`;
                         
                         commentsHTML += `
-                            <div class="comment-item ${typeClass}">
+                            <div class="comment-item ${typeClass} ${activityClass}" data-comment-id="${comment.id}">
                                 <div class="comment-header">
                                     <div class="comment-author">
                                         <div class="comment-avatar">
@@ -11790,17 +12043,49 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                                             <div class="comment-author-username">@${comment.username}</div>
                                         </div>
                                     </div>
-                                    <span class="comment-date">${dateStr}</span>
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <span class="comment-date">${dateStr}</span>
+                                        ${comment.type === 'comment' && window.trelloIntegration.isUserAuthenticated() ? `
+                                            <div class="comment-actions">
+                                                <button class="comment-action-btn comment-edit-btn" onclick="editComment('${comment.id}')" title="Edit comment">✏️ Edit</button>
+                                                <button class="comment-action-btn comment-delete-btn" onclick="deleteComment('${comment.id}')" title="Delete comment">🗑️ Delete</button>
+                                            </div>
+                                        ` : ''}
+                                    </div>
                                 </div>
                                 <p class="comment-text">${comment.text}</p>
+                                <div class="comment-meta">
+                                    <span class="comment-type-badge ${comment.type}">${comment.type === 'comment' ? '💬 Comment' : '📝 Activity'}</span>
+                                    <span>•</span>
+                                    <span>${comment.date.toLocaleDateString('en-US', { 
+                                        year: 'numeric', 
+                                        month: 'short', 
+                                        day: 'numeric',
+                                        hour: '2-digit',
+                                        minute: '2-digit'
+                                    })}</span>
+                                    ${comment.type === 'comment' ? '<span>• Can be edited/deleted</span>' : ''}
+                                </div>
+                                <div class="comment-edit-form" id="edit-form-${comment.id}">
+                                    <textarea class="comment-edit-textarea" id="edit-text-${comment.id}">${comment.text}</textarea>
+                                    <div class="comment-edit-buttons">
+                                        <button class="comment-cancel-edit-btn" onclick="cancelEditComment('${comment.id}')">Cancel</button>
+                                        <button class="comment-save-btn" onclick="saveEditComment('${comment.id}')">Save</button>
+                                    </div>
+                                </div>
                             </div>
                         `;
                     });
                     modalBody.innerHTML = commentsHTML;
                 }
                 
-                // Show comment form
-                commentForm.style.display = 'block';
+                // Update user authentication status and refresh comments display
+                await updateUserAuthStatus();
+                
+                // Refresh comments to show edit/delete buttons if user just connected
+                if (window.trelloIntegration.isUserAuthenticated()) {
+                    await refreshComments();
+                }
                 
             } catch (error) {
                 modalBody.innerHTML = '<div class="comments-error">❌ Error loading comments: ' + error.message + '</div>';
@@ -11881,11 +12166,34 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                 if (comments.length === 0) {
                     modalBody.innerHTML = '<div class="no-comments">No comments or activity yet. Be the first to comment!</div>';
                 } else {
-                    let commentsHTML = '';
+                    // Count different types of activities
+                    const commentCount = comments.filter(c => c.type === 'comment').length;
+                    const activityCount = comments.filter(c => c.type === 'activity').length;
+                    const checklistCount = comments.filter(c => c.activityType === 'checklist').length;
+                    const moveCount = comments.filter(c => c.activityType === 'move').length;
+                    
+                    let commentsHTML = `
+                        <div style="background: #f8f9fa; padding: 12px; border-radius: 6px; margin-bottom: 16px; font-size: 0.9em; color: #6c757d; border-left: 4px solid #74b9ff;">
+                            📊 <strong>Activity Summary:</strong> ${commentCount} comment${commentCount !== 1 ? 's' : ''} • ${activityCount} activit${activityCount !== 1 ? 'ies' : 'y'} • ${checklistCount} checklist update${checklistCount !== 1 ? 's' : ''} • ${moveCount} move${moveCount !== 1 ? 's' : ''} • ${comments.length} total entries
+                        </div>
+                    `;
+                    
+                    // Add info message for non-authenticated users
+                    if (!window.trelloIntegration.isUserAuthenticated()) {
+                        commentsHTML += `
+                            <div style="background: #e3f2fd; padding: 12px; border-radius: 6px; margin-bottom: 15px; border-left: 3px solid #2196f3;">
+                                <div style="color: #1976d2; font-size: 0.85em;">
+                                    ℹ️ <strong>Connect your Trello account</strong> to add, edit, or delete comments
+                                </div>
+                            </div>
+                        `;
+                    }
+                    
                     comments.forEach(comment => {
                         const dateStr = comment.date.toLocaleDateString() + ' ' + comment.date.toLocaleTimeString();
                         const icon = comment.type === 'comment' ? '💬' : '📝';
                         const typeClass = comment.type === 'comment' ? 'comment' : 'activity';
+                        const activityClass = comment.activityType ? comment.activityType : '';
                         
                         // Create avatar HTML
                         let avatarHTML = '';
@@ -11895,7 +12203,7 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                         avatarHTML += `<div class="comment-avatar" style="${comment.avatarUrl ? 'display: none;' : ''}">${comment.initials}</div>`;
                         
                         commentsHTML += `
-                            <div class="comment-item ${typeClass}">
+                            <div class="comment-item ${typeClass} ${activityClass}" data-comment-id="${comment.id}">
                                 <div class="comment-header">
                                     <div class="comment-author">
                                         <div class="comment-avatar">
@@ -11906,9 +12214,36 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                                             <div class="comment-author-username">@${comment.username}</div>
                                         </div>
                                     </div>
-                                    <span class="comment-date">${dateStr}</span>
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <span class="comment-date">${dateStr}</span>
+                                        ${comment.type === 'comment' && window.trelloIntegration.isUserAuthenticated() ? `
+                                            <div class="comment-actions">
+                                                <button class="comment-action-btn comment-edit-btn" onclick="editComment('${comment.id}')" title="Edit comment">✏️ Edit</button>
+                                                <button class="comment-action-btn comment-delete-btn" onclick="deleteComment('${comment.id}')" title="Delete comment">🗑️ Delete</button>
+                                            </div>
+                                        ` : ''}
+                                    </div>
                                 </div>
                                 <p class="comment-text">${comment.text}</p>
+                                <div class="comment-meta">
+                                    <span class="comment-type-badge ${comment.type}">${comment.type === 'comment' ? '💬 Comment' : '📝 Activity'}</span>
+                                    <span>•</span>
+                                    <span>${comment.date.toLocaleDateString('en-US', { 
+                                        year: 'numeric', 
+                                        month: 'short', 
+                                        day: 'numeric',
+                                        hour: '2-digit',
+                                        minute: '2-digit'
+                                    })}</span>
+                                    ${comment.type === 'comment' ? '<span>• Can be edited/deleted</span>' : ''}
+                                </div>
+                                <div class="comment-edit-form" id="edit-form-${comment.id}">
+                                    <textarea class="comment-edit-textarea" id="edit-text-${comment.id}">${comment.text}</textarea>
+                                    <div class="comment-edit-buttons">
+                                        <button class="comment-cancel-edit-btn" onclick="cancelEditComment('${comment.id}')">Cancel</button>
+                                        <button class="comment-save-btn" onclick="saveEditComment('${comment.id}')">Save</button>
+                                    </div>
+                                </div>
                             </div>
                         `;
                     });
@@ -11923,10 +12258,318 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
         function closeCommentsModal() {
             const modal = document.getElementById('commentsModal');
             const textarea = document.getElementById('commentTextarea');
+            const openInTrelloBtn = document.getElementById('openInTrelloBtn');
+            
             modal.style.display = 'none';
             textarea.value = '';
             currentCardId = null;
             currentCardName = '';
+            
+            // Hide "Open in Trello" button
+            if (openInTrelloBtn) {
+                openInTrelloBtn.style.display = 'none';
+            }
+        }
+
+        // Function to open current card in Trello (new private window)
+        function openInTrello() {
+            if (!currentCardId) {
+                alert('No card selected. Please try again.');
+                return;
+            }
+            
+            // Construct Trello card URL
+            const trelloCardUrl = `https://trello.com/c/${currentCardId}`;
+            
+            // Open in new window with specific features for privacy
+            const windowFeatures = [
+                'width=1200',
+                'height=800',
+                'scrollbars=yes',
+                'resizable=yes',
+                'toolbar=no',
+                'menubar=no',
+                'location=no',
+                'status=no',
+                'directories=no'
+            ].join(',');
+            
+            const trelloWindow = window.open(trelloCardUrl, 'trelloCard', windowFeatures);
+            
+            if (trelloWindow) {
+                trelloWindow.focus();
+            } else {
+                // Fallback if popup was blocked
+                alert('Popup blocked! Please allow popups for this site or manually open: ' + trelloCardUrl);
+            }
+        }
+
+        // Function to show token input section
+        function showTokenInput() {
+            const tokenSection = document.getElementById('tokenInputSection');
+            const connectSection = document.getElementById('connectSection');
+            const input = document.getElementById('trelloTokenInput');
+            const validation = document.getElementById('tokenValidation');
+            const connectBtn = document.getElementById('connectTokenBtn');
+            
+            // Reset input state
+            input.value = '';
+            validation.innerHTML = '';
+            connectBtn.disabled = true;
+            
+            // Hide connect section and show token input section
+            connectSection.style.display = 'none';
+            tokenSection.style.display = 'block';
+            
+            // Scroll to token section and focus on input
+            setTimeout(() => {
+                // Scroll to show the entire token section including buttons
+                const connectBtn = document.getElementById('connectTokenBtn');
+                if (connectBtn) {
+                    connectBtn.scrollIntoView({ behavior: 'smooth', block: 'end' });
+                }
+                input.focus();
+            }, 100);
+        }
+
+        // Function to cancel token input
+        function cancelTokenInput() {
+            const tokenSection = document.getElementById('tokenInputSection');
+            const connectSection = document.getElementById('connectSection');
+            
+            // Hide token section and show connect section
+            tokenSection.style.display = 'none';
+            connectSection.style.display = 'block';
+            
+            // Clear status message
+            const statusSpan = document.getElementById('userStatus');
+            if (statusSpan && statusSpan.textContent.includes('Please paste your token')) {
+                statusSpan.textContent = 'Connection cancelled.';
+                setTimeout(() => {
+                    statusSpan.textContent = '';
+                }, 3000);
+            }
+        }
+
+        // Function to validate token input
+        function validateTokenInput() {
+            const input = document.getElementById('trelloTokenInput');
+            const validation = document.getElementById('tokenValidation');
+            const connectBtn = document.getElementById('connectTokenBtn');
+            const token = input.value.trim();
+            
+            if (!token) {
+                validation.innerHTML = '';
+                connectBtn.disabled = true;
+                return;
+            }
+            
+            // Basic token validation (Trello tokens typically start with "ATTA" and are 64+ characters)
+            if (token.startsWith('ATTA') && token.length >= 64) {
+                validation.innerHTML = '<span style="color: #28a745;">✅ Token format looks correct!</span>';
+                connectBtn.disabled = false;
+            } else if (token.length < 20) {
+                validation.innerHTML = '<span style="color: #ffc107;">⚠️ Token seems too short. Make sure you copied the complete token.</span>';
+                connectBtn.disabled = true;
+            } else {
+                validation.innerHTML = '<span style="color: #17a2b8;">ℹ️ Token format is different than expected, but we\'ll try to use it.</span>';
+                connectBtn.disabled = false;
+            }
+        }
+
+        // Function to connect with the provided token
+        async function connectWithToken() {
+            const input = document.getElementById('trelloTokenInput');
+            const connectBtn = document.getElementById('connectTokenBtn');
+            const token = input.value.trim();
+            
+            if (!token) {
+                alert('Please enter a token first.');
+                return;
+            }
+            
+            // Disable button and show loading state
+            connectBtn.disabled = true;
+            connectBtn.innerHTML = '🔄 Connecting...';
+            
+            try {
+                // Set the token in the integration
+                window.trelloIntegration.userToken = token;
+                localStorage.setItem('trello_user_token', token);
+                
+                // Test the token by trying to get user info
+                const userInfo = await window.trelloIntegration.getCurrentUser();
+                if (userInfo) {
+                    // Success!
+                    const tokenSection = document.getElementById('tokenInputSection');
+                    tokenSection.style.display = 'none';
+                    
+                    await updateUserAuthStatus();
+                    
+                    // Clear status message
+                    const statusSpan = document.getElementById('userStatus');
+                    if (statusSpan) {
+                        statusSpan.textContent = '';
+                    }
+                    
+                    // Show success message
+                    alert('✅ Successfully connected to Trello! You can now add comments with your name.');
+                    
+                    // Refresh comments to show edit/delete buttons
+                    if (currentCardId) {
+                        await refreshComments();
+                    }
+                } else {
+                    throw new Error('Invalid token or unable to verify connection');
+                }
+            } catch (error) {
+                console.error('Token connection failed:', error);
+                alert('❌ Failed to connect with this token. Please check that you copied the complete token and try again.');
+                
+                // Reset button
+                connectBtn.disabled = false;
+                connectBtn.innerHTML = '🔗 Connect';
+                
+                // Show connect section again and hide token section
+                const tokenSection = document.getElementById('tokenInputSection');
+                const connectSection = document.getElementById('connectSection');
+                tokenSection.style.display = 'none';
+                connectSection.style.display = 'block';
+                
+                // Clear status message
+                const statusSpan = document.getElementById('userStatus');
+                if (statusSpan) {
+                    statusSpan.textContent = 'Connection failed. Please try again.';
+                    setTimeout(() => {
+                        statusSpan.textContent = '';
+                    }, 3000);
+                }
+            }
+        }
+
+        // Add event listener for Enter key in token input
+        document.addEventListener('DOMContentLoaded', function() {
+            const tokenInput = document.getElementById('trelloTokenInput');
+            if (tokenInput) {
+                tokenInput.addEventListener('input', validateTokenInput);
+                tokenInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter' && !document.getElementById('connectTokenBtn').disabled) {
+                        connectWithToken();
+                    }
+                });
+            }
+        });
+
+        // Function to edit a comment
+        function editComment(commentId) {
+            // Check if user is authenticated
+            if (!window.trelloIntegration.isUserAuthenticated()) {
+                alert('Please connect your Trello account first to edit comments.');
+                return;
+            }
+            
+            const editForm = document.getElementById(`edit-form-${commentId}`);
+            const commentText = document.querySelector(`[data-comment-id="${commentId}"] .comment-text`);
+            
+            // Hide the comment text and show edit form
+            commentText.style.display = 'none';
+            editForm.style.display = 'block';
+            
+            // Focus on the textarea
+            const textarea = document.getElementById(`edit-text-${commentId}`);
+            textarea.focus();
+            textarea.select();
+        }
+
+        // Function to cancel edit
+        function cancelEditComment(commentId) {
+            const editForm = document.getElementById(`edit-form-${commentId}`);
+            const commentText = document.querySelector(`[data-comment-id="${commentId}"] .comment-text`);
+            
+            // Show the comment text and hide edit form
+            commentText.style.display = 'block';
+            editForm.style.display = 'none';
+        }
+
+        // Function to save edited comment
+        async function saveEditComment(commentId) {
+            const textarea = document.getElementById(`edit-text-${commentId}`);
+            const newText = textarea.value.trim();
+            
+            if (!newText) {
+                alert('Please enter a comment.');
+                return;
+            }
+            
+            try {
+                // Update comment in Trello
+                await window.trelloIntegration.updateCardComment(commentId, newText);
+                
+                // Update the comment text in the UI
+                const commentText = document.querySelector(`[data-comment-id="${commentId}"] .comment-text`);
+                commentText.textContent = newText;
+                
+                // Hide edit form and show comment text
+                cancelEditComment(commentId);
+                
+                // Show success message
+                const commentItem = document.querySelector(`[data-comment-id="${commentId}"]`);
+                const successMsg = document.createElement('div');
+                successMsg.style.cssText = 'background: #d4edda; color: #155724; padding: 8px; border-radius: 4px; margin-top: 8px; font-size: 0.8em;';
+                successMsg.textContent = '✅ Comment updated successfully!';
+                commentItem.appendChild(successMsg);
+                
+                // Remove success message after 3 seconds
+                setTimeout(() => {
+                    if (successMsg.parentNode) {
+                        successMsg.parentNode.removeChild(successMsg);
+                    }
+                }, 3000);
+                
+            } catch (error) {
+                alert('Error updating comment: ' + error.message);
+            }
+        }
+
+        // Function to delete a comment
+        async function deleteComment(commentId) {
+            // Check if user is authenticated
+            if (!window.trelloIntegration.isUserAuthenticated()) {
+                alert('Please connect your Trello account first to delete comments.');
+                return;
+            }
+            
+            if (!confirm('Are you sure you want to delete this comment? This action cannot be undone.')) {
+                return;
+            }
+            
+            try {
+                // Delete comment from Trello
+                await window.trelloIntegration.deleteCardComment(commentId);
+                
+                // Remove comment from UI
+                const commentItem = document.querySelector(`[data-comment-id="${commentId}"]`);
+                if (commentItem) {
+                    commentItem.remove();
+                }
+                
+                // Show success message
+                const modalBody = document.getElementById('commentsModalBody');
+                const successMsg = document.createElement('div');
+                successMsg.style.cssText = 'background: #d4edda; color: #155724; padding: 10px; border-radius: 4px; margin-bottom: 15px; border: 1px solid #c3e6cb;';
+                successMsg.textContent = '✅ Comment deleted successfully!';
+                modalBody.insertBefore(successMsg, modalBody.firstChild);
+                
+                // Remove success message after 3 seconds
+                setTimeout(() => {
+                    if (successMsg.parentNode) {
+                        successMsg.parentNode.removeChild(successMsg);
+                    }
+                }, 3000);
+                
+            } catch (error) {
+                alert('Error deleting comment: ' + error.message);
+            }
         }
 
         // Close modal when clicking outside
@@ -12674,12 +13317,97 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
     <div id="commentsModal" class="comments-modal">
         <div class="comments-modal-content">
             <div class="comments-modal-header">
-                <h3 class="comments-modal-title">💬 Comments & Activity</h3>
+                <div style="display: flex; align-items: center; gap: 15px; flex: 1;">
+                    <h3 class="comments-modal-title" style="margin: 0;">💬 Comments & Activity</h3>
+                    <button id="openInTrelloBtn" onclick="openInTrello()" 
+                            style="background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.85em; display: none;"
+                            title="Open this card in Trello">
+                        🔗 Open in Trello
+                    </button>
+                </div>
                 <button class="comments-modal-close" onclick="closeCommentsModal()">&times;</button>
             </div>
             <div class="comments-modal-body" id="commentsModalBody">
                 <div class="comments-loading">🔄 Loading comments...</div>
             </div>
+            <!-- User Authentication Section -->
+            <div class="user-auth-section" id="userAuthSection" style="display: none;">
+                <!-- Original Connect Section -->
+                <div id="connectSection" style="background: #fff3cd; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #ffc107;">
+                    <h6 style="color: #856404; margin: 0 0 10px 0;">🔐 Connect Your Trello Account</h6>
+                    <p style="margin: 0 0 15px 0; color: #856404; font-size: 0.9em;">To add, edit, or delete comments, please connect your personal Trello account. This ensures comments appear with your name.</p>
+                    <div style="background: #f8f9fa; padding: 10px; border-radius: 4px; margin-bottom: 15px; font-size: 0.8em; color: #6c757d;">
+                        <strong>How it works:</strong><br>
+                        1. Click "Connect Trello Account" below<br>
+                        2. A popup will open to Trello's authorization page<br>
+                        3. Log in with your Trello account and click "Allow"<br>
+                        4. If automatic connection works, you're done! If not, you may need to copy/paste the token.
+                    </div>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <button onclick="connectTrelloAccount()" style="background: #026aa7; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 0.9em; cursor: pointer;">
+                            🔗 Connect Trello Account
+                        </button>
+                        <span id="userStatus" style="font-size: 0.8em; color: #6c757d;"></span>
+                    </div>
+                </div>
+
+                <!-- Token Input Section (initially hidden) -->
+                <div id="tokenInputSection" style="display: none;">
+                    <div style="background: #d1ecf1; padding: 12px; border-radius: 6px; margin-bottom: 15px; border-left: 4px solid #17a2b8;">
+                        <h6 style="color: #0c5460; margin: 0 0 8px 0; font-size: 0.95em;">✅ Authorization Complete!</h6>
+                        <p style="margin: 0; color: #0c5460; font-size: 0.85em;"><strong>Next step:</strong> Please paste your Trello token below to complete the connection.</p>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label for="trelloTokenInput" style="display: block; margin-bottom: 6px; font-weight: 600; color: #495057; font-size: 0.9em;">Trello Token:</label>
+                        <textarea id="trelloTokenInput" 
+                                  placeholder="Paste your Trello token here..." 
+                                  style="width: 100%; height: 60px; padding: 10px; border: 2px solid #dee2e6; border-radius: 6px; font-family: monospace; font-size: 0.85em; resize: vertical; box-sizing: border-box;"
+                                  onpaste="setTimeout(() => validateTokenInput(), 100)"></textarea>
+                        <div id="tokenValidation" style="margin-top: 6px; font-size: 0.8em;"></div>
+                    </div>
+                    
+                    <details style="margin-bottom: 15px;">
+                        <summary style="cursor: pointer; font-size: 0.85em; color: #6c757d; padding: 8px; background: #f8f9fa; border-radius: 4px; border: 1px solid #e9ecef;">
+                            <strong>💡 How to get your token (click to expand)</strong>
+                        </summary>
+                        <div style="padding: 10px; font-size: 0.8em; color: #6c757d; background: #f8f9fa; border-radius: 0 0 4px 4px; border: 1px solid #e9ecef; border-top: none;">
+                            1. After clicking "Allow" in the Trello popup, you should see a token on the page<br>
+                            2. Copy the entire token (it starts with "ATTA" and is quite long)<br>
+                            3. Paste it in the field above<br>
+                            4. Click "Connect" to complete the setup
+                        </div>
+                    </details>
+                    
+                    <div style="display: flex; gap: 10px; justify-content: flex-end; padding-top: 10px; border-top: 1px solid #e9ecef;">
+                        <button onclick="cancelTokenInput()" 
+                                style="background: #6c757d; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9em;">
+                            Cancel
+                        </button>
+                        <button id="connectTokenBtn" onclick="connectWithToken()" 
+                                style="background: #026aa7; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9em;" 
+                                disabled>
+                            🔗 Connect
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Info Section -->
+            <div class="user-info-section" id="userInfoSection" style="display: none;">
+                <div style="background: #d4edda; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #28a745;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h6 style="color: #155724; margin: 0 0 5px 0;">✅ Connected as:</h6>
+                            <div id="currentUserInfo" style="color: #155724; font-size: 0.9em;"></div>
+                        </div>
+                        <button onclick="disconnectTrelloAccount()" style="background: #dc3545; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 0.8em; cursor: pointer;">
+                            Disconnect
+                        </button>
+                    </div>
+                </div>
+            </div>
+
             <div class="comment-form" id="commentForm" style="display: none;">
                 <h4>💬 Add a Comment</h4>
                 <textarea id="commentTextarea" placeholder="Write your comment here..."></textarea>
