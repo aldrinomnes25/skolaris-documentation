@@ -268,6 +268,10 @@
             from { transform: translateY(-50px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
         .comments-modal-header { 
             background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%); 
             color: white; 
@@ -322,9 +326,6 @@
             flex-direction: row;
         }
         .comment-item.comment.current-user {
-            background: rgba(102, 126, 234, 0.05);
-            border-radius: 8px;
-            margin: 8px 0;
             flex-direction: row-reverse;
         }
         .comment-item.activity {
@@ -333,9 +334,6 @@
             padding: 6px 16px;
         }
         .comment-item.activity.current-user {
-            background: rgba(102, 126, 234, 0.05);
-            border-radius: 8px;
-            margin: 8px 0;
             flex-direction: row-reverse;
         }
         .comment-item.activity.current-user .comment-author {
@@ -12233,6 +12231,11 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                         }
                     });
                     modalBody.innerHTML = commentsHTML;
+                    
+                    // Auto-scroll to latest comment (bottom)
+                    setTimeout(() => {
+                        modalBody.scrollTop = modalBody.scrollHeight;
+                    }, 100);
                 }
                 
                 // Update user authentication status and refresh comments display
@@ -12248,13 +12251,59 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
             }
         }
 
+        // Global variable to store current attachment
+        let currentAttachment = null;
+
+        // Function to handle file attachment
+        function handleAttachment(input) {
+            const file = input.files[0];
+            if (!file) return;
+            
+            // Check file size (max 10MB)
+            if (file.size > 10 * 1024 * 1024) {
+                alert('File size must be less than 10MB');
+                input.value = '';
+                return;
+            }
+            
+            currentAttachment = file;
+            
+            // Show preview
+            const preview = document.getElementById('attachmentPreview');
+            const icon = document.getElementById('attachmentIcon');
+            const name = document.getElementById('attachmentName');
+            
+            // Set appropriate icon based on file type
+            if (file.type.startsWith('image/')) {
+                icon.textContent = '🖼️';
+            } else if (file.type.includes('pdf')) {
+                icon.textContent = '📄';
+            } else if (file.type.includes('word') || file.type.includes('document')) {
+                icon.textContent = '📝';
+            } else if (file.type.includes('zip') || file.type.includes('rar')) {
+                icon.textContent = '📦';
+            } else {
+                icon.textContent = '📎';
+            }
+            
+            name.textContent = file.name;
+            preview.style.display = 'block';
+        }
+
+        // Function to remove attachment
+        function removeAttachment() {
+            currentAttachment = null;
+            document.getElementById('attachmentInput').value = '';
+            document.getElementById('attachmentPreview').style.display = 'none';
+        }
+
         // Function to submit a comment
         async function submitComment() {
             const textarea = document.getElementById('commentTextarea');
             const commentText = textarea.value.trim();
             
-            if (!commentText) {
-                alert('Please enter a comment.');
+            if (!commentText && !currentAttachment) {
+                alert('Please enter a comment or attach a file.');
                 return;
             }
             
@@ -12263,19 +12312,41 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                 return;
             }
             
-            const submitBtn = document.querySelector('.comment-submit-btn');
-            const originalText = submitBtn.textContent;
+            const submitBtn = document.querySelector('button[onclick="submitComment()"]');
+            const originalContent = submitBtn ? submitBtn.innerHTML : '➤';
             
             try {
                 // Disable button and show loading
-                submitBtn.disabled = true;
-                submitBtn.textContent = 'Posting...';
+                if (submitBtn) {
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<div style="animation: spin 1s linear infinite;">⏳</div>';
+                }
                 
-                // Submit comment to Trello
-                await window.trelloIntegration.addCardComment(currentCardId, commentText);
+                // Upload attachment first if exists
+                if (currentAttachment) {
+                    try {
+                        await window.trelloIntegration.addCardAttachment(currentCardId, currentAttachment);
+                        
+                        // Add comment mentioning the attachment if there's text
+                        if (commentText) {
+                            const attachmentComment = `${commentText}\n\n📎 Attached: ${currentAttachment.name}`;
+                            await window.trelloIntegration.addCardComment(currentCardId, attachmentComment);
+                        }
+                    } catch (attachError) {
+                        console.error('Attachment upload failed:', attachError);
+                        // Still try to post the comment if attachment fails
+                        if (commentText) {
+                            await window.trelloIntegration.addCardComment(currentCardId, commentText);
+                        }
+                    }
+                } else if (commentText) {
+                    // Submit comment to Trello (text only)
+                    await window.trelloIntegration.addCardComment(currentCardId, commentText);
+                }
                 
-                // Clear textarea
+                // Clear textarea and attachment
                 textarea.value = '';
+                removeAttachment();
                 
                 // Refresh comments
                 await refreshComments();
@@ -12298,8 +12369,10 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                 alert('Error posting comment: ' + error.message);
             } finally {
                 // Re-enable button
-                submitBtn.disabled = false;
-                submitBtn.textContent = originalText;
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalContent;
+                }
             }
         }
 
@@ -12475,6 +12548,11 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                         }
                     });
                     modalBody.innerHTML = commentsHTML;
+                    
+                    // Auto-scroll to latest comment (bottom)
+                    setTimeout(() => {
+                        modalBody.scrollTop = modalBody.scrollHeight;
+                    }, 100);
                 }
             } catch (error) {
                 modalBody.innerHTML = '<div class="comments-error">❌ Error refreshing comments: ' + error.message + '</div>';
@@ -13560,11 +13638,6 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
             <div class="comments-modal-header">
                 <div style="display: flex; align-items: center; gap: 15px; flex: 1;">
                     <h3 class="comments-modal-title" style="margin: 0;">💬 Comments & Activity</h3>
-                    <button id="openInTrelloBtn" onclick="openInTrello()" 
-                            style="background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.85em; display: none;"
-                            title="Open this card in Trello">
-                        🔗 Open in Trello
-                    </button>
                 </div>
                 <button class="comments-modal-close" onclick="closeCommentsModal()">&times;</button>
             </div>
@@ -13636,27 +13709,55 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
 
             <!-- User Info Section -->
             <div class="user-info-section" id="userInfoSection" style="display: none;">
-                <div style="background: #d4edda; padding: 8px 12px; border-radius: 6px; margin-bottom: 10px; border-left: 3px solid #28a745; font-size: 0.85em;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                <div style="background: #f8f9fa; padding: 8px 12px; border-radius: 8px; margin-bottom: 8px; border: 1px solid #e9ecef; font-size: 0.85em;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
                         <div style="display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0;">
-                            <span style="color: #28a745; font-size: 1.1em;">✅</span>
-                            <div id="currentUserInfo" style="color: #155724; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"></div>
+                            <span style="color: #28a745; font-size: 1em;">●</span>
+                            <div id="currentUserInfo" style="color: #495057; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"></div>
                         </div>
-                        <button onclick="disconnectTrelloAccount()" style="background: #dc3545; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.75em; cursor: pointer; flex-shrink: 0;" title="Disconnect Trello account">
-                            ✕
-                        </button>
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                            <button id="openInTrelloBtn" onclick="openInTrello()" 
+                                    style="background: #0079bf; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.75em; display: none;"
+                                    title="Open this card in Trello">
+                                🔗 Trello
+                            </button>
+                            <button onclick="disconnectTrelloAccount()" style="background: none; color: #6c757d; border: none; padding: 4px; border-radius: 4px; font-size: 0.8em; cursor: pointer; flex-shrink: 0; transition: all 0.2s ease;" title="Disconnect Trello account" onmouseover="this.style.color='#dc3545'" onmouseout="this.style.color='#6c757d'">
+                                ✕
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="comment-form" id="commentForm" style="display: none; background: #ffffff; border-top: 1px solid #e9ecef; padding: 16px; margin: 0;">
+                <!-- Attachment Preview Area -->
+                <div id="attachmentPreview" style="display: none; margin-bottom: 12px; padding: 8px; background: #f8f9fa; border-radius: 8px; border: 1px solid #e9ecef;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+                        <div style="display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0;">
+                            <span id="attachmentIcon" style="font-size: 1.2em;">📎</span>
+                            <span id="attachmentName" style="font-size: 0.85em; color: #495057; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"></span>
+                        </div>
+                        <button onclick="removeAttachment()" style="background: none; border: none; color: #6c757d; cursor: pointer; padding: 4px; border-radius: 4px; font-size: 0.8em;" title="Remove attachment">✕</button>
+                    </div>
+                </div>
+                
                 <div style="display: flex; align-items: flex-end; gap: 12px;">
                     <div style="flex: 1; position: relative;">
                         <textarea id="commentTextarea" 
-                                  placeholder="Type a message..." 
-                                  style="width: 100%; min-height: 40px; max-height: 120px; padding: 12px 50px 12px 16px; border: 1px solid #e9ecef; border-radius: 20px; font-family: inherit; font-size: 0.9em; resize: none; outline: none; box-sizing: border-box;"
+                                  placeholder="Write a comment..." 
+                                  style="width: 100%; min-height: 40px; max-height: 120px; padding: 12px 80px 12px 16px; border: 1px solid #e9ecef; border-radius: 20px; font-family: inherit; font-size: 0.9em; resize: none; outline: none; box-sizing: border-box;"
                                   onkeypress="handleCommentKeyPress(event)"
                                   oninput="autoResizeTextarea(this)"></textarea>
+                        
+                        <!-- Attachment Button -->
+                        <input type="file" id="attachmentInput" style="display: none;" accept="image/*,.pdf,.doc,.docx,.txt,.zip" onchange="handleAttachment(this)">
+                        <button onclick="document.getElementById('attachmentInput').click()" 
+                                style="position: absolute; right: 48px; bottom: 8px; background: #6c757d; color: white; border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.9em;"
+                                title="Attach file or image">
+                            📎
+                        </button>
+                        
+                        <!-- Send Button -->
                         <button onclick="submitComment()" 
                                 style="position: absolute; right: 8px; bottom: 8px; background: #667eea; color: white; border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.9em;"
                                 title="Send message">

@@ -1462,12 +1462,45 @@ class TrelloIntegration {
                 }
             });
             
-            // Sort by date (newest first)
-            comments.sort((a, b) => new Date(b.date) - new Date(a.date));
+            // Sort by date (oldest first, latest at bottom)
+            comments.sort((a, b) => new Date(a.date) - new Date(b.date));
             
             return comments;
         } catch (error) {
             console.error('Error fetching card comments:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Add an attachment to a Trello card
+     */
+    async addCardAttachment(cardId, file) {
+        if (!this.userToken) {
+            throw new Error('Please connect your Trello account first to add attachments.');
+        }
+        
+        try {
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('key', this.apiKey);
+            formData.append('token', this.userToken);
+            formData.append('name', file.name);
+
+            const response = await fetch(`${this.baseUrl}/cards/${cardId}/attachments`, {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Failed to add attachment: ${errorText}`);
+            }
+
+            const result = await response.json();
+            return result;
+        } catch (error) {
+            console.error('Error adding attachment:', error);
             throw error;
         }
     }
