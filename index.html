@@ -308,41 +308,85 @@
             scroll-behavior: smooth;
         }
         .comment-item { 
-            background: #ffffff; 
-            padding: 16px; 
-            margin-bottom: 16px; 
-            border-radius: 10px; 
-            border: 1px solid #e9ecef;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            transition: box-shadow 0.2s ease;
+            margin-bottom: 12px; 
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 8px 16px;
+            transition: background-color 0.2s ease;
         }
         .comment-item:hover {
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .comment-item.activity {
-            background: #f8f9fa; 
-            border-left: 4px solid #6c757d;
+            background: rgba(0,0,0,0.02);
         }
         .comment-item.comment {
-            border-left: 4px solid #74b9ff;
+            flex-direction: row;
+        }
+        .comment-item.comment.current-user {
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 8px;
+            margin: 8px 0;
+            flex-direction: row-reverse;
+        }
+        .comment-item.activity {
+            /* System activities - with avatar and author info */
+            flex-direction: row;
+            padding: 6px 16px;
+        }
+        .comment-item.activity.current-user {
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 8px;
+            margin: 8px 0;
+            flex-direction: row-reverse;
+        }
+        .comment-item.activity.current-user .comment-author {
+            color: #667eea;
+            font-weight: 700;
+        }
+        .comment-item.activity.current-user .comment-header {
+            text-align: right;
+        }
+        .comment-bubble {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 12px 16px;
+            max-width: 70%;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            position: relative;
+            word-wrap: break-word;
+        }
+        .comment-bubble.own-message {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin-left: auto;
+        }
+        .comment-bubble.other-message {
+            background: #f1f3f4;
+            color: #202124;
+        }
+        .activity-bubble {
+            background: rgba(108, 117, 125, 0.1);
+            border-radius: 16px;
+            padding: 10px 14px;
+            font-size: 0.85em;
+            color: #6c757d;
+            max-width: 70%;
+            border: 1px solid rgba(108, 117, 125, 0.15);
         }
         .comment-header { 
             display: flex; 
-            justify-content: space-between; 
-            align-items: flex-start; 
-            margin-bottom: 12px;
+            align-items: center; 
+            gap: 8px;
+            margin-bottom: 4px;
+            font-size: 0.8em;
+            color: #6c757d;
         }
         .comment-author { 
-            display: flex; 
-            align-items: center; 
-            gap: 10px; 
             font-weight: 600; 
             color: #495057; 
-            font-size: 0.95em;
         }
         .comment-avatar { 
-            width: 32px; 
-            height: 32px; 
+            width: 36px; 
+            height: 36px; 
             border-radius: 50%; 
             background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%); 
             display: flex; 
@@ -350,8 +394,44 @@
             justify-content: center; 
             color: white; 
             font-weight: bold; 
-            font-size: 0.8em;
+            font-size: 0.85em;
             flex-shrink: 0;
+            border: 2px solid #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .comment-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .message-container {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-width: 0;
+        }
+        .message-row {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            margin-bottom: 2px;
+        }
+        .message-row.own {
+            flex-direction: row-reverse;
+        }
+        .message-time {
+            font-size: 0.7em;
+            color: rgba(0, 0, 0, 0.6);
+            margin-top: 4px;
+            text-align: right;
+            white-space: nowrap;
+        }
+        .own-message .message-time {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        .other-message .message-time {
+            color: rgba(0, 0, 0, 0.6);
         }
         .comment-avatar img { 
             width: 100%; 
@@ -378,12 +458,14 @@
             font-size: 0.8em;
         }
         .comment-text { 
-            color: #212529; 
-            line-height: 1.6; 
+            line-height: 1.4; 
             margin: 0;
-            font-size: 0.95em;
+            font-size: 0.9em;
             white-space: pre-wrap;
             word-wrap: break-word;
+        }
+        .comment-bubble .comment-text {
+            color: inherit;
         }
         .comment-meta {
             display: flex;
@@ -459,8 +541,11 @@
             border: 1px solid #e9ecef;
             flex-shrink: 0;
         }
-        .user-auth-section, .user-info-section {
+        .user-auth-section {
             margin: 20px 20px 10px 20px;
+        }
+        .user-info-section {
+            margin: 15px 20px 5px 20px;
         }
         .comment-form h4 { 
             margin: 0 0 15px 0; 
@@ -12018,11 +12103,48 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                         `;
                     }
                     
+                    // Smart date formatting function
+                    function formatSmartDate(date) {
+                        const today = new Date();
+                        const yesterday = new Date(today);
+                        yesterday.setDate(yesterday.getDate() - 1);
+                        
+                        const commentDate = new Date(date);
+                        
+                        // Check if it's today
+                        if (commentDate.toDateString() === today.toDateString()) {
+                            return 'Today';
+                        }
+                        
+                        // Check if it's yesterday
+                        if (commentDate.toDateString() === yesterday.toDateString()) {
+                            return 'Yesterday';
+                        }
+                        
+                        // Otherwise return formatted date
+                        return commentDate.toLocaleDateString('en-US', { 
+                            weekday: 'short', 
+                            month: 'short', 
+                            day: 'numeric' 
+                        });
+                    }
+                    
+                    // Get current user info for highlighting
+                    let currentUser = null;
+                    if (window.trelloIntegration.isUserAuthenticated()) {
+                        try {
+                            currentUser = await window.trelloIntegration.getCurrentUser();
+                        } catch (error) {
+                            console.log('Could not get current user info');
+                        }
+                    }
+                    
                     comments.forEach(comment => {
                         const dateStr = comment.date.toLocaleDateString() + ' ' + comment.date.toLocaleTimeString();
                         const icon = comment.type === 'comment' ? '💬' : '📝';
                         const typeClass = comment.type === 'comment' ? 'comment' : 'activity';
                         const activityClass = comment.activityType ? comment.activityType : '';
+                        const isCurrentUser = currentUser && currentUser.username === comment.username;
                         
                         // Create avatar HTML
                         let avatarHTML = '';
@@ -12031,50 +12153,65 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                         }
                         avatarHTML += `<div class="comment-avatar" style="${comment.avatarUrl ? 'display: none;' : ''}">${comment.initials}</div>`;
                         
+                        if (comment.type === 'activity') {
+                            // Activity messages - with avatar showing who performed the action
                         commentsHTML += `
-                            <div class="comment-item ${typeClass} ${activityClass}" data-comment-id="${comment.id}">
+                                <div class="comment-item activity ${activityClass} ${isCurrentUser ? 'current-user' : ''}" data-comment-id="${comment.id}">
+                                    <div class="comment-avatar" style="width: 28px; height: 28px; font-size: 0.75em;">
+                                        ${avatarHTML}
+                                    </div>
+                                    <div class="message-container">
                                 <div class="comment-header">
-                                    <div class="comment-author">
-                                        <div class="comment-avatar">
-                                            ${avatarHTML}
+                                            <span class="comment-author">${comment.author}</span>
+                                            <span class="comment-date">${formatSmartDate(comment.date)}</span>
                                         </div>
-                                        <div class="comment-author-info">
-                                            <div class="comment-author-name">${icon} ${comment.author}</div>
-                                            <div class="comment-author-username">@${comment.username}</div>
+                                        <div class="activity-bubble">
+                                            ${comment.text}
+                                            <div class="message-time">${formatSmartDate(comment.date)} ${comment.date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</div>
                                         </div>
                                     </div>
-                                    <div style="display: flex; align-items: center; gap: 10px;">
-                                        <span class="comment-date">${dateStr}</span>
-                                        ${comment.type === 'comment' && window.trelloIntegration.isUserAuthenticated() ? `
-                                            <div class="comment-actions">
-                                                <button class="comment-action-btn comment-edit-btn" onclick="editComment('${comment.id}')" title="Edit comment">✏️ Edit</button>
-                                                <button class="comment-action-btn comment-delete-btn" onclick="deleteComment('${comment.id}')" title="Delete comment">🗑️ Delete</button>
+                                </div>
+                            `;
+                        } else {
+                            // Regular comments - chat bubble style
+                            const bubbleClass = isCurrentUser ? 'own-message' : 'other-message';
+                            const messageRowClass = isCurrentUser ? 'own' : '';
+                            
+                            commentsHTML += `
+                                <div class="comment-item comment ${isCurrentUser ? 'current-user' : ''}" data-comment-id="${comment.id}">
+                                    <div class="comment-avatar">
+                                        ${avatarHTML}
+                                    </div>
+                                    <div class="message-container">
+                                        ${!isCurrentUser ? `
+                                            <div class="comment-header">
+                                                <span class="comment-author">${comment.author}</span>
+                                                <span class="comment-date">${formatSmartDate(comment.date)}</span>
                                             </div>
                                         ` : ''}
+                                        <div class="message-row ${messageRowClass}">
+                                            <div class="comment-bubble ${bubbleClass}">
+                                                <p class="comment-text">${comment.text}</p>
+                                                ${comment.type === 'comment' && window.trelloIntegration.isUserAuthenticated() && isCurrentUser ? `
+                                                    <div class="comment-actions" style="margin-top: 8px; display: flex; gap: 8px;">
+                                                        <button class="comment-action-btn comment-edit-btn" onclick="editComment('${comment.id}')" title="Edit comment" style="background: rgba(255,255,255,0.2); border: none; color: inherit; padding: 4px 8px; border-radius: 12px; font-size: 0.75em; cursor: pointer;">✏️</button>
+                                                        <button class="comment-action-btn comment-delete-btn" onclick="deleteComment('${comment.id}')" title="Delete comment" style="background: rgba(255,255,255,0.2); border: none; color: inherit; padding: 4px 8px; border-radius: 12px; font-size: 0.75em; cursor: pointer;">🗑️</button>
+                                                    </div>
+                                                ` : ''}
+                                                <div class="message-time">${formatSmartDate(comment.date)} ${comment.date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</div>
+                                            </div>
+                                        </div>
+                                        <div class="comment-edit-form" id="edit-form-${comment.id}" style="display: none; margin-top: 8px;">
+                                            <textarea class="comment-edit-textarea" id="edit-text-${comment.id}" style="width: 100%; padding: 8px; border-radius: 12px; border: 1px solid #ddd; resize: vertical;">${comment.text}</textarea>
+                                            <div class="comment-edit-buttons" style="margin-top: 8px; display: flex; gap: 8px; justify-content: flex-end;">
+                                                <button class="comment-cancel-edit-btn" onclick="cancelEditComment('${comment.id}')" style="background: #6c757d; color: white; border: none; padding: 6px 12px; border-radius: 12px; font-size: 0.8em; cursor: pointer;">Cancel</button>
+                                                <button class="comment-save-btn" onclick="saveEditComment('${comment.id}')" style="background: #667eea; color: white; border: none; padding: 6px 12px; border-radius: 12px; font-size: 0.8em; cursor: pointer;">Save</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <p class="comment-text">${comment.text}</p>
-                                <div class="comment-meta">
-                                    <span class="comment-type-badge ${comment.type}">${comment.type === 'comment' ? '💬 Comment' : '📝 Activity'}</span>
-                                    <span>•</span>
-                                    <span>${comment.date.toLocaleDateString('en-US', { 
-                                        year: 'numeric', 
-                                        month: 'short', 
-                                        day: 'numeric',
-                                        hour: '2-digit',
-                                        minute: '2-digit'
-                                    })}</span>
-                                    ${comment.type === 'comment' ? '<span>• Can be edited/deleted</span>' : ''}
-                                </div>
-                                <div class="comment-edit-form" id="edit-form-${comment.id}">
-                                    <textarea class="comment-edit-textarea" id="edit-text-${comment.id}">${comment.text}</textarea>
-                                    <div class="comment-edit-buttons">
-                                        <button class="comment-cancel-edit-btn" onclick="cancelEditComment('${comment.id}')">Cancel</button>
-                                        <button class="comment-save-btn" onclick="saveEditComment('${comment.id}')">Save</button>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
+                            `;
+                        }
                     });
                     modalBody.innerHTML = commentsHTML;
                 }
@@ -12189,11 +12326,48 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                         `;
                     }
                     
+                    // Smart date formatting function
+                    function formatSmartDate(date) {
+                        const today = new Date();
+                        const yesterday = new Date(today);
+                        yesterday.setDate(yesterday.getDate() - 1);
+                        
+                        const commentDate = new Date(date);
+                        
+                        // Check if it's today
+                        if (commentDate.toDateString() === today.toDateString()) {
+                            return 'Today';
+                        }
+                        
+                        // Check if it's yesterday
+                        if (commentDate.toDateString() === yesterday.toDateString()) {
+                            return 'Yesterday';
+                        }
+                        
+                        // Otherwise return formatted date
+                        return commentDate.toLocaleDateString('en-US', { 
+                            weekday: 'short', 
+                            month: 'short', 
+                            day: 'numeric' 
+                        });
+                    }
+                    
+                    // Get current user info for highlighting
+                    let currentUser = null;
+                    if (window.trelloIntegration.isUserAuthenticated()) {
+                        try {
+                            currentUser = await window.trelloIntegration.getCurrentUser();
+                        } catch (error) {
+                            console.log('Could not get current user info');
+                        }
+                    }
+                    
                     comments.forEach(comment => {
                         const dateStr = comment.date.toLocaleDateString() + ' ' + comment.date.toLocaleTimeString();
                         const icon = comment.type === 'comment' ? '💬' : '📝';
                         const typeClass = comment.type === 'comment' ? 'comment' : 'activity';
                         const activityClass = comment.activityType ? comment.activityType : '';
+                        const isCurrentUser = currentUser && currentUser.username === comment.username;
                         
                         // Create avatar HTML
                         let avatarHTML = '';
@@ -12202,50 +12376,65 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                         }
                         avatarHTML += `<div class="comment-avatar" style="${comment.avatarUrl ? 'display: none;' : ''}">${comment.initials}</div>`;
                         
+                        if (comment.type === 'activity') {
+                            // Activity messages - with avatar showing who performed the action
                         commentsHTML += `
-                            <div class="comment-item ${typeClass} ${activityClass}" data-comment-id="${comment.id}">
+                                <div class="comment-item activity ${activityClass} ${isCurrentUser ? 'current-user' : ''}" data-comment-id="${comment.id}">
+                                    <div class="comment-avatar" style="width: 28px; height: 28px; font-size: 0.75em;">
+                                        ${avatarHTML}
+                                    </div>
+                                    <div class="message-container">
                                 <div class="comment-header">
-                                    <div class="comment-author">
-                                        <div class="comment-avatar">
-                                            ${avatarHTML}
+                                            <span class="comment-author">${comment.author}</span>
+                                            <span class="comment-date">${formatSmartDate(comment.date)}</span>
                                         </div>
-                                        <div class="comment-author-info">
-                                            <div class="comment-author-name">${icon} ${comment.author}</div>
-                                            <div class="comment-author-username">@${comment.username}</div>
+                                        <div class="activity-bubble">
+                                            ${comment.text}
+                                            <div class="message-time">${formatSmartDate(comment.date)} ${comment.date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</div>
                                         </div>
                                     </div>
-                                    <div style="display: flex; align-items: center; gap: 10px;">
-                                        <span class="comment-date">${dateStr}</span>
-                                        ${comment.type === 'comment' && window.trelloIntegration.isUserAuthenticated() ? `
-                                            <div class="comment-actions">
-                                                <button class="comment-action-btn comment-edit-btn" onclick="editComment('${comment.id}')" title="Edit comment">✏️ Edit</button>
-                                                <button class="comment-action-btn comment-delete-btn" onclick="deleteComment('${comment.id}')" title="Delete comment">🗑️ Delete</button>
+                                </div>
+                            `;
+                        } else {
+                            // Regular comments - chat bubble style
+                            const bubbleClass = isCurrentUser ? 'own-message' : 'other-message';
+                            const messageRowClass = isCurrentUser ? 'own' : '';
+                            
+                            commentsHTML += `
+                                <div class="comment-item comment ${isCurrentUser ? 'current-user' : ''}" data-comment-id="${comment.id}">
+                                    <div class="comment-avatar">
+                                        ${avatarHTML}
+                                    </div>
+                                    <div class="message-container">
+                                        ${!isCurrentUser ? `
+                                            <div class="comment-header">
+                                                <span class="comment-author">${comment.author}</span>
+                                                <span class="comment-date">${formatSmartDate(comment.date)}</span>
                                             </div>
                                         ` : ''}
+                                        <div class="message-row ${messageRowClass}">
+                                            <div class="comment-bubble ${bubbleClass}">
+                                                <p class="comment-text">${comment.text}</p>
+                                                ${comment.type === 'comment' && window.trelloIntegration.isUserAuthenticated() && isCurrentUser ? `
+                                                    <div class="comment-actions" style="margin-top: 8px; display: flex; gap: 8px;">
+                                                        <button class="comment-action-btn comment-edit-btn" onclick="editComment('${comment.id}')" title="Edit comment" style="background: rgba(255,255,255,0.2); border: none; color: inherit; padding: 4px 8px; border-radius: 12px; font-size: 0.75em; cursor: pointer;">✏️</button>
+                                                        <button class="comment-action-btn comment-delete-btn" onclick="deleteComment('${comment.id}')" title="Delete comment" style="background: rgba(255,255,255,0.2); border: none; color: inherit; padding: 4px 8px; border-radius: 12px; font-size: 0.75em; cursor: pointer;">🗑️</button>
+                                                    </div>
+                                                ` : ''}
+                                                <div class="message-time">${formatSmartDate(comment.date)} ${comment.date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</div>
+                                            </div>
+                                        </div>
+                                        <div class="comment-edit-form" id="edit-form-${comment.id}" style="display: none; margin-top: 8px;">
+                                            <textarea class="comment-edit-textarea" id="edit-text-${comment.id}" style="width: 100%; padding: 8px; border-radius: 12px; border: 1px solid #ddd; resize: vertical;">${comment.text}</textarea>
+                                            <div class="comment-edit-buttons" style="margin-top: 8px; display: flex; gap: 8px; justify-content: flex-end;">
+                                                <button class="comment-cancel-edit-btn" onclick="cancelEditComment('${comment.id}')" style="background: #6c757d; color: white; border: none; padding: 6px 12px; border-radius: 12px; font-size: 0.8em; cursor: pointer;">Cancel</button>
+                                                <button class="comment-save-btn" onclick="saveEditComment('${comment.id}')" style="background: #667eea; color: white; border: none; padding: 6px 12px; border-radius: 12px; font-size: 0.8em; cursor: pointer;">Save</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <p class="comment-text">${comment.text}</p>
-                                <div class="comment-meta">
-                                    <span class="comment-type-badge ${comment.type}">${comment.type === 'comment' ? '💬 Comment' : '📝 Activity'}</span>
-                                    <span>•</span>
-                                    <span>${comment.date.toLocaleDateString('en-US', { 
-                                        year: 'numeric', 
-                                        month: 'short', 
-                                        day: 'numeric',
-                                        hour: '2-digit',
-                                        minute: '2-digit'
-                                    })}</span>
-                                    ${comment.type === 'comment' ? '<span>• Can be edited/deleted</span>' : ''}
-                                </div>
-                                <div class="comment-edit-form" id="edit-form-${comment.id}">
-                                    <textarea class="comment-edit-textarea" id="edit-text-${comment.id}">${comment.text}</textarea>
-                                    <div class="comment-edit-buttons">
-                                        <button class="comment-cancel-edit-btn" onclick="cancelEditComment('${comment.id}')">Cancel</button>
-                                        <button class="comment-save-btn" onclick="saveEditComment('${comment.id}')">Save</button>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
+                            `;
+                        }
                     });
                     modalBody.innerHTML = commentsHTML;
                 }
@@ -12459,6 +12648,20 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                 });
             }
         });
+
+        // Handle Enter key press in comment textarea
+        function handleCommentKeyPress(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                submitComment();
+            }
+        }
+
+        // Auto-resize textarea as user types
+        function autoResizeTextarea(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
+        }
 
         // Function to edit a comment
         function editComment(commentId) {
@@ -13395,25 +13598,33 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
 
             <!-- User Info Section -->
             <div class="user-info-section" id="userInfoSection" style="display: none;">
-                <div style="background: #d4edda; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #28a745;">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <div>
-                            <h6 style="color: #155724; margin: 0 0 5px 0;">✅ Connected as:</h6>
-                            <div id="currentUserInfo" style="color: #155724; font-size: 0.9em;"></div>
+                <div style="background: #d4edda; padding: 8px 12px; border-radius: 6px; margin-bottom: 10px; border-left: 3px solid #28a745; font-size: 0.85em;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <div style="display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0;">
+                            <span style="color: #28a745; font-size: 1.1em;">✅</span>
+                            <div id="currentUserInfo" style="color: #155724; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"></div>
                         </div>
-                        <button onclick="disconnectTrelloAccount()" style="background: #dc3545; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 0.8em; cursor: pointer;">
-                            Disconnect
+                        <button onclick="disconnectTrelloAccount()" style="background: #dc3545; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.75em; cursor: pointer; flex-shrink: 0;" title="Disconnect Trello account">
+                            ✕
                         </button>
                     </div>
                 </div>
             </div>
 
-            <div class="comment-form" id="commentForm" style="display: none;">
-                <h4>💬 Add a Comment</h4>
-                <textarea id="commentTextarea" placeholder="Write your comment here..."></textarea>
-                <div class="comment-form-buttons">
-                    <button class="comment-cancel-btn" onclick="cancelComment()">Cancel</button>
-                    <button class="comment-submit-btn" onclick="submitComment()">Post Comment</button>
+            <div class="comment-form" id="commentForm" style="display: none; background: #ffffff; border-top: 1px solid #e9ecef; padding: 16px; margin: 0;">
+                <div style="display: flex; align-items: flex-end; gap: 12px;">
+                    <div style="flex: 1; position: relative;">
+                        <textarea id="commentTextarea" 
+                                  placeholder="Type a message..." 
+                                  style="width: 100%; min-height: 40px; max-height: 120px; padding: 12px 50px 12px 16px; border: 1px solid #e9ecef; border-radius: 20px; font-family: inherit; font-size: 0.9em; resize: none; outline: none; box-sizing: border-box;"
+                                  onkeypress="handleCommentKeyPress(event)"
+                                  oninput="autoResizeTextarea(this)"></textarea>
+                        <button onclick="submitComment()" 
+                                style="position: absolute; right: 8px; bottom: 8px; background: #667eea; color: white; border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.9em;"
+                                title="Send message">
+                            ➤
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
