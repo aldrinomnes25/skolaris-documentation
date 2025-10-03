@@ -1603,6 +1603,59 @@ class TrelloIntegration {
     }
 
     /**
+     * Get checklist progress for current priority
+     */
+    async getChecklistProgress() {
+        try {
+            // Find SKOLARIS board
+            const boardUrl = await this.findSkolarisBoardUrl();
+            if (!boardUrl) {
+                throw new Error('No SKOLARIS board found');
+            }
+
+            // Get all cards
+            const cardsResponse = await fetch(`${this.baseUrl}/boards/${this.boardId}/cards?key=${this.apiKey}&token=${this.adminToken}`);
+            if (!cardsResponse.ok) {
+                throw new Error('Failed to fetch cards');
+            }
+            const cards = await cardsResponse.json();
+
+            // Get all lists
+            const lists = await this.getBoardLists();
+
+            // Get checklist progress for each card
+            const checklistProgress = [];
+            for (const card of cards) {
+                const listName = lists.find(list => list.id === card.idList)?.name || 'Unknown';
+                
+                // Only get checklist progress for cards in main status lists
+                if (listName.includes('TO DO') || listName.includes('ON-GOING') || 
+                    listName.includes('FOR TESTING') || listName.includes('DONE')) {
+                    
+                    const checklistStatus = await this.getTaskChecklistStatus(card.id);
+                    if (checklistStatus && checklistStatus.length > 0) {
+                        checklistStatus.forEach(checklist => {
+                            checklistProgress.push({
+                                cardName: card.name,
+                                listName: listName,
+                                checklistName: checklist.checklistName,
+                                completedItems: checklist.completedItems,
+                                totalItems: checklist.totalItems,
+                                completionRate: checklist.completionRate
+                            });
+                        });
+                    }
+                }
+            }
+
+            return checklistProgress;
+        } catch (error) {
+            console.error('Error getting checklist progress:', error);
+            return [];
+        }
+    }
+
+    /**
      * Get comprehensive status of all Trello tasks
      */
     async getAllTaskStatus() {

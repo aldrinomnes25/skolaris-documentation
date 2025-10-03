@@ -369,6 +369,183 @@
             min-height: 0;
             scroll-behavior: smooth;
         }
+        
+        /* Progress Report Modal Styles */
+        .progress-report-modal { 
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            height: 100%; 
+            background-color: rgba(0,0,0,0.5); 
+            backdrop-filter: blur(5px);
+        }
+        .progress-report-modal-content { 
+            background-color: #fefefe; 
+            margin: 2% auto; 
+            padding: 0; 
+            border-radius: 12px; 
+            width: 90%; 
+            max-width: 1000px;
+            height: 90%;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+        .progress-report-modal-header { 
+            background: linear-gradient(135deg, #e67e22 0%, #d35400 100%); 
+            color: white; 
+            padding: 20px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            border-radius: 12px 12px 0 0;
+        }
+        .progress-report-modal-title { 
+            margin: 0; 
+            font-size: 1.3em; 
+            font-weight: 600;
+        }
+        .progress-report-modal-close { 
+            color: white; 
+            font-size: 28px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            background: none; 
+            border: none;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center; 
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+        .progress-report-modal-close:hover { 
+            background-color: rgba(255,255,255,0.2); 
+        }
+        .progress-report-modal-body { 
+            padding: 20px; 
+            flex: 1;
+            overflow-y: auto;
+            min-height: 0;
+            scroll-behavior: smooth;
+            background: #f8f9fa;
+        }
+        .progress-report-modal-footer {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #e9ecef;
+            border-radius: 0 0 12px 12px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        .progress-report-loading {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+            font-size: 1.1em;
+        }
+        .progress-report-content {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+        }
+        .progress-report-content h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #e67e22;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .progress-report-content h2 {
+            color: #34495e;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        .progress-report-content h3 {
+            color: #7f8c8d;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        .progress-report-content .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .progress-report-content .stat-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #e67e22;
+            text-align: center;
+        }
+        .progress-report-content .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #e67e22;
+            margin-bottom: 5px;
+        }
+        .progress-report-content .stat-label {
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+        .progress-report-content .task-list {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        .progress-report-content .task-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .progress-report-content .task-item:last-child {
+            border-bottom: none;
+        }
+        .progress-report-content .task-status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .progress-report-content .status-todo {
+            background: #ffc107;
+            color: #856404;
+        }
+        .progress-report-content .status-ongoing {
+            background: #17a2b8;
+            color: white;
+        }
+        .progress-report-content .status-testing {
+            background: #fd7e14;
+            color: white;
+        }
+        .progress-report-content .status-done {
+            background: #28a745;
+            color: white;
+        }
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
         .comment-item { 
             margin-bottom: 12px; 
             display: flex;
@@ -813,6 +990,71 @@
             background-color: rgba(255,255,255,0.2); 
         }
         .email-report-modal-body { 
+            padding: 25px; 
+            flex: 1;
+            overflow-y: auto;
+            min-height: 0;
+        }
+        
+        /* Trello Connect Modal Styles */
+        .trello-connect-modal { 
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            height: 100%; 
+            background-color: rgba(0,0,0,0.5); 
+            backdrop-filter: blur(5px);
+        }
+        .trello-connect-modal-content { 
+            background-color: #fefefe; 
+            margin: 5% auto; 
+            padding: 0; 
+            border-radius: 12px; 
+            width: 90%; 
+            max-width: 600px; 
+            max-height: 80vh; 
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: modalSlideIn 0.3s ease-out;
+            display: flex;
+            flex-direction: column;
+        }
+        .trello-connect-modal-header { 
+            background: linear-gradient(135deg, #026aa7 0%, #0056b3 100%); 
+            color: white; 
+            padding: 20px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+        }
+        .trello-connect-modal-title { 
+            margin: 0; 
+            font-size: 1.3em; 
+            font-weight: 600;
+        }
+        .trello-connect-modal-close { 
+            color: white; 
+            font-size: 28px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            background: none; 
+            border: none; 
+            padding: 0; 
+            width: 30px; 
+            height: 30px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+        .trello-connect-modal-close:hover { 
+            background-color: rgba(255,255,255,0.2); 
+        }
+        .trello-connect-modal-body { 
             padding: 25px; 
             flex: 1;
             overflow-y: auto;
@@ -6688,10 +6930,13 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                     <div id="auto-sync-status" style="background: rgba(255,255,255,0.15); padding: 25px; border-radius: 12px; margin: 20px 0; border: 1px solid rgba(255,255,255,0.2); display: none;">
                         <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
                             <div style="background: rgba(255,255,255,0.2); padding: 10px; border-radius: 10px; font-size: 1.3em;">📊</div>
-                            <div>
+                            <div style="flex: 1;">
                                 <h6 style="margin: 0; color: #ecf0f1; font-weight: 700; font-size: 1.3em;">Live Project Status</h6>
                                 <p style="margin: 0; color: rgba(255,255,255,0.8); font-size: 0.9em;">Real-time sync with Trello board</p>
                             </div>
+                            <button id="trelloConnectButton" onclick="toggleTrelloConnection()" style="background: rgba(2, 106, 167, 0.8); color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 0.9em; cursor: pointer; transition: all 0.3s ease; backdrop-filter: blur(10px);" onmouseover="this.style.background='rgba(2, 106, 167, 1)'" onmouseout="this.style.background='rgba(2, 106, 167, 0.8)'">
+                                🔗 Connect Your Trello Account
+                            </button>
                         </div>
                         <div id="auto-sync-status-content" style="color: #ecf0f1; line-height: 1.6;"></div>
                     </div>
@@ -7963,9 +8208,26 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                     </div>
                 </div>
 
-                <!-- Trello Integration -->
+                <!-- Trello Integration Password Protection -->
                 <div class="highlight-box" style="background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); color: white; margin-bottom: 30px; border: 1px solid #bdc3c7;">
                     <h4 style="color: #ecf0f1; margin-bottom: 20px; font-weight: 600;">🔗 Trello Integration</h4>
+                    
+                    <!-- Password Form -->
+                    <div id="trello-password-form" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.2);">
+                        <h5 style="color: #ecf0f1; margin-bottom: 15px; font-weight: 600;">🔐 Enter Password to Access Trello Integration</h5>
+                        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                            <input type="password" id="trello-password-input" placeholder="Enter password..." style="padding: 12px 16px; border: 1px solid #bdc3c7; border-radius: 8px; font-size: 16px; background: white; color: #2c3e50; min-width: 200px; flex: 1;">
+                            <button id="trello-login-btn" style="background: #27ae60; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                🔓 Access
+                            </button>
+                        </div>
+                        <div id="trello-password-error" style="color: #e74c3c; margin-top: 10px; font-size: 14px; display: none;">
+                            ❌ Incorrect password. Please try again.
+                        </div>
+                    </div>
+                    
+                    <!-- Trello Integration Content (Hidden Initially) -->
+                    <div id="trello-integration-content" style="display: none;">
                     <p style="margin-bottom: 20px; opacity: 0.95; color: #ecf0f1; line-height: 1.6;">Sync all Phase 1 tasks to Trello with status tracking (TO DO → ON-GOING → FOR TESTING → DONE) for better project management and collaboration.</p>
                     
                     <div style="display: flex; gap: 15px; flex-wrap: wrap; align-items: center; margin-bottom: 20px;">
@@ -7981,6 +8243,10 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                         <button id="trello-status-btn" class="trello-btn" style="background: #8e44ad; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
                             📊 Get All Task Status
                         </button>
+                        
+                        <button id="progress-report-btn" class="trello-btn" onclick="openProgressReportModal()" style="background: #e67e22; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            📧 Generate Progress Report
+                        </button>
                     </div>
                     
                     <!-- Priority Sync Buttons -->
@@ -7989,6 +8255,7 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                         <div id="current-week-status" style="background: rgba(255,255,255,0.15); padding: 12px; border-radius: 8px; margin-bottom: 15px; font-size: 0.9em; border: 1px solid rgba(255,255,255,0.2);">
                             <div style="color: #3498db; font-weight: 600;">📅 Current Week Status</div>
                             <div id="week-status-text" style="color: #ecf0f1; margin-top: 5px;">Loading...</div>
+                            <div id="checklist-loading-info" style="color: #95a5a6; font-size: 0.8em; margin-top: 8px; font-style: italic;">📋 Checklist Progress will only load for the currently active priority week</div>
                         </div>
                         <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
                             <button id="sync-priority-1" class="priority-sync-btn" data-priority="🔥 Priority 1: System Foundation" style="background: #c0392b; color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.9em; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
@@ -8022,6 +8289,14 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                     
                     <div style="font-size: 0.9em; opacity: 0.9; margin-top: 20px; color: #ecf0f1; line-height: 1.6; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 8px;">
                         <strong style="color: #3498db;">Features:</strong> Status workflow (TO DO → ON-GOING → FOR TESTING → DONE) • Priority-based organization • Color-coded labels • Task details sync • Real-time collaboration
+                    </div>
+                    
+                    <!-- Logout Button -->
+                    <div style="margin-top: 20px; text-align: center;">
+                        <button id="trello-logout-btn" style="background: #e74c3c; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            🔒 Hide Content
+                        </button>
+                    </div>
                     </div>
                 </div>
 
@@ -12230,6 +12505,10 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
     <!-- Trello Integration Script -->
     <script src="trello-integration.js"></script>
     
+    <!-- Libraries for image and PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
     <script>
         // Function to display checklist status for task cards
         async function displayChecklistStatus() {
@@ -12239,43 +12518,65 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                     return;
                 }
 
-                // Show loading indicator
+                // Get current priority status to determine which tasks to load checklists for
+                const checkDate = new Date();
+                const activePriority = getCurrentActivePriority(checkDate);
+                
+                if (!activePriority) {
+                    console.log('No active priority week - skipping checklist loading');
+                    return;
+                }
+
+                console.log(`Loading checklist status for active priority: ${activePriority.name}`);
+
+                // Show loading indicator only for tasks in the current priority
                 const taskCards = document.querySelectorAll('.task-card');
                 taskCards.forEach(card => {
-                    const existingStatus = card.querySelector('.checklist-status');
-                    if (existingStatus) {
-                        existingStatus.remove();
-                    }
+                    // Check if this task belongs to the current priority
+                    const moduleHeader = card.closest('.module-section')?.querySelector('.module-header h3');
+                    const isCurrentPriorityTask = isTaskInCurrentPriority(card, activePriority);
                     
-                    // Add loading indicator
-                    const loadingHTML = '<div class="checklist-status"><h6>📋 Loading Checklist Status...</h6><div style="text-align: center; padding: 20px; color: #6c757d;">🔄 Fetching data from Trello...</div></div>';
-                    const taskDetails = card.querySelector('.task-details');
-                    if (taskDetails) {
-                        taskDetails.insertAdjacentHTML('afterend', loadingHTML);
+                    if (isCurrentPriorityTask) {
+                        const existingStatus = card.querySelector('.checklist-status');
+                        if (existingStatus) {
+                            existingStatus.remove();
+                        }
+                        
+                        // Add loading indicator
+                        const loadingHTML = '<div class="checklist-status"><h6>📋 Loading Checklist Status...</h6><div style="text-align: center; padding: 20px; color: #6c757d;">🔄 Fetching data from Trello...</div></div>';
+                        const taskDetails = card.querySelector('.task-details');
+                        if (taskDetails) {
+                            taskDetails.insertAdjacentHTML('afterend', loadingHTML);
+                        }
                     }
                 });
 
                 // Get all tasks with checklist status
                 const tasksWithStatus = await window.trelloIntegration.getAllTasksWithChecklistStatus();
                 
-                // Update each task card with checklist status
+                // Update each task card with checklist status (only for current priority)
                 tasksWithStatus.forEach(task => {
                     const taskCards = document.querySelectorAll('.task-card');
                     taskCards.forEach(card => {
                         const taskTitle = card.querySelector('h4')?.textContent?.trim();
                         if (taskTitle && taskTitle === task.cardName) {
-                            // Remove existing checklist status if any
-                            const existingStatus = card.querySelector('.checklist-status');
-                            if (existingStatus) {
-                                existingStatus.remove();
-                            }
+                            // Check if this task belongs to the current priority
+                            const isCurrentPriorityTask = isTaskInCurrentPriority(card, activePriority);
+                            
+                            if (isCurrentPriorityTask) {
+                                // Remove existing checklist status if any
+                                const existingStatus = card.querySelector('.checklist-status');
+                                if (existingStatus) {
+                                    existingStatus.remove();
+                                }
 
-                            // Add checklist status if available
-                            if (task.checklistStatus && task.checklistStatus.length > 0) {
-                                const checklistHTML = generateChecklistHTML(task.checklistStatus, task.cardId, task.cardName);
-                                const taskDetails = card.querySelector('.task-details');
-                                if (taskDetails) {
-                                    taskDetails.insertAdjacentHTML('afterend', checklistHTML);
+                                // Add checklist status if available
+                                if (task.checklistStatus && task.checklistStatus.length > 0) {
+                                    const checklistHTML = generateChecklistHTML(task.checklistStatus, task.cardId, task.cardName);
+                                    const taskDetails = card.querySelector('.task-details');
+                                    if (taskDetails) {
+                                        taskDetails.insertAdjacentHTML('afterend', checklistHTML);
+                                    }
                                 }
                             }
                         }
@@ -12284,6 +12585,57 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
             } catch (error) {
                 console.error('Error displaying checklist status:', error);
             }
+        }
+
+        // Helper function to get current active priority
+        function getCurrentActivePriority(currentDate) {
+            const prioritySchedule = {
+                '🔥 Priority 1: System Foundation': { startWeek: 1, endWeek: 2, startDate: new Date('2025-10-01'), endDate: new Date('2025-10-15'), name: 'System Foundation', key: '🔥 Priority 1: System Foundation' },
+                '🛠️ Priority 2: Maintenance Features': { startWeek: 3, endWeek: 4, startDate: new Date('2025-10-16'), endDate: new Date('2025-10-31'), name: 'Maintenance Features', key: '🛠️ Priority 2: Maintenance Features' },
+                '🎯 Priority 3: Student Core Processes': { startWeek: 5, endWeek: 6, startDate: new Date('2025-11-01'), endDate: new Date('2025-11-15'), name: 'Student Core Processes', key: '🎯 Priority 3: Student Core Processes' },
+                '👨‍🏫 Priority 4: Faculty Core Processes': { startWeek: 7, endWeek: 8, startDate: new Date('2025-11-16'), endDate: new Date('2025-11-30'), name: 'Faculty Core Processes', key: '👨‍🏫 Priority 4: Faculty Core Processes' },
+                '⚙️ Priority 5: Admin Core Processes': { startWeek: 9, endWeek: 10, startDate: new Date('2025-12-01'), endDate: new Date('2025-12-15'), name: 'Admin Core Processes', key: '⚙️ Priority 5: Admin Core Processes' },
+                '🔗 Priority 6: Integration & Testing': { startWeek: 11, endWeek: 12, startDate: new Date('2025-12-16'), endDate: new Date('2025-12-31'), name: 'Integration & Testing', key: '🔗 Priority 6: Integration & Testing' },
+                '🎉 Pilot Launch (Jan 2026)': { startWeek: 13, endWeek: 13, startDate: new Date('2026-01-06'), endDate: new Date('2026-01-10'), name: 'Pilot Launch', key: '🎉 Pilot Launch (Jan 2026)' }
+            };
+            
+            for (const [key, schedule] of Object.entries(prioritySchedule)) {
+                const isCurrentWeek = isWithinSchedule(currentDate, schedule);
+                if (isCurrentWeek) {
+                    return schedule;
+                }
+            }
+            return null;
+        }
+
+        // Helper function to check if a task belongs to the current priority
+        function isTaskInCurrentPriority(card, currentPriority) {
+            const moduleHeader = card.closest('.module-section')?.querySelector('.module-header h3');
+            if (!moduleHeader || !currentPriority) {
+                return false;
+            }
+            
+            const headerText = moduleHeader.textContent;
+            const priorityKey = currentPriority.key;
+            
+            // Check if the task's module header matches the current priority
+            if (priorityKey === '🔥 Priority 1: System Foundation') {
+                return headerText.includes('Priority 1: System Foundation');
+            } else if (priorityKey === '🛠️ Priority 2: Maintenance Features') {
+                return headerText.includes('Priority 2: Maintenance Features');
+            } else if (priorityKey === '🎯 Priority 3: Student Core Processes') {
+                return headerText.includes('Priority 3: Student Core Processes');
+            } else if (priorityKey === '👨‍🏫 Priority 4: Faculty Core Processes') {
+                return headerText.includes('Priority 4: Faculty Core Processes');
+            } else if (priorityKey === '⚙️ Priority 5: Admin Core Processes') {
+                return headerText.includes('Priority 5: Admin Core Processes');
+            } else if (priorityKey === '🔗 Priority 6: Integration & Testing') {
+                return headerText.includes('Priority 6: Integration & Testing');
+            } else if (priorityKey === '🎉 Pilot Launch (Jan 2026)') {
+                return headerText.includes('Pilot Launch');
+            }
+            
+            return false;
         }
 
         // Global variables for current card
@@ -13218,8 +13570,798 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
         // Close modal when clicking outside
         window.onclick = function(event) {
             const modal = document.getElementById('commentsModal');
+            const trelloConnectModal = document.getElementById('trelloConnectModal');
+            const progressReportModal = document.getElementById('progressReportModal');
             if (event.target === modal) {
                 closeCommentsModal();
+            }
+            if (event.target === trelloConnectModal) {
+                closeTrelloConnectModal();
+            }
+            if (event.target === progressReportModal) {
+                closeProgressReportModal();
+            }
+        }
+
+        // Progress Report Modal Functions
+        async function openProgressReportModal() {
+            const modal = document.getElementById('progressReportModal');
+            const modalBody = document.getElementById('progressReportModalBody');
+            
+            modal.style.display = 'block';
+            modalBody.innerHTML = '<div class="progress-report-loading">🔄 Generating progress report...</div>';
+            
+            // Generate the progress report
+            await generateProgressReport();
+        }
+
+        function closeProgressReportModal() {
+            const modal = document.getElementById('progressReportModal');
+            modal.style.display = 'none';
+        }
+
+        async function generateProgressReport() {
+            const modalBody = document.getElementById('progressReportModalBody');
+            
+            // Get current date
+            const now = new Date();
+            const reportDate = now.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            
+            // Get current week and priority information
+            const currentWeek = getCurrentWeek(now);
+            const currentPriority = getCurrentPriority(now);
+            const checklistProgress = await getChecklistProgress();
+            
+            // Get real task status from Trello
+            let taskStatus = {
+                todoCards: 0,
+                inProgressCards: 0,
+                testingCards: 0,
+                completedCards: 0,
+                totalCards: 0
+            };
+            
+            try {
+                if (window.trelloIntegration) {
+                    const trelloStatus = await window.trelloIntegration.getAllTaskStatus();
+                    if (trelloStatus) {
+                        taskStatus = {
+                            todoCards: trelloStatus.todoCards || 0,
+                            inProgressCards: trelloStatus.inProgressCards || 0,
+                            testingCards: trelloStatus.testingCards || 0,
+                            completedCards: trelloStatus.completedCards || 0,
+                            totalCards: trelloStatus.totalCards || 0
+                        };
+                    }
+                }
+            } catch (error) {
+                console.log('Could not fetch Trello task status:', error.message);
+            }
+            
+            // Generate the report content
+            const reportContent = `
+                <div class="progress-report-content">
+                    <h1>📊 SKOLARIS Phase 1 - Progress Report - ${reportDate}</h1>
+                    <p><strong>Report Generated:</strong> ${reportDate}</p>
+                    <p><strong>Current Week:</strong> Week ${currentWeek} of Phase 1</p>
+                    <p><strong>Current Priority:</strong> ${currentPriority.name} (Week ${currentPriority.startWeek}-${currentPriority.endWeek})</p>
+                    
+                    <h2>📈 Project Overview</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">${taskStatus.totalCards}</div>
+                            <div class="stat-label">Total Tasks</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${taskStatus.totalCards > 0 ? Math.round((taskStatus.completedCards / taskStatus.totalCards) * 100) : 0}%</div>
+                            <div class="stat-label">Overall Progress</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${taskStatus.todoCards + taskStatus.inProgressCards + taskStatus.testingCards + taskStatus.completedCards}</div>
+                            <div class="stat-label">Active Tasks</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${taskStatus.completedCards}</div>
+                            <div class="stat-label">Completed Tasks</div>
+                        </div>
+                    </div>
+                    
+                    <h2>🎯 Current Status</h2>
+                    <div class="task-list">
+                        <div class="task-item">
+                            <span class="task-status status-todo">TO DO</span>
+                            <strong>${taskStatus.todoCards} tasks</strong> - Ready to start development
+                        </div>
+                        <div class="task-item">
+                            <span class="task-status status-ongoing">ON-GOING</span>
+                            <strong>${taskStatus.inProgressCards} tasks</strong> - Currently in progress
+                        </div>
+                        <div class="task-item">
+                            <span class="task-status status-testing">FOR TESTING</span>
+                            <strong>${taskStatus.testingCards} tasks</strong> - Ready for testing
+                        </div>
+                        <div class="task-item">
+                            <span class="task-status status-done">DONE</span>
+                            <strong>${taskStatus.completedCards} tasks</strong> - Completed and approved
+                        </div>
+                    </div>
+                    
+                    <h2>📋 Checklist Progress</h2>
+                    ${checklistProgress.length > 0 ? `
+                        <div class="task-list">
+                            ${checklistProgress.map(checklist => `
+                                <div class="task-item">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                        <strong>${checklist.checklistName}</strong>
+                                        <span style="color: #e67e22; font-weight: bold;">${checklist.completionRate}%</span>
+                                    </div>
+                                    <div class="checklist-progress">
+                                        <div class="checklist-progress-bar">
+                                            <div class="checklist-progress-fill" style="width: ${checklist.completionRate}%;"></div>
+                                        </div>
+                                        <div class="checklist-summary">${checklist.completedItems}/${checklist.totalItems} completed</div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : `
+                        <div class="task-list">
+                            <div class="task-item">
+                                <span style="color: #6c757d; font-style: italic;">📋 No active checklist progress available. Connect to Trello to see real-time checklist updates.</span>
+                            </div>
+                        </div>
+                    `}
+                    
+                    <h2>🔥 Current Sprint Focus</h2>
+                    <div class="task-list">
+                        <div class="task-item">
+                            <strong>${currentPriority.name}</strong> (Week ${currentPriority.startWeek}-${currentPriority.endWeek})
+                        </div>
+                        <div class="task-item">
+                            <strong>Duration:</strong> ${currentPriority.startDate.toLocaleDateString()} - ${currentPriority.endDate.toLocaleDateString()}
+                        </div>
+                        <div class="task-item">
+                            <strong>Status:</strong> ${currentPriority.status}
+                        </div>
+                        <div class="task-item">
+                            <strong>Focus Areas:</strong> ${currentPriority.focusAreas.join(', ')}
+                        </div>
+                    </div>
+                    
+                    <h3>📋 Current Sprint Tasks</h3>
+                    <div class="task-list">
+                        ${currentPriority.focusAreas.map(area => `
+                            <div class="task-item">• ${area}</div>
+                        `).join('')}
+                    </div>
+                    
+                    <h2>📅 Timeline Status</h2>
+                    <p><strong>Phase 1 Duration:</strong> October - December 2025 (3 Months)</p>
+                    <p><strong>Pilot Launch:</strong> January 2026</p>
+                    <p><strong>Current Phase:</strong> ${currentPriority.status}</p>
+                    <p><strong>Weeks Remaining:</strong> ${Math.max(0, 12 - currentWeek)} weeks</p>
+                    
+                    <h2>🚀 Next Steps</h2>
+                    <div class="task-list">
+                        <div class="task-item">1. Complete ${currentPriority.name} tasks</div>
+                        <div class="task-item">2. Update checklist progress in Trello</div>
+                        <div class="task-item">3. Move completed tasks to next status</div>
+                        <div class="task-item">4. Prepare for next sprint when current one is done</div>
+                    </div>
+                    
+                    <h2>📊 Key Metrics</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">${taskStatus.inProgressCards + taskStatus.testingCards + taskStatus.completedCards}</div>
+                            <div class="stat-label">Tasks Started</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${taskStatus.completedCards}</div>
+                            <div class="stat-label">Tasks Completed</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${taskStatus.totalCards > 0 ? Math.round((taskStatus.completedCards / taskStatus.totalCards) * 100) : 0}%</div>
+                            <div class="stat-label">Completion Rate</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${currentWeek}</div>
+                            <div class="stat-label">Current Week</div>
+                        </div>
+                    </div>
+                    
+                    <h2>📝 Notes</h2>
+                    <p>This report focuses on the current sprint: <strong>${currentPriority.name}</strong>. The system will automatically update to show the next priority when the current sprint is completed. All tasks are planned and ready for implementation.</p>
+                    
+                    <p><strong>Report generated by:</strong> SKOLARIS Progress Tracker System</p>
+                    <p><strong>Last updated:</strong> ${now.toLocaleString()}</p>
+                </div>
+            `;
+            
+            // Display the report
+            modalBody.innerHTML = reportContent;
+        }
+
+        function getCurrentWeek() {
+            const now = new Date();
+            const startOfYear = new Date(now.getFullYear(), 0, 1);
+            const days = Math.floor((now - startOfYear) / (24 * 60 * 60 * 1000));
+            const weekNumber = Math.ceil((days + startOfYear.getDay() + 1) / 7);
+            return `Week ${weekNumber} of ${now.getFullYear()}`;
+        }
+
+        function getCurrentPriority(currentDate) {
+            // Priority schedule mapping
+            const prioritySchedule = {
+                '🔥 Priority 1: System Foundation': { 
+                    startWeek: 1, 
+                    endWeek: 2, 
+                    startDate: new Date('2025-10-01'), 
+                    endDate: new Date('2025-10-15'), 
+                    name: 'System Foundation',
+                    status: 'Pre-Development',
+                    focusAreas: ['Database Schema', 'Authentication', 'API Security', 'Frontend Components']
+                },
+                '🛠️ Priority 2: Maintenance Features': { 
+                    startWeek: 3, 
+                    endWeek: 4, 
+                    startDate: new Date('2025-10-16'), 
+                    endDate: new Date('2025-10-31'), 
+                    name: 'Maintenance Features',
+                    status: 'Upcoming',
+                    focusAreas: ['System Monitoring', 'Error Handling', 'Performance', 'Backup Systems']
+                },
+                '🎯 Priority 3: Student Core Processes': { 
+                    startWeek: 5, 
+                    endWeek: 6, 
+                    startDate: new Date('2025-11-01'), 
+                    endDate: new Date('2025-11-15'), 
+                    name: 'Student Core Processes',
+                    status: 'Upcoming',
+                    focusAreas: ['Student Registration', 'Course Enrollment', 'Payment Processing', 'Medical Records']
+                },
+                '👨‍🏫 Priority 4: Faculty Core Processes': { 
+                    startWeek: 7, 
+                    endWeek: 8, 
+                    startDate: new Date('2025-11-16'), 
+                    endDate: new Date('2025-11-30'), 
+                    name: 'Faculty Core Processes',
+                    status: 'Upcoming',
+                    focusAreas: ['Class Management', 'Grade Entry', 'Student Tracking', 'Academic Reports']
+                },
+                '⚙️ Priority 5: Admin Core Processes': { 
+                    startWeek: 9, 
+                    endWeek: 10, 
+                    startDate: new Date('2025-12-01'), 
+                    endDate: new Date('2025-12-15'), 
+                    name: 'Admin Core Processes',
+                    status: 'Upcoming',
+                    focusAreas: ['User Management', 'Payment Management', 'System Admin', 'Comprehensive Reports']
+                },
+                '🔗 Priority 6: Integration & Testing': { 
+                    startWeek: 11, 
+                    endWeek: 12, 
+                    startDate: new Date('2025-12-16'), 
+                    endDate: new Date('2025-12-31'), 
+                    name: 'Integration & Testing',
+                    status: 'Upcoming',
+                    focusAreas: ['Process Integration', 'System Testing', 'Security Audit', 'Deployment Prep']
+                }
+            };
+
+            // Find current priority based on date
+            for (const [key, schedule] of Object.entries(prioritySchedule)) {
+                if (currentDate >= schedule.startDate && currentDate <= schedule.endDate) {
+                    return { ...schedule, key, status: 'Active' };
+                }
+            }
+
+            // If no current priority, find the next one
+            for (const [key, schedule] of Object.entries(prioritySchedule)) {
+                if (currentDate < schedule.startDate) {
+                    return { ...schedule, key, status: 'Upcoming' };
+                }
+            }
+
+            // If past all priorities, return the last one as completed
+            const lastPriority = Object.values(prioritySchedule)[Object.values(prioritySchedule).length - 1];
+            return { ...lastPriority, status: 'Completed' };
+        }
+
+        async function getChecklistProgress() {
+            try {
+                // Check if we have Trello integration available
+                if (window.trelloIntegration) {
+                    // Try to get real checklist data from Trello
+                    const trelloData = await window.trelloIntegration.getChecklistProgress();
+                    if (trelloData && trelloData.length > 0) {
+                        // Group by checklist name and calculate overall progress
+                        const groupedData = {};
+                        trelloData.forEach(item => {
+                            if (!groupedData[item.checklistName]) {
+                                groupedData[item.checklistName] = {
+                                    checklistName: item.checklistName,
+                                    completedItems: 0,
+                                    totalItems: 0,
+                                    completionRate: 0,
+                                    cards: []
+                                };
+                            }
+                            groupedData[item.checklistName].completedItems += item.completedItems;
+                            groupedData[item.checklistName].totalItems += item.totalItems;
+                            groupedData[item.checklistName].cards.push({
+                                cardName: item.cardName,
+                                listName: item.listName,
+                                completionRate: item.completionRate
+                            });
+                        });
+
+                        // Calculate overall completion rate for each checklist
+                        Object.values(groupedData).forEach(checklist => {
+                            checklist.completionRate = checklist.totalItems > 0 ? 
+                                Math.round((checklist.completedItems / checklist.totalItems) * 100) : 0;
+                        });
+
+                        return Object.values(groupedData);
+                    }
+                }
+            } catch (error) {
+                console.log('Trello integration not available for checklist progress:', error.message);
+            }
+
+            // Return sample data for demonstration if Trello is not available
+            return [
+                {
+                    checklistName: "Database Schema Design",
+                    completedItems: 0,
+                    totalItems: 5,
+                    completionRate: 0,
+                    cards: []
+                },
+                {
+                    checklistName: "Authentication System",
+                    completedItems: 0,
+                    totalItems: 4,
+                    completionRate: 0,
+                    cards: []
+                },
+                {
+                    checklistName: "API Security Framework",
+                    completedItems: 0,
+                    totalItems: 3,
+                    completionRate: 0,
+                    cards: []
+                }
+            ];
+        }
+
+        function copyProgressReport() {
+            const reportContent = document.querySelector('.progress-report-content');
+            if (reportContent) {
+                const textContent = reportContent.innerText;
+                navigator.clipboard.writeText(textContent).then(() => {
+                    // Show success message
+                    const button = document.querySelector('.copy-report-btn');
+                    const originalText = button.textContent;
+                    button.textContent = '✅ Copied!';
+                    button.style.background = '#28a745';
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.style.background = '#28a745';
+                    }, 2000);
+                }).catch(err => {
+                    alert('Failed to copy report. Please select and copy manually.');
+                });
+            }
+        }
+
+        function downloadProgressReport() {
+            const reportContent = document.querySelector('.progress-report-content');
+            if (reportContent) {
+                const textContent = reportContent.innerText;
+                const blob = new Blob([textContent], { type: 'text/plain' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `skolaris-progress-report-${new Date().toISOString().split('T')[0]}.txt`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            }
+        }
+
+        async function downloadProgressReportAsImage() {
+            const reportContent = document.querySelector('.progress-report-content');
+            if (!reportContent) {
+                alert('No report content found to download');
+                return;
+            }
+
+            try {
+                // Show loading state
+                const button = document.querySelector('.download-image-btn');
+                const originalText = button.textContent;
+                button.textContent = '🔄 Generating...';
+                button.disabled = true;
+
+                // Use html2canvas to capture the report as image
+                const canvas = await html2canvas(reportContent, {
+                    backgroundColor: '#ffffff',
+                    scale: 2, // Higher quality
+                    useCORS: true,
+                    allowTaint: true,
+                    logging: false
+                });
+
+                // Convert canvas to blob
+                canvas.toBlob((blob) => {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `skolaris-progress-report-${new Date().toISOString().split('T')[0]}.png`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+
+                    // Reset button
+                    button.textContent = originalText;
+                    button.disabled = false;
+                }, 'image/png', 0.95);
+
+            } catch (error) {
+                console.error('Error generating image:', error);
+                alert('Error generating image. Please try again.');
+                
+                // Reset button
+                const button = document.querySelector('.download-image-btn');
+                button.textContent = '🖼️ Download as Image';
+                button.disabled = false;
+            }
+        }
+
+        async function downloadProgressReportAsPDF() {
+            const reportContent = document.querySelector('.progress-report-content');
+            if (!reportContent) {
+                alert('No report content found to download');
+                return;
+            }
+
+            try {
+                // Show loading state
+                const button = document.querySelector('.download-pdf-btn');
+                const originalText = button.textContent;
+                button.textContent = '🔄 Generating...';
+                button.disabled = true;
+
+                // First, capture the report as an image using html2canvas
+                const canvas = await html2canvas(reportContent, {
+                    backgroundColor: '#ffffff',
+                    scale: 1.5, // Balanced quality and file size
+                    useCORS: true,
+                    allowTaint: true,
+                    logging: false,
+                    width: reportContent.scrollWidth,
+                    height: reportContent.scrollHeight
+                });
+
+                // Initialize jsPDF
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                
+                // Get page dimensions
+                const pageWidth = pdf.internal.pageSize.getWidth();
+                const pageHeight = pdf.internal.pageSize.getHeight();
+                const margin = 15; // Reasonable margin
+                
+                // Calculate the available space for the image
+                const availableWidth = pageWidth - (margin * 2);
+                const availableHeight = pageHeight - (margin * 2);
+                
+                // Calculate image dimensions maintaining aspect ratio
+                const aspectRatio = canvas.width / canvas.height;
+                let imgWidth = availableWidth;
+                let imgHeight = availableWidth / aspectRatio;
+                
+                // If the image is too tall for one page, adjust to fit height
+                if (imgHeight > availableHeight) {
+                    imgHeight = availableHeight;
+                    imgWidth = availableHeight * aspectRatio;
+                }
+                
+                // Convert canvas to image data
+                const imgData = canvas.toDataURL('image/png', 0.9);
+                
+                // Check if image fits in one page
+                if (imgHeight <= availableHeight) {
+                    // Single page - center the image
+                    const x = margin + (availableWidth - imgWidth) / 2;
+                    const y = margin + (availableHeight - imgHeight) / 2;
+                    pdf.addImage(imgData, 'PNG', x, y, imgWidth, imgHeight);
+                } else {
+                    // Multi-page - split the image properly
+                    const totalPages = Math.ceil(imgHeight / availableHeight);
+                    const pageImgHeight = availableHeight;
+                    
+                    for (let i = 0; i < totalPages; i++) {
+                        if (i > 0) {
+                            pdf.addPage();
+                        }
+                        
+                        // Calculate the source rectangle for this page
+                        const sourceY = i * pageImgHeight * (canvas.height / imgHeight);
+                        const sourceHeight = Math.min(
+                            pageImgHeight * (canvas.height / imgHeight), 
+                            canvas.height - sourceY
+                        );
+                        
+                        // Create a temporary canvas for this page slice
+                        const pageCanvas = document.createElement('canvas');
+                        const pageCtx = pageCanvas.getContext('2d');
+                        pageCanvas.width = canvas.width;
+                        pageCanvas.height = sourceHeight;
+                        
+                        // Draw the portion of the image for this page
+                        pageCtx.drawImage(
+                            canvas, 
+                            0, sourceY, canvas.width, sourceHeight, 
+                            0, 0, canvas.width, sourceHeight
+                        );
+                        
+                        // Convert to image data
+                        const pageImgData = pageCanvas.toDataURL('image/png', 0.9);
+                        
+                        // Calculate the actual height for this page (might be shorter for last page)
+                        const actualPageHeight = Math.min(pageImgHeight, imgHeight - (i * pageImgHeight));
+                        
+                        // Add to PDF with proper scaling
+                        pdf.addImage(
+                            pageImgData, 
+                            'PNG', 
+                            margin, 
+                            margin, 
+                            imgWidth, 
+                            actualPageHeight
+                        );
+                    }
+                }
+
+                // Save the PDF
+                pdf.save(`skolaris-progress-report-${new Date().toISOString().split('T')[0]}.pdf`);
+
+                // Reset button
+                button.textContent = originalText;
+                button.disabled = false;
+
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                alert('Error generating PDF. Please try again.');
+                
+                // Reset button
+                const button = document.querySelector('.download-pdf-btn');
+                button.textContent = '📄 Download as PDF';
+                button.disabled = false;
+            }
+        }
+
+        // Trello Connect Modal Functions
+        function openTrelloConnectModal() {
+            const modal = document.getElementById('trelloConnectModal');
+            const statusSpan = document.getElementById('trelloConnectStatus');
+            
+            modal.style.display = 'block';
+            
+            // Reset status
+            if (statusSpan) statusSpan.textContent = '';
+        }
+
+        function closeTrelloConnectModal() {
+            const modal = document.getElementById('trelloConnectModal');
+            const connectSection = document.getElementById('trelloConnectConnectSection');
+            const tokenSection = document.getElementById('trelloConnectTokenSection');
+            const successSection = document.getElementById('trelloConnectSuccessSection');
+            const statusSpan = document.getElementById('trelloConnectStatus');
+            const tokenInput = document.getElementById('trelloConnectTokenInput');
+            
+            modal.style.display = 'none';
+            
+            // Reset modal state
+            if (connectSection) connectSection.style.display = 'block';
+            if (tokenSection) tokenSection.style.display = 'none';
+            if (successSection) successSection.style.display = 'none';
+            if (statusSpan) statusSpan.textContent = '';
+            if (tokenInput) tokenInput.value = '';
+        }
+
+        // Modified connectTrelloAccount function for modal
+        async function connectTrelloAccountModal() {
+            const statusSpan = document.getElementById('trelloConnectStatus');
+            const connectSection = document.getElementById('trelloConnectConnectSection');
+            const tokenSection = document.getElementById('trelloConnectTokenSection');
+            
+            if (statusSpan) statusSpan.textContent = 'Opening Trello authorization...';
+            
+            try {
+                await window.trelloIntegration.authenticateUser();
+                if (statusSpan) statusSpan.textContent = 'Please paste your token below to complete the connection...';
+                
+                // Show token input section
+                if (connectSection) connectSection.style.display = 'none';
+                if (tokenSection) tokenSection.style.display = 'block';
+                
+            } catch (error) {
+                if (statusSpan) statusSpan.textContent = 'Connection failed. Please try again.';
+                console.error('Trello authentication failed:', error);
+                
+                // Make sure connect section is visible if there was an error
+                if (connectSection) connectSection.style.display = 'block';
+                if (tokenSection) tokenSection.style.display = 'none';
+            }
+        }
+
+        // Function to validate token input in modal
+        function validateTrelloConnectTokenInput() {
+            const tokenInput = document.getElementById('trelloConnectTokenInput');
+            const validation = document.getElementById('trelloConnectTokenValidation');
+            
+            if (!tokenInput || !validation) return;
+            
+            const token = tokenInput.value.trim();
+            if (token.startsWith('ATTA') && token.length > 50) {
+                validation.innerHTML = '<span style="color: #28a745;">✅ Valid token format detected</span>';
+            } else if (token.length > 0) {
+                validation.innerHTML = '<span style="color: #dc3545;">❌ Invalid token format. Token should start with "ATTA" and be longer than 50 characters.</span>';
+            } else {
+                validation.innerHTML = '';
+            }
+        }
+
+        // Function to connect with token in modal
+        async function connectWithTrelloToken() {
+            const tokenInput = document.getElementById('trelloConnectTokenInput');
+            const validation = document.getElementById('trelloConnectTokenValidation');
+            const connectSection = document.getElementById('trelloConnectConnectSection');
+            const tokenSection = document.getElementById('trelloConnectTokenSection');
+            const successSection = document.getElementById('trelloConnectSuccessSection');
+            
+            if (!tokenInput) return;
+            
+            const token = tokenInput.value.trim();
+            if (!token.startsWith('ATTA') || token.length < 50) {
+                if (validation) validation.innerHTML = '<span style="color: #dc3545;">❌ Please enter a valid Trello token.</span>';
+                return;
+            }
+            
+            try {
+                // Store the token in localStorage and set it in the integration
+                localStorage.setItem('trello_user_token', token);
+                window.trelloIntegration.userToken = token;
+                
+                // Verify the token by getting current user
+                const user = await window.trelloIntegration.getCurrentUser();
+                if (!user) {
+                    throw new Error('Invalid token - could not verify user');
+                }
+                
+                // Show success section
+                if (connectSection) connectSection.style.display = 'none';
+                if (tokenSection) tokenSection.style.display = 'none';
+                if (successSection) successSection.style.display = 'block';
+                
+                // Update user auth status and button
+                updateUserAuthStatus();
+                updateTrelloConnectButton();
+                
+            } catch (error) {
+                if (validation) validation.innerHTML = '<span style="color: #dc3545;">❌ Connection failed: ' + error.message + '</span>';
+                console.error('Token connection failed:', error);
+            }
+        }
+
+        // Function to reset modal connection process
+        function resetTrelloConnect() {
+            const connectSection = document.getElementById('trelloConnectConnectSection');
+            const tokenSection = document.getElementById('trelloConnectTokenSection');
+            const successSection = document.getElementById('trelloConnectSuccessSection');
+            const disconnectSection = document.getElementById('trelloConnectDisconnectSection');
+            const statusSpan = document.getElementById('trelloConnectStatus');
+            const tokenInput = document.getElementById('trelloConnectTokenInput');
+            const validation = document.getElementById('trelloConnectTokenValidation');
+            
+            // Reset all sections
+            if (connectSection) connectSection.style.display = 'block';
+            if (tokenSection) tokenSection.style.display = 'none';
+            if (successSection) successSection.style.display = 'none';
+            if (disconnectSection) disconnectSection.style.display = 'none';
+            if (statusSpan) statusSpan.textContent = '';
+            if (tokenInput) tokenInput.value = '';
+            if (validation) validation.innerHTML = '';
+        }
+
+        // Function to toggle Trello connection (button click handler)
+        function toggleTrelloConnection() {
+            if (window.trelloIntegration && window.trelloIntegration.isUserAuthenticated()) {
+                // User is connected, show disconnect option
+                openTrelloConnectModal();
+                showDisconnectSection();
+            } else {
+                // User is not connected, show connect option only
+                openTrelloConnectModal();
+                showConnectSection();
+            }
+        }
+
+        // Function to show connect section in modal
+        function showConnectSection() {
+            const connectSection = document.getElementById('trelloConnectConnectSection');
+            const tokenSection = document.getElementById('trelloConnectTokenSection');
+            const successSection = document.getElementById('trelloConnectSuccessSection');
+            const disconnectSection = document.getElementById('trelloConnectDisconnectSection');
+            
+            // Hide all other sections
+            if (tokenSection) tokenSection.style.display = 'none';
+            if (successSection) successSection.style.display = 'none';
+            if (disconnectSection) disconnectSection.style.display = 'none';
+            
+            // Show connect section
+            if (connectSection) connectSection.style.display = 'block';
+        }
+
+        // Function to show disconnect section in modal
+        function showDisconnectSection() {
+            const connectSection = document.getElementById('trelloConnectConnectSection');
+            const tokenSection = document.getElementById('trelloConnectTokenSection');
+            const successSection = document.getElementById('trelloConnectSuccessSection');
+            const disconnectSection = document.getElementById('trelloConnectDisconnectSection');
+            
+            // Hide all other sections
+            if (connectSection) connectSection.style.display = 'none';
+            if (tokenSection) tokenSection.style.display = 'none';
+            if (successSection) successSection.style.display = 'none';
+            
+            // Show disconnect section
+            if (disconnectSection) disconnectSection.style.display = 'block';
+        }
+
+        // Function to disconnect Trello account
+        function disconnectTrelloAccount() {
+            showDisconnectSection();
+        }
+
+        // Function to confirm disconnect
+        function confirmDisconnectTrello() {
+            if (window.trelloIntegration) {
+                window.trelloIntegration.logoutUser();
+                updateTrelloConnectButton();
+                updateUserAuthStatus();
+                closeTrelloConnectModal();
+            }
+        }
+
+        // Function to cancel disconnect
+        function cancelDisconnectTrello() {
+            closeTrelloConnectModal();
+        }
+
+        // Function to update the connect button state
+        function updateTrelloConnectButton() {
+            const button = document.getElementById('trelloConnectButton');
+            if (!button) return;
+            
+            if (window.trelloIntegration && window.trelloIntegration.isUserAuthenticated()) {
+                button.innerHTML = '✅ Connected';
+                button.style.background = 'rgba(40, 167, 69, 0.8)';
+                button.onmouseover = function() { this.style.background = 'rgba(40, 167, 69, 1)'; };
+                button.onmouseout = function() { this.style.background = 'rgba(40, 167, 69, 0.8)'; };
+            } else {
+                button.innerHTML = '🔗 Connect Your Trello Account';
+                button.style.background = 'rgba(2, 106, 167, 0.8)';
+                button.onmouseover = function() { this.style.background = 'rgba(2, 106, 167, 1)'; };
+                button.onmouseout = function() { this.style.background = 'rgba(2, 106, 167, 0.8)'; };
             }
         }
 
@@ -13512,13 +14654,21 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                 autoStatusContent.innerHTML = statusMessage;
                 
                 // Automatically load checklist status after Live Project Status is loaded
-                setTimeout(async () => {
-                    try {
-                        await displayChecklistStatus();
-                    } catch (error) {
-                        console.log('Checklist status loading failed:', error);
-                    }
-                }, 1000); // Wait 1 second after status is displayed
+                // Only load if there's an active priority week
+                const autoLoadDate = new Date();
+                const autoLoadPriority = getCurrentActivePriority(autoLoadDate);
+                
+                if (autoLoadPriority) {
+                    setTimeout(async () => {
+                        try {
+                            await displayChecklistStatus();
+                        } catch (error) {
+                            console.log('Checklist status loading failed:', error);
+                        }
+                    }, 1000); // Wait 1 second after status is displayed
+                } else {
+                    console.log('No active priority week - skipping automatic checklist loading');
+                }
                 
             } catch (error) {
                 const autoStatusContent = document.getElementById('auto-sync-status-content');
@@ -13526,6 +14676,58 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                     autoStatusContent.innerHTML = `<div style="color: #e74c3c; text-align: center; padding: 20px;">❌ Error loading status: ${error.message}</div>`;
                 }
             }
+        }
+
+        // Trello Integration Password Protection
+        function initializeTrelloPasswordProtection() {
+            const passwordForm = document.getElementById('trello-password-form');
+            const passwordInput = document.getElementById('trello-password-input');
+            const loginBtn = document.getElementById('trello-login-btn');
+            const logoutBtn = document.getElementById('trello-logout-btn');
+            const content = document.getElementById('trello-integration-content');
+            const errorDiv = document.getElementById('trello-password-error');
+            const correctPassword = '1234567890';
+
+            // Login functionality
+            function handleLogin() {
+                const enteredPassword = passwordInput.value.trim();
+                
+                if (enteredPassword === correctPassword) {
+                    // Hide password form and show content
+                    passwordForm.style.display = 'none';
+                    content.style.display = 'block';
+                    errorDiv.style.display = 'none';
+                    passwordInput.value = '';
+                } else {
+                    // Show error message
+                    errorDiv.style.display = 'block';
+                    passwordInput.value = '';
+                    passwordInput.focus();
+                }
+            }
+
+            // Logout functionality
+            function handleLogout() {
+                // Hide content and show password form
+                content.style.display = 'none';
+                passwordForm.style.display = 'block';
+                errorDiv.style.display = 'none';
+                passwordInput.value = '';
+            }
+
+            // Event listeners
+            loginBtn.addEventListener('click', handleLogin);
+            logoutBtn.addEventListener('click', handleLogout);
+            
+            // Allow Enter key to submit password
+            passwordInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    handleLogin();
+                }
+            });
+
+            // Initialize - hide content by default
+            content.style.display = 'none';
         }
 
         // Trello Integration Functions
@@ -13855,12 +15057,26 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
             
             // Update status display
             const weekStatusText = document.getElementById('week-status-text');
+            const checklistLoadingInfo = document.getElementById('checklist-loading-info');
+            
             if (currentPriority) {
                 statusText = `✅ Currently active: ${currentPriority.name} (Week ${currentPriority.startWeek}-${currentPriority.endWeek})`;
+                if (checklistLoadingInfo) {
+                    checklistLoadingInfo.innerHTML = `📋 Checklist Progress is loading for ${currentPriority.name} tasks only`;
+                    checklistLoadingInfo.style.color = '#27ae60';
+                }
             } else if (nextPriority) {
                 statusText = `⏳ Next up: ${nextPriority.name} starting ${formatDate(nextPriority.startDate)} (Week ${nextPriority.startWeek}-${nextPriority.endWeek})`;
+                if (checklistLoadingInfo) {
+                    checklistLoadingInfo.innerHTML = `📋 Checklist Progress will load when ${nextPriority.name} becomes active`;
+                    checklistLoadingInfo.style.color = '#f39c12';
+                }
                 } else {
                 statusText = `🎉 All phases completed! Pilot launch period.`;
+                if (checklistLoadingInfo) {
+                    checklistLoadingInfo.innerHTML = `📋 All phases completed - Checklist Progress available for all tasks`;
+                    checklistLoadingInfo.style.color = '#8e44ad';
+                }
             }
             
             if (weekStatusText) {
@@ -13964,8 +15180,14 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                 });
             });
 
+            // Initialize Trello password protection
+            initializeTrelloPasswordProtection();
+            
             // Initialize Trello integration
             initializeTrelloIntegration();
+            
+            // Initialize Trello connect button state
+            updateTrelloConnectButton();
             
             // Add hover effects to priority sync buttons
             const prioritySyncBtns = document.querySelectorAll('.priority-sync-btn');
@@ -14179,6 +15401,145 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                         <button type="button" onclick="hidePreview()" class="btn-cancel">Back to Form</button>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trello Connect Modal -->
+    <div id="trelloConnectModal" class="trello-connect-modal" style="display: none;">
+        <div class="trello-connect-modal-content">
+            <div class="trello-connect-modal-header">
+                <div style="display: flex; align-items: center; gap: 15px; flex: 1;">
+                    <h3 class="trello-connect-modal-title" style="margin: 0;">🔗 Connect Your Trello Account</h3>
+                </div>
+                <button class="trello-connect-modal-close" onclick="closeTrelloConnectModal()">&times;</button>
+            </div>
+            <div class="trello-connect-modal-body">
+                <!-- Connect Section -->
+                <div id="trelloConnectConnectSection" style="background: #fff3cd; padding: 20px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid #ffc107;">
+                    <h6 style="color: #856404; margin: 0 0 15px 0; font-size: 1.1em;">🔐 Connect Your Trello Account</h6>
+                    <p style="margin: 0 0 15px 0; color: #856404; font-size: 0.95em; line-height: 1.5;">To add, edit, or delete comments, please connect your personal Trello account. This ensures comments appear with your name and enables full collaboration features.</p>
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 15px; font-size: 0.9em; color: #6c757d;">
+                        <strong>How it works:</strong><br>
+                        1. Click "Connect Trello Account" below<br>
+                        2. A popup will open to Trello's authorization page<br>
+                        3. Log in with your Trello account and click "Allow"<br>
+                        4. If automatic connection works, you're done! If not, you may need to copy/paste the token.
+                    </div>
+                    <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+                        <button onclick="connectTrelloAccountModal()" style="background: #026aa7; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 1em; cursor: pointer; transition: all 0.3s ease; font-weight: 600;" onmouseover="this.style.background='#0056b3'" onmouseout="this.style.background='#026aa7'">
+                            🔗 Connect Trello Account
+                        </button>
+                        <span id="trelloConnectStatus" style="font-size: 0.9em; color: #6c757d;"></span>
+                    </div>
+                </div>
+
+                <!-- Token Input Section (initially hidden) -->
+                <div id="trelloConnectTokenSection" style="display: none;">
+                    <div style="background: #d1ecf1; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #17a2b8;">
+                        <h6 style="color: #0c5460; margin: 0 0 10px 0; font-size: 1em;">✅ Authorization Complete!</h6>
+                        <p style="margin: 0; color: #0c5460; font-size: 0.9em;"><strong>Next step:</strong> Please paste your Trello token below to complete the connection.</p>
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <label for="trelloConnectTokenInput" style="display: block; margin-bottom: 8px; font-weight: 600; color: #495057; font-size: 0.95em;">Trello Token:</label>
+                        <textarea id="trelloConnectTokenInput" 
+                                  placeholder="Paste your Trello token here..." 
+                                  style="width: 100%; height: 80px; padding: 12px; border: 2px solid #dee2e6; border-radius: 8px; font-family: monospace; font-size: 0.9em; resize: vertical; box-sizing: border-box;"
+                                  onpaste="setTimeout(() => validateTrelloConnectTokenInput(), 100)"></textarea>
+                        <div id="trelloConnectTokenValidation" style="margin-top: 8px; font-size: 0.85em;"></div>
+                    </div>
+                    
+                    <details style="margin-bottom: 20px;">
+                        <summary style="cursor: pointer; font-size: 0.9em; color: #6c757d; padding: 10px; background: #f8f9fa; border-radius: 6px; border: 1px solid #e9ecef;">
+                            <strong>🔍 How to get your Trello token:</strong>
+                        </summary>
+                        <div style="padding: 15px; background: #f8f9fa; border-radius: 6px; margin-top: 8px; font-size: 0.85em; color: #495057; line-height: 1.5;">
+                            <p><strong>Step 1:</strong> After clicking "Connect Trello Account", you'll be redirected to Trello's authorization page.</p>
+                            <p><strong>Step 2:</strong> Log in to your Trello account and click "Allow" to grant access.</p>
+                            <p><strong>Step 3:</strong> You'll see a page with a long token (starts with "ATTA..."). Copy this entire token.</p>
+                            <p><strong>Step 4:</strong> Paste the token in the text area above and click "Complete Connection".</p>
+                            <p style="margin-top: 10px; padding: 8px; background: #fff3cd; border-radius: 4px; border-left: 3px solid #ffc107;">
+                                <strong>⚠️ Security Note:</strong> This token gives access to your Trello account. Only use it with trusted applications.
+                            </p>
+                        </div>
+                    </details>
+                    
+                    <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+                        <button onclick="connectWithTrelloToken()" style="background: #28a745; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 1em; cursor: pointer; transition: all 0.3s ease; font-weight: 600;" onmouseover="this.style.background='#218838'" onmouseout="this.style.background='#28a745'">
+                            ✅ Complete Connection
+                        </button>
+                        <button onclick="resetTrelloConnect()" style="background: #6c757d; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 1em; cursor: pointer; transition: all 0.3s ease; font-weight: 600;" onmouseover="this.style.background='#5a6268'" onmouseout="this.style.background='#6c757d'">
+                            🔄 Start Over
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Success Section (initially hidden) -->
+                <div id="trelloConnectSuccessSection" style="display: none;">
+                    <div style="background: #d4edda; padding: 20px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid #28a745; text-align: center;">
+                        <div style="font-size: 3em; margin-bottom: 15px;">🎉</div>
+                        <h6 style="color: #155724; margin: 0 0 10px 0; font-size: 1.2em;">Connection Successful!</h6>
+                        <p style="margin: 0; color: #155724; font-size: 0.95em;">Your Trello account has been connected successfully. You can now add comments and collaborate with the team.</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <button onclick="closeTrelloConnectModal()" style="background: #026aa7; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 1em; cursor: pointer; transition: all 0.3s ease; font-weight: 600; margin-right: 10px;" onmouseover="this.style.background='#0056b3'" onmouseout="this.style.background='#026aa7'">
+                            ✅ Done
+                        </button>
+                        <button onclick="disconnectTrelloAccount()" style="background: #dc3545; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 1em; cursor: pointer; transition: all 0.3s ease; font-weight: 600;" onmouseover="this.style.background='#c82333'" onmouseout="this.style.background='#dc3545'">
+                            🔌 Disconnect
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Disconnect Section (initially hidden) -->
+                <div id="trelloConnectDisconnectSection" style="display: none;">
+                    <div style="background: #f8d7da; padding: 20px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid #dc3545; text-align: center;">
+                        <div style="font-size: 3em; margin-bottom: 15px;">🔌</div>
+                        <h6 style="color: #721c24; margin: 0 0 10px 0; font-size: 1.2em;">Disconnect Trello Account</h6>
+                        <p style="margin: 0; color: #721c24; font-size: 0.95em;">Are you sure you want to disconnect your Trello account? You will no longer be able to add comments or collaborate with the team.</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <button onclick="confirmDisconnectTrello()" style="background: #dc3545; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 1em; cursor: pointer; transition: all 0.3s ease; font-weight: 600; margin-right: 10px;" onmouseover="this.style.background='#c82333'" onmouseout="this.style.background='#dc3545'">
+                            🔌 Yes, Disconnect
+                        </button>
+                        <button onclick="cancelDisconnectTrello()" style="background: #6c757d; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 1em; cursor: pointer; transition: all 0.3s ease; font-weight: 600;" onmouseover="this.style.background='#5a6268'" onmouseout="this.style.background='#6c757d'">
+                            ❌ Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Report Modal -->
+    <div id="progressReportModal" class="progress-report-modal" style="display: none;">
+        <div class="progress-report-modal-content">
+            <div class="progress-report-modal-header">
+                <div style="display: flex; align-items: center; gap: 15px; flex: 1;">
+                    <h3 class="progress-report-modal-title" style="margin: 0;">📊 Project Progress Report</h3>
+                </div>
+                <button class="progress-report-modal-close" onclick="closeProgressReportModal()">&times;</button>
+            </div>
+            <div class="progress-report-modal-body" id="progressReportModalBody">
+                <div class="progress-report-loading">🔄 Generating progress report...</div>
+            </div>
+            <div class="progress-report-modal-footer">
+                <button onclick="copyProgressReport()" class="copy-report-btn" style="background: #28a745; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; margin-right: 10px;">
+                    📋 Copy Report
+                </button>
+                <button onclick="downloadProgressReport()" class="download-report-btn" style="background: #007bff; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; margin-right: 10px;">
+                    💾 Download as Text
+                </button>
+                <button onclick="downloadProgressReportAsImage()" class="download-image-btn" style="background: #e67e22; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; margin-right: 10px;">
+                    🖼️ Download as Image
+                </button>
+                <button onclick="downloadProgressReportAsPDF()" class="download-pdf-btn" style="background: #dc3545; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; margin-right: 10px;">
+                    📄 Download as PDF
+                </button>
+                <button onclick="closeProgressReportModal()" class="close-report-btn" style="background: #6c757d; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s ease;">
+                    ❌ Close
+                </button>
             </div>
         </div>
     </div>
