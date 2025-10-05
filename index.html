@@ -1636,7 +1636,599 @@
                 display: block;
             }
         }
+
+        /* API Documentation Styles */
+        .loading-spinner {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .endpoints-grid {
+            display: grid;
+            gap: 15px;
+        }
+
+        .endpoint-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .endpoint-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15) !important;
+        }
+
+        .method-badge {
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .method-get {
+            background: #28a745 !important;
+        }
+
+        .method-post {
+            background: #007bff !important;
+        }
+
+        .method-put {
+            background: #ffc107 !important;
+            color: #000 !important;
+        }
+
+        .method-delete {
+            background: #dc3545 !important;
+        }
+
+        .method-patch {
+            background: #6f42c1 !important;
+        }
+
+        .method-head {
+            background: #17a2b8 !important;
+        }
+
+        .method-options {
+            background: #6c757d !important;
+        }
+
+        /* New API Documentation Styles */
+        .api-overview {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #3498db 100%);
+            color: white;
+            padding: 35px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(44, 62, 80, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .api-overview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .overview-header {
+            position: relative;
+            z-index: 1;
+        }
+
+        .overview-header h3 {
+            margin: 0 0 15px 0;
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .overview-header p {
+            margin: 0;
+            opacity: 0.9;
+            line-height: 1.6;
+            font-size: 1em;
+            color: #ecf0f1;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .stat-icon {
+            font-size: 2em;
+            opacity: 0.9;
+        }
+
+        .stat-content {
+            flex: 1;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #ffffff;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.85;
+            font-weight: 500;
+            color: #ecf0f1;
+        }
+
+        .api-controls {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border: 1px solid #e9ecef;
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .clear-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 10px 20px;
+            border: 2px solid #e9ecef;
+            background: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: #666;
+        }
+
+        .filter-tab:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .filter-tab.active {
+            background: #667eea;
+            border-color: #667eea;
+            color: white;
+        }
+
+        .endpoints-container {
+            margin-bottom: 30px;
+        }
+
+        .endpoint-group {
+            margin-bottom: 40px;
+        }
+
+        .endpoint-group-header {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 20px 25px;
+            border-radius: 12px 12px 0 0;
+            border-bottom: 3px solid #667eea;
+            margin-bottom: 0;
+        }
+
+        .endpoint-group-title {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .endpoint-group-description {
+            color: #666;
+            margin: 8px 0 0 0;
+            font-size: 0.95em;
+        }
+
+        .endpoints-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            background: white;
+            padding: 25px;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .endpoint-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .endpoint-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .endpoint-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            border-color: #667eea;
+        }
+
+        .endpoint-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+
+        .method-badge {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: white;
+            min-width: 70px;
+            text-align: center;
+        }
+
+        .url-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
+        .endpoint-url {
+            flex: 1;
+            background: #f8f9fa;
+            padding: 12px 45px 12px 16px;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+            color: #2c3e50;
+            border: 1px solid #e9ecef;
+            word-break: break-all;
+            transition: all 0.3s ease;
+        }
+
+        .endpoint-url:hover {
+            border-color: #667eea;
+            background: #ffffff;
+        }
+
+        .copy-button {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 6px 8px;
+            cursor: pointer;
+            font-size: 0.8em;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            opacity: 0.8;
+        }
+
+        .copy-button:hover {
+            background: #5a6fd8;
+            opacity: 1;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .copy-button:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .copy-button.copied {
+            background: #28a745;
+            animation: copySuccess 0.6s ease;
+        }
+
+        @keyframes copySuccess {
+            0% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-50%) scale(1.2); }
+            100% { transform: translateY(-50%) scale(1); }
+        }
+
+        .endpoint-description {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        .endpoint-details {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .detail-section {
+            margin-bottom: 20px;
+        }
+
+        .detail-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-title {
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-content {
+            background: white;
+            border-radius: 6px;
+            padding: 15px;
+            border: 1px solid #e9ecef;
+        }
+
+        .detail-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .detail-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f3f4;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.85em;
+        }
+
+        .detail-list li:last-child {
+            border-bottom: none;
+        }
+
+        .json-code {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.85em;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+
+        .quick-reference {
+            margin-bottom: 30px;
+        }
+
+        .quick-reference h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .reference-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+        }
+
+        .reference-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border: 1px solid #e9ecef;
+        }
+
+        .reference-card h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .collection-info-collapsible {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border: 1px solid #e9ecef;
+            overflow: hidden;
+        }
+
+        .collapsible-header {
+            width: 100%;
+            background: #f8f9fa;
+            border: none;
+            padding: 20px 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+        }
+
+        .collapsible-header:hover {
+            background: #e9ecef;
+        }
+
+        .toggle-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .collapsible-header.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .collapsible-content {
+            padding: 25px;
+            display: none;
+        }
+
+        .collapsible-content.active {
+            display: block;
+        }
+
+        /* API Documentation Responsive */
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 15px;
+            }
+
+            .stat-card {
+                padding: 15px;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .stat-icon {
+                font-size: 1.5em;
+            }
+
+            .endpoints-grid {
+                grid-template-columns: 1fr;
+                padding: 15px;
+            }
+
+            .endpoint-header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+
+            .method-badge {
+                align-self: flex-start;
+            }
+
+            .url-container {
+                position: relative;
+            }
+
+            .endpoint-url {
+                padding-right: 40px;
+            }
+
+            .copy-button {
+                right: 6px;
+                width: 24px;
+                height: 24px;
+                font-size: 0.7em;
+            }
+
+            .reference-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-tabs {
+                justify-content: center;
+            }
+
+            .filter-tab {
+                padding: 8px 16px;
+                font-size: 0.9em;
+            }
+        }
     </style>
+
+
+
+
+<!-- Auto-refresh timestamp: 1759671598368 -->
 </head>
 <body>
     <div class="header">
@@ -1656,6 +2248,7 @@
                 <div class="nav-dropdown">
                     <a href="#" class="nav-link dropdown-toggle" id="moreDropdown">📚 More Sections ▼</a>
                     <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="#" class="dropdown-item" data-section="api-documentation">🔌 API Docs</a>
                         <a href="#" class="dropdown-item" data-section="phase2-timeline">🚀 Phase 2 Timeline</a>
                         <a href="#" class="dropdown-item" data-section="process-flow">🔄 Process Flow</a>
                         <a href="#" class="dropdown-item" data-section="implementation-roadmap">🚀 Implementation</a>
@@ -12638,6 +13231,100 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                 </div>
             </div>
 
+            <!-- API Documentation Section -->
+            <div class="content-section" id="api-documentation">
+                <h2 class="section-title">🔌 API Documentation</h2>
+                
+                <!-- API Overview with Quick Stats -->
+                <div class="api-overview">
+                    <div class="overview-header">
+                        <h3>📊 API Overview</h3>
+                        <p>SKOLARIS REST API provides comprehensive endpoints for user management, campus operations, and authentication. The API follows RESTful principles with JWT-based authentication and supports multi-campus operations.</p>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">🔗</div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="totalEndpoints">-</div>
+                                <div class="stat-label">Total Endpoints</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🔐</div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="authEndpoints">-</div>
+                                <div class="stat-label">Authentication</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">👥</div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="userEndpoints">-</div>
+                                <div class="stat-label">User Management</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🏢</div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="campusEndpoints">-</div>
+                                <div class="stat-label">Campus Management</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search and Filter Controls -->
+                <div class="api-controls">
+                    <div class="search-box">
+                        <input type="text" id="endpointSearch" placeholder="🔍 Search endpoints..." />
+                        <button id="clearSearch" class="clear-btn">✕</button>
+                    </div>
+                    <div class="filter-tabs">
+                        <button class="filter-tab active" data-filter="all">All</button>
+                        <button class="filter-tab" data-filter="auth">Authentication</button>
+                        <button class="filter-tab" data-filter="user">User Management</button>
+                        <button class="filter-tab" data-filter="campus">Campus Management</button>
+                    </div>
+                </div>
+
+                <!-- API Endpoints Container -->
+                <div class="endpoints-container">
+                    <div id="apiEndpoints">
+                        <div class="loading-spinner">Loading endpoints...</div>
+                    </div>
+                </div>
+
+                <!-- Quick Reference -->
+                <div class="quick-reference">
+                    <h3>📚 Quick Reference</h3>
+                    <div class="reference-grid">
+                        <div class="reference-card">
+                            <h4>🔧 Environment Variables</h4>
+                            <div id="environmentVariables">
+                                <div class="loading-spinner">Loading environment variables...</div>
+                            </div>
+                        </div>
+                        <div class="reference-card">
+                            <h4>📝 Sample Data</h4>
+                            <div id="sampleData">
+                                <div class="loading-spinner">Loading sample data...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Collection Info (Collapsible) -->
+                <div class="collection-info-collapsible">
+                    <button class="collapsible-header" onclick="toggleCollectionInfo()">
+                        <span>📋 Collection Information</span>
+                        <span class="toggle-icon">▼</span>
+                    </button>
+                    <div class="collapsible-content" id="collectionInfo">
+                        <div class="loading-spinner">Loading API collection...</div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -16211,6 +16898,1445 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
             </div>
         </div>
     </div>
+
+    <!-- API Documentation Script -->
+    <script>
+        // Embedded Postman Collection Data
+        window.postmanCollectionData = {
+            "info": {
+                "_postman_id": "3943dcc8-5438-4e3e-bce9-086239bf457c",
+                "name": "School Management API - User Management",
+                "description": "# School Management API - Postman Collection\n\nThis directory contains Postman collections and environment files for testing the School Management API.\n\n## Collection Structure\n\n### Authentication\n\n- **Login** - Get access and refresh tokens\n    \n- **Refresh Token** - Refresh expired access token\n    \n- **Get Current User** - Get authenticated user info\n    \n- **Logout** - Invalidate current token\n    \n\n### User Management\n\n- **Get All Users** - List users with pagination and filtering\n    \n- **Get User Statistics** - Get user statistics and breakdowns\n    \n- **Get User by ID** - Get specific user details\n    \n- **Create New User** - Create a new user account\n    \n- **Update User** - Update user information\n    \n- **Assign Role to User** - Assign role to user\n    \n- **Remove Role from User** - Remove role from user\n    \n- **Toggle User Status** - Activate/deactivate user\n    \n- **Delete User** - Delete user account\n    \n\n### Campus Management\n\n- **Get All Campuses** - List all campuses\n    \n- **Get Campus by ID** - Get specific campus\n    \n- **Create New Campus** - Create new campus\n    \n- **Update Campus** - Update campus information\n    \n- **Toggle Campus Status** - Activate/deactivate campus\n    \n- **Get Campus Statistics** - Get campus statistics\n    \n- **Delete Campus** - Delete campus\n    \n\n## Features\n\n### Automatic Token Management\n\n- **Auto-refresh**: Tokens are automatically refreshed when they expire\n    \n- **Token storage**: Access and refresh tokens are saved in environment variables\n    \n- **Expiration tracking**: Token expiration times are tracked and managed\n    \n\n### Pre-request Scripts\n\n- **Token validation**: Checks if token is expired before each request\n    \n- **Auto-refresh**: Automatically refreshes token if it expires within 5 minutes\n    \n- **Error handling**: Handles token refresh failures gracefully\n    \n\n### Test Scripts\n\n- **Response validation**: Validates API responses\n    \n- **Variable extraction**: Extracts and saves important data from responses\n    \n- **Logging**: Provides console logging for debugging\n    \n\n## Environment Variables\n\n| Variable | Description | Example |\n| --- | --- | --- |\n| `base_url` | API base URL | `http://localhost` |\n| `access_token` | JWT access token | `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...` |\n| `refresh_token` | JWT refresh token | `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...` |\n| `token_expires_at` | Token expiration timestamp | `2025-09-29T13:00:00.000Z` |\n| `user_id` | Current user ID | `1` |\n| `new_user_id` | ID of newly created user | `14` |\n| `new_campus_id` | ID of newly created campus | `4` |\n\n## API Endpoints\n\nAuthentication\n\n- `POST /login` - Login with email/password\n    \n- `POST /refresh` - Refresh access token\n    \n- `GET /user` - Get current user\n    \n- `POST /logout` - Logout\n    \n\n### User Management\n\n- `GET /users` - List users (with pagination and filters)\n    \n- `GET /users/statistics` - Get user statistics\n    \n- `GET /users/{id}` - Get user by ID\n    \n- `POST /users` - Create new user\n    \n- `PUT /users/{id}` - Update user\n    \n- `DELETE /users/{id}` - Delete user\n    \n- `POST /users/{id}/assign-role` - Assign role\n    \n- `DELETE /users/{id}/remove-role` - Remove role\n    \n- `POST /users/{id}/toggle-status` - Toggle status\n    \n\n### Campus Management\n\n- `GET /campuses` - List campuses\n    \n- `GET /campuses/{id}` - Get campus by ID\n    \n- `POST /campuses` - Create campus\n    \n- `PUT /campuses/{id}` - Update campus\n    \n- `DELETE /campuses/{id}` - Delete campus\n    \n- `POST /campuses/{id}/toggle-status` - Toggle campus status\n    \n- `GET /campuses/{id}/statistics` - Get campus statistics\n    \n\n## Sample Data\n\n### Default Login Credentials\n\n``` json\n{\n  \"email\": \"superadmin@icct.edu.ph\",\n  \"password\": \"Password123!\"\n}\n\n ```\n\n###   \nUser Types\n\n- `student` - Student user\n    \n- `teacher` - Faculty/Teacher user\n    \n- `staff` - Staff user\n    \n- `admin` - Administrator user\n    \n\n### Role IDs\n\n- `1` - Super Admin\n    \n- `2` - Campus Admin\n    \n- `3` - Registrar\n    \n- `4` - Faculty\n    \n- `5` - Cashier\n    \n- `6` - Student\n    \n\n### Campus IDs\n\n- `1` - ICCT Main Campus\n    \n- `2` - ICCT Antipolo Campus\n    \n- `3` - ICCT Subic Campus",
+                "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+                "_exporter_id": "49014689",
+                "_collection_link": "https://speeding-desert-110783.postman.co/workspace/Alpha-Byte~397b10cc-b517-4aa9-8b5f-e451db43228d/collection/6092661-3943dcc8-5438-4e3e-bce9-086239bf457c?action=share&source=collection_link&creator=49014689"
+            },
+            "item": [
+                {
+                    "name": "Authentication",
+                    "item": [
+                        {
+                            "name": "Login",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "if (pm.response.code === 200) {",
+                                            "    const response = pm.response.json();",
+                                            "    ",
+                                            "    // Save tokens to environment variables",
+                                            "    pm.environment.set('access_token', response.access_token);",
+                                            "    pm.environment.set('refresh_token', response.refresh_token);",
+                                            "    ",
+                                            "    // Calculate token expiration time",
+                                            "    const expiresIn = response.expires_in; // 3600 seconds (1 hour)",
+                                            "    const expirationTime = new Date(Date.now() + expiresIn * 1000);",
+                                            "    pm.environment.set('token_expires_at', expirationTime.toISOString());",
+                                            "    ",
+                                            "    console.log('Access token saved:', response.access_token.substring(0, 50) + '...');",
+                                            "    console.log('Token expires at:', expirationTime.toISOString());",
+                                            "}"
+                                        ],
+                                        "type": "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"email\": \"superadmin@icct.edu.ph\",\n    \"password\": \"Password123!\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/api/v1/login",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "v1",
+                                        "login"
+                                    ]
+                                },
+                                "description": "Login to get access and refresh tokens"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Refresh Token",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "if (pm.response.code === 200) {",
+                                            "    const response = pm.response.json();",
+                                            "    ",
+                                            "    // Save new tokens to environment variables",
+                                            "    pm.environment.set('access_token', response.access_token);",
+                                            "    pm.environment.set('refresh_token', response.refresh_token);",
+                                            "    ",
+                                            "    // Calculate new token expiration time",
+                                            "    const expiresIn = response.expires_in; // 3600 seconds (1 hour)",
+                                            "    const expirationTime = new Date(Date.now() + expiresIn * 1000);",
+                                            "    pm.environment.set('token_expires_at', expirationTime.toISOString());",
+                                            "    ",
+                                            "    console.log('New access token saved:', response.access_token.substring(0, 50) + '...');",
+                                            "    console.log('New token expires at:', expirationTime.toISOString());",
+                                            "}"
+                                        ],
+                                        "type": "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"refresh_token\": \"{{refresh_token}}\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/api/v1/refresh",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "v1",
+                                        "refresh"
+                                    ]
+                                },
+                                "description": "Refresh access token using refresh token"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Get Current User",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/api/v1/user",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "v1",
+                                        "user"
+                                    ]
+                                },
+                                "description": "Get current authenticated user information"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Logout",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/api/v1/logout",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "v1",
+                                        "logout"
+                                    ]
+                                },
+                                "description": "Logout and invalidate current token"
+                            },
+                            "response": []
+                        }
+                    ],
+                    "description": "Authentication endpoints for login, logout, and token management"
+                },
+                {
+                    "name": "User Management",
+                    "item": [
+                        {
+                            "name": "Get All Users",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/api/v1/users?per_page=15&search=&campus_id=&user_type=&is_active=",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "v1",
+                                        "users"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "per_page",
+                                            "value": "15",
+                                            "description": "Number of users per page"
+                                        },
+                                        {
+                                            "key": "search",
+                                            "value": "",
+                                            "description": "Search by name, email, student_id, or employee_number"
+                                        },
+                                        {
+                                            "key": "campus_id",
+                                            "value": "",
+                                            "description": "Filter by campus ID"
+                                        },
+                                        {
+                                            "key": "user_type",
+                                            "value": "",
+                                            "description": "Filter by user type (student, teacher, staff, admin)"
+                                        },
+                                        {
+                                            "key": "is_active",
+                                            "value": "",
+                                            "description": "Filter by active status (true/false)"
+                                        }
+                                    ]
+                                },
+                                "description": "Get paginated list of all users with optional filtering"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Get User Statistics",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/api/v1/users/statistics",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "v1",
+                                        "users",
+                                        "statistics"
+                                    ]
+                                },
+                                "description": "Get user statistics including totals, active/inactive counts, and breakdowns by type and campus"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Get User by ID",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "if (pm.response.code === 200) {",
+                                            "    const response = pm.response.json();",
+                                            "    ",
+                                            "    // Save user ID for other requests",
+                                            "    pm.environment.set('user_id', response.data.user_id);",
+                                            "    ",
+                                            "    console.log('User ID saved:', response.data.user_id);",
+                                            "}"
+                                        ],
+                                        "type": "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/api/v1/users/{{user_id}}",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "v1",
+                                        "users",
+                                        "{{user_id}}"
+                                    ]
+                                },
+                                "description": "Get specific user by ID"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Create New User",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "if (pm.response.code === 201) {",
+                                            "    const response = pm.response.json();",
+                                            "    ",
+                                            "    // Save new user ID for other requests",
+                                            "    pm.environment.set('new_user_id', response.data.user_id);",
+                                            "    ",
+                                            "    console.log('New user created with ID:', response.data.user_id);",
+                                            "}"
+                                        ],
+                                        "type": "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"campus_id\": 1,\n    \"email\": \"newuser@icct.edu.ph\",\n    \"phone\": \"+639171234999\",\n    \"student_id\": \"STU999\",\n    \"password\": \"NewPassword123!\",\n    \"password_confirmation\": \"NewPassword123!\",\n    \"full_name\": \"New Test User\",\n    \"user_type\": \"student\",\n    \"is_active\": true\n}"
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/api/v1/users",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "v1",
+                                        "users"
+                                    ]
+                                },
+                                "description": "Create a new user account"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Update User",
+                            "request": {
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"campus_id\": 1,\n    \"email\": \"updateduser@icct.edu.ph\",\n    \"phone\": \"+639171234888\",\n    \"student_id\": \"STU888\",\n    \"full_name\": \"Updated Test User\",\n    \"user_type\": \"student\",\n    \"is_active\": true\n}"
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/api/v1/users/{{new_user_id}}",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "v1",
+                                        "users",
+                                        "{{new_user_id}}"
+                                    ]
+                                },
+                                "description": "Update user information (password is optional)"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Assign Role to User",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"role_id\": 6\n}"
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/api/v1/users/{{new_user_id}}/assign-role",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "v1",
+                                        "users",
+                                        "{{new_user_id}}",
+                                        "assign-role"
+                                    ]
+                                },
+                                "description": "Assign a role to a user (role_id: 1=Super Admin, 2=Campus Admin, 3=Registrar, 4=Faculty, 5=Cashier, 6=Student)"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Remove Role from User",
+                            "request": {
+                                "method": "DELETE",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"role_id\": 6\n}"
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/api/v1/users/{{new_user_id}}/remove-role",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "v1",
+                                        "users",
+                                        "{{new_user_id}}",
+                                        "remove-role"
+                                    ]
+                                },
+                                "description": "Remove a role from a user"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Toggle User Status",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/api/v1/users/{{new_user_id}}/toggle-status",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "v1",
+                                        "users",
+                                        "{{new_user_id}}",
+                                        "toggle-status"
+                                    ]
+                                },
+                                "description": "Toggle user active/inactive status"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Delete User",
+                            "request": {
+                                "method": "DELETE",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/api/v1/users/{{new_user_id}}",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "v1",
+                                        "users",
+                                        "{{new_user_id}}"
+                                    ]
+                                },
+                                "description": "Delete a user (cannot delete the last Super Admin)"
+                            },
+                            "response": []
+                        }
+                    ],
+                    "description": "Complete CRUD operations for user management"
+                },
+                {
+                    "name": "Campus Management",
+                    "item": [
+                        {
+                            "name": "Get All Campuses",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/api/v1/campuses",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "v1",
+                                        "campuses"
+                                    ]
+                                },
+                                "description": "Get list of all campuses"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Get Campus by ID",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/api/v1/campuses/1",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "v1",
+                                        "campuses",
+                                        "1"
+                                    ]
+                                },
+                                "description": "Get specific campus by ID"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Create New Campus",
+                            "event": [
+                                {
+                                    "listen": "test",
+                                    "script": {
+                                        "exec": [
+                                            "if (pm.response.code === 201) {",
+                                            "    const response = pm.response.json();",
+                                            "    ",
+                                            "    // Save new campus ID for other requests",
+                                            "    pm.environment.set('new_campus_id', response.data.campus_id);",
+                                            "    ",
+                                            "    console.log('New campus created with ID:', response.data.campus_id);",
+                                            "}"
+                                        ],
+                                        "type": "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"campus_code\": \"TEST\",\n    \"campus_name\": \"Test Campus\",\n    \"address\": \"Test Address, Test City\",\n    \"phone\": \"(02) 1234-5678\",\n    \"email\": \"test@icct.edu.ph\",\n    \"website\": \"https://test.icct.edu.ph\",\n    \"is_active\": true\n}"
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/api/v1/campuses",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "v1",
+                                        "campuses"
+                                    ]
+                                },
+                                "description": "Create a new campus"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Update Campus",
+                            "request": {
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"campus_code\": \"TEST_UPDATED\",\n    \"campus_name\": \"Updated Test Campus\",\n    \"address\": \"Updated Test Address, Test City\",\n    \"phone\": \"(02) 8765-4321\",\n    \"email\": \"updated@icct.edu.ph\",\n    \"website\": \"https://updated.icct.edu.ph\",\n    \"is_active\": true\n}"
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/api/v1/campuses/{{new_campus_id}}",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "v1",
+                                        "campuses",
+                                        "{{new_campus_id}}"
+                                    ]
+                                },
+                                "description": "Update campus information"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Toggle Campus Status",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/api/v1/campuses/{{new_campus_id}}/toggle-status",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "v1",
+                                        "campuses",
+                                        "{{new_campus_id}}",
+                                        "toggle-status"
+                                    ]
+                                },
+                                "description": "Toggle campus active/inactive status"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Get Campus Statistics",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/api/v1/campuses/{{new_campus_id}}/statistics",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "v1",
+                                        "campuses",
+                                        "{{new_campus_id}}",
+                                        "statistics"
+                                    ]
+                                },
+                                "description": "Get statistics for a specific campus"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Delete Campus",
+                            "request": {
+                                "method": "DELETE",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{access_token}}"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/api/v1/campuses/{{new_campus_id}}",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "v1",
+                                        "campuses",
+                                        "{{new_campus_id}}"
+                                    ]
+                                },
+                                "description": "Delete a campus"
+                            },
+                            "response": []
+                        }
+                    ],
+                    "description": "Campus management endpoints (existing functionality)"
+                }
+            ],
+            "event": [
+                {
+                    "listen": "prerequest",
+                    "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                            "// Auto-refresh token if expired or about to expire",
+                            "const tokenExpiresAt = pm.environment.get('token_expires_at');",
+                            "const refreshToken = pm.environment.get('refresh_token');",
+                            "",
+                            "if (tokenExpiresAt && refreshToken) {",
+                            "    const expirationTime = new Date(tokenExpiresAt);",
+                            "    const now = new Date();",
+                            "    const timeUntilExpiry = expirationTime.getTime() - now.getTime();",
+                            "    ",
+                            "    // Refresh token if it expires in the next 5 minutes (300000 ms)",
+                            "    if (timeUntilExpiry < 300000) {",
+                            "        console.log('Token expires soon, refreshing...');",
+                            "        ",
+                            "        pm.sendRequest({",
+                            "            url: pm.environment.get('base_url') + '/api/v1/refresh',",
+                            "            method: 'POST',",
+                            "            header: {",
+                            "                'Content-Type': 'application/json',",
+                            "                'Accept': 'application/json'",
+                            "            },",
+                            "            body: {",
+                            "                mode: 'raw',",
+                            "                raw: JSON.stringify({",
+                            "                    refresh_token: refreshToken",
+                            "                })",
+                            "            }",
+                            "        }, function (err, response) {",
+                            "            if (response && response.code === 200) {",
+                            "                const responseData = response.json();",
+                            "                ",
+                            "                // Update tokens",
+                            "                pm.environment.set('access_token', responseData.access_token);",
+                            "                pm.environment.set('refresh_token', responseData.refresh_token);",
+                            "                ",
+                            "                // Calculate new expiration time",
+                            "                const expiresIn = responseData.expires_in;",
+                            "                const newExpirationTime = new Date(Date.now() + expiresIn * 1000);",
+                            "                pm.environment.set('token_expires_at', newExpirationTime.toISOString());",
+                            "                ",
+                            "                console.log('Token refreshed successfully');",
+                            "            } else {",
+                            "                console.log('Failed to refresh token:', err);",
+                            "            }",
+                            "        });",
+                            "    }",
+                            "}"
+                        ]
+                    }
+                }
+            ],
+            "variable": [
+                {
+                    "key": "base_url",
+                    "value": "http://localhost",
+                    "type": "string"
+                }
+            ]
+        };
+
+        // API Documentation Manager
+        class APIDocumentationManager {
+            constructor() {
+                this.collectionData = null;
+                this.lastModified = null;
+                this.refreshInterval = 5000; // Check for changes every 5 seconds
+                this.init();
+            }
+
+            async init() {
+                await this.loadCollection();
+                this.startAutoRefresh();
+            }
+
+            async loadCollection() {
+                try {
+                    // Use the embedded collection data instead of fetching
+                    if (window.postmanCollectionData) {
+                        this.collectionData = window.postmanCollectionData;
+                        this.renderDocumentation();
+                    } else {
+                        // Fallback to fetch if embedded data is not available
+                        const response = await fetch('postman_collection.json');
+                        if (!response.ok) {
+                            throw new Error('Failed to load Postman collection');
+                        }
+                        
+                        const data = await response.json();
+                        this.collectionData = data;
+                        this.renderDocumentation();
+                    }
+                } catch (error) {
+                    console.error('Error loading API collection:', error);
+                    this.showError('Failed to load API collection. Please check if postman_collection.json exists.');
+                }
+            }
+
+            async checkForUpdates() {
+                try {
+                    const response = await fetch('postman_collection.json', { method: 'HEAD' });
+                    if (response.ok) {
+                        const lastModified = response.headers.get('Last-Modified');
+                        if (lastModified && lastModified !== this.lastModified) {
+                            this.lastModified = lastModified;
+                            console.log('API collection updated, reloading...');
+                            await this.loadCollection();
+                            this.showUpdateNotification();
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error checking for updates:', error);
+                }
+            }
+
+            showUpdateNotification() {
+                // Create a temporary notification
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: #28a745;
+                    color: white;
+                    padding: 15px 20px;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                    z-index: 1000;
+                    font-weight: 600;
+                    animation: slideIn 0.3s ease;
+                `;
+                notification.textContent = '🔄 API Documentation Updated!';
+                
+                // Add animation keyframes
+                if (!document.getElementById('apiNotificationStyles')) {
+                    const style = document.createElement('style');
+                    style.id = 'apiNotificationStyles';
+                    style.textContent = `
+                        @keyframes slideIn {
+                            from { transform: translateX(100%); opacity: 0; }
+                            to { transform: translateX(0); opacity: 1; }
+                        }
+                        @keyframes slideOut {
+                            from { transform: translateX(0); opacity: 1; }
+                            to { transform: translateX(100%); opacity: 0; }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                }
+                
+                document.body.appendChild(notification);
+                
+                // Remove notification after 3 seconds
+                setTimeout(() => {
+                    notification.style.animation = 'slideOut 0.3s ease';
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 300);
+                }, 3000);
+            }
+
+            startAutoRefresh() {
+                setInterval(() => {
+                    this.checkForUpdates();
+                }, this.refreshInterval);
+            }
+
+            renderDocumentation() {
+                if (!this.collectionData) return;
+
+                this.renderCollectionInfo();
+                this.renderEndpoints();
+                this.renderEnvironmentVariables();
+                this.renderSampleData();
+                this.updateStats();
+            }
+
+            renderCollectionInfo() {
+                const info = this.collectionData.info;
+                const collectionInfoDiv = document.getElementById('collectionInfo');
+                
+                collectionInfoDiv.innerHTML = `
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                        <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                            <h5 style="color: #2c3e50; margin-bottom: 10px;">📋 Collection Details</h5>
+                            <p><strong>Name:</strong> ${info.name}</p>
+                            <p><strong>Description:</strong> ${info.description ? this.formatDescription(info.description) : 'No description available'}</p>
+                            <p><strong>Schema:</strong> ${info.schema}</p>
+                        </div>
+                        <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                            <h5 style="color: #2c3e50; margin-bottom: 10px;">🔗 Collection Link</h5>
+                            <p><strong>Postman ID:</strong> ${info._postman_id}</p>
+                            <p><strong>Exporter ID:</strong> ${info._exporter_id}</p>
+                            ${info._collection_link ? `<p><strong>Collection Link:</strong> <a href="${info._collection_link}" target="_blank" style="color: #667eea;">View in Postman</a></p>` : ''}
+                        </div>
+                    </div>
+                `;
+            }
+
+            renderEndpoints() {
+                const endpointsDiv = document.getElementById('apiEndpoints');
+                let html = '';
+
+                this.collectionData.item.forEach(folder => {
+                    const folderName = folder.name.toLowerCase();
+                    const folderClass = this.getFolderClass(folderName);
+                    
+                    html += `
+                        <div class="endpoint-group" data-category="${folderClass}">
+                            <div class="endpoint-group-header">
+                                <h3 class="endpoint-group-title">
+                                    ${this.getFolderIcon(folder.name)} ${folder.name}
+                                </h3>
+                                <p class="endpoint-group-description">${folder.description || 'No description available'}</p>
+                            </div>
+                            <div class="endpoints-grid">
+                    `;
+
+                    folder.item.forEach(endpoint => {
+                        const method = endpoint.request.method;
+                        const fullUrl = this.buildUrl(endpoint.request.url);
+                        const description = endpoint.request.description || 'No description available';
+                        
+                        // Extract just the API path for display (remove {{base_url}})
+                        let displayUrl = fullUrl;
+                        if (fullUrl.includes('{{base_url}}')) {
+                            displayUrl = fullUrl.replace('{{base_url}}', '');
+                        }
+                        
+                        html += `
+                            <div class="endpoint-card" data-method="${method.toLowerCase()}" data-url="${fullUrl}" data-description="${description.toLowerCase()}">
+                                <div class="endpoint-header">
+                                    <span class="method-badge method-${method.toLowerCase()}">
+                                        ${method}
+                                    </span>
+                                    <div class="url-container">
+                                        <div class="endpoint-url">${displayUrl}</div>
+                                        <button class="copy-button" onclick="copyToClipboard('${fullUrl}', this)" title="Copy URL">
+                                            📋
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="endpoint-description">${description}</div>
+                                ${this.renderRequestDetails(endpoint)}
+                            </div>
+                        `;
+                    });
+
+                    html += `
+                            </div>
+                        </div>
+                    `;
+                });
+
+                endpointsDiv.innerHTML = html;
+                this.initializeSearchAndFilter();
+            }
+
+            getFolderClass(folderName) {
+                if (folderName.includes('auth')) return 'auth';
+                if (folderName.includes('user')) return 'user';
+                if (folderName.includes('campus')) return 'campus';
+                return 'other';
+            }
+
+            initializeSearchAndFilter() {
+                const searchInput = document.getElementById('endpointSearch');
+                const clearBtn = document.getElementById('clearSearch');
+                const filterTabs = document.querySelectorAll('.filter-tab');
+                const endpointCards = document.querySelectorAll('.endpoint-card');
+                const endpointGroups = document.querySelectorAll('.endpoint-group');
+
+                // Search functionality
+                searchInput.addEventListener('input', (e) => {
+                    const searchTerm = e.target.value.toLowerCase();
+                    
+                    if (searchTerm) {
+                        clearBtn.style.display = 'flex';
+                    } else {
+                        clearBtn.style.display = 'none';
+                    }
+
+                    endpointCards.forEach(card => {
+                        const url = card.dataset.url.toLowerCase();
+                        const description = card.dataset.description;
+                        const method = card.dataset.method.toLowerCase();
+                        
+                        const matches = url.includes(searchTerm) || 
+                                      description.includes(searchTerm) || 
+                                      method.includes(searchTerm);
+                        
+                        card.style.display = matches ? 'block' : 'none';
+                    });
+
+                    // Hide empty groups
+                    endpointGroups.forEach(group => {
+                        const visibleCards = group.querySelectorAll('.endpoint-card[style*="block"], .endpoint-card:not([style*="none"])');
+                        group.style.display = visibleCards.length > 0 ? 'block' : 'none';
+                    });
+                });
+
+                // Clear search
+                clearBtn.addEventListener('click', () => {
+                    searchInput.value = '';
+                    clearBtn.style.display = 'none';
+                    
+                    endpointCards.forEach(card => {
+                        card.style.display = 'block';
+                    });
+                    
+                    endpointGroups.forEach(group => {
+                        group.style.display = 'block';
+                    });
+                });
+
+                // Filter functionality
+                filterTabs.forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        // Update active tab
+                        filterTabs.forEach(t => t.classList.remove('active'));
+                        tab.classList.add('active');
+                        
+                        const filter = tab.dataset.filter;
+                        
+                        endpointGroups.forEach(group => {
+                            if (filter === 'all' || group.dataset.category === filter) {
+                                group.style.display = 'block';
+                            } else {
+                                group.style.display = 'none';
+                            }
+                        });
+                    });
+                });
+            }
+
+            renderRequestDetails(endpoint) {
+                let details = '';
+
+                // Headers
+                if (endpoint.request.header && endpoint.request.header.length > 0) {
+                    details += '<div class="detail-section">';
+                    details += '<div class="detail-title">Headers</div>';
+                    details += '<div class="detail-content">';
+                    details += '<ul class="detail-list">';
+                    endpoint.request.header.forEach(header => {
+                        details += `<li><strong>${header.key}:</strong> ${header.value}</li>`;
+                    });
+                    details += '</ul></div></div>';
+                }
+
+                // Query Parameters
+                if (endpoint.request.url && endpoint.request.url.query && endpoint.request.url.query.length > 0) {
+                    details += '<div class="detail-section">';
+                    details += '<div class="detail-title">Query Parameters</div>';
+                    details += '<div class="detail-content">';
+                    details += '<ul class="detail-list">';
+                    endpoint.request.url.query.forEach(param => {
+                        details += `<li><strong>${param.key}</strong> - ${param.description || 'No description'}</li>`;
+                    });
+                    details += '</ul></div></div>';
+                }
+
+                // Request Body
+                if (endpoint.request.body && endpoint.request.body.raw) {
+                    details += '<div class="detail-section">';
+                    details += '<div class="detail-title">Request Body</div>';
+                    details += '<div class="detail-content">';
+                    details += `<div class="json-code">${this.formatJson(endpoint.request.body.raw)}</div>`;
+                    details += '</div></div>';
+                }
+
+                return details ? `<div class="endpoint-details">${details}</div>` : '';
+            }
+
+            renderEnvironmentVariables() {
+                const envDiv = document.getElementById('environmentVariables');
+                
+                if (this.collectionData.variable && this.collectionData.variable.length > 0) {
+                    let html = '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">';
+                    
+                    this.collectionData.variable.forEach(variable => {
+                        html += `
+                            <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <div style="font-weight: bold; color: #2c3e50; margin-bottom: 5px;">${variable.key}</div>
+                                <div style="color: #666; font-size: 0.9em; margin-bottom: 8px;">${variable.value}</div>
+                                <div style="font-size: 0.8em; color: #999;">Type: ${variable.type || 'string'}</div>
+                            </div>
+                        `;
+                    });
+                    
+                    html += '</div>';
+                    envDiv.innerHTML = html;
+                } else {
+                    envDiv.innerHTML = '<p style="color: #666; text-align: center;">No environment variables defined</p>';
+                }
+            }
+
+            renderSampleData() {
+                const sampleDiv = document.getElementById('sampleData');
+                
+                // Extract sample data from the collection description
+                const description = this.collectionData.info.description;
+                if (description && description.includes('Sample Data')) {
+                    const sampleDataMatch = description.match(/### Sample Data([\s\S]*?)(?=###|$)/);
+                    if (sampleDataMatch) {
+                        sampleDiv.innerHTML = `<pre style="background: #f8f9fa; padding: 20px; border-radius: 8px; overflow-x: auto; white-space: pre-wrap;">${sampleDataMatch[1].trim()}</pre>`;
+                        return;
+                    }
+                }
+                
+                sampleDiv.innerHTML = '<p style="color: #666; text-align: center;">No sample data available</p>';
+            }
+
+            updateStats() {
+                let totalEndpoints = 0;
+                let authEndpoints = 0;
+                let userEndpoints = 0;
+                let campusEndpoints = 0;
+
+                this.collectionData.item.forEach(folder => {
+                    totalEndpoints += folder.item.length;
+                    
+                    if (folder.name.toLowerCase().includes('auth')) {
+                        authEndpoints += folder.item.length;
+                    } else if (folder.name.toLowerCase().includes('user')) {
+                        userEndpoints += folder.item.length;
+                    } else if (folder.name.toLowerCase().includes('campus')) {
+                        campusEndpoints += folder.item.length;
+                    }
+                });
+
+                document.getElementById('totalEndpoints').textContent = totalEndpoints;
+                document.getElementById('authEndpoints').textContent = authEndpoints;
+                document.getElementById('userEndpoints').textContent = userEndpoints;
+                document.getElementById('campusEndpoints').textContent = campusEndpoints;
+            }
+
+            buildUrl(urlObj) {
+                if (typeof urlObj === 'string') return urlObj;
+                
+                let url = '';
+                if (urlObj.protocol) url += urlObj.protocol + '://';
+                if (urlObj.host) {
+                    if (Array.isArray(urlObj.host)) {
+                        url += urlObj.host.join('.');
+                    } else {
+                        url += urlObj.host;
+                    }
+                }
+                if (urlObj.path) {
+                    if (Array.isArray(urlObj.path)) {
+                        url += '/' + urlObj.path.join('/');
+                    } else {
+                        url += '/' + urlObj.path;
+                    }
+                }
+                return url;
+            }
+
+            getFolderIcon(folderName) {
+                const icons = {
+                    'Authentication': '🔐',
+                    'User Management': '👥',
+                    'Campus Management': '🏢',
+                    'default': '📁'
+                };
+                return icons[folderName] || icons.default;
+            }
+
+            formatDescription(description) {
+                // Convert markdown-like formatting to HTML
+                return description
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                    .replace(/`(.*?)`/g, '<code>$1</code>')
+                    .replace(/\n/g, '<br>');
+            }
+
+            formatJson(jsonString) {
+                try {
+                    const obj = JSON.parse(jsonString);
+                    return JSON.stringify(obj, null, 2);
+                } catch (e) {
+                    return jsonString;
+                }
+            }
+
+            showError(message) {
+                document.getElementById('collectionInfo').innerHTML = `<div style="color: #dc3545; text-align: center; padding: 20px;">${message}</div>`;
+                document.getElementById('apiEndpoints').innerHTML = `<div style="color: #dc3545; text-align: center; padding: 20px;">${message}</div>`;
+                document.getElementById('environmentVariables').innerHTML = `<div style="color: #dc3545; text-align: center; padding: 20px;">${message}</div>`;
+                document.getElementById('sampleData').innerHTML = `<div style="color: #dc3545; text-align: center; padding: 20px;">${message}</div>`;
+            }
+        }
+
+        // Global API Documentation Manager instance
+        let apiDocManager = null;
+
+        // Initialize API Documentation when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            apiDocManager = new APIDocumentationManager();
+        });
+
+        // Manual refresh function
+        function refreshAPIDocumentation() {
+            if (apiDocManager) {
+                apiDocManager.loadCollection();
+            }
+        }
+
+        // Toggle collection info
+        function toggleCollectionInfo() {
+            const header = document.querySelector('.collapsible-header');
+            const content = document.querySelector('.collapsible-content');
+            
+            header.classList.toggle('active');
+            content.classList.toggle('active');
+        }
+
+        // Copy to clipboard function
+        function copyToClipboard(text, button) {
+            // Replace {{base_url}} with actual base URL
+            let processedText = text;
+            if (window.postmanCollectionData && window.postmanCollectionData.variable) {
+                const baseUrlVar = window.postmanCollectionData.variable.find(v => v.key === 'base_url');
+                if (baseUrlVar && baseUrlVar.value) {
+                    processedText = text.replace(/\{\{base_url\}\}/g, baseUrlVar.value);
+                }
+            }
+            
+            // Create a temporary textarea element
+            const textarea = document.createElement('textarea');
+            textarea.value = processedText;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            
+            // Select and copy the text
+            textarea.select();
+            textarea.setSelectionRange(0, 99999); // For mobile devices
+            
+            try {
+                document.execCommand('copy');
+                
+                // Update button appearance
+                const originalText = button.innerHTML;
+                button.innerHTML = '✅';
+                button.classList.add('copied');
+                
+                // Reset button after 2 seconds
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+                
+                // Show success notification
+                showCopyNotification('URL copied to clipboard!');
+                
+            } catch (err) {
+                console.error('Failed to copy: ', err);
+                showCopyNotification('Failed to copy URL', 'error');
+            }
+            
+            // Clean up
+            document.body.removeChild(textarea);
+        }
+
+        // Show copy notification
+        function showCopyNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#28a745' : '#dc3545'};
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 1000;
+                font-weight: 600;
+                animation: slideInRight 0.3s ease;
+                max-width: 300px;
+            `;
+            notification.textContent = message;
+            
+            // Add animation keyframes if not already added
+            if (!document.getElementById('copyNotificationStyles')) {
+                const style = document.createElement('style');
+                style.id = 'copyNotificationStyles';
+                style.textContent = `
+                    @keyframes slideInRight {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                    @keyframes slideOutRight {
+                        from { transform: translateX(0); opacity: 1; }
+                        to { transform: translateX(100%); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            document.body.appendChild(notification);
+            
+            // Remove notification after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+    </script>
 
     <!-- SKOLARIS Chatbot Integration -->
     <script src="chatbot-integration.js"></script>

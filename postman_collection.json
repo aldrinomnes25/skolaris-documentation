@@ -1,0 +1,877 @@
+{
+	"info": {
+		"_postman_id": "3943dcc8-5438-4e3e-bce9-086239bf457c",
+		"name": "School Management API - User Management",
+		"description": "# School Management API - Postman Collection\n\nThis directory contains Postman collections and environment files for testing the School Management API.\n\n## Collection Structure\n\n### Authentication\n\n- **Login** - Get access and refresh tokens\n    \n- **Refresh Token** - Refresh expired access token\n    \n- **Get Current User** - Get authenticated user info\n    \n- **Logout** - Invalidate current token\n    \n\n### User Management\n\n- **Get All Users** - List users with pagination and filtering\n    \n- **Get User Statistics** - Get user statistics and breakdowns\n    \n- **Get User by ID** - Get specific user details\n    \n- **Create New User** - Create a new user account\n    \n- **Update User** - Update user information\n    \n- **Assign Role to User** - Assign role to user\n    \n- **Remove Role from User** - Remove role from user\n    \n- **Toggle User Status** - Activate/deactivate user\n    \n- **Delete User** - Delete user account\n    \n\n### Campus Management\n\n- **Get All Campuses** - List all campuses\n    \n- **Get Campus by ID** - Get specific campus\n    \n- **Create New Campus** - Create new campus\n    \n- **Update Campus** - Update campus information\n    \n- **Toggle Campus Status** - Activate/deactivate campus\n    \n- **Get Campus Statistics** - Get campus statistics\n    \n- **Delete Campus** - Delete campus\n    \n\n## Features\n\n### Automatic Token Management\n\n- **Auto-refresh**: Tokens are automatically refreshed when they expire\n    \n- **Token storage**: Access and refresh tokens are saved in environment variables\n    \n- **Expiration tracking**: Token expiration times are tracked and managed\n    \n\n### Pre-request Scripts\n\n- **Token validation**: Checks if token is expired before each request\n    \n- **Auto-refresh**: Automatically refreshes token if it expires within 5 minutes\n    \n- **Error handling**: Handles token refresh failures gracefully\n    \n\n### Test Scripts\n\n- **Response validation**: Validates API responses\n    \n- **Variable extraction**: Extracts and saves important data from responses\n    \n- **Logging**: Provides console logging for debugging\n    \n\n## Environment Variables\n\n| Variable | Description | Example |\n| --- | --- | --- |\n| `base_url` | API base URL | `http://localhost` |\n| `access_token` | JWT access token | `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...` |\n| `refresh_token` | JWT refresh token | `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...` |\n| `token_expires_at` | Token expiration timestamp | `2025-09-29T13:00:00.000Z` |\n| `user_id` | Current user ID | `1` |\n| `new_user_id` | ID of newly created user | `14` |\n| `new_campus_id` | ID of newly created campus | `4` |\n\n## API Endpoints\n\nAuthentication\n\n- `POST /login` - Login with email/password\n    \n- `POST /refresh` - Refresh access token\n    \n- `GET /user` - Get current user\n    \n- `POST /logout` - Logout\n    \n\n### User Management\n\n- `GET /users` - List users (with pagination and filters)\n    \n- `GET /users/statistics` - Get user statistics\n    \n- `GET /users/{id}` - Get user by ID\n    \n- `POST /users` - Create new user\n    \n- `PUT /users/{id}` - Update user\n    \n- `DELETE /users/{id}` - Delete user\n    \n- `POST /users/{id}/assign-role` - Assign role\n    \n- `DELETE /users/{id}/remove-role` - Remove role\n    \n- `POST /users/{id}/toggle-status` - Toggle status\n    \n\n### Campus Management\n\n- `GET /campuses` - List campuses\n    \n- `GET /campuses/{id}` - Get campus by ID\n    \n- `POST /campuses` - Create campus\n    \n- `PUT /campuses/{id}` - Update campus\n    \n- `DELETE /campuses/{id}` - Delete campus\n    \n- `POST /campuses/{id}/toggle-status` - Toggle campus status\n    \n- `GET /campuses/{id}/statistics` - Get campus statistics\n    \n\n## Sample Data\n\n### Default Login Credentials\n\n``` json\n{\n  \"email\": \"superadmin@icct.edu.ph\",\n  \"password\": \"Password123!\"\n}\n\n ```\n\n###   \nUser Types\n\n- `student` - Student user\n    \n- `teacher` - Faculty/Teacher user\n    \n- `staff` - Staff user\n    \n- `admin` - Administrator user\n    \n\n### Role IDs\n\n- `1` - Super Admin\n    \n- `2` - Campus Admin\n    \n- `3` - Registrar\n    \n- `4` - Faculty\n    \n- `5` - Cashier\n    \n- `6` - Student\n    \n\n### Campus IDs\n\n- `1` - ICCT Main Campus\n    \n- `2` - ICCT Antipolo Campus\n    \n- `3` - ICCT Subic Campus",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49014689",
+		"_collection_link": "https://speeding-desert-110783.postman.co/workspace/Alpha-Byte~397b10cc-b517-4aa9-8b5f-e451db43228d/collection/6092661-3943dcc8-5438-4e3e-bce9-086239bf457c?action=share&source=collection_link&creator=49014689"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const response = pm.response.json();",
+									"    ",
+									"    // Save tokens to environment variables",
+									"    pm.environment.set('access_token', response.access_token);",
+									"    pm.environment.set('refresh_token', response.refresh_token);",
+									"    ",
+									"    // Calculate token expiration time",
+									"    const expiresIn = response.expires_in; // 3600 seconds (1 hour)",
+									"    const expirationTime = new Date(Date.now() + expiresIn * 1000);",
+									"    pm.environment.set('token_expires_at', expirationTime.toISOString());",
+									"    ",
+									"    console.log('Access token saved:', response.access_token.substring(0, 50) + '...');",
+									"    console.log('Token expires at:', expirationTime.toISOString());",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"superadmin@icct.edu.ph\",\n    \"password\": \"Password123!\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						},
+						"description": "Login to get access and refresh tokens"
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const response = pm.response.json();",
+									"    ",
+									"    // Save new tokens to environment variables",
+									"    pm.environment.set('access_token', response.access_token);",
+									"    pm.environment.set('refresh_token', response.refresh_token);",
+									"    ",
+									"    // Calculate new token expiration time",
+									"    const expiresIn = response.expires_in; // 3600 seconds (1 hour)",
+									"    const expirationTime = new Date(Date.now() + expiresIn * 1000);",
+									"    pm.environment.set('token_expires_at', expirationTime.toISOString());",
+									"    ",
+									"    console.log('New access token saved:', response.access_token.substring(0, 50) + '...');",
+									"    console.log('New token expires at:', expirationTime.toISOString());",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refresh_token\": \"{{refresh_token}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/refresh",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"refresh"
+							]
+						},
+						"description": "Refresh access token using refresh token"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Current User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/user",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						},
+						"description": "Get current authenticated user information"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/logout",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logout"
+							]
+						},
+						"description": "Logout and invalidate current token"
+					},
+					"response": []
+				}
+			],
+			"description": "Authentication endpoints for login, logout, and token management"
+		},
+		{
+			"name": "User Management",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/users?per_page=15&search=&campus_id=&user_type=&is_active=",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "15",
+									"description": "Number of users per page"
+								},
+								{
+									"key": "search",
+									"value": "",
+									"description": "Search by name, email, student_id, or employee_number"
+								},
+								{
+									"key": "campus_id",
+									"value": "",
+									"description": "Filter by campus ID"
+								},
+								{
+									"key": "user_type",
+									"value": "",
+									"description": "Filter by user type (student, teacher, staff, admin)"
+								},
+								{
+									"key": "is_active",
+									"value": "",
+									"description": "Filter by active status (true/false)"
+								}
+							]
+						},
+						"description": "Get paginated list of all users with optional filtering"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Statistics",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/users/statistics",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"statistics"
+							]
+						},
+						"description": "Get user statistics including totals, active/inactive counts, and breakdowns by type and campus"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const response = pm.response.json();",
+									"    ",
+									"    // Save user ID for other requests",
+									"    pm.environment.set('user_id', response.data.user_id);",
+									"    ",
+									"    console.log('User ID saved:', response.data.user_id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/users/{{user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"{{user_id}}"
+							]
+						},
+						"description": "Get specific user by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create New User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    const response = pm.response.json();",
+									"    ",
+									"    // Save new user ID for other requests",
+									"    pm.environment.set('new_user_id', response.data.user_id);",
+									"    ",
+									"    console.log('New user created with ID:', response.data.user_id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"campus_id\": 1,\n    \"email\": \"newuser@icct.edu.ph\",\n    \"phone\": \"+639171234999\",\n    \"student_id\": \"STU999\",\n    \"password\": \"NewPassword123!\",\n    \"password_confirmation\": \"NewPassword123!\",\n    \"full_name\": \"New Test User\",\n    \"user_type\": \"student\",\n    \"is_active\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						},
+						"description": "Create a new user account"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"campus_id\": 1,\n    \"email\": \"updateduser@icct.edu.ph\",\n    \"phone\": \"+639171234888\",\n    \"student_id\": \"STU888\",\n    \"full_name\": \"Updated Test User\",\n    \"user_type\": \"student\",\n    \"is_active\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/users/{{new_user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"{{new_user_id}}"
+							]
+						},
+						"description": "Update user information (password is optional)"
+					},
+					"response": []
+				},
+				{
+					"name": "Assign Role to User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"role_id\": 6\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/users/{{new_user_id}}/assign-role",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"{{new_user_id}}",
+								"assign-role"
+							]
+						},
+						"description": "Assign a role to a user (role_id: 1=Super Admin, 2=Campus Admin, 3=Registrar, 4=Faculty, 5=Cashier, 6=Student)"
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Role from User",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"role_id\": 6\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/users/{{new_user_id}}/remove-role",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"{{new_user_id}}",
+								"remove-role"
+							]
+						},
+						"description": "Remove a role from a user"
+					},
+					"response": []
+				},
+				{
+					"name": "Toggle User Status",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/users/{{new_user_id}}/toggle-status",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"{{new_user_id}}",
+								"toggle-status"
+							]
+						},
+						"description": "Toggle user active/inactive status"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/users/{{new_user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"{{new_user_id}}"
+							]
+						},
+						"description": "Delete a user (cannot delete the last Super Admin)"
+					},
+					"response": []
+				}
+			],
+			"description": "Complete CRUD operations for user management"
+		},
+		{
+			"name": "Campus Management",
+			"item": [
+				{
+					"name": "Get All Campuses",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/campuses",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"campuses"
+							]
+						},
+						"description": "Get list of all campuses"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Campus by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/campuses/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"campuses",
+								"1"
+							]
+						},
+						"description": "Get specific campus by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Campus",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    const response = pm.response.json();",
+									"    ",
+									"    // Save new campus ID for other requests",
+									"    pm.environment.set('new_campus_id', response.data.campus_id);",
+									"    ",
+									"    console.log('New campus created with ID:', response.data.campus_id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"campus_code\": \"TEST\",\n    \"campus_name\": \"Test Campus\",\n    \"address\": \"Test Address, Test City\",\n    \"phone\": \"(02) 1234-5678\",\n    \"email\": \"test@icct.edu.ph\",\n    \"website\": \"https://test.icct.edu.ph\",\n    \"is_active\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/campuses",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"campuses"
+							]
+						},
+						"description": "Create a new campus"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Campus",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"campus_code\": \"TEST_UPDATED\",\n    \"campus_name\": \"Updated Test Campus\",\n    \"address\": \"Updated Test Address, Test City\",\n    \"phone\": \"(02) 8765-4321\",\n    \"email\": \"updated@icct.edu.ph\",\n    \"website\": \"https://updated.icct.edu.ph\",\n    \"is_active\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/campuses/{{new_campus_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"campuses",
+								"{{new_campus_id}}"
+							]
+						},
+						"description": "Update campus information"
+					},
+					"response": []
+				},
+				{
+					"name": "Toggle Campus Status",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/campuses/{{new_campus_id}}/toggle-status",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"campuses",
+								"{{new_campus_id}}",
+								"toggle-status"
+							]
+						},
+						"description": "Toggle campus active/inactive status"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Campus Statistics",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/campuses/{{new_campus_id}}/statistics",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"campuses",
+								"{{new_campus_id}}",
+								"statistics"
+							]
+						},
+						"description": "Get statistics for a specific campus"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Campus",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/campuses/{{new_campus_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"campuses",
+								"{{new_campus_id}}"
+							]
+						},
+						"description": "Delete a campus"
+					},
+					"response": []
+				}
+			],
+			"description": "Campus management endpoints (existing functionality)"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Auto-refresh token if expired or about to expire",
+					"const tokenExpiresAt = pm.environment.get('token_expires_at');",
+					"const refreshToken = pm.environment.get('refresh_token');",
+					"",
+					"if (tokenExpiresAt && refreshToken) {",
+					"    const expirationTime = new Date(tokenExpiresAt);",
+					"    const now = new Date();",
+					"    const timeUntilExpiry = expirationTime.getTime() - now.getTime();",
+					"    ",
+					"    // Refresh token if it expires in the next 5 minutes (300000 ms)",
+					"    if (timeUntilExpiry < 300000) {",
+					"        console.log('Token expires soon, refreshing...');",
+					"        ",
+					"        pm.sendRequest({",
+					"            url: pm.environment.get('base_url') + '/api/v1/refresh',",
+					"            method: 'POST',",
+					"            header: {",
+					"                'Content-Type': 'application/json',",
+					"                'Accept': 'application/json'",
+					"            },",
+					"            body: {",
+					"                mode: 'raw',",
+					"                raw: JSON.stringify({",
+					"                    refresh_token: refreshToken",
+					"                })",
+					"            }",
+					"        }, function (err, response) {",
+					"            if (response && response.code === 200) {",
+					"                const responseData = response.json();",
+					"                ",
+					"                // Update tokens",
+					"                pm.environment.set('access_token', responseData.access_token);",
+					"                pm.environment.set('refresh_token', responseData.refresh_token);",
+					"                ",
+					"                // Calculate new expiration time",
+					"                const expiresIn = responseData.expires_in;",
+					"                const newExpirationTime = new Date(Date.now() + expiresIn * 1000);",
+					"                pm.environment.set('token_expires_at', newExpirationTime.toISOString());",
+					"                ",
+					"                console.log('Token refreshed successfully');",
+					"            } else {",
+					"                console.log('Failed to refresh token:', err);",
+					"            }",
+					"        });",
+					"    }",
+					"}"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost",
+			"type": "string"
+		}
+	]
+}
