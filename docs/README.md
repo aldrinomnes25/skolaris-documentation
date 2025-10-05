@@ -1,43 +1,72 @@
 # SKOLARIS Documentation Portal
 
-🔐 **SKOLARIS** - Secure Student Information System Documentation Portal
+🔐 **SKOLARIS** - Student Information System (SIS) Documentation Portal
 
 ## Overview
 
-SKOLARIS Documentation Portal is a secure gateway that provides protected access to comprehensive system documentation and resources. The portal features password-protected access with session management and security controls.
+SKOLARIS is an Integrated Student Lifecycle Management System with Multi-Campus Support and Smart Access Control. This documentation portal provides comprehensive access to system documentation, development guides, and project resources.
 
 ## Project Structure
 
 ```
 skolaris-documentation/
-├── README.md              # This documentation file
-├── index.html             # Main documentation portal (password protected)
-└── skolaris.html          # Authentication gateway
+├── docs/                  # 📁 Documentation files
+│   ├── 00_MAIN_NAVIGATION_GUIDE.md
+│   ├── 01_Project_Overview_Guide.md
+│   ├── 02_Database_Structure_Guide.md
+│   ├── 05_Development_Tasks_Guide.md
+│   ├── 06_Progress_Tracker_Guide.md
+│   ├── 11_Timeline_Guide.md
+│   ├── README_CHATBOT.md
+│   ├── README_USER_GUIDES.md
+│   └── README.md
+├── js/                    # 📁 JavaScript files
+│   ├── chatbot-integration.js
+│   └── trello-integration.js
+├── json/                  # 📁 JSON configuration files
+│   └── postman_collection.json
+├── index.html             # Main documentation portal
+├── skolaris.html          # Authentication gateway
+└── skolaris-chatbot.html  # Chatbot integration portal
 ```
 
 ## Features
 
+### System Capabilities
+
+- 🎓 **Student Lifecycle Management**: Complete student journey from registration to graduation
+- 🏢 **Multi-Campus Support**: Unified system for multiple ICCT campuses
+- 🔐 **Smart Access Control**: Role-based permissions for students, faculty, and administrators
+- 💳 **Payment Integration**: Secure online payment processing
+- 🏥 **Medical Records**: Comprehensive health management system
+- 📊 **Progress Tracking**: Real-time project monitoring with Trello integration
+
+### Documentation Features
+
+- 📚 **Comprehensive Guides**: Detailed documentation for all system components
+- 🤖 **AI Chatbot**: Interactive help system for documentation navigation
+- 📋 **Project Management**: Trello integration for task tracking
+- 🔗 **API Documentation**: Complete Postman collection for development
+- 📅 **Timeline Management**: 3-month development roadmap
+
 ### Security Features
+
 - 🔐 **Password Protection**: Secure access with configurable password
 - 🛡️ **Session Management**: Automatic session timeout (30 minutes)
 - 🔒 **Attempt Limiting**: Maximum 3 login attempts before lockout
 - 🚪 **Logout Functionality**: Secure session termination
 
 ### User Interface
+
 - 📱 **Responsive Design**: Mobile-optimized interface
 - 🎨 **Modern UI**: Clean, professional design with gradient backgrounds
 - ⚡ **Instant Decryption**: Real-time content decryption
 - 🔄 **Loading States**: Visual feedback during authentication
 
-### Technical Features
-- 🌐 **Cross-Platform**: Works on desktop and mobile devices
-- 🔧 **Session Storage**: Client-side session persistence
-- 📄 **Iframe Integration**: Seamless content loading
-- 🎯 **Auto-Focus**: Enhanced user experience
-
 ## Getting Started
 
 ### Prerequisites
+
 - Modern web browser (Chrome, Firefox, Safari, Edge)
 - JavaScript enabled
 - Access credentials (contact administrator)
@@ -45,10 +74,12 @@ skolaris-documentation/
 ### Access Instructions
 
 1. **Open the Portal**
+
    - Navigate to `skolaris.html` in your web browser
    - The authentication gateway will load automatically
 
 2. **Authentication**
+
    - Enter the provided access password
    - Click "🔓 Unlock Documentation"
    - Wait for content decryption (loading indicator will show)
@@ -67,30 +98,43 @@ skolaris-documentation/
 
 ## File Descriptions
 
-### `skolaris.html`
-The main authentication gateway that provides:
-- Password-protected access to documentation
-- Session management and security controls
-- Responsive design for all devices
-- Automatic session timeout and logout functionality
+### Core Files
 
-### `index.html`
-The main documentation portal containing:
-- Complete system documentation
-- User guides and technical specifications
-- Interactive content and resources
-- Password-protected access via iframe
+- **`index.html`**: Main documentation portal with comprehensive system documentation
+- **`skolaris.html`**: Authentication gateway with password protection
+- **`skolaris-chatbot.html`**: AI-powered chatbot integration portal
 
+### Documentation (`docs/` folder)
+
+- **`00_MAIN_NAVIGATION_GUIDE.md`**: Complete navigation system and section descriptions
+- **`01_Project_Overview_Guide.md`**: Project summary, architecture, and technology stack
+- **`02_Database_Structure_Guide.md`**: Database schema, SQL scripts, and data management
+- **`05_Development_Tasks_Guide.md`**: Frontend, backend, and mobile development tasks
+- **`06_Progress_Tracker_Guide.md`**: Trello integration and project monitoring
+- **`11_Timeline_Guide.md`**: 3-Month implementation timeline and milestones
+- **`README_CHATBOT.md`**: AI chatbot integration and usage guide
+- **`README_USER_GUIDES.md`**: User guide navigation and quick start
+
+### JavaScript (`js/` folder)
+
+- **`chatbot-integration.js`**: AI chatbot functionality and knowledge base
+- **`trello-integration.js`**: Trello API integration for project management
+
+### Configuration (`json/` folder)
+
+- **`postman_collection.json`**: Complete API documentation and testing collection
 
 ## Development
 
 ### Customization
+
 - **Password**: Modify the `correctPassword` variable in `skolaris.html`
 - **Session Timeout**: Adjust the timeout value in the JavaScript
 - **Max Attempts**: Change the `maxAttempts` variable for different security levels
 - **Styling**: Update CSS variables for custom branding
 
 ### Browser Compatibility
+
 - ✅ Chrome 80+
 - ✅ Firefox 75+
 - ✅ Safari 13+
@@ -100,6 +144,7 @@ The main documentation portal containing:
 ## Support
 
 For technical support or access issues:
+
 - Contact your system administrator
 - Check browser compatibility requirements
 - Ensure JavaScript is enabled
@@ -112,5 +157,5 @@ This project is proprietary software. Unauthorized access or distribution is pro
 ---
 
 **Last Updated**: January 2025  
-**Version**: 1.0  
-**Status**: Active Development
+**Version**: 2.0  
+**Status**: Active Development - Organized Structure
