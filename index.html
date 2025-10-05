@@ -1777,7 +1777,7 @@
             flex: 1;
         }
 
-        .stat-number {
+        #api-documentation .stat-number {
             font-size: 2em;
             font-weight: 700;
             margin-bottom: 5px;
@@ -1785,7 +1785,7 @@
             text-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
 
-        .stat-label {
+       #api-documentation .stat-label {
             font-size: 0.9em;
             opacity: 0.85;
             font-weight: 500;
@@ -2228,13 +2228,14 @@
 
 
 
-<!-- Auto-refresh timestamp: 1759671598368 -->
+
+<!-- Auto-refresh timestamp: 1759679896406 -->
 </head>
 <body>
     <div class="header">
         <div class="container">
             <h1>SKOLARIS</h1>
-            <p>Student Information System (SIS) with Multi-Campus Support and Role-Based Access Control (RBAC)</p>
+            <p>Student Information System (SIS) - Integrated Student Lifecycle Management System with Multi-Campus Support and Smart Access Control</p>
         </div>
     </div>
 
@@ -13520,7 +13521,7 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
     <script src="https://trello.com/1/client.js?key=f3cba5684e71b81cf564e204aa79df6e"></script>
     
     <!-- Trello Integration Script -->
-    <script src="trello-integration.js"></script>
+    <script src="js/trello-integration.js"></script>
     
     <!-- Libraries for image and PDF generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -17802,7 +17803,7 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                         this.renderDocumentation();
                     } else {
                         // Fallback to fetch if embedded data is not available
-                        const response = await fetch('postman_collection.json');
+                        const response = await fetch('json/postman_collection.json');
                         if (!response.ok) {
                             throw new Error('Failed to load Postman collection');
                         }
@@ -17813,13 +17814,13 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                     }
                 } catch (error) {
                     console.error('Error loading API collection:', error);
-                    this.showError('Failed to load API collection. Please check if postman_collection.json exists.');
+                    this.showError('Failed to load API collection. Please check if json/postman_collection.json exists.');
                 }
             }
 
             async checkForUpdates() {
                 try {
-                    const response = await fetch('postman_collection.json', { method: 'HEAD' });
+                    const response = await fetch('json/postman_collection.json', { method: 'HEAD' });
                     if (response.ok) {
                         const lastModified = response.headers.get('Last-Modified');
                         if (lastModified && lastModified !== this.lastModified) {
@@ -18339,7 +18340,7 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
     </script>
 
     <!-- SKOLARIS Chatbot Integration -->
-    <script src="chatbot-integration.js"></script>
+    <script src="js/chatbot-integration.js"></script>
 </body>
 </html>
 

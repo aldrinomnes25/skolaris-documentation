@@ -22,12 +22,12 @@ This directory contains comprehensive user guides for each section of the SKOLAR
 
 ### **Additional Guides** (Coming Soon)
 
-- **03_Implementation_Roadmap_Guide.md** - Development phases and roadmap
-- **04_Process_Flow_Guide.md** - Workflow diagrams and processes
-- **07_Task_Management_Guide.md** - Task breakdown and assignments
-- **08_Frontend_Development_Guide.md** - React.js development guide
-- **09_Mobile_Development_Guide.md** - Flutter mobile app guide
-- **10_Security_Guide.md** - Security implementation guide
+- **03_Implementation_Roadmap_Guide.md** - _Coming Soon_
+- **04_Process_Flow_Guide.md** - _Coming Soon_
+- **07_Task_Management_Guide.md** - _Coming Soon_
+- **08_Frontend_Development_Guide.md** - _Coming Soon_
+- **09_Mobile_Development_Guide.md** - _Coming Soon_
+- **10_Security_Guide.md** - _Coming Soon_
 
 ---
 

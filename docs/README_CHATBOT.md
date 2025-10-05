@@ -54,7 +54,7 @@ The SKOLARIS Documentation Chatbot is an intelligent floating assistant that hel
 
 1. Add this line to your `skolaris.html` before the closing `</body>` tag:
    ```html
-   <script src="chatbot-integration.js"></script>
+   <script src="js/chatbot-integration.js"></script>
    ```
 2. The chatbot will automatically appear on your existing documentation page
 3. Users can access it via the floating chat button
@@ -133,7 +133,7 @@ The chatbot includes quick action buttons for:
 
 To add new knowledge to the chatbot:
 
-1. Open `chatbot-integration.js`
+1. Open `js/chatbot-integration.js`
 2. Find the `initializeKnowledgeBase()` method
 3. Add new entries to the knowledge base object:
 

@@ -8,20 +8,20 @@ The SKOLARIS Documentation Portal is organized into **12 main sections/tabs**, e
 
 ## 📋 Quick Access Menu
 
-| Tab | Section                       | Purpose                                   | User Guide                                                                 |
-| --- | ----------------------------- | ----------------------------------------- | -------------------------------------------------------------------------- |
-| 📊  | **Project Overview**          | Complete project summary and architecture | [01_Project_Overview_Guide.md](./01_Project_Overview_Guide.md)             |
-| 🗄️  | **Database Structure**        | Database schema and SQL scripts           | [02_Database_Structure_Guide.md](./02_Database_Structure_Guide.md)         |
-| 💾  | **SQL Scripts**               | Ready-to-use database scripts             | [02_Database_Structure_Guide.md](./02_Database_Structure_Guide.md)         |
-| 🚀  | **Implementation Roadmap**    | Development phases and milestones         | [03_Implementation_Roadmap_Guide.md](./03_Implementation_Roadmap_Guide.md) |
-| 🔄  | **Process Flow**              | Workflow diagrams and processes           | [04_Process_Flow_Guide.md](./04_Process_Flow_Guide.md)                     |
-| 🛠️  | **Development Tasks**         | Detailed development tasks                | [05_Development_Tasks_Guide.md](./05_Development_Tasks_Guide.md)           |
-| 📊  | **Progress Tracker**          | Real-time project monitoring              | [06_Progress_Tracker_Guide.md](./06_Progress_Tracker_Guide.md)             |
-| 📋  | **Task Management**           | Task breakdown and assignments            | [07_Task_Management_Guide.md](./07_Task_Management_Guide.md)               |
-| ⚛️  | **Frontend Development**      | React.js development guide                | [08_Frontend_Development_Guide.md](./08_Frontend_Development_Guide.md)     |
-| 📱  | **Mobile Development**        | Flutter mobile app guide                  | [09_Mobile_Development_Guide.md](./09_Mobile_Development_Guide.md)         |
-| 🔒  | **Security & Access Control** | Security implementation guide             | [10_Security_Guide.md](./10_Security_Guide.md)                             |
-| 📅  | **Timeline Documentation**    | 3-Month implementation timeline           | [11_Timeline_Guide.md](./11_Timeline_Guide.md)                             |
+| Tab | Section                       | Purpose                                   | User Guide                                                         |
+| --- | ----------------------------- | ----------------------------------------- | ------------------------------------------------------------------ |
+| 📊  | **Project Overview**          | Complete project summary and architecture | [01_Project_Overview_Guide.md](./01_Project_Overview_Guide.md)     |
+| 🗄️  | **Database Structure**        | Database schema and SQL scripts           | [02_Database_Structure_Guide.md](./02_Database_Structure_Guide.md) |
+| 💾  | **SQL Scripts**               | Ready-to-use database scripts             | [02_Database_Structure_Guide.md](./02_Database_Structure_Guide.md) |
+| 🚀  | **Implementation Roadmap**    | Development phases and milestones         | _Coming Soon_                                                      |
+| 🔄  | **Process Flow**              | Workflow diagrams and processes           | _Coming Soon_                                                      |
+| 🛠️  | **Development Tasks**         | Detailed development tasks                | [05_Development_Tasks_Guide.md](./05_Development_Tasks_Guide.md)   |
+| 📊  | **Progress Tracker**          | Real-time project monitoring              | [06_Progress_Tracker_Guide.md](./06_Progress_Tracker_Guide.md)     |
+| 📋  | **Task Management**           | Task breakdown and assignments            | _Coming Soon_                                                      |
+| ⚛️  | **Frontend Development**      | React.js development guide                | _Coming Soon_                                                      |
+| 📱  | **Mobile Development**        | Flutter mobile app guide                  | _Coming Soon_                                                      |
+| 🔒  | **Security & Access Control** | Security implementation guide             | _Coming Soon_                                                      |
+| 📅  | **Timeline Documentation**    | 3-Month implementation timeline           | [11_Timeline_Guide.md](./11_Timeline_Guide.md)                     |
 
 ---
 
@@ -77,14 +77,14 @@ The SKOLARIS Documentation Portal is organized into **12 main sections/tabs**, e
 - **What it contains**: Development phases, milestones, deliverables
 - **Who should use**: Project managers, team leads, stakeholders
 - **Key features**: Phase 1 (3-month) and Phase 2 timelines, priority management
-- **Guide**: [03_Implementation_Roadmap_Guide.md](./03_Implementation_Roadmap_Guide.md)
+- **Guide**: _Coming Soon_
 
 ### **🔄 Process Flow**
 
 - **What it contains**: Workflow diagrams, process descriptions, user journeys
 - **Who should use**: Business analysts, developers, QA testers
 - **Key features**: Student, faculty, admin workflows, system processes
-- **Guide**: [04_Process_Flow_Guide.md](./04_Process_Flow_Guide.md)
+- **Guide**: _Coming Soon_
 
 ### **🛠️ Development Tasks**
 
@@ -105,28 +105,28 @@ The SKOLARIS Documentation Portal is organized into **12 main sections/tabs**, e
 - **What it contains**: Task assignments, priority management, resource allocation
 - **Who should use**: Project managers, team leads, developers
 - **Key features**: Task breakdown, assignments, progress tracking
-- **Guide**: [07_Task_Management_Guide.md](./07_Task_Management_Guide.md)
+- **Guide**: _Coming Soon_
 
 ### **⚛️ Frontend Development**
 
 - **What it contains**: React.js development guide, UI/UX specifications
 - **Who should use**: Frontend developers, UI/UX designers
 - **Key features**: Component architecture, design specifications, implementation guide
-- **Guide**: [08_Frontend_Development_Guide.md](./08_Frontend_Development_Guide.md)
+- **Guide**: _Coming Soon_
 
 ### **📱 Mobile Development**
 
 - **What it contains**: Flutter mobile app development guide
 - **Who should use**: Mobile developers, app developers
 - **Key features**: Cross-platform development, mobile-specific features
-- **Guide**: [09_Mobile_Development_Guide.md](./09_Mobile_Development_Guide.md)
+- **Guide**: _Coming Soon_
 
 ### **🔒 Security & Access Control**
 
 - **What it contains**: Security implementation, authentication, authorization
 - **Who should use**: Security specialists, backend developers, system administrators
 - **Key features**: JWT authentication, RBAC, security measures
-- **Guide**: [10_Security_Guide.md](./10_Security_Guide.md)
+- **Guide**: _Coming Soon_
 
 ### **📅 Timeline Documentation**
 
