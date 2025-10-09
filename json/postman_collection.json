@@ -1,8 +1,8 @@
 {
 	"info": {
 		"_postman_id": "3943dcc8-5438-4e3e-bce9-086239bf457c",
-		"name": "School Management API - User Management",
-		"description": "# School Management API - Postman Collection\n\nThis directory contains Postman collections and environment files for testing the School Management API.\n\n## Collection Structure\n\n### Authentication\n\n- **Login** - Get access and refresh tokens\n    \n- **Refresh Token** - Refresh expired access token\n    \n- **Get Current User** - Get authenticated user info\n    \n- **Logout** - Invalidate current token\n    \n\n### User Management\n\n- **Get All Users** - List users with pagination and filtering\n    \n- **Get User Statistics** - Get user statistics and breakdowns\n    \n- **Get User by ID** - Get specific user details\n    \n- **Create New User** - Create a new user account\n    \n- **Update User** - Update user information\n    \n- **Assign Role to User** - Assign role to user\n    \n- **Remove Role from User** - Remove role from user\n    \n- **Toggle User Status** - Activate/deactivate user\n    \n- **Delete User** - Delete user account\n    \n\n### Campus Management\n\n- **Get All Campuses** - List all campuses\n    \n- **Get Campus by ID** - Get specific campus\n    \n- **Create New Campus** - Create new campus\n    \n- **Update Campus** - Update campus information\n    \n- **Toggle Campus Status** - Activate/deactivate campus\n    \n- **Get Campus Statistics** - Get campus statistics\n    \n- **Delete Campus** - Delete campus\n    \n\n## Features\n\n### Automatic Token Management\n\n- **Auto-refresh**: Tokens are automatically refreshed when they expire\n    \n- **Token storage**: Access and refresh tokens are saved in environment variables\n    \n- **Expiration tracking**: Token expiration times are tracked and managed\n    \n\n### Pre-request Scripts\n\n- **Token validation**: Checks if token is expired before each request\n    \n- **Auto-refresh**: Automatically refreshes token if it expires within 5 minutes\n    \n- **Error handling**: Handles token refresh failures gracefully\n    \n\n### Test Scripts\n\n- **Response validation**: Validates API responses\n    \n- **Variable extraction**: Extracts and saves important data from responses\n    \n- **Logging**: Provides console logging for debugging\n    \n\n## Environment Variables\n\n| Variable | Description | Example |\n| --- | --- | --- |\n| `base_url` | API base URL | `http://localhost` |\n| `access_token` | JWT access token | `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...` |\n| `refresh_token` | JWT refresh token | `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...` |\n| `token_expires_at` | Token expiration timestamp | `2025-09-29T13:00:00.000Z` |\n| `user_id` | Current user ID | `1` |\n| `new_user_id` | ID of newly created user | `14` |\n| `new_campus_id` | ID of newly created campus | `4` |\n\n## API Endpoints\n\nAuthentication\n\n- `POST /login` - Login with email/password\n    \n- `POST /refresh` - Refresh access token\n    \n- `GET /user` - Get current user\n    \n- `POST /logout` - Logout\n    \n\n### User Management\n\n- `GET /users` - List users (with pagination and filters)\n    \n- `GET /users/statistics` - Get user statistics\n    \n- `GET /users/{id}` - Get user by ID\n    \n- `POST /users` - Create new user\n    \n- `PUT /users/{id}` - Update user\n    \n- `DELETE /users/{id}` - Delete user\n    \n- `POST /users/{id}/assign-role` - Assign role\n    \n- `DELETE /users/{id}/remove-role` - Remove role\n    \n- `POST /users/{id}/toggle-status` - Toggle status\n    \n\n### Campus Management\n\n- `GET /campuses` - List campuses\n    \n- `GET /campuses/{id}` - Get campus by ID\n    \n- `POST /campuses` - Create campus\n    \n- `PUT /campuses/{id}` - Update campus\n    \n- `DELETE /campuses/{id}` - Delete campus\n    \n- `POST /campuses/{id}/toggle-status` - Toggle campus status\n    \n- `GET /campuses/{id}/statistics` - Get campus statistics\n    \n\n## Sample Data\n\n### Default Login Credentials\n\n``` json\n{\n  \"email\": \"superadmin@icct.edu.ph\",\n  \"password\": \"Password123!\"\n}\n\n ```\n\n###   \nUser Types\n\n- `student` - Student user\n    \n- `teacher` - Faculty/Teacher user\n    \n- `staff` - Staff user\n    \n- `admin` - Administrator user\n    \n\n### Role IDs\n\n- `1` - Super Admin\n    \n- `2` - Campus Admin\n    \n- `3` - Registrar\n    \n- `4` - Faculty\n    \n- `5` - Cashier\n    \n- `6` - Student\n    \n\n### Campus IDs\n\n- `1` - ICCT Main Campus\n    \n- `2` - ICCT Antipolo Campus\n    \n- `3` - ICCT Subic Campus",
+		"name": "SKOLARIS Student Information System API",
+		"description": "# SKOLARIS Student Information System API - Complete Postman Collection\n\nThis comprehensive Postman collection contains all API endpoints for the SKOLARIS Student Information System, including authentication, user management, campus operations, academic management, and role-based access control.\n\n## Collection Structure\n\n### Authentication\n\n- **Login** - Get access and refresh tokens\n- **Refresh Token** - Refresh expired access token\n- **Get Current User** - Get authenticated user info\n- **Logout** - Invalidate current token\n\n### User Management\n\n- **Get All Users** - List users with pagination and filtering\n- **Get User Statistics** - Get user statistics and breakdowns\n- **Get User by ID** - Get specific user details\n- **Create New User** - Create a new user account\n- **Update User** - Update user information\n- **Assign Role to User** - Assign role to user\n- **Remove Role from User** - Remove role from user\n- **Toggle User Status** - Activate/deactivate user\n- **Delete User** - Delete user account\n\n### Campus Management\n\n- **Get All Campuses** - List all campuses\n- **Get Campus by ID** - Get specific campus\n- **Create New Campus** - Create new campus\n- **Update Campus** - Update campus information\n- **Toggle Campus Status** - Activate/deactivate campus\n- **Get Campus Statistics** - Get campus statistics\n- **Delete Campus** - Delete campus\n\n### Student Management\n\n- **Get All Students** - List students with pagination and filtering\n- **Get Student by ID** - Get specific student details\n- **Create New Student** - Create new student record\n- **Update Student** - Update student information\n- **Delete Student** - Delete student record\n- **Get My Grades** - Get current student's grades (Student role only)\n- **Get My Assignments** - Get current student's assignments (Student role only)\n\n### Teacher Management\n\n- **Get All Teachers** - List teachers with pagination and filtering\n- **Get Teacher by ID** - Get specific teacher details\n- **Create New Teacher** - Create new teacher record\n- **Update Teacher** - Update teacher information\n- **Delete Teacher** - Delete teacher record\n- **Get My Classes** - Get current teacher's classes (Faculty role only)\n\n### Class Management\n\n- **Get All Classes** - List classes with pagination and filtering\n- **Get Class by ID** - Get specific class details\n- **Create New Class** - Create new class\n- **Update Class** - Update class information\n- **Delete Class** - Delete class\n\n### Assignment Management\n\n- **Get All Assignments** - List assignments with pagination and filtering\n- **Get Assignment by ID** - Get specific assignment details\n- **Create New Assignment** - Create new assignment\n- **Update Assignment** - Update assignment information\n- **Delete Assignment** - Delete assignment\n\n### Grade Management\n\n- **Get All Grades** - List grades with pagination and filtering\n- **Get Grade by ID** - Get specific grade details\n- **Create New Grade** - Create new grade record\n- **Update Grade** - Update grade information\n- **Delete Grade** - Delete grade record\n\n## Role-Based Access Control\n\n### Student Role\n- Read-only access to personal data\n- View own grades and assignments\n- Limited to personal information\n\n### Faculty Role\n- Manage own classes and assignments\n- Create and grade assignments\n- View student grades for their classes\n\n### Registrar Role\n- Full academic management access\n- Manage students, teachers, classes\n- Handle assignments and grades\n\n### Campus Admin Role\n- Campus-level management\n- User management (read-only)\n- Academic management within campus\n\n### Super Admin Role\n- Full system access\n- Complete user and campus management\n- All CRUD operations\n\n## Features\n\n### Automatic Token Management\n\n- **Auto-refresh**: Tokens are automatically refreshed when they expire\n- **Token storage**: Access and refresh tokens are saved in environment variables\n- **Expiration tracking**: Token expiration times are tracked and managed\n\n### Pre-request Scripts\n\n- **Token validation**: Checks if token is expired before each request\n- **Auto-refresh**: Automatically refreshes token if it expires within 5 minutes\n- **Error handling**: Handles token refresh failures gracefully\n\n### Test Scripts\n\n- **Response validation**: Validates API responses\n- **Variable extraction**: Extracts and saves important data from responses\n- **Logging**: Provides console logging for debugging\n\n## Environment Variables\n\n| Variable | Description | Example |\n| --- | --- | --- |\n| `base_url` | API base URL | `http://localhost` |\n| `access_token` | JWT access token | `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...` |\n| `refresh_token` | JWT refresh token | `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...` |\n| `token_expires_at` | Token expiration timestamp | `2025-09-29T13:00:00.000Z` |\n| `user_id` | Current user ID | `1` |\n| `new_user_id` | ID of newly created user | `14` |\n| `new_campus_id` | ID of newly created campus | `4` |\n\n## API Endpoints Summary\n\n### Authentication (4 endpoints)\n- `POST /api/v1/login` - Login with email/password\n- `POST /api/v1/refresh` - Refresh access token\n- `GET /api/v1/user` - Get current user\n- `POST /api/v1/logout` - Logout\n\n### User Management (9 endpoints)\n- `GET /api/v1/users` - List users (with pagination and filters)\n- `GET /api/v1/users/statistics` - Get user statistics\n- `GET /api/v1/users/{id}` - Get user by ID\n- `POST /api/v1/users` - Create new user\n- `PUT /api/v1/users/{id}` - Update user\n- `DELETE /api/v1/users/{id}` - Delete user\n- `POST /api/v1/users/{id}/assign-role` - Assign role\n- `DELETE /api/v1/users/{id}/remove-role` - Remove role\n- `POST /api/v1/users/{id}/toggle-status` - Toggle status\n\n### Campus Management (7 endpoints)\n- `GET /api/v1/campuses` - List campuses\n- `GET /api/v1/campuses/{id}` - Get campus by ID\n- `POST /api/v1/campuses` - Create campus\n- `PUT /api/v1/campuses/{id}` - Update campus\n- `DELETE /api/v1/campuses/{id}` - Delete campus\n- `POST /api/v1/campuses/{id}/toggle-status` - Toggle campus status\n- `GET /api/v1/campuses/{id}/statistics` - Get campus statistics\n\n### Student Management (7 endpoints)\n- `GET /api/v1/students` - List students\n- `GET /api/v1/students/{id}` - Get student by ID\n- `POST /api/v1/students` - Create student\n- `PUT /api/v1/students/{id}` - Update student\n- `DELETE /api/v1/students/{id}` - Delete student\n- `GET /api/v1/my-grades` - Get my grades (Student role)\n- `GET /api/v1/my-assignments` - Get my assignments (Student role)\n\n### Teacher Management (6 endpoints)\n- `GET /api/v1/teachers` - List teachers\n- `GET /api/v1/teachers/{id}` - Get teacher by ID\n- `POST /api/v1/teachers` - Create teacher\n- `PUT /api/v1/teachers/{id}` - Update teacher\n- `DELETE /api/v1/teachers/{id}` - Delete teacher\n- `GET /api/v1/my-classes` - Get my classes (Faculty role)\n\n### Class Management (5 endpoints)\n- `GET /api/v1/classes` - List classes\n- `GET /api/v1/classes/{id}` - Get class by ID\n- `POST /api/v1/classes` - Create class\n- `PUT /api/v1/classes/{id}` - Update class\n- `DELETE /api/v1/classes/{id}` - Delete class\n\n### Assignment Management (5 endpoints)\n- `GET /api/v1/assignments` - List assignments\n- `GET /api/v1/assignments/{id}` - Get assignment by ID\n- `POST /api/v1/assignments` - Create assignment\n- `PUT /api/v1/assignments/{id}` - Update assignment\n- `DELETE /api/v1/assignments/{id}` - Delete assignment\n\n### Grade Management (5 endpoints)\n- `GET /api/v1/grades` - List grades\n- `GET /api/v1/grades/{id}` - Get grade by ID\n- `POST /api/v1/grades` - Create grade\n- `PUT /api/v1/grades/{id}` - Update grade\n- `DELETE /api/v1/grades/{id}` - Delete grade\n\n**Total: 48 API Endpoints**\n\n## Sample Data\n\n### Default Login Credentials\n\n```json\n{\n  \"email\": \"superadmin@icct.edu.ph\",\n  \"password\": \"Password123!\"\n}\n```\n\n### User Types\n- `student` - Student user\n- `teacher` - Faculty/Teacher user\n- `staff` - Staff user\n- `admin` - Administrator user\n\n### Role IDs\n- `1` - Super Admin\n- `2` - Campus Admin\n- `3` - Registrar\n- `4` - Faculty\n- `5` - Cashier\n- `6` - Student\n\n### Campus IDs\n- `1` - ICCT Main Campus\n- `2` - ICCT Antipolo Campus\n- `3` - ICCT Subic Campus",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "49014689",
 		"_collection_link": "https://speeding-desert-110783.postman.co/workspace/Alpha-Byte~397b10cc-b517-4aa9-8b5f-e451db43228d/collection/6092661-3943dcc8-5438-4e3e-bce9-086239bf457c?action=share&source=collection_link&creator=49014689"
@@ -808,7 +808,944 @@
 					"response": []
 				}
 			],
-			"description": "Campus management endpoints (existing functionality)"
+			"description": "Campus management endpoints with full CRUD operations"
+		},
+		{
+			"name": "Student Management",
+			"item": [
+				{
+					"name": "Get All Students",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/students",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"students"
+							]
+						},
+						"description": "Get list of all students with pagination and filtering"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Student by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/students/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"students",
+								"1"
+							]
+						},
+						"description": "Get specific student by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Student",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 1,\n    \"student_id\": \"STU001\",\n    \"campus_id\": 1,\n    \"year_level\": 1,\n    \"course\": \"Bachelor of Science in Information Technology\",\n    \"is_active\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/students",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"students"
+							]
+						},
+						"description": "Create a new student record"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Student",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 1,\n    \"student_id\": \"STU001_UPDATED\",\n    \"campus_id\": 1,\n    \"year_level\": 2,\n    \"course\": \"Bachelor of Science in Computer Science\",\n    \"is_active\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/students/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"students",
+								"1"
+							]
+						},
+						"description": "Update student information"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Student",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/students/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"students",
+								"1"
+							]
+						},
+						"description": "Delete a student record"
+					},
+					"response": []
+				},
+				{
+					"name": "Get My Grades (Student)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/my-grades",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"my-grades"
+							]
+						},
+						"description": "Get current student's grades (Student role only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get My Assignments (Student)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/my-assignments",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"my-assignments"
+							]
+						},
+						"description": "Get current student's assignments (Student role only)"
+					},
+					"response": []
+				}
+			],
+			"description": "Student management endpoints with role-based access"
+		},
+		{
+			"name": "Teacher Management",
+			"item": [
+				{
+					"name": "Get All Teachers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/teachers",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"teachers"
+							]
+						},
+						"description": "Get list of all teachers with pagination and filtering"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Teacher by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/teachers/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"teachers",
+								"1"
+							]
+						},
+						"description": "Get specific teacher by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Teacher",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 1,\n    \"employee_number\": \"EMP001\",\n    \"campus_id\": 1,\n    \"department\": \"Information Technology\",\n    \"position\": \"Assistant Professor\",\n    \"is_active\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/teachers",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"teachers"
+							]
+						},
+						"description": "Create a new teacher record"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Teacher",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 1,\n    \"employee_number\": \"EMP001_UPDATED\",\n    \"campus_id\": 1,\n    \"department\": \"Computer Science\",\n    \"position\": \"Associate Professor\",\n    \"is_active\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/teachers/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"teachers",
+								"1"
+							]
+						},
+						"description": "Update teacher information"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Teacher",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/teachers/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"teachers",
+								"1"
+							]
+						},
+						"description": "Delete a teacher record"
+					},
+					"response": []
+				},
+				{
+					"name": "Get My Classes (Teacher)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/my-classes",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"my-classes"
+							]
+						},
+						"description": "Get current teacher's classes (Faculty role only)"
+					},
+					"response": []
+				}
+			],
+			"description": "Teacher management endpoints with role-based access"
+		},
+		{
+			"name": "Class Management",
+			"item": [
+				{
+					"name": "Get All Classes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/classes",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"classes"
+							]
+						},
+						"description": "Get list of all classes with pagination and filtering"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Class by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/classes/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"classes",
+								"1"
+							]
+						},
+						"description": "Get specific class by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Class",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"class_name\": \"BSIT 3A\",\n    \"campus_id\": 1,\n    \"teacher_id\": 1,\n    \"subject_id\": 1,\n    \"schedule_id\": 1,\n    \"max_students\": 30,\n    \"is_active\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/classes",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"classes"
+							]
+						},
+						"description": "Create a new class"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Class",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"class_name\": \"BSIT 3A Updated\",\n    \"campus_id\": 1,\n    \"teacher_id\": 1,\n    \"subject_id\": 1,\n    \"schedule_id\": 1,\n    \"max_students\": 35,\n    \"is_active\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/classes/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"classes",
+								"1"
+							]
+						},
+						"description": "Update class information"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Class",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/classes/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"classes",
+								"1"
+							]
+						},
+						"description": "Delete a class"
+					},
+					"response": []
+				}
+			],
+			"description": "Class management endpoints for academic scheduling"
+		},
+		{
+			"name": "Assignment Management",
+			"item": [
+				{
+					"name": "Get All Assignments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/assignments",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"assignments"
+							]
+						},
+						"description": "Get list of all assignments with pagination and filtering"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Assignment by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/assignments/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"assignments",
+								"1"
+							]
+						},
+						"description": "Get specific assignment by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Assignment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Programming Assignment 1\",\n    \"description\": \"Create a simple calculator program\",\n    \"class_id\": 1,\n    \"teacher_id\": 1,\n    \"due_date\": \"2024-12-31 23:59:59\",\n    \"max_points\": 100,\n    \"is_active\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/assignments",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"assignments"
+							]
+						},
+						"description": "Create a new assignment"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Assignment",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Programming Assignment 1 - Updated\",\n    \"description\": \"Create an advanced calculator program with GUI\",\n    \"class_id\": 1,\n    \"teacher_id\": 1,\n    \"due_date\": \"2025-01-15 23:59:59\",\n    \"max_points\": 150,\n    \"is_active\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/assignments/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"assignments",
+								"1"
+							]
+						},
+						"description": "Update assignment information"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Assignment",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/assignments/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"assignments",
+								"1"
+							]
+						},
+						"description": "Delete an assignment"
+					},
+					"response": []
+				}
+			],
+			"description": "Assignment management endpoints for academic tasks"
+		},
+		{
+			"name": "Grade Management",
+			"item": [
+				{
+					"name": "Get All Grades",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/grades",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"grades"
+							]
+						},
+						"description": "Get list of all grades with pagination and filtering"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Grade by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/grades/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"grades",
+								"1"
+							]
+						},
+						"description": "Get specific grade by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Grade",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"student_id\": 1,\n    \"assignment_id\": 1,\n    \"teacher_id\": 1,\n    \"points_earned\": 85,\n    \"max_points\": 100,\n    \"grade\": 85.0,\n    \"comments\": \"Good work, but needs improvement in error handling\",\n    \"is_final\": false\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/grades",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"grades"
+							]
+						},
+						"description": "Create a new grade record"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Grade",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"student_id\": 1,\n    \"assignment_id\": 1,\n    \"teacher_id\": 1,\n    \"points_earned\": 90,\n    \"max_points\": 100,\n    \"grade\": 90.0,\n    \"comments\": \"Excellent work! Great improvement in code quality\",\n    \"is_final\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/grades/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"grades",
+								"1"
+							]
+						},
+						"description": "Update grade information"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Grade",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/grades/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"grades",
+								"1"
+							]
+						},
+						"description": "Delete a grade record"
+					},
+					"response": []
+				}
+			],
+			"description": "Grade management endpoints for academic assessment"
 		}
 	],
 	"event": [
@@ -870,7 +1807,7 @@
 	"variable": [
 		{
 			"key": "base_url",
-			"value": "http://localhost",
+			"value": "http://localhost:8000",
 			"type": "string"
 		}
 	]

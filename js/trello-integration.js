@@ -1262,6 +1262,24 @@ class TrelloIntegration {
     }
 
     /**
+     * Get attachments for a specific card
+     */
+    async getCardAttachments(cardId) {
+        try {
+            const response = await fetch(`${this.baseUrl}/cards/${cardId}/attachments?key=${this.apiKey}&token=${this.adminToken}`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch attachments');
+            }
+            
+            const attachments = await response.json();
+            return attachments;
+        } catch (error) {
+            console.error('Error fetching card attachments:', error);
+            return [];
+        }
+    }
+
+    /**
      * Get comments and activity for a specific card
      */
     async getCardComments(cardId) {
@@ -1416,7 +1434,8 @@ class TrelloIntegration {
                         ...baseData,
                         text: `📎 Added attachment "${attachment.name}"`,
                         type: 'activity',
-                        activityType: 'attachment'
+                        activityType: 'attachment',
+                        attachment: attachment
                     });
                 } else if (action.type === 'deleteAttachmentFromCard') {
                     const attachment = action.data.attachment;
@@ -1424,7 +1443,8 @@ class TrelloIntegration {
                         ...baseData,
                         text: `🗑️ Removed attachment "${attachment.name}"`,
                         type: 'activity',
-                        activityType: 'attachment'
+                        activityType: 'attachment',
+                        attachment: attachment
                     });
                 } else if (action.type === 'addLabelToCard') {
                     const label = action.data.label;

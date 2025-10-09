@@ -237,6 +237,91 @@
         .task-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-top: 4px solid #667eea; }
         .task-card.frontend { border-left-color: #28a745; }
         .task-card.backend { border-left-color: #dc3545; }
+        
+        /* Trello Status Sync Styles - Matching Documentation Design */
+        .trello-status-sync {
+            margin: 8px 0;
+            padding: 0;
+            background: transparent;
+            border: none;
+        }
+        
+        .trello-status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: 600;
+            border: 1px solid;
+            transition: all 0.2s ease;
+        }
+        
+        .trello-status-icon {
+            font-size: 1em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .trello-status-text {
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+        
+        /* Status-specific styling matching task-card design */
+        .trello-status-indicator[data-trello-status="todo"] {
+            background: #e3f2fd;
+            border-color: #2196f3;
+            color: #1976d2;
+        }
+        
+        .trello-status-indicator[data-trello-status="ongoing"] {
+            background: #fff3e0;
+            border-color: #ff9800;
+            color: #f57c00;
+        }
+        
+        .trello-status-indicator[data-trello-status="testing"] {
+            background: #f3e5f5;
+            border-color: #9c27b0;
+            color: #7b1fa2;
+        }
+        
+        .trello-status-indicator[data-trello-status="done"] {
+            background: #e8f5e8;
+            border-color: #4caf50;
+            color: #388e3c;
+        }
+        
+        .trello-status-indicator[data-trello-status="error"] {
+            background: #ffebee;
+            border-color: #f44336;
+            color: #d32f2f;
+        }
+        
+        .trello-status-indicator[data-trello-status="loading"] {
+            background: #f5f5f5;
+            border-color: #9e9e9e;
+            color: #616161;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        
+        .trello-status-indicator[data-trello-status="loading"] .trello-status-icon {
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
         .task-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .task-ticket { background: #667eea; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8em; font-weight: 600; }
         .task-ticket.frontend { background: #28a745; }
@@ -605,6 +690,116 @@
             max-width: 70%;
             border: 1px solid rgba(108, 117, 125, 0.15);
         }
+        
+        /* Image attachment styles */
+        .attachment-image {
+            margin: 6px 0;
+            text-align: center;
+            padding: 4px;
+        }
+        
+        .attachment-image img {
+            max-width: 100%;
+            max-height: 300px;
+            width: auto;
+            height: auto;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .attachment-image img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* Multiple images in comments */
+        .attachment-image + .attachment-image {
+            margin-top: 8px;
+        }
+        
+        /* Image container in comment bubbles */
+        .comment-bubble .attachment-image {
+            margin: 8px 0 4px 0;
+            padding: 0;
+        }
+        
+        .activity-bubble .attachment-image {
+            margin: 6px 0 3px 0;
+            padding: 0;
+        }
+        
+        /* Better spacing for multiple images */
+        .comment-bubble .attachment-image:not(:last-child) {
+            margin-bottom: 6px;
+        }
+        
+        .activity-bubble .attachment-image:not(:last-child) {
+            margin-bottom: 4px;
+        }
+        
+        /* Ensure images don't break out of comment bubbles */
+        .comment-bubble, .activity-bubble {
+            overflow: hidden;
+        }
+        
+        /* Responsive image sizing within comment containers */
+        @media (max-width: 768px) {
+            .attachment-image img {
+                max-width: 100%;
+                max-height: 250px;
+            }
+        }
+        
+        /* Image modal styles */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            backdrop-filter: blur(5px);
+        }
+        
+        .image-modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .image-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 2001;
+            transition: color 0.2s ease;
+        }
+        
+        .image-modal-close:hover {
+            color: #fff;
+        }
+        
+        #imageCaption {
+            text-align: center;
+            color: #f1f1f1;
+            padding: 10px;
+            font-size: 16px;
+        }
         .comment-header { 
             display: flex; 
             align-items: center; 
@@ -696,6 +891,24 @@
             font-size: 0.9em;
             white-space: pre-wrap;
             word-wrap: break-word;
+        }
+        
+        .comment-text strong {
+            font-weight: bold;
+            color: inherit;
+        }
+        
+        .comment-text em {
+            font-style: italic;
+            color: inherit;
+        }
+        
+        .activity-content strong {
+            font-weight: bold;
+        }
+        
+        .activity-content em {
+            font-style: italic;
         }
         .comment-bubble .comment-text {
             color: inherit;
@@ -1645,10 +1858,6 @@
             font-style: italic;
         }
 
-        .endpoints-grid {
-            display: grid;
-            gap: 15px;
-        }
 
         .endpoint-card {
             transition: all 0.3s ease;
@@ -2163,6 +2372,8 @@
             display: block;
         }
 
+
+
         /* API Documentation Responsive */
         @media (max-width: 768px) {
             .stats-grid {
@@ -2213,6 +2424,7 @@
             .reference-grid {
                 grid-template-columns: 1fr;
             }
+
 
             .filter-tabs {
                 justify-content: center;
@@ -7836,6 +8048,9 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                         <div style="text-align: right;">
                             <div style="font-size: 2.5em; font-weight: 700; margin: 0;">0%</div>
                             <div style="opacity: 0.9; font-size: 0.9em;">Overall Progress</div>
+                            <button onclick="refreshTrelloStatus()" style="margin-top: 10px; padding: 8px 16px; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; border-radius: 6px; cursor: pointer; font-size: 0.9em; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+                                🔄 Refresh Trello Status
+                            </button>
                         </div>
                     </div>
                     
@@ -7919,10 +8134,16 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                     
                     <div class="task-grid">
                         <!-- Week 1: Core Infrastructure - Frontend -->
-                        <div class="task-card frontend">
+                        <div class="task-card frontend" data-trello-sync="true">
                             <div class="task-header">
                                 <div class="task-ticket frontend">SKOL-001-FE</div>
                                 <div class="task-status for-development">Week 1</div>
+                            </div>
+                            <div class="trello-status-sync">
+                                <div class="trello-status-indicator" data-trello-status="loading">
+                                    <span class="trello-status-icon">🔄</span>
+                                    <span class="trello-status-text">Syncing with Trello...</span>
+                                </div>
                             </div>
                             <h4>Core Infrastructure - Frontend</h4>
                             <div class="task-priority high">Priority: Critical</div>
@@ -13240,35 +13461,70 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                 <div class="api-overview">
                     <div class="overview-header">
                         <h3>📊 API Overview</h3>
-                        <p>SKOLARIS REST API provides comprehensive endpoints for user management, campus operations, and authentication. The API follows RESTful principles with JWT-based authentication and supports multi-campus operations.</p>
+                        <p>SKOLARIS REST API provides comprehensive endpoints for complete student information system management including authentication, user management, campus operations, academic management, and role-based access control. The API follows RESTful principles with JWT-based authentication and supports multi-campus operations with granular permissions.</p>
                     </div>
                     <div class="stats-grid">
                         <div class="stat-card">
                             <div class="stat-icon">🔗</div>
                             <div class="stat-content">
-                                <div class="stat-number" id="totalEndpoints">-</div>
+                                <div class="stat-number" id="totalEndpoints">48</div>
                                 <div class="stat-label">Total Endpoints</div>
                             </div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-icon">🔐</div>
                             <div class="stat-content">
-                                <div class="stat-number" id="authEndpoints">-</div>
+                                <div class="stat-number" id="authEndpoints">4</div>
                                 <div class="stat-label">Authentication</div>
                             </div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-icon">👥</div>
                             <div class="stat-content">
-                                <div class="stat-number" id="userEndpoints">-</div>
+                                <div class="stat-number" id="userEndpoints">9</div>
                                 <div class="stat-label">User Management</div>
                             </div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-icon">🏢</div>
                             <div class="stat-content">
-                                <div class="stat-number" id="campusEndpoints">-</div>
+                                <div class="stat-number" id="campusEndpoints">7</div>
                                 <div class="stat-label">Campus Management</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🎓</div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="studentEndpoints">7</div>
+                                <div class="stat-label">Student Management</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">👨‍🏫</div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="teacherEndpoints">6</div>
+                                <div class="stat-label">Teacher Management</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">📚</div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="classEndpoints">5</div>
+                                <div class="stat-label">Class Management</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">📝</div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="assignmentEndpoints">5</div>
+                                <div class="stat-label">Assignment Management</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">📊</div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="gradeEndpoints">5</div>
+                                <div class="stat-label">Grade Management</div>
                             </div>
                         </div>
                     </div>
@@ -13285,6 +13541,11 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                         <button class="filter-tab" data-filter="auth">Authentication</button>
                         <button class="filter-tab" data-filter="user">User Management</button>
                         <button class="filter-tab" data-filter="campus">Campus Management</button>
+                        <button class="filter-tab" data-filter="student">Student Management</button>
+                        <button class="filter-tab" data-filter="teacher">Teacher Management</button>
+                        <button class="filter-tab" data-filter="class">Class Management</button>
+                        <button class="filter-tab" data-filter="assignment">Assignment Management</button>
+                        <button class="filter-tab" data-filter="grade">Grade Management</button>
                     </div>
                 </div>
 
@@ -13306,13 +13567,119 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                             </div>
                         </div>
                         <div class="reference-card">
-                            <h4>📝 Sample Data</h4>
+                            <h4>📝 Sample Data & Responses</h4>
                             <div id="sampleData">
-                                <div class="loading-spinner">Loading sample data...</div>
+                                <div style="padding: 15px;">
+                                    <h5>🔐 Authentication Response</h5>
+                                    <pre style="background: #f8f9fa; padding: 10px; border-radius: 5px; font-size: 0.85em; overflow-x: auto;"><code>{
+  "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+  "refresh_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+  "token_type": "bearer",
+  "expires_in": 3600,
+  "refresh_expires_in": 604800,
+  "user": {
+    "user_id": 1,
+    "email": "superadmin@icct.edu.ph",
+    "full_name": "Super Administrator",
+    "phone": "+639171234567",
+    "user_type": "admin",
+    "campus_id": 1,
+    "is_active": true,
+    "roles": ["Super Admin"]
+  }
+}</code></pre>
+                                    
+                                    <h5>👥 User Statistics Response</h5>
+                                    <pre style="background: #f8f9fa; padding: 10px; border-radius: 5px; font-size: 0.85em; overflow-x: auto;"><code>{
+  "success": true,
+  "message": "User statistics retrieved successfully",
+  "data": {
+    "total_users": 13,
+    "active_users": 12,
+    "inactive_users": 1,
+    "users_by_type": {
+      "admin": 3,
+      "faculty": 3,
+      "staff": 2,
+      "student": 5
+    },
+    "users_by_campus": {
+      "ICCT Main Campus": 7,
+      "ICCT Antipolo Campus": 5,
+      "ICCT Subic Campus": 1
+    }
+  }
+}</code></pre>
+                                    
+                                    <h5>🏢 Campus Data Response</h5>
+                                    <pre style="background: #f8f9fa; padding: 10px; border-radius: 5px; font-size: 0.85em; overflow-x: auto;"><code>{
+  "success": true,
+  "message": "Campuses retrieved successfully",
+  "data": [
+    {
+      "campus_id": 1,
+      "campus_code": "MAIN",
+      "campus_name": "ICCT Main Campus",
+      "address": "Cainta, Rizal, Philippines",
+      "phone": "(02) 8123-4567",
+      "email": "main@icct.edu.ph",
+      "website": "https://www.icct.edu.ph",
+      "is_active": true
+    }
+  ],
+  "meta": {
+    "current_page": 1,
+    "last_page": 1,
+    "per_page": 15,
+    "total": 3
+  }
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="reference-card">
+                            <h4>🔐 Role-Based Access</h4>
+                            <div style="padding: 15px;">
+                                <div style="margin-bottom: 10px;">
+                                    <strong>Student Role:</strong> Read-only access to personal data, grades, and assignments
+                                </div>
+                                <div style="margin-bottom: 10px;">
+                                    <strong>Faculty Role:</strong> Manage classes, assignments, and grade students
+                                </div>
+                                <div style="margin-bottom: 10px;">
+                                    <strong>Registrar Role:</strong> Full academic management access
+                                </div>
+                                <div style="margin-bottom: 10px;">
+                                    <strong>Campus Admin:</strong> Campus-level management with user oversight
+                                </div>
+                                <div>
+                                    <strong>Super Admin:</strong> Complete system access and management
+                                </div>
+                            </div>
+                        </div>
+                        <div class="reference-card">
+                            <h4>📊 API Statistics</h4>
+                            <div style="padding: 15px;">
+                                <div style="margin-bottom: 8px;">
+                                    <strong>Total Endpoints:</strong> 48
+                                </div>
+                                <div style="margin-bottom: 8px;">
+                                    <strong>Authentication:</strong> 4 endpoints
+                                </div>
+                                <div style="margin-bottom: 8px;">
+                                    <strong>User Management:</strong> 9 endpoints
+                                </div>
+                                <div style="margin-bottom: 8px;">
+                                    <strong>Academic Management:</strong> 35 endpoints
+                                </div>
+                                <div>
+                                    <strong>Role-Based Access:</strong> Granular permissions
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
 
                 <!-- Collection Info (Collapsible) -->
                 <div class="collection-info-collapsible">
@@ -13856,7 +14223,7 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                                         <div class="message-container">
                                             <div class="message-row own">
                                                 <div class="comment-bubble own-message">
-                                                    <p class="comment-text">${comment.text}</p>
+                                                    <div class="comment-text">${processCommentText(comment.text)}</div>
                                                     <div class="message-time">${formatSmartDate(comment.date)} ${comment.date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</div>
                                                 </div>
                                             </div>
@@ -13876,7 +14243,7 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                                                 <span class="comment-date">${formatSmartDate(comment.date)}</span>
                                             </div>
                                             <div class="activity-bubble">
-                                                ${comment.text}
+                                                ${processCommentText(comment.text)}
                                                 <div class="message-time">${formatSmartDate(comment.date)} ${comment.date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</div>
                                             </div>
                                         </div>
@@ -13902,7 +14269,7 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                                         ` : ''}
                                         <div class="message-row ${messageRowClass}">
                                             <div class="comment-bubble ${bubbleClass}">
-                                                <p class="comment-text">${comment.text}</p>
+                                                <div class="comment-text">${processCommentText(comment.text)}</div>
                                                 ${comment.type === 'comment' && window.trelloIntegration.isUserAuthenticated() && isCurrentUser ? `
                                                     <div class="comment-actions" style="margin-top: 8px; display: flex; gap: 8px;">
                                                         <button class="comment-action-btn comment-edit-btn" onclick="editComment('${comment.id}')" title="Edit comment" style="background: rgba(255,255,255,0.2); border: none; color: inherit; padding: 4px 8px; border-radius: 12px; font-size: 0.75em; cursor: pointer;">✏️</button>
@@ -14076,6 +14443,217 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
             textarea.value = '';
         }
 
+        // Function to process markdown formatting in text
+        function processMarkdownFormatting(text) {
+            let processedText = text;
+            
+            // Process bold text: **text** -> <strong>text</strong>
+            processedText = processedText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            
+            // Process italic text: *text* -> <em>text</em>
+            processedText = processedText.replace(/\*(.*?)\*/g, '<em>$1</em>');
+            
+            return processedText;
+        }
+
+        // Function to process text with both formatting and images
+        function processCommentText(text) {
+            // First process markdown formatting
+            let processedText = processMarkdownFormatting(text);
+            
+            // Then process images
+            const { processedText: finalText, hasImages, imageElements } = processMarkdownImages(processedText);
+            
+            return finalText + imageElements;
+        }
+
+        // Function to process markdown images in text
+        function processMarkdownImages(text) {
+            // Regular expression to match markdown image syntax: ![alt](url) and [alt](url)
+            const imageRegex = /!?\[([^\]]*)\]\(([^)]+)\)/g;
+            let processedText = text;
+            let hasImages = false;
+            let imageElements = '';
+            
+            // Find all markdown images and replace them with HTML
+            processedText = processedText.replace(imageRegex, (match, altText, url) => {
+                // Check if it's an image URL (common image extensions or Trello attachment URLs)
+                const isImageUrl = /\.(jpg|jpeg|png|gif|bmp|webp|svg)(\?.*)?$/i.test(url) || 
+                                 url.includes('trello.com') && url.includes('attachments') ||
+                                 url.includes('download');
+                
+                if (isImageUrl) {
+                    hasImages = true;
+                    const imageId = 'img_' + Math.random().toString(36).substr(2, 9);
+                    imageElements += `
+                        <div class="attachment-image">
+                            <img src="${url}" alt="${altText || 'Image'}" 
+                                 onclick="openImageModal('${url}', '${altText || 'Image'}')" />
+                        </div>
+                    `;
+                    return ''; // Remove the markdown from text
+                } else {
+                    // If it's not an image, keep it as a regular link
+                    return `<a href="${url}" target="_blank" style="color: #667eea; text-decoration: none;">${altText || url}</a>`;
+                }
+            });
+            
+            return { processedText, hasImages, imageElements };
+        }
+
+        // Function to render comment with image support
+        function renderCommentWithImage(comment, isCurrentUser, currentUser, formatSmartDate) {
+            const dateStr = comment.date.toLocaleDateString() + ' ' + comment.date.toLocaleTimeString();
+            const icon = comment.type === 'comment' ? '💬' : '📝';
+            const typeClass = comment.type === 'comment' ? 'comment' : 'activity';
+            const activityClass = comment.activityType ? comment.activityType : '';
+            
+            // Check if this comment has an attachment that's an image
+            const hasImageAttachment = comment.attachment && comment.attachment.mimeType && comment.attachment.mimeType.startsWith('image/');
+            
+            // Process markdown formatting and images in comment text
+            const formattedText = processMarkdownFormatting(comment.text);
+            const { processedText, hasImages, imageElements } = processMarkdownImages(formattedText);
+            
+            // Create avatar HTML
+            let avatarHTML = '';
+            if (comment.avatarUrl) {
+                avatarHTML = `<img src="${comment.avatarUrl}" alt="${comment.author}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />`;
+            }
+            avatarHTML += `<div class="comment-avatar" style="${comment.avatarUrl ? 'display: none;' : ''}">${comment.initials}</div>`;
+            
+            if (comment.type === 'activity') {
+                if (isCurrentUser) {
+                    // Current user activity messages - render as chat bubbles
+                    return `
+                        <div class="comment-item comment ${isCurrentUser ? 'current-user' : ''}" data-comment-id="${comment.id}">
+                            <div class="comment-avatar">
+                                ${avatarHTML}
+                            </div>
+                            <div class="message-container">
+                                <div class="message-row own">
+                                    <div class="comment-bubble own-message">
+                                        <div class="comment-text">${processedText}</div>
+                                        ${hasImageAttachment ? `
+                                            <div class="attachment-image">
+                                                <img src="${comment.attachment.url}" alt="${comment.attachment.name}" 
+                                                     onclick="openImageModal('${comment.attachment.url}', '${comment.attachment.name}')" />
+                                            </div>
+                                        ` : ''}
+                                        ${imageElements}
+                                        <div class="message-time">${formatSmartDate(comment.date)} ${comment.date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // Other users' activity messages - keep as activity bubbles
+                    return `
+                        <div class="comment-item activity ${activityClass}" data-comment-id="${comment.id}">
+                            <div class="comment-avatar" style="width: 28px; height: 28px; font-size: 0.75em;">
+                                ${avatarHTML}
+                            </div>
+                            <div class="message-container">
+                                <div class="comment-header">
+                                    <span class="comment-author">${comment.author}</span>
+                                    <span class="comment-date">${formatSmartDate(comment.date)}</span>
+                                </div>
+                                <div class="activity-bubble">
+                                    ${processedText}
+                                    ${hasImageAttachment ? `
+                                        <div class="attachment-image">
+                                            <img src="${comment.attachment.url}" alt="${comment.attachment.name}" 
+                                                 onclick="openImageModal('${comment.attachment.url}', '${comment.attachment.name}')" />
+                                        </div>
+                                    ` : ''}
+                                    ${imageElements}
+                                    <div class="message-time">${formatSmartDate(comment.date)} ${comment.date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            } else {
+                // Regular comments - chat bubble style
+                const bubbleClass = isCurrentUser ? 'own-message' : 'other-message';
+                const messageRowClass = isCurrentUser ? 'own' : '';
+                
+                return `
+                    <div class="comment-item comment ${isCurrentUser ? 'current-user' : ''}" data-comment-id="${comment.id}">
+                        <div class="comment-avatar">
+                            ${avatarHTML}
+                        </div>
+                        <div class="message-container">
+                            ${!isCurrentUser ? `
+                                <div class="comment-header">
+                                    <span class="comment-author">${comment.author}</span>
+                                    <span class="comment-date">${formatSmartDate(comment.date)}</span>
+                                </div>
+                            ` : ''}
+                            <div class="message-row ${messageRowClass}">
+                                <div class="comment-bubble ${bubbleClass}">
+                                    <div class="comment-text">${processedText}</div>
+                                    ${hasImageAttachment ? `
+                                        <div class="attachment-image">
+                                            <img src="${comment.attachment.url}" alt="${comment.attachment.name}" 
+                                                 onclick="openImageModal('${comment.attachment.url}', '${comment.attachment.name}')" />
+                                        </div>
+                                    ` : ''}
+                                    ${imageElements}
+                                    ${comment.type === 'comment' && window.trelloIntegration.isUserAuthenticated() && isCurrentUser ? `
+                                        <div class="comment-actions" style="margin-top: 8px; display: flex; gap: 8px;">
+                                            <button class="comment-action-btn comment-edit-btn" onclick="editComment('${comment.id}')" title="Edit comment" style="background: rgba(255,255,255,0.2); border: none; color: inherit; padding: 4px 8px; border-radius: 12px; font-size: 0.75em; cursor: pointer;">✏️</button>
+                                            <button class="comment-action-btn comment-delete-btn" onclick="deleteComment('${comment.id}')" title="Delete comment" style="background: rgba(255,255,255,0.2); border: none; color: inherit; padding: 4px 8px; border-radius: 12px; font-size: 0.75em; cursor: pointer;">🗑️</button>
+                                        </div>
+                                    ` : ''}
+                                    <div class="message-time">${formatSmartDate(comment.date)} ${comment.date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</div>
+                                </div>
+                            </div>
+                            <div class="comment-edit-form" id="edit-form-${comment.id}" style="display: none; margin-top: 8px;">
+                                <textarea class="comment-edit-textarea" id="edit-text-${comment.id}" style="width: 100%; padding: 8px; border-radius: 12px; border: 1px solid #ddd; resize: vertical;">${comment.text}</textarea>
+                                <div class="comment-edit-buttons" style="margin-top: 8px; display: flex; gap: 8px; justify-content: flex-end;">
+                                    <button class="comment-cancel-edit-btn" onclick="cancelEditComment('${comment.id}')" style="background: #6c757d; color: white; border: none; padding: 6px 12px; border-radius: 12px; font-size: 0.8em; cursor: pointer;">Cancel</button>
+                                    <button class="comment-save-btn" onclick="saveEditComment('${comment.id}')" style="background: #667eea; color: white; border: none; padding: 6px 12px; border-radius: 12px; font-size: 0.8em; cursor: pointer;">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Image modal functions
+        function openImageModal(imageUrl, imageName) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const caption = document.getElementById('imageCaption');
+            
+            modal.style.display = 'block';
+            modalImg.src = imageUrl;
+            caption.textContent = imageName || 'Image';
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            modal.style.display = 'none';
+        }
+
+        // Close image modal when clicking outside the image
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target === modal) {
+                closeImageModal();
+            }
+        });
+
+        // Close image modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeImageModal();
+            }
+        });
+
         // Function to refresh comments
         async function refreshComments() {
             if (!currentCardId) return;
@@ -14084,7 +14662,10 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
             modalBody.innerHTML = '<div class="comments-loading">🔄 Refreshing comments...</div>';
             
             try {
-                const comments = await window.trelloIntegration.getCardComments(currentCardId);
+                const [comments, attachments] = await Promise.all([
+                    window.trelloIntegration.getCardComments(currentCardId),
+                    window.trelloIntegration.getCardAttachments(currentCardId)
+                ]);
                 
                 if (comments.length === 0) {
                     modalBody.innerHTML = '<div class="no-comments">No comments or activity yet. Be the first to comment!</div>';
@@ -14173,7 +14754,7 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                                         <div class="message-container">
                                             <div class="message-row own">
                                                 <div class="comment-bubble own-message">
-                                                    <p class="comment-text">${comment.text}</p>
+                                                    <div class="comment-text">${processCommentText(comment.text)}</div>
                                                     <div class="message-time">${formatSmartDate(comment.date)} ${comment.date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</div>
                                                 </div>
                                             </div>
@@ -14193,7 +14774,7 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                                                 <span class="comment-date">${formatSmartDate(comment.date)}</span>
                                             </div>
                                             <div class="activity-bubble">
-                                                ${comment.text}
+                                                ${processCommentText(comment.text)}
                                                 <div class="message-time">${formatSmartDate(comment.date)} ${comment.date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</div>
                                             </div>
                                         </div>
@@ -14219,7 +14800,7 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                                         ` : ''}
                                         <div class="message-row ${messageRowClass}">
                                             <div class="comment-bubble ${bubbleClass}">
-                                                <p class="comment-text">${comment.text}</p>
+                                                <div class="comment-text">${processCommentText(comment.text)}</div>
                                                 ${comment.type === 'comment' && window.trelloIntegration.isUserAuthenticated() && isCurrentUser ? `
                                                     <div class="comment-actions" style="margin-top: 8px; display: flex; gap: 8px;">
                                                         <button class="comment-action-btn comment-edit-btn" onclick="editComment('${comment.id}')" title="Edit comment" style="background: rgba(255,255,255,0.2); border: none; color: inherit; padding: 4px 8px; border-radius: 12px; font-size: 0.75em; cursor: pointer;">✏️</button>
@@ -16510,16 +17091,26 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                         <div class="activity-content ${typeClass}">
                             <div class="activity-card-name">${activity.cardName}</div>
                             <div>${this.formatActivityText(activity)}</div>
+                            ${activity.attachment && activity.attachment.mimeType && activity.attachment.mimeType.startsWith('image/') ? `
+                                <div class="attachment-image">
+                                    <img src="${activity.attachment.url}" alt="${activity.attachment.name}" 
+                                         onclick="openImageModal('${activity.attachment.url}', '${activity.attachment.name}')" />
+                                </div>
+                            ` : ''}
                         </div>
                     </div>
                 `;
             }
 
             formatActivityText(activity) {
-                if (activity.type === 'comment') {
-                    return activity.text;
+                // Process markdown formatting and images in activity text
+                const formattedText = processMarkdownFormatting(activity.text);
+                const { processedText, hasImages, imageElements } = processMarkdownImages(formattedText);
+                
+                if (hasImages) {
+                    return processedText + imageElements;
                 } else {
-                    return activity.text;
+                    return formattedText;
                 }
             }
 
@@ -16558,7 +17149,246 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
         document.addEventListener('DOMContentLoaded', function() {
             new ActivitySidebar();
         });
+
+        /**
+         * Trello Status Sync Manager
+         * Handles real-time status synchronization between task cards and Trello
+         */
+        class TrelloStatusSync {
+            constructor() {
+                this.statusMap = {
+                    '📋 TO DO': { status: 'todo', icon: '⏳', text: 'To Do' },
+                    '🔄 ON-GOING': { status: 'ongoing', icon: '⚡', text: 'In Progress' },
+                    '🧪 FOR TESTING': { status: 'testing', icon: '🔍', text: 'Testing' },
+                    '✅ DONE': { status: 'done', icon: '✓', text: 'Done' }
+                };
+                this.syncInterval = null;
+                this.isInitialized = false;
+            }
+
+            /**
+             * Initialize Trello status sync for all task cards
+             */
+            async initialize() {
+                try {
+                    // Add Trello status sync div to all task cards that don't have it
+                    this.addStatusSyncToAllCards();
+                    
+                    // Start periodic sync
+                    this.startPeriodicSync();
+                    
+                    // Initial sync
+                    await this.syncAllTaskStatuses();
+                    
+                    this.isInitialized = true;
+                    console.log('Trello Status Sync initialized successfully');
+                } catch (error) {
+                    console.error('Failed to initialize Trello Status Sync:', error);
+                }
+            }
+
+            /**
+             * Add Trello status sync div to all task cards
+             */
+            addStatusSyncToAllCards() {
+                const taskCards = document.querySelectorAll('.task-card:not([data-trello-sync])');
+                
+                taskCards.forEach(card => {
+                    // Add data attribute
+                    card.setAttribute('data-trello-sync', 'true');
+                    
+                    // Find the task header
+                    const taskHeader = card.querySelector('.task-header');
+                    if (taskHeader) {
+                        // Create and insert the status sync div
+                        const statusSyncDiv = document.createElement('div');
+                        statusSyncDiv.className = 'trello-status-sync';
+                        statusSyncDiv.innerHTML = `
+                            <div class="trello-status-indicator" data-trello-status="loading">
+                                <span class="trello-status-icon">⟳</span>
+                                <span class="trello-status-text">Syncing...</span>
+                            </div>
+                        `;
+                        
+                        // Insert after the task header
+                        taskHeader.insertAdjacentElement('afterend', statusSyncDiv);
+                    }
+                });
+            }
+
+            /**
+             * Sync status for all task cards
+             */
+            async syncAllTaskStatuses() {
+                try {
+                    // Get all task cards with Trello sync
+                    const taskCards = document.querySelectorAll('.task-card[data-trello-sync="true"]');
+                    
+                    // Get Trello task status
+                    const trelloStatus = await window.trelloIntegration.getAllTaskStatus();
+                    
+                    if (!trelloStatus || !trelloStatus.boardName) {
+                        // No Trello data available, show error status
+                        this.showErrorStatus(taskCards, 'Trello board not found');
+                        return;
+                    }
+
+                    // Get all tasks with checklist status from Trello
+                    const tasksWithStatus = await window.trelloIntegration.getAllTasksWithChecklistStatus();
+                    
+                    // Update each task card
+                    taskCards.forEach(card => {
+                        this.updateTaskCardStatus(card, tasksWithStatus);
+                    });
+                    
+                } catch (error) {
+                    console.error('Error syncing task statuses:', error);
+                    const taskCards = document.querySelectorAll('.task-card[data-trello-sync="true"]');
+                    this.showErrorStatus(taskCards, 'Sync failed');
+                }
+            }
+
+            /**
+             * Update individual task card status
+             */
+            updateTaskCardStatus(card, trelloTasks) {
+                try {
+                    const taskTitle = card.querySelector('h4')?.textContent?.trim();
+                    if (!taskTitle) return;
+
+                    // Find matching Trello task
+                    const trelloTask = trelloTasks.find(task => 
+                        task.cardName === taskTitle || 
+                        task.cardName.includes(taskTitle) ||
+                        taskTitle.includes(task.cardName)
+                    );
+
+                    const statusIndicator = card.querySelector('.trello-status-indicator');
+                    if (!statusIndicator) return;
+
+                    if (trelloTask) {
+                        // Update with Trello status
+                        const listName = trelloTask.listName;
+                        const statusInfo = this.getStatusInfo(listName);
+                        
+                        statusIndicator.setAttribute('data-trello-status', statusInfo.status);
+                        statusIndicator.querySelector('.trello-status-icon').textContent = statusInfo.icon;
+                        statusIndicator.querySelector('.trello-status-text').textContent = 
+                            `${statusInfo.text} • ${listName}`;
+                        
+                        // Add checklist progress if available
+                        if (trelloTask.checklistStatus && trelloTask.checklistStatus.length > 0) {
+                            const checklist = trelloTask.checklistStatus[0];
+                            const progressText = ` • ${checklist.completedItems}/${checklist.totalItems} items (${checklist.completionRate}%)`;
+                            statusIndicator.querySelector('.trello-status-text').textContent += progressText;
+                        }
+                    } else {
+                        // Task not found in Trello
+                        statusIndicator.setAttribute('data-trello-status', 'todo');
+                        statusIndicator.querySelector('.trello-status-icon').textContent = '⏳';
+                        statusIndicator.querySelector('.trello-status-text').textContent = 'Not synced';
+                    }
+                } catch (error) {
+                    console.error('Error updating task card status:', error);
+                    this.showErrorStatus([card], 'Update failed');
+                }
+            }
+
+            /**
+             * Get status information based on Trello list name
+             */
+            getStatusInfo(listName) {
+                for (const [key, value] of Object.entries(this.statusMap)) {
+                    if (listName.includes(key.replace(/[📋🔄🧪✅]/g, '').trim())) {
+                        return value;
+                    }
+                }
+                return { status: 'todo', icon: '⏳', text: 'Unknown' };
+            }
+
+            /**
+             * Show error status for task cards
+             */
+            showErrorStatus(cards, errorMessage) {
+                cards.forEach(card => {
+                    const statusIndicator = card.querySelector('.trello-status-indicator');
+                    if (statusIndicator) {
+                        statusIndicator.setAttribute('data-trello-status', 'error');
+                        statusIndicator.querySelector('.trello-status-icon').textContent = '⚠';
+                        statusIndicator.querySelector('.trello-status-text').textContent = errorMessage;
+                    }
+                });
+            }
+
+            /**
+             * Start periodic sync
+             */
+            startPeriodicSync() {
+                // Sync every 30 seconds
+                this.syncInterval = setInterval(() => {
+                    if (this.isInitialized) {
+                        this.syncAllTaskStatuses();
+                    }
+                }, 30000);
+            }
+
+            /**
+             * Stop periodic sync
+             */
+            stopPeriodicSync() {
+                if (this.syncInterval) {
+                    clearInterval(this.syncInterval);
+                    this.syncInterval = null;
+                }
+            }
+
+            /**
+             * Manual refresh of all statuses
+             */
+            async refreshAllStatuses() {
+                const taskCards = document.querySelectorAll('.task-card[data-trello-sync="true"]');
+                taskCards.forEach(card => {
+                    const statusIndicator = card.querySelector('.trello-status-indicator');
+                    if (statusIndicator) {
+                        statusIndicator.setAttribute('data-trello-status', 'loading');
+                        statusIndicator.querySelector('.trello-status-icon').textContent = '⟳';
+                        statusIndicator.querySelector('.trello-status-text').textContent = 'Syncing...';
+                    }
+                });
+                
+                await this.syncAllTaskStatuses();
+            }
+        }
+
+        // Global instance
+        window.trelloStatusSync = new TrelloStatusSync();
+
+        // Initialize Trello status sync when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Trello status sync after a short delay to ensure Trello integration is ready
+            setTimeout(() => {
+                if (window.trelloIntegration) {
+                    window.trelloStatusSync.initialize();
+                }
+            }, 1000);
+        });
+
+        // Function to refresh Trello status (called by the refresh button)
+        async function refreshTrelloStatus() {
+            if (window.trelloStatusSync) {
+                await window.trelloStatusSync.refreshAllStatuses();
+            }
+        }
     </script>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="image-modal" style="display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); backdrop-filter: blur(5px);">
+        <div class="image-modal-content" style="margin: auto; display: block; max-width: 90%; max-height: 90%; object-fit: contain; position: relative; top: 50%; transform: translateY(-50%);">
+            <span class="image-modal-close" onclick="closeImageModal()" style="position: absolute; top: 15px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; cursor: pointer; z-index: 2001;">&times;</span>
+            <img id="modalImage" style="width: 100%; height: auto; border-radius: 8px;">
+            <div id="imageCaption" style="text-align: center; color: #f1f1f1; padding: 10px; font-size: 16px;"></div>
+        </div>
+    </div>
 
     <!-- Comments Modal -->
     <div id="commentsModal" class="comments-modal">
@@ -17984,6 +18814,11 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                 if (folderName.includes('auth')) return 'auth';
                 if (folderName.includes('user')) return 'user';
                 if (folderName.includes('campus')) return 'campus';
+                if (folderName.includes('student')) return 'student';
+                if (folderName.includes('teacher')) return 'teacher';
+                if (folderName.includes('class')) return 'class';
+                if (folderName.includes('assignment')) return 'assignment';
+                if (folderName.includes('grade')) return 'grade';
                 return 'other';
             }
 
@@ -18186,6 +19021,11 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                     'Authentication': '🔐',
                     'User Management': '👥',
                     'Campus Management': '🏢',
+                    'Student Management': '🎓',
+                    'Teacher Management': '👨‍🏫',
+                    'Class Management': '📚',
+                    'Assignment Management': '📝',
+                    'Grade Management': '📊',
                     'default': '📁'
                 };
                 return icons[folderName] || icons.default;
