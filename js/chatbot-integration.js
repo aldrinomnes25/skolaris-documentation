@@ -1547,7 +1547,7 @@ class SKOLARISChatbot {
 
                                 <h5>🏗️ System Foundation (Priority 1):</h5>
                                 <ul>
-                                    <li><strong>Database Schema</strong>: 40+ tables with complete data model</li>
+                                    <li><strong>Database Schema</strong>: 49 tables with complete data model including academic hierarchy</li>
                                     <li><strong>Multi-Campus Setup</strong>: Support for 8 ICCT campuses</li>
                                     <li><strong>JWT Authentication</strong>: Secure user authentication system</li>
                                     <li><strong>Role-Based Access Control</strong>: Students, Faculty, Admin roles</li>
@@ -1561,6 +1561,10 @@ class SKOLARISChatbot {
                                     <li><strong>Schedule Management</strong>: Class scheduling and timetables</li>
                                     <li><strong>Clinic Management</strong>: Medical records and health tracking</li>
                                     <li><strong>Bulk Import</strong>: Data import and migration tools</li>
+                                    <li><strong>College Management ⭐ NEW</strong>: Organizational units administration</li>
+                                    <li><strong>Academic Terms ⭐ NEW</strong>: Semester/trimester management</li>
+                                    <li><strong>Default Curriculum ⭐ NEW</strong>: Template curriculum builder</li>
+                                    <li><strong>Course Offerings ⭐ NEW</strong>: Programs→Terms→Subjects connection</li>
                                 </ul>
 
                                 <h5>👨‍🎓 Student Core Processes (Priority 3):</h5>

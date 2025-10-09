@@ -535,6 +535,58 @@
             color: #6c757d;
             font-size: 1.1em;
         }
+
+        /* Image Upload Section Styles */
+        .image-upload-section {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .image-upload-controls {
+            margin-top: 15px;
+        }
+
+        .uploaded-images-preview {
+            margin-top: 15px;
+            padding: 10px;
+            background: white;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            min-height: 50px;
+        }
+
+        .uploaded-image-item {
+            transition: transform 0.2s ease;
+        }
+
+        .uploaded-image-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* Annex Images Styles */
+        .annex-images {
+            margin: 20px 0;
+        }
+
+        .annex-image-item {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+
+        .annex-image-item h4 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+
+        .annex-image-item img {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
         .progress-report-content {
             background: white;
             padding: 25px;
@@ -2995,9 +3047,9 @@
                         <div style="background: #e8f4fd; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #17a2b8;">
                             <h6 style="color: #2c3e50; margin: 0 0 15px 0;">🎯 Current Development Status</h6>
                             <ul style="margin: 0; padding-left: 20px; color: #495057;">
-                                <li><strong>Database Schema:</strong> ✅ Complete with 40 tables covering all system modules</li>
+                                <li><strong>Database Schema:</strong> ✅ Complete with 49 tables covering all system modules</li>
                                 <li><strong>Development Phases:</strong> 🔄 Ready to start - 6 development phases (Phase 1-6) at 0% completion</li>
-                                <li><strong>Task Management:</strong> ✅ 72 Phase 1 development tasks ready for implementation (36 Frontend + 36 Backend)</li>
+                                <li><strong>Task Management:</strong> ✅ 80 Phase 1 development tasks ready for implementation (40 Frontend + 40 Backend)</li>
                                 <li><strong>System Architecture:</strong> ✅ Complete design with 18 core modules defined</li>
                                 <li><strong>User Roles:</strong> ✅ 8 roles defined with permission structure</li>
                             </ul>
@@ -3006,7 +3058,7 @@
                         <div style="background: #fff3cd; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #ffc107;">
                             <h6 style="color: #856404; margin: 0 0 15px 0;">📋 Development Phases Status</h6>
                             <ul style="margin: 0; padding-left: 20px; color: #856404;">
-                                <li><strong>Phase 1 (3-Month Core Implementation):</strong> 0% - Ready for development (72 tasks planned, Oct-Dec 2025)</li>
+                                <li><strong>Phase 1 (3-Month Core Implementation):</strong> 0% - Ready for development (80 tasks planned, Oct-Dec 2025)</li>
                                 <li><strong>Phase 2 (3-Month Advanced Features):</strong> 0% - Ready for development (Feb-Apr 2026)</li>
                                 <li><strong>Phase 3 (Extended Academic Features):</strong> 0% - Ready for development (May-Jul 2026)</li>
                                 <li><strong>Phase 4 (Advanced Financial & Administrative):</strong> 0% - Ready for development (Aug-Oct 2026)</li>
@@ -3119,14 +3171,14 @@
                 
                 <div class="highlight-box">
                     <h4>📊 Database Overview</h4>
-                    <p>SKOLARIS uses a comprehensive relational database design with <strong>45 tables</strong> organized into logical modules. The core architecture supports multi-campus operations with role-based access control, ensuring data integrity and scalability across all ICCT campuses. The system includes comprehensive Philippine student information management with DepEd compliance.</p>
+                    <p>SKOLARIS uses a comprehensive relational database design with <strong>49 tables</strong> organized into logical modules. The core architecture supports multi-campus operations with role-based access control, ensuring data integrity and scalability across all ICCT campuses. The system includes comprehensive Philippine student information management with DepEd compliance.</p>
                     <div class="stats-row">
                         <div class="stat-box">
                             <div class="stat-number">10</div>
                             <div class="stat-label">Core Tables</div>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-number">17</div>
+                            <div class="stat-number">21</div>
                             <div class="stat-label">Academic Tables</div>
                         </div>
                         <div class="stat-box">
@@ -3380,8 +3432,11 @@
                                 This ERD manages the complete academic lifecycle from student enrollment to graduation, including curriculum management, class scheduling, grade tracking, and transcript generation. The design supports flexible academic structures across multiple programs and campuses.
                             </p>
                             <ul style="margin: 0; padding-left: 20px; color: #495057; line-height: 1.6;">
+                                <li><strong>🏫 CAMPUSES:</strong> Physical locations (8 ICCT campuses) serving as the top level of the hierarchy</li>
+                                <li><strong>🏛️ COLLEGES:</strong> Organizational units within campuses (e.g., College of Engineering, College of Business)</li>
                                 <li><strong>👥 STUDENTS:</strong> Student records linked to users and programs, tracking enrollment status and academic progress</li>
-                                <li><strong>📚 PROGRAMS:</strong> Academic programs offered by each campus with specific duration and requirements</li>
+                                <li><strong>📚 PROGRAMS:</strong> Academic programs offered by colleges with specific duration and requirements</li>
+                                <li><strong>📅 ACADEMIC_TERMS:</strong> Centralized term management (semesters, trimesters, summer terms) with enrollment periods</li>
                                 <li><strong>📖 CURRICULUM:</strong> Course mapping for programs, defining subject sequences, prerequisites, and credit units</li>
                                 <li><strong>📝 SUBJECTS:</strong> Master list of all courses with codes, names, units, and descriptions</li>
                                 <li><strong>🏫 SECTIONS:</strong> Class sections for each program year level with capacity limits</li>
@@ -3472,6 +3527,7 @@
                                     <div style="padding: 15px;">
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #dc3545; font-weight: 600;">program_id (PK)</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">campus_id (FK)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">college_id (FK)</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #555;">program_code</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #555;">program_name</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #555;">duration_years</div>
@@ -3568,6 +3624,996 @@
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #555;">room_number</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #555;">capacity, type</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #555;">building, floor</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEW: Complete Academic Hierarchy ERD with Colleges and Academic Terms -->
+                <div class="process-group">
+                    <h3 class="group-title">🏛️ Academic Hierarchy ERD Diagram (Updated)</h3>
+                    <div class="entry">
+                        <div class="meta">
+                            <span class="meta-badge category">Academic Hierarchy</span>
+                            <span class="meta-badge priority">High Priority</span>
+                        </div>
+                        <h3>Academic Hierarchy Entity Relationship Diagram</h3>
+                        <h4>Colleges → Programs → Academic Terms → Courses Structure</h4>
+                        
+                        <div style="background: #f0f8ff; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #007bff;">
+                            <h5 style="color: #2c3e50; margin: 0 0 15px 0; font-size: 1.1em;">🏛️ Academic Hierarchy Explanation</h5>
+                            <p style="margin: 0 0 10px 0; color: #495057; line-height: 1.6;">
+                                This ERD represents the complete academic hierarchy: <strong>CAMPUSES → COLLEGES → PROGRAMS → ACADEMIC_TERMS → SUBJECTS</strong>. This structure provides clear organizational boundaries and enables flexible term management across different academic calendars.
+                            </p>
+                            <ul style="margin: 0; padding-left: 20px; color: #495057; line-height: 1.6;">
+                                <li><strong>🏫 CAMPUSES:</strong> Physical locations (8 ICCT campuses)</li>
+                                <li><strong>🏛️ COLLEGES:</strong> Organizational units within campuses (e.g., College of Engineering, College of Business)</li>
+                                <li><strong>📚 PROGRAMS:</strong> Academic programs offered by colleges (e.g., BS Computer Science, BS Accountancy)</li>
+                                <li><strong>📅 ACADEMIC_TERMS:</strong> Centralized term management (semesters, trimesters, summer terms)</li>
+                                <li><strong>📝 SUBJECTS:</strong> Individual courses/subjects taught in programs</li>
+                            </ul>
+                            <p style="margin: 10px 0 0 0; color: #495057; line-height: 1.6; font-style: italic;">
+                                This hierarchy ensures proper organizational structure and enables efficient management of academic offerings across all campuses.
+                            </p>
+                        </div>
+                        
+                        <div style="background: white; padding: 30px; border-radius: 12px; margin: 20px 0; border: 2px solid #e9ecef;">
+                            <div style="font-size: 1.3em; font-weight: 600; text-align: center; margin-bottom: 30px; color: #2c3e50; padding-bottom: 15px; border-bottom: 2px solid #007bff;">Academic Hierarchy - Entity Relationship Diagram</div>
+                            
+                            <!-- Hierarchy Flow -->
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin: 25px 0; flex-wrap: wrap; gap: 15px;">
+                                <div style="background: white; border: 2px solid #17a2b8; border-radius: 8px; min-width: 180px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                    <div style="background: #17a2b8; color: white; padding: 12px; font-weight: 600; text-align: center;">🏫 CAMPUSES</div>
+                                    <div style="padding: 15px;">
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #dc3545; font-weight: 600;">campus_id (PK)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">campus_code</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">campus_name</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">address</div>
+                                    </div>
+                                </div>
+                                
+                                <div style="font-size: 1.5em; color: #007bff; font-weight: bold;">→</div>
+                                
+                                <div style="background: white; border: 2px solid #6f42c1; border-radius: 8px; min-width: 180px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                    <div style="background: #6f42c1; color: white; padding: 12px; font-weight: 600; text-align: center;">🏛️ COLLEGES</div>
+                                    <div style="padding: 15px;">
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #dc3545; font-weight: 600;">college_id (PK)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">campus_id (FK)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">college_code</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">college_name</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">dean_name</div>
+                                    </div>
+                                </div>
+                                
+                                <div style="font-size: 1.5em; color: #007bff; font-weight: bold;">→</div>
+                                
+                                <div style="background: white; border: 2px solid #28a745; border-radius: 8px; min-width: 180px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                    <div style="background: #28a745; color: white; padding: 12px; font-weight: 600; text-align: center;">📚 PROGRAMS</div>
+                                    <div style="padding: 15px;">
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #dc3545; font-weight: 600;">program_id (PK)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">campus_id (FK)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">college_id (FK)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">program_code</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">program_name</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Second Row: Academic Terms and Subjects -->
+                            <div style="display: flex; justify-content: center; align-items: center; margin: 25px 0; flex-wrap: wrap; gap: 15px;">
+                                <div style="background: white; border: 2px solid #ffc107; border-radius: 8px; min-width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                    <div style="background: #ffc107; color: #212529; padding: 12px; font-weight: 600; text-align: center;">📅 ACADEMIC_TERMS</div>
+                                    <div style="padding: 15px;">
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #dc3545; font-weight: 600;">term_id (PK)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">term_code</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">school_year</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">term_type</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">term_start_date</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">is_current</div>
+                                    </div>
+                                </div>
+                                
+                                <div style="font-size: 1.5em; color: #007bff; font-weight: bold;">→</div>
+                                
+                                <div style="background: white; border: 2px solid #dc3545; border-radius: 8px; min-width: 180px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                    <div style="background: #dc3545; color: white; padding: 12px; font-weight: 600; text-align: center;">📝 SUBJECTS</div>
+                                    <div style="padding: 15px;">
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #dc3545; font-weight: 600;">subject_id (PK)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">subject_code</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">subject_name</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">units</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">type</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEW: DEFAULT CURRICULUM ERD -->
+                <div class="process-group">
+                    <h3 class="group-title">📖 Default Curriculum ERD Diagram</h3>
+                    <div class="entry">
+                        <div class="meta">
+                            <span class="meta-badge category">Default Curriculum</span>
+                            <span class="meta-badge priority">Critical</span>
+                        </div>
+                        <h3>Default Curriculum Entity Relationship Diagram</h3>
+                        <h4>Template Curriculum Management per Program</h4>
+                        
+                        <div style="background: #fff3cd; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #ff6b6b;">
+                            <h5 style="color: #2c3e50; margin: 0 0 15px 0; font-size: 1.1em;">📖 Default Curriculum Explanation</h5>
+                            <p style="margin: 0 0 10px 0; color: #495057; line-height: 1.6;">
+                                The <strong>DEFAULT_CURRICULUM</strong> table serves as the master template for each program's curriculum. It defines the standard course sequence, prerequisites, and requirements that every student in a program should follow. This template is used to auto-populate student-specific curricula during enrollment.
+                            </p>
+                            <ul style="margin: 0; padding-left: 20px; color: #495057; line-height: 1.6;">
+                                <li><strong>📚 Program-Specific:</strong> Each program has its own default curriculum defining the complete course sequence</li>
+                                <li><strong>📅 Term-Organized:</strong> Subjects organized by year level, semester, and term type</li>
+                                <li><strong>🎯 Subject Classification:</strong> Subjects categorized as Core, Major, Minor, Elective, GE, PE, or NSTP</li>
+                                <li><strong>🔗 Prerequisites:</strong> Defines prerequisite and co-requisite relationships between subjects</li>
+                                <li><strong>✅ Template Source:</strong> Used to generate individual student curricula during enrollment</li>
+                            </ul>
+                            <p style="margin: 10px 0 0 0; color: #495057; line-height: 1.6; font-style: italic;">
+                                This ensures consistency across all students enrolled in the same program while allowing flexibility for special cases.
+                            </p>
+                        </div>
+                        
+                        <div style="background: #ffe8e8; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #ff6b6b;">
+                            <h5 style="color: #2c3e50; margin: 0 0 15px 0; font-size: 1.1em;">🔗 Default Curriculum Relationships</h5>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px;">
+                                <div style="background: white; padding: 15px; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                    <h6 style="color: #2c3e50; margin: 0 0 10px 0; font-size: 1em;">📚 → 📖 PROGRAMS to DEFAULT_CURRICULUM</h6>
+                                    <p style="margin: 0; font-size: 0.9em; color: #495057; line-height: 1.5;">
+                                        <strong>One-to-Many:</strong> Each program has one default curriculum template containing all required and elective subjects organized by year and term.
+                                    </p>
+                                </div>
+                                <div style="background: white; padding: 15px; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                    <h6 style="color: #2c3e50; margin: 0 0 10px 0; font-size: 1em;">📝 → 📖 SUBJECTS to DEFAULT_CURRICULUM</h6>
+                                    <p style="margin: 0; font-size: 0.9em; color: #495057; line-height: 1.5;">
+                                        <strong>One-to-Many:</strong> Each subject can appear in multiple default curricula across different programs and year levels.
+                                    </p>
+                                </div>
+                                <div style="background: white; padding: 15px; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                    <h6 style="color: #2c3e50; margin: 0 0 10px 0; font-size: 1em;">📖 → 📖 DEFAULT_CURRICULUM to CURRICULUM</h6>
+                                    <p style="margin: 0; font-size: 0.9em; color: #495057; line-height: 1.5;">
+                                        <strong>Template-to-Instance:</strong> Default curriculum is copied to individual student curriculum records during enrollment, allowing personalization.
+                                    </p>
+                                </div>
+                                <div style="background: white; padding: 15px; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                    <h6 style="color: #2c3e50; margin: 0 0 10px 0; font-size: 1em;">🎯 Subject Types Classification</h6>
+                                    <p style="margin: 0; font-size: 0.9em; color: #495057; line-height: 1.5;">
+                                        <strong>Categories:</strong> Core (program foundation), Major (specialization), Minor (secondary track), Elective (student choice), GE (general education), PE (physical education), NSTP (national service).
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="background: white; padding: 30px; border-radius: 12px; margin: 20px 0; border: 2px solid #e9ecef;">
+                            <div style="font-size: 1.3em; font-weight: 600; text-align: center; margin-bottom: 30px; color: #2c3e50; padding-bottom: 15px; border-bottom: 2px solid #ff6b6b;">Default Curriculum - Entity Relationship Diagram</div>
+                            
+                            <!-- Main ERD Flow -->
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin: 25px 0; flex-wrap: wrap; gap: 15px;">
+                                <div style="background: white; border: 2px solid #28a745; border-radius: 8px; min-width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                    <div style="background: #28a745; color: white; padding: 12px; font-weight: 600; text-align: center;">📚 PROGRAMS</div>
+                                    <div style="padding: 15px;">
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #dc3545; font-weight: 600;">program_id (PK)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">campus_id (FK)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">college_id (FK)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">program_code</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">program_name</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">degree_type</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">duration_years</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">total_units</div>
+                                    </div>
+                                </div>
+                                
+                                <div style="font-size: 1.5em; color: #ff6b6b; font-weight: bold;">→</div>
+                                
+                                <div style="background: white; border: 2px solid #ff6b6b; border-radius: 8px; min-width: 220px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                    <div style="background: #ff6b6b; color: white; padding: 12px; font-weight: 600; text-align: center;">📖 DEFAULT_CURRICULUM</div>
+                                    <div style="padding: 15px;">
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #dc3545; font-weight: 600;">default_curriculum_id (PK)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">program_id (FK)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">subject_id (FK)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">year_level (1-6)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">semester (1-3)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">term_type</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">subject_type</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">prerequisites</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">co_requisites</div>
+                                    </div>
+                                </div>
+                                
+                                <div style="font-size: 1.5em; color: #ff6b6b; font-weight: bold;">→</div>
+                                
+                                <div style="background: white; border: 2px solid #6f42c1; border-radius: 8px; min-width: 180px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                    <div style="background: #6f42c1; color: white; padding: 12px; font-weight: 600; text-align: center;">📝 SUBJECTS</div>
+                                    <div style="padding: 15px;">
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #dc3545; font-weight: 600;">subject_id (PK)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">subject_code</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">subject_name</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">units</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">type</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">description</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Subject Type Legend -->
+                            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                                <h5 style="color: #2c3e50; margin: 0 0 15px 0; font-size: 1em;">🎯 Subject Type Classifications</h5>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
+                                    <div style="padding: 10px; background: white; border-left: 3px solid #007bff; border-radius: 4px;">
+                                        <strong style="color: #007bff;">Core</strong><br>
+                                        <small>Program Foundation</small>
+                                    </div>
+                                    <div style="padding: 10px; background: white; border-left: 3px solid #28a745; border-radius: 4px;">
+                                        <strong style="color: #28a745;">Major</strong><br>
+                                        <small>Specialization</small>
+                                    </div>
+                                    <div style="padding: 10px; background: white; border-left: 3px solid #17a2b8; border-radius: 4px;">
+                                        <strong style="color: #17a2b8;">Minor</strong><br>
+                                        <small>Secondary Track</small>
+                                    </div>
+                                    <div style="padding: 10px; background: white; border-left: 3px solid #ffc107; border-radius: 4px;">
+                                        <strong style="color: #856404;">Elective</strong><br>
+                                        <small>Student Choice</small>
+                                    </div>
+                                    <div style="padding: 10px; background: white; border-left: 3px solid #6c757d; border-radius: 4px;">
+                                        <strong style="color: #6c757d;">GE</strong><br>
+                                        <small>General Education</small>
+                                    </div>
+                                    <div style="padding: 10px; background: white; border-left: 3px solid #fd7e14; border-radius: 4px;">
+                                        <strong style="color: #fd7e14;">PE</strong><br>
+                                        <small>Physical Education</small>
+                                    </div>
+                                    <div style="padding: 10px; background: white; border-left: 3px solid #e83e8c; border-radius: 4px;">
+                                        <strong style="color: #e83e8c;">NSTP</strong><br>
+                                        <small>National Service</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Example Curriculum Flow -->
+                            <div style="background: #e8f5e9; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                                <h5 style="color: #2c3e50; margin: 0 0 15px 0; font-size: 1em;">📋 Example: BS Computer Science Default Curriculum</h5>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                                    <div style="background: white; padding: 15px; border-radius: 6px; border-left: 4px solid #28a745;">
+                                        <strong>1st Year - 1st Semester</strong>
+                                        <ul style="margin: 10px 0 0 0; padding-left: 20px; font-size: 0.9em;">
+                                            <li>Intro to Computing (Core)</li>
+                                            <li>Calculus I (Core)</li>
+                                            <li>English I (GE)</li>
+                                            <li>PE 1 (PE)</li>
+                                            <li>NSTP 1 (NSTP)</li>
+                                        </ul>
+                                    </div>
+                                    <div style="background: white; padding: 15px; border-radius: 6px; border-left: 4px solid #007bff;">
+                                        <strong>1st Year - 2nd Semester</strong>
+                                        <ul style="margin: 10px 0 0 0; padding-left: 20px; font-size: 0.9em;">
+                                            <li>Programming I (Core)</li>
+                                            <li>Calculus II (Core)</li>
+                                            <li>English II (GE)</li>
+                                            <li>PE 2 (PE)</li>
+                                            <li>NSTP 2 (NSTP)</li>
+                                        </ul>
+                                    </div>
+                                    <div style="background: white; padding: 15px; border-radius: 6px; border-left: 4px solid #17a2b8;">
+                                        <strong>2nd Year - 1st Semester</strong>
+                                        <ul style="margin: 10px 0 0 0; padding-left: 20px; font-size: 0.9em;">
+                                            <li>Data Structures (Major)</li>
+                                            <li>Database Systems (Major)</li>
+                                            <li>Physics (GE)</li>
+                                            <li>PE 3 (PE)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEW: COURSE OFFERINGS CONNECTION ERD -->
+                <div class="process-group">
+                    <h3 class="group-title">🔗 Course Offerings Connection ERD</h3>
+                    <div class="entry">
+                        <div class="meta">
+                            <span class="meta-badge category">Course Offerings</span>
+                            <span class="meta-badge priority">Critical</span>
+                        </div>
+                        <h3>Programs → Academic Terms → Subjects Connection</h3>
+                        <h4>Actual Course Offerings per Academic Term</h4>
+                        
+                        <div style="background: #e3f2fd; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #2196f3;">
+                            <h5 style="color: #2c3e50; margin: 0 0 15px 0; font-size: 1.1em;">🔗 Course Offerings Explanation</h5>
+                            <p style="margin: 0 0 10px 0; color: #495057; line-height: 1.6;">
+                                The <strong>COURSE_OFFERINGS</strong> table serves as the bridge connecting <strong>PROGRAMS → ACADEMIC_TERMS → SUBJECTS</strong>. While DEFAULT_CURRICULUM defines what subjects SHOULD be taken (the template), COURSE_OFFERINGS defines what subjects ARE being offered in a specific term with actual faculty assignments and slot limits.
+                            </p>
+                            <ul style="margin: 0; padding-left: 20px; color: #495057; line-height: 1.6;">
+                                <li><strong>🔄 Dynamic Offerings:</strong> Links programs to specific terms with actual subject offerings</li>
+                                <li><strong>👨‍🏫 Faculty Assignment:</strong> Each offering can be assigned to a faculty member</li>
+                                <li><strong>📊 Slot Management:</strong> Tracks maximum slots and current enrollment count</li>
+                                <li><strong>📅 Term-Specific:</strong> Same subject can be offered multiple times across different terms</li>
+                                <li><strong>✅ Availability Control:</strong> Can activate/deactivate offerings per term</li>
+                            </ul>
+                            <p style="margin: 10px 0 0 0; color: #495057; line-height: 1.6; font-style: italic;">
+                                This creates the complete connection: Programs decide what's offered → Terms schedule when it's offered → Subjects define what's taught.
+                            </p>
+                        </div>
+                        
+                        <div style="background: #e1f5fe; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #2196f3;">
+                            <h5 style="color: #2c3e50; margin: 0 0 15px 0; font-size: 1.1em;">🔗 Course Offerings Relationships</h5>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px;">
+                                <div style="background: white; padding: 15px; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                    <h6 style="color: #2c3e50; margin: 0 0 10px 0; font-size: 1em;">📚 → 🔗 PROGRAMS to COURSE_OFFERINGS</h6>
+                                    <p style="margin: 0; font-size: 0.9em; color: #495057; line-height: 1.5;">
+                                        <strong>One-to-Many:</strong> Each program can have multiple course offerings across different terms. This defines which subjects are available for a specific program.
+                                    </p>
+                                </div>
+                                <div style="background: white; padding: 15px; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                    <h6 style="color: #2c3e50; margin: 0 0 10px 0; font-size: 1em;">📅 → 🔗 ACADEMIC_TERMS to COURSE_OFFERINGS</h6>
+                                    <p style="margin: 0; font-size: 0.9em; color: #495057; line-height: 1.5;">
+                                        <strong>One-to-Many:</strong> Each academic term has multiple course offerings. This schedules when subjects are offered during the academic year.
+                                    </p>
+                                </div>
+                                <div style="background: white; padding: 15px; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                    <h6 style="color: #2c3e50; margin: 0 0 10px 0; font-size: 1em;">📝 → 🔗 SUBJECTS to COURSE_OFFERINGS</h6>
+                                    <p style="margin: 0; font-size: 0.9em; color: #495057; line-height: 1.5;">
+                                        <strong>One-to-Many:</strong> Each subject can be offered multiple times across different programs and terms with different faculty and schedules.
+                                    </p>
+                                </div>
+                                <div style="background: white; padding: 15px; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                    <h6 style="color: #2c3e50; margin: 0 0 10px 0; font-size: 1em;">👨‍🏫 → 🔗 FACULTY to COURSE_OFFERINGS</h6>
+                                    <p style="margin: 0; font-size: 0.9em; color: #495057; line-height: 1.5;">
+                                        <strong>One-to-Many:</strong> Each faculty member can be assigned to teach multiple course offerings across different terms and programs.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="background: white; padding: 30px; border-radius: 12px; margin: 20px 0; border: 2px solid #e9ecef;">
+                            <div style="font-size: 1.3em; font-weight: 600; text-align: center; margin-bottom: 30px; color: #2c3e50; padding-bottom: 15px; border-bottom: 2px solid #2196f3;">Course Offerings Connection - Entity Relationship Diagram</div>
+                            
+                            <!-- Main ERD Flow -->
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin: 25px 0; flex-wrap: wrap; gap: 15px;">
+                                <div style="background: white; border: 2px solid #28a745; border-radius: 8px; min-width: 180px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                    <div style="background: #28a745; color: white; padding: 12px; font-weight: 600; text-align: center;">📚 PROGRAMS</div>
+                                    <div style="padding: 15px;">
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #dc3545; font-weight: 600;">program_id (PK)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">program_code</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">program_name</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">college_id</div>
+                                    </div>
+                                </div>
+                                
+                                <div style="font-size: 1.5em; color: #2196f3; font-weight: bold;">→</div>
+                                
+                                <div style="background: white; border: 2px solid #2196f3; border-radius: 8px; min-width: 220px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                    <div style="background: #2196f3; color: white; padding: 12px; font-weight: 600; text-align: center;">🔗 COURSE_OFFERINGS</div>
+                                    <div style="padding: 15px;">
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #dc3545; font-weight: 600;">offering_id (PK)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">program_id (FK)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">term_id (FK)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">subject_id (FK)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">faculty_id (FK)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">year_level</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">max_slots</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">enrolled_count</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">is_available</div>
+                                    </div>
+                                </div>
+                                
+                                <div style="font-size: 1.5em; color: #2196f3; font-weight: bold;">→</div>
+                                
+                                <div style="background: white; border: 2px solid #6f42c1; border-radius: 8px; min-width: 180px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                    <div style="background: #6f42c1; color: white; padding: 12px; font-weight: 600; text-align: center;">📝 SUBJECTS</div>
+                                    <div style="padding: 15px;">
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #dc3545; font-weight: 600;">subject_id (PK)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">subject_code</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">subject_name</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">units</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Second Row: Academic Terms and Faculty -->
+                            <div style="display: flex; justify-content: center; align-items: center; margin: 25px 0; flex-wrap: wrap; gap: 15px;">
+                                <div style="background: white; border: 2px solid #ffc107; border-radius: 8px; min-width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                    <div style="background: #ffc107; color: #212529; padding: 12px; font-weight: 600; text-align: center;">📅 ACADEMIC_TERMS</div>
+                                    <div style="padding: 15px;">
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #dc3545; font-weight: 600;">term_id (PK)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">term_code</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">school_year</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">term_type</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">is_current</div>
+                                    </div>
+                                </div>
+                                
+                                <div style="font-size: 1.5em; color: #2196f3; font-weight: bold;">↑</div>
+                                
+                                <div style="background: white; border: 2px solid #17a2b8; border-radius: 8px; min-width: 180px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                    <div style="background: #17a2b8; color: white; padding: 12px; font-weight: 600; text-align: center;">👨‍🏫 FACULTY</div>
+                                    <div style="padding: 15px;">
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #dc3545; font-weight: 600;">faculty_id (PK)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">employee_number</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">full_name</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">department_id</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Example with arrows pointing to COURSE_OFFERINGS -->
+                            <div style="text-align: center; margin: 20px 0; font-size: 0.9em; color: #666;">
+                                <strong>Note:</strong> COURSE_OFFERINGS is the junction table connecting all entities
+                            </div>
+                            
+                            <!-- Real Example -->
+                            <div style="background: #f0f7ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                                <h5 style="color: #2c3e50; margin: 0 0 15px 0; font-size: 1em;">📋 Example: Course Offerings for BSCS - 1st Semester 2025-2026</h5>
+                                <div style="background: white; padding: 15px; border-radius: 6px; overflow-x: auto;">
+                                    <table style="width: 100%; border-collapse: collapse; font-size: 0.9em;">
+                                        <thead style="background: #2196f3; color: white;">
+                                            <tr>
+                                                <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Program</th>
+                                                <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Term</th>
+                                                <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Subject</th>
+                                                <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Faculty</th>
+                                                <th style="padding: 10px; text-align: center; border: 1px solid #ddd;">Slots</th>
+                                                <th style="padding: 10px; text-align: center; border: 1px solid #ddd;">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr style="background: #f8f9fa;">
+                                                <td style="padding: 8px; border: 1px solid #ddd;">BSCS</td>
+                                                <td style="padding: 8px; border: 1px solid #ddd;">2025-2026 1st Sem</td>
+                                                <td style="padding: 8px; border: 1px solid #ddd;">CS101 - Intro to Computing</td>
+                                                <td style="padding: 8px; border: 1px solid #ddd;">Prof. Juan Dela Cruz</td>
+                                                <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">40/40</td>
+                                                <td style="padding: 8px; border: 1px solid #ddd; text-align: center;"><span style="color: #28a745;">✓ Available</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px; border: 1px solid #ddd;">BSCS</td>
+                                                <td style="padding: 8px; border: 1px solid #ddd;">2025-2026 1st Sem</td>
+                                                <td style="padding: 8px; border: 1px solid #ddd;">MATH101 - Calculus I</td>
+                                                <td style="padding: 8px; border: 1px solid #ddd;">Prof. Maria Santos</td>
+                                                <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">35/40</td>
+                                                <td style="padding: 8px; border: 1px solid #ddd; text-align: center;"><span style="color: #28a745;">✓ Available</span></td>
+                                            </tr>
+                                            <tr style="background: #f8f9fa;">
+                                                <td style="padding: 8px; border: 1px solid #ddd;">BSCS</td>
+                                                <td style="padding: 8px; border: 1px solid #ddd;">2025-2026 1st Sem</td>
+                                                <td style="padding: 8px; border: 1px solid #ddd;">ENG101 - English I</td>
+                                                <td style="padding: 8px; border: 1px solid #ddd;">Prof. Pedro Reyes</td>
+                                                <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">40/40</td>
+                                                <td style="padding: 8px; border: 1px solid #ddd; text-align: center;"><span style="color: #dc3545;">✗ Full</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <!-- Key Difference -->
+                            <div style="background: #fff3cd; padding: 15px; border-radius: 6px; margin: 20px 0; border-left: 4px solid #ffc107;">
+                                <strong style="color: #856404;">Key Difference:</strong>
+                                <ul style="margin: 10px 0 0 0; padding-left: 20px; color: #856404;">
+                                    <li><strong>DEFAULT_CURRICULUM:</strong> Template (What students SHOULD take)</li>
+                                    <li><strong>COURSE_OFFERINGS:</strong> Actual offerings (What IS being offered this term with faculty, slots, and availability)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEW: COMPLETE CURRICULUM MANAGEMENT PROCESS -->
+                <div class="process-group">
+                    <h3 class="group-title">📚 Complete Curriculum Management Process</h3>
+                    <div class="entry">
+                        <div class="meta">
+                            <span class="meta-badge category">Curriculum Process</span>
+                            <span class="meta-badge priority">Essential</span>
+                        </div>
+                        <h3>From DEFAULT_CURRICULUM to COURSE_OFFERINGS - Complete Workflow</h3>
+                        <h4>End-to-End Curriculum Management System</h4>
+                        
+                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 12px; margin: 20px 0; color: white;">
+                            <h5 style="color: white; margin: 0 0 15px 0; font-size: 1.3em; text-align: center;">🎓 Complete Curriculum Lifecycle</h5>
+                            <p style="margin: 0 0 20px 0; line-height: 1.8; text-align: center; font-size: 1.1em;">
+                                This section explains the complete journey of curriculum management in SKOLARIS, from program design to student enrollment.
+                            </p>
+                            <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 8px; backdrop-filter: blur(10px);">
+                                <div style="text-align: center; font-size: 1.1em; font-weight: 600; margin-bottom: 15px;">The 5-Stage Process:</div>
+                                <div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 10px;">
+                                    <div style="text-align: center;">
+                                        <div style="font-size: 2em; margin-bottom: 5px;">1️⃣</div>
+                                        <div style="font-size: 0.9em;">Program Setup</div>
+                                    </div>
+                                    <div style="font-size: 1.5em;">→</div>
+                                    <div style="text-align: center;">
+                                        <div style="font-size: 2em; margin-bottom: 5px;">2️⃣</div>
+                                        <div style="font-size: 0.9em;">Default Curriculum</div>
+                                    </div>
+                                    <div style="font-size: 1.5em;">→</div>
+                                    <div style="text-align: center;">
+                                        <div style="font-size: 2em; margin-bottom: 5px;">3️⃣</div>
+                                        <div style="font-size: 0.9em;">Term Planning</div>
+                                    </div>
+                                    <div style="font-size: 1.5em;">→</div>
+                                    <div style="text-align: center;">
+                                        <div style="font-size: 2em; margin-bottom: 5px;">4️⃣</div>
+                                        <div style="font-size: 0.9em;">Course Offerings</div>
+                                    </div>
+                                    <div style="font-size: 1.5em;">→</div>
+                                    <div style="text-align: center;">
+                                        <div style="font-size: 2em; margin-bottom: 5px;">5️⃣</div>
+                                        <div style="font-size: 0.9em;">Student Enrollment</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- STAGE 1: Program Setup -->
+                        <div style="background: white; padding: 30px; border-radius: 12px; margin: 20px 0; border: 3px solid #667eea;">
+                            <div style="background: #667eea; color: white; padding: 15px; margin: -30px -30px 20px -30px; border-radius: 9px 9px 0 0;">
+                                <h4 style="margin: 0; font-size: 1.3em;">1️⃣ STAGE 1: Program Setup (One-Time)</h4>
+                            </div>
+                            
+                            <h5 style="color: #667eea; margin: 20px 0 15px 0;">📋 What Happens:</h5>
+                            <p style="line-height: 1.6; color: #555;">
+                                The academic administrator sets up the program structure within a college. This is done once when creating a new degree program.
+                            </p>
+                            
+                            <h5 style="color: #667eea; margin: 20px 0 15px 0;">🗂️ Tables Involved:</h5>
+                            <ul style="line-height: 1.8; color: #555;">
+                                <li><strong>CAMPUSES</strong> → Physical location</li>
+                                <li><strong>COLLEGES</strong> → Organizational unit</li>
+                                <li><strong>PROGRAMS</strong> → Degree program</li>
+                            </ul>
+                            
+                            <h5 style="color: #667eea; margin: 20px 0 15px 0;">💻 SQL Example:</h5>
+                            <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; border-left: 4px solid #667eea; overflow-x: auto;">
+<pre style="margin: 0; font-family: monospace; font-size: 0.9em;">-- Step 1: Create Program
+INSERT INTO programs (campus_id, college_id, program_code, program_name, degree_type, duration_years, total_units)
+VALUES (1, 1, 'BSCS', 'Bachelor of Science in Computer Science', 'bachelor', 4.0, 180);
+-- Result: program_id = 1</pre>
+                            </div>
+                            
+                            <div style="background: #e8f5e9; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #4caf50;">
+                                <strong style="color: #2e7d32;">✅ Output:</strong>
+                                <div style="margin-top: 10px; color: #555;">
+                                    Program "BSCS" created under College of Engineering at Main Campus
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- STAGE 2: Default Curriculum -->
+                        <div style="background: white; padding: 30px; border-radius: 12px; margin: 20px 0; border: 3px solid #9c27b0;">
+                            <div style="background: #9c27b0; color: white; padding: 15px; margin: -30px -30px 20px -30px; border-radius: 9px 9px 0 0;">
+                                <h4 style="margin: 0; font-size: 1.3em;">2️⃣ STAGE 2: Create DEFAULT_CURRICULUM (Template)</h4>
+                            </div>
+                            
+                            <h5 style="color: #9c27b0; margin: 20px 0 15px 0;">📋 What Happens:</h5>
+                            <p style="line-height: 1.6; color: #555;">
+                                Define the <strong>master template</strong> curriculum for the program. This template specifies all subjects that students SHOULD take throughout their degree, organized by year and semester. This is the "ideal curriculum" that serves as the blueprint.
+                            </p>
+                            
+                            <h5 style="color: #9c27b0; margin: 20px 0 15px 0;">🗂️ Tables Involved:</h5>
+                            <ul style="line-height: 1.8; color: #555;">
+                                <li><strong>DEFAULT_CURRICULUM</strong> → Master template</li>
+                                <li><strong>SUBJECTS</strong> → Individual courses</li>
+                            </ul>
+                            
+                            <h5 style="color: #9c27b0; margin: 20px 0 15px 0;">💻 SQL Example:</h5>
+                            <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; border-left: 4px solid #9c27b0; overflow-x: auto;">
+<pre style="margin: 0; font-family: monospace; font-size: 0.9em;">-- Step 2: Define DEFAULT_CURRICULUM for BSCS
+-- 1st Year, 1st Semester Template
+INSERT INTO default_curriculum 
+(program_id, subject_id, year_level, semester, term_type, subject_type, is_required, prerequisites)
+VALUES
+(1, 1, 1, 1, '1st Semester', 'Core', TRUE, NULL),        -- CS101
+(1, 2, 1, 1, '1st Semester', 'Core', TRUE, NULL),        -- MATH101
+(1, 3, 1, 1, '1st Semester', 'GE', TRUE, NULL),          -- ENG101
+(1, 4, 1, 1, '1st Semester', 'PE', TRUE, NULL),          -- PE101
+(1, 5, 1, 1, '1st Semester', 'NSTP', TRUE, NULL);        -- NSTP101
+
+-- Repeat for all semesters (8 semesters for 4-year program)</pre>
+                            </div>
+                            
+                            <div style="background: #fff3e0; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #ff9800;">
+                                <strong style="color: #e65100;">📌 Key Points:</strong>
+                                <ul style="margin: 10px 0 0 20px; color: #555;">
+                                    <li>Template is program-wide (same for all students)</li>
+                                    <li>Rarely changes (only when curriculum is revised)</li>
+                                    <li>No faculty assignment</li>
+                                    <li>No term-specific details</li>
+                                    <li>Defines prerequisites and co-requisites</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- STAGE 3: Term Planning -->
+                        <div style="background: white; padding: 30px; border-radius: 12px; margin: 20px 0; border: 3px solid #ff9800;">
+                            <div style="background: #ff9800; color: white; padding: 15px; margin: -30px -30px 20px -30px; border-radius: 9px 9px 0 0;">
+                                <h4 style="margin: 0; font-size: 1.3em;">3️⃣ STAGE 3: Academic Term Planning (Per Semester)</h4>
+                            </div>
+                            
+                            <h5 style="color: #ff9800; margin: 20px 0 15px 0;">📋 What Happens:</h5>
+                            <p style="line-height: 1.6; color: #555;">
+                                Before each semester starts, the registrar creates a new academic term with specific dates and enrollment periods. This defines <strong>WHEN</strong> courses will be offered.
+                            </p>
+                            
+                            <h5 style="color: #ff9800; margin: 20px 0 15px 0;">🗂️ Tables Involved:</h5>
+                            <ul style="line-height: 1.8; color: #555;">
+                                <li><strong>ACADEMIC_TERMS</strong> → Term scheduling</li>
+                            </ul>
+                            
+                            <h5 style="color: #ff9800; margin: 20px 0 15px 0;">💻 SQL Example:</h5>
+                            <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; border-left: 4px solid #ff9800; overflow-x: auto;">
+<pre style="margin: 0; font-family: monospace; font-size: 0.9em;">-- Step 3: Create Academic Term for upcoming semester
+INSERT INTO academic_terms 
+(term_code, school_year, term_type, term_start_date, term_end_date, enrollment_start, enrollment_end, is_current)
+VALUES
+('2025-1S', '2025-2026', '1st Semester', '2025-08-01', '2025-12-15', '2025-06-01', '2025-07-31', TRUE);
+-- Result: term_id = 1</pre>
+                            </div>
+                            
+                            <div style="background: #e1f5fe; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #03a9f4;">
+                                <strong style="color: #01579b;">ℹ️ Term Details:</strong>
+                                <div style="margin-top: 10px; color: #555;">
+                                    <strong>2025-2026 1st Semester</strong><br>
+                                    Classes: Aug 1 - Dec 15, 2025<br>
+                                    Enrollment: Jun 1 - Jul 31, 2025<br>
+                                    Status: Active/Current
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- STAGE 4: Course Offerings -->
+                        <div style="background: white; padding: 30px; border-radius: 12px; margin: 20px 0; border: 3px solid #4caf50;">
+                            <div style="background: #4caf50; color: white; padding: 15px; margin: -30px -30px 20px -30px; border-radius: 9px 9px 0 0;">
+                                <h4 style="margin: 0; font-size: 1.3em;">4️⃣ STAGE 4: Create COURSE_OFFERINGS (Actual Offerings)</h4>
+                            </div>
+                            
+                            <h5 style="color: #4caf50; margin: 20px 0 15px 0;">📋 What Happens:</h5>
+                            <p style="line-height: 1.6; color: #555;">
+                                The academic department creates <strong>actual course offerings</strong> for the specific term. This connects DEFAULT_CURRICULUM (template) with ACADEMIC_TERMS (when) and assigns faculty, sets slot limits, and opens for enrollment. This is what students will actually see and enroll in.
+                            </p>
+                            
+                            <h5 style="color: #4caf50; margin: 20px 0 15px 0;">🗂️ Tables Involved:</h5>
+                            <ul style="line-height: 1.8; color: #555;">
+                                <li><strong>COURSE_OFFERINGS</strong> → Junction/Bridge table</li>
+                                <li>References: PROGRAMS, ACADEMIC_TERMS, SUBJECTS, FACULTY</li>
+                            </ul>
+                            
+                            <h5 style="color: #4caf50; margin: 20px 0 15px 0;">💻 SQL Example:</h5>
+                            <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; border-left: 4px solid #4caf50; overflow-x: auto;">
+<pre style="margin: 0; font-family: monospace; font-size: 0.9em;">-- Step 4A: Auto-generate offerings from DEFAULT_CURRICULUM template
+INSERT INTO course_offerings 
+(program_id, term_id, subject_id, year_level, semester, subject_type, max_slots, is_available)
+SELECT 
+    dc.program_id,
+    1 AS term_id,  -- 2025-2026 1st Semester
+    dc.subject_id,
+    dc.year_level,
+    dc.semester,
+    dc.subject_type,
+    40 AS max_slots,
+    FALSE AS is_available  -- Not yet open for enrollment
+FROM default_curriculum dc
+WHERE dc.program_id = 1 
+  AND dc.semester = 1  -- Only 1st semester subjects
+  AND dc.is_active = TRUE;
+
+-- Step 4B: Assign faculty to offerings
+UPDATE course_offerings 
+SET faculty_id = 101 
+WHERE program_id = 1 AND term_id = 1 AND subject_id = 1;  -- CS101 → Prof. Juan
+
+UPDATE course_offerings 
+SET faculty_id = 102 
+WHERE program_id = 1 AND term_id = 1 AND subject_id = 2;  -- MATH101 → Prof. Maria
+
+-- Step 4C: Open for enrollment
+UPDATE course_offerings 
+SET is_available = TRUE 
+WHERE program_id = 1 AND term_id = 1;</pre>
+                            </div>
+                            
+                            <div style="background: #e8f5e9; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #4caf50;">
+                                <strong style="color: #2e7d32;">✅ What Students See:</strong>
+                                <div style="margin-top: 10px;">
+                                    <table style="width: 100%; border-collapse: collapse; font-size: 0.9em; margin-top: 10px;">
+                                        <thead style="background: #4caf50; color: white;">
+                                            <tr>
+                                                <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Subject</th>
+                                                <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Faculty</th>
+                                                <th style="padding: 10px; text-align: center; border: 1px solid #ddd;">Slots</th>
+                                                <th style="padding: 10px; text-align: center; border: 1px solid #ddd;">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr style="background: white;">
+                                                <td style="padding: 8px; border: 1px solid #ddd;">CS101 - Intro to Computing</td>
+                                                <td style="padding: 8px; border: 1px solid #ddd;">Prof. Juan Dela Cruz</td>
+                                                <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">35/40</td>
+                                                <td style="padding: 8px; border: 1px solid #ddd; text-align: center;"><span style="color: #4caf50;">✓ Available</span></td>
+                                            </tr>
+                                            <tr style="background: #f5f5f5;">
+                                                <td style="padding: 8px; border: 1px solid #ddd;">MATH101 - Calculus I</td>
+                                                <td style="padding: 8px; border: 1px solid #ddd;">Prof. Maria Santos</td>
+                                                <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">38/40</td>
+                                                <td style="padding: 8px; border: 1px solid #ddd; text-align: center;"><span style="color: #4caf50;">✓ Available</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- STAGE 5: Student Enrollment -->
+                        <div style="background: white; padding: 30px; border-radius: 12px; margin: 20px 0; border: 3px solid #2196f3;">
+                            <div style="background: #2196f3; color: white; padding: 15px; margin: -30px -30px 20px -30px; border-radius: 9px 9px 0 0;">
+                                <h4 style="margin: 0; font-size: 1.3em;">5️⃣ STAGE 5: Student Enrollment (Per Student)</h4>
+                            </div>
+                            
+                            <h5 style="color: #2196f3; margin: 20px 0 15px 0;">📋 What Happens:</h5>
+                            <p style="line-height: 1.6; color: #555;">
+                                Students enroll in available course offerings during the enrollment period. The system checks prerequisites, available slots, and creates enrollment records. Each enrollment updates the enrolled_count in COURSE_OFFERINGS.
+                            </p>
+                            
+                            <h5 style="color: #2196f3; margin: 20px 0 15px 0;">🗂️ Tables Involved:</h5>
+                            <ul style="line-height: 1.8; color: #555;">
+                                <li><strong>ENROLLMENTS</strong> → Student enrollment records</li>
+                                <li><strong>COURSE_OFFERINGS</strong> → Updated slot counts</li>
+                            </ul>
+                            
+                            <h5 style="color: #2196f3; margin: 20px 0 15px 0;">💻 SQL Example:</h5>
+                            <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; border-left: 4px solid #2196f3; overflow-x: auto;">
+<pre style="margin: 0; font-family: monospace; font-size: 0.9em;">-- Step 5A: Check if student can enroll
+SELECT 
+    co.offering_id,
+    s.subject_code,
+    s.subject_name,
+    f.full_name AS faculty,
+    (co.max_slots - co.enrolled_count) AS available_slots
+FROM course_offerings co
+JOIN subjects s ON co.subject_id = s.subject_id
+LEFT JOIN faculty f ON co.faculty_id = f.faculty_id
+WHERE co.program_id = 1 
+  AND co.term_id = 1
+  AND co.is_available = TRUE
+  AND (co.max_slots - co.enrolled_count) > 0;
+
+-- Step 5B: Enroll student
+INSERT INTO enrollments (student_id, offering_id, enrollment_date, status)
+VALUES (1001, 101, NOW(), 'enrolled');
+
+-- Step 5C: Update enrolled count
+UPDATE course_offerings 
+SET enrolled_count = enrolled_count + 1 
+WHERE offering_id = 101;</pre>
+                            </div>
+                            
+                            <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #2196f3;">
+                                <strong style="color: #01579b;">🎓 Student View:</strong>
+                                <div style="margin-top: 10px; color: #555;">
+                                    <strong>Student ID: 1001 (Juan Silva)</strong><br>
+                                    Program: BSCS<br>
+                                    Term: 2025-2026 1st Semester<br>
+                                    Enrolled Subjects: 5<br>
+                                    Total Units: 14
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- COMPLETE FLOW DIAGRAM -->
+                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 12px; margin: 30px 0; color: white;">
+                            <h4 style="color: white; margin: 0 0 20px 0; font-size: 1.3em; text-align: center;">🔄 Complete Process Flow Diagram</h4>
+                            
+                            <div style="background: rgba(255,255,255,0.95); padding: 25px; border-radius: 8px; color: #333;">
+                                <div style="display: flex; flex-direction: column; gap: 20px;">
+                                    <!-- Row 1 -->
+                                    <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                                        <div style="background: #667eea; color: white; padding: 20px; border-radius: 8px; min-width: 200px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                            <div style="font-size: 2em; margin-bottom: 10px;">1️⃣</div>
+                                            <div style="font-weight: 600;">PROGRAMS</div>
+                                            <div style="font-size: 0.85em; margin-top: 5px; opacity: 0.9;">Create degree program</div>
+                                        </div>
+                                        <div style="font-size: 2em; color: #667eea;">→</div>
+                                        <div style="background: #9c27b0; color: white; padding: 20px; border-radius: 8px; min-width: 200px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                            <div style="font-size: 2em; margin-bottom: 10px;">2️⃣</div>
+                                            <div style="font-weight: 600;">DEFAULT_CURRICULUM</div>
+                                            <div style="font-size: 0.85em; margin-top: 5px; opacity: 0.9;">Define template</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Arrow Down -->
+                                    <div style="text-align: center; font-size: 2em; color: #667eea;">↓</div>
+                                    
+                                    <!-- Row 2 -->
+                                    <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                                        <div style="background: #ff9800; color: white; padding: 20px; border-radius: 8px; min-width: 200px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                            <div style="font-size: 2em; margin-bottom: 10px;">3️⃣</div>
+                                            <div style="font-weight: 600;">ACADEMIC_TERMS</div>
+                                            <div style="font-size: 0.85em; margin-top: 5px; opacity: 0.9;">Plan semester</div>
+                                        </div>
+                                        <div style="font-size: 2em; color: #667eea;">→</div>
+                                        <div style="background: #4caf50; color: white; padding: 20px; border-radius: 8px; min-width: 200px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                            <div style="font-size: 2em; margin-bottom: 10px;">4️⃣</div>
+                                            <div style="font-weight: 600;">COURSE_OFFERINGS</div>
+                                            <div style="font-size: 0.85em; margin-top: 5px; opacity: 0.9;">Create offerings</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Arrow Down -->
+                                    <div style="text-align: center; font-size: 2em; color: #667eea;">↓</div>
+                                    
+                                    <!-- Row 3 -->
+                                    <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                                        <div style="background: #2196f3; color: white; padding: 20px; border-radius: 8px; min-width: 200px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                            <div style="font-size: 2em; margin-bottom: 10px;">5️⃣</div>
+                                            <div style="font-weight: 600;">ENROLLMENTS</div>
+                                            <div style="font-size: 0.85em; margin-top: 5px; opacity: 0.9;">Students enroll</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- COMPARISON TABLE -->
+                        <div style="background: white; padding: 30px; border-radius: 12px; margin: 20px 0; border: 2px solid #e9ecef;">
+                            <h4 style="color: #2c3e50; margin: 0 0 20px 0;">📊 Key Differences: DEFAULT_CURRICULUM vs COURSE_OFFERINGS</h4>
+                            
+                            <div style="overflow-x: auto;">
+                                <table style="width: 100%; border-collapse: collapse; font-size: 0.9em;">
+                                    <thead>
+                                        <tr style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                                            <th style="padding: 15px; text-align: left; border: 1px solid #ddd;">Aspect</th>
+                                            <th style="padding: 15px; text-align: left; border: 1px solid #ddd;">DEFAULT_CURRICULUM (Template)</th>
+                                            <th style="padding: 15px; text-align: left; border: 1px solid #ddd;">COURSE_OFFERINGS (Actual)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="background: #f8f9fa;">
+                                            <td style="padding: 12px; border: 1px solid #ddd; font-weight: 600;">Purpose</td>
+                                            <td style="padding: 12px; border: 1px solid #ddd;">Master template/blueprint</td>
+                                            <td style="padding: 12px; border: 1px solid #ddd;">Actual term-specific offerings</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 12px; border: 1px solid #ddd; font-weight: 600;">Scope</td>
+                                            <td style="padding: 12px; border: 1px solid #ddd;">Program-wide (all students)</td>
+                                            <td style="padding: 12px; border: 1px solid #ddd;">Term-specific (one semester)</td>
+                                        </tr>
+                                        <tr style="background: #f8f9fa;">
+                                            <td style="padding: 12px; border: 1px solid #ddd; font-weight: 600;">Definition</td>
+                                            <td style="padding: 12px; border: 1px solid #ddd;">What students SHOULD take</td>
+                                            <td style="padding: 12px; border: 1px solid #ddd;">What IS being offered now</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 12px; border: 1px solid #ddd; font-weight: 600;">Faculty</td>
+                                            <td style="padding: 12px; border: 1px solid #ddd;">❌ Not assigned</td>
+                                            <td style="padding: 12px; border: 1px solid #ddd;">✅ Assigned (Prof. Juan, Prof. Maria, etc.)</td>
+                                        </tr>
+                                        <tr style="background: #f8f9fa;">
+                                            <td style="padding: 12px; border: 1px solid #ddd; font-weight: 600;">Slots</td>
+                                            <td style="padding: 12px; border: 1px solid #ddd;">❌ Not tracked</td>
+                                            <td style="padding: 12px; border: 1px solid #ddd;">✅ Tracked (35/40, 40/40, etc.)</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 12px; border: 1px solid #ddd; font-weight: 600;">Academic Term</td>
+                                            <td style="padding: 12px; border: 1px solid #ddd;">❌ Generic (no specific term)</td>
+                                            <td style="padding: 12px; border: 1px solid #ddd;">✅ Specific (2025-2026 1st Sem)</td>
+                                        </tr>
+                                        <tr style="background: #f8f9fa;">
+                                            <td style="padding: 12px; border: 1px solid #ddd; font-weight: 600;">Availability</td>
+                                            <td style="padding: 12px; border: 1px solid #ddd;">Always active (static)</td>
+                                            <td style="padding: 12px; border: 1px solid #ddd;">Can enable/disable per term</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 12px; border: 1px solid #ddd; font-weight: 600;">Updates</td>
+                                            <td style="padding: 12px; border: 1px solid #ddd;">Rarely changes (curriculum revision)</td>
+                                            <td style="padding: 12px; border: 1px solid #ddd;">Changes every term</td>
+                                        </tr>
+                                        <tr style="background: #f8f9fa;">
+                                            <td style="padding: 12px; border: 1px solid #ddd; font-weight: 600;">Student Interaction</td>
+                                            <td style="padding: 12px; border: 1px solid #ddd;">Students don't see this</td>
+                                            <td style="padding: 12px; border: 1px solid #ddd;">Students enroll in this</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <!-- REAL EXAMPLE -->
+                        <div style="background: #f0f7ff; padding: 30px; border-radius: 12px; margin: 20px 0; border: 2px solid #2196f3;">
+                            <h4 style="color: #1976d2; margin: 0 0 20px 0;">🎓 Real-World Example: BSCS Student Journey</h4>
+                            
+                            <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 15px;">
+                                <h5 style="color: #1976d2; margin: 0 0 10px 0;">Admin Side (One-Time Setup):</h5>
+                                <ol style="line-height: 2; color: #555;">
+                                    <li><strong>Program Created:</strong> BSCS under College of Engineering</li>
+                                    <li><strong>Default Curriculum Defined:</strong> 8 semesters of subjects mapped out</li>
+                                </ol>
+                            </div>
+                            
+                            <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 15px;">
+                                <h5 style="color: #1976d2; margin: 0 0 10px 0;">Admin Side (Per Semester):</h5>
+                                <ol style="line-height: 2; color: #555;" start="3">
+                                    <li><strong>Term Created:</strong> 2025-2026 1st Semester (Aug-Dec)</li>
+                                    <li><strong>Course Offerings Generated:</strong> From DEFAULT_CURRICULUM template</li>
+                                    <li><strong>Faculty Assigned:</strong> Prof. Juan → CS101, Prof. Maria → MATH101</li>
+                                    <li><strong>Enrollment Opened:</strong> Students can now see and enroll</li>
+                                </ol>
+                            </div>
+                            
+                            <div style="background: white; padding: 20px; border-radius: 8px;">
+                                <h5 style="color: #1976d2; margin: 0 0 10px 0;">Student Side (Enrollment):</h5>
+                                <ol style="line-height: 2; color: #555;" start="7">
+                                    <li><strong>Student Logs In:</strong> Juan Silva (Student ID: 1001)</li>
+                                    <li><strong>Sees Available Offerings:</strong> CS101, MATH101, ENG101, PE101, NSTP101</li>
+                                    <li><strong>Checks Slots:</strong> CS101 has 5 slots available (35/40)</li>
+                                    <li><strong>Enrolls:</strong> System creates enrollment record</li>
+                                    <li><strong>Slot Updated:</strong> CS101 now shows 36/40</li>
+                                </ol>
+                            </div>
+                        </div>
+                        
+                        <!-- BENEFITS -->
+                        <div style="background: white; padding: 30px; border-radius: 12px; margin: 20px 0; border: 2px solid #4caf50;">
+                            <h4 style="color: #2e7d32; margin: 0 0 20px 0;">✅ Benefits of This Two-Layer System</h4>
+                            
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                                <div style="background: #e8f5e9; padding: 20px; border-radius: 8px; border-left: 4px solid #4caf50;">
+                                    <h5 style="color: #2e7d32; margin: 0 0 10px 0;">For Administrators:</h5>
+                                    <ul style="margin: 0; padding-left: 20px; line-height: 1.8; color: #555;">
+                                        <li>Easy to update curriculum (change template once)</li>
+                                        <li>Flexible term-by-term planning</li>
+                                        <li>Faculty workload management</li>
+                                        <li>Resource optimization</li>
+                                    </ul>
+                                </div>
+                                
+                                <div style="background: #e3f2fd; padding: 20px; border-radius: 8px; border-left: 4px solid #2196f3;">
+                                    <h5 style="color: #1976d2; margin: 0 0 10px 0;">For Students:</h5>
+                                    <ul style="margin: 0; padding-left: 20px; line-height: 1.8; color: #555;">
+                                        <li>See actual available offerings</li>
+                                        <li>Know who's teaching</li>
+                                        <li>Check slot availability</li>
+                                        <li>Clear enrollment path</li>
+                                    </ul>
+                                </div>
+                                
+                                <div style="background: #fff3e0; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9800;">
+                                    <h5 style="color: #e65100; margin: 0 0 10px 0;">For Faculty:</h5>
+                                    <ul style="margin: 0; padding-left: 20px; line-height: 1.8; color: #555;">
+                                        <li>Clear teaching assignments</li>
+                                        <li>Load tracking per term</li>
+                                        <li>Student list management</li>
+                                        <li>Schedule planning</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- SUMMARY -->
+                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 12px; margin: 20px 0; color: white;">
+                            <h4 style="color: white; margin: 0 0 20px 0; font-size: 1.3em; text-align: center;">📝 Complete Process Summary</h4>
+                            
+                            <div style="background: rgba(255,255,255,0.95); padding: 25px; border-radius: 8px; color: #333;">
+                                <div style="font-size: 1.1em; line-height: 2; color: #555;">
+                                    <strong style="color: #667eea;">1. DEFAULT_CURRICULUM</strong> = The template/blueprint (what should be taken)<br>
+                                    <strong style="color: #9c27b0;">2. ACADEMIC_TERMS</strong> = When it happens (specific semester)<br>
+                                    <strong style="color: #4caf50;">3. COURSE_OFFERINGS</strong> = The bridge connecting template + term + faculty<br>
+                                    <strong style="color: #2196f3;">4. ENROLLMENTS</strong> = Students actually enrolling<br>
+                                </div>
+                                
+                                <div style="background: #fff3cd; padding: 15px; border-radius: 6px; margin-top: 20px; border-left: 4px solid #ffc107;">
+                                    <strong style="color: #856404;">🎯 Key Insight:</strong>
+                                    <div style="margin-top: 10px; color: #555; line-height: 1.6;">
+                                        DEFAULT_CURRICULUM is the <strong>master plan</strong> created once.<br>
+                                        COURSE_OFFERINGS is the <strong>actual implementation</strong> created every term.<br>
+                                        This separation allows flexibility while maintaining consistency!
                                     </div>
                                 </div>
                             </div>
@@ -3934,13 +4980,18 @@
                     </div>
                     
                     <div class="category-card">
-                        <h3>🎓 Academic Module Tables (12)</h3>
+                        <h3>🎓 Academic Module Tables (16)</h3>
                         <ul>
-                            <li><strong>students</strong> - Student records</li>
+                            <li><strong>campuses</strong> - Campus locations (8 ICCT)</li>
+                            <li><strong>colleges</strong> - Organizational units</li>
                             <li><strong>programs</strong> - Academic programs</li>
-                            <li><strong>sections</strong> - Class sections</li>
+                            <li><strong>academic_terms</strong> - Semester/term management</li>
+                            <li><strong>course_offerings</strong> - Program-Term-Subject connection</li>
+                            <li><strong>students</strong> - Student records</li>
+                            <li><strong>default_curriculum</strong> - Template curriculum per program</li>
+                            <li><strong>curriculum</strong> - Student-specific curriculum</li>
                             <li><strong>subjects</strong> - Course subjects</li>
-                            <li><strong>curriculum</strong> - Program curriculum</li>
+                            <li><strong>sections</strong> - Class sections</li>
                             <li><strong>class_schedules</strong> - Class timing</li>
                             <li><strong>student_grades</strong> - Grade records</li>
                             <li><strong>transcripts</strong> - Academic transcripts</li>
@@ -4328,7 +5379,45 @@ CREATE TABLE campuses (
     INDEX idx_campus_active (is_active)
 );
 
--- 2. USERS TABLE
+-- 2. COLLEGES TABLE (Organizational units within campuses)
+CREATE TABLE colleges (
+    college_id INT AUTO_INCREMENT PRIMARY KEY,
+    campus_id INT NOT NULL,
+    college_code VARCHAR(20) UNIQUE NOT NULL,
+    college_name VARCHAR(150) NOT NULL,
+    dean_name VARCHAR(150),
+    dean_contact VARCHAR(100),
+    description TEXT,
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (campus_id) REFERENCES campuses(campus_id) ON DELETE RESTRICT,
+    INDEX idx_college_code (college_code),
+    INDEX idx_college_campus (campus_id),
+    INDEX idx_college_active (is_active)
+);
+
+-- 3. ACADEMIC_TERMS TABLE (Centralized academic term management)
+CREATE TABLE academic_terms (
+    term_id INT AUTO_INCREMENT PRIMARY KEY,
+    term_code VARCHAR(20) UNIQUE NOT NULL,
+    school_year VARCHAR(20) NOT NULL,
+    term_type ENUM('1st Semester', '2nd Semester', '3rd Semester', 'Summer', 'Trimester 1', 'Trimester 2', 'Trimester 3') NOT NULL,
+    term_start_date DATE NOT NULL,
+    term_end_date DATE NOT NULL,
+    enrollment_start DATE,
+    enrollment_end DATE,
+    is_active BOOLEAN DEFAULT FALSE,
+    is_current BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_term_code (term_code),
+    INDEX idx_term_school_year (school_year),
+    INDEX idx_term_active (is_active),
+    INDEX idx_term_current (is_current)
+);
+
+-- 4. USERS TABLE
 CREATE TABLE users (
     user_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     campus_id INT NOT NULL,
@@ -4645,6 +5734,7 @@ CREATE TABLE student_contact_information (
 CREATE TABLE programs (
     program_id INT AUTO_INCREMENT PRIMARY KEY,
     campus_id INT NOT NULL,
+    college_id INT NOT NULL,
     program_code VARCHAR(20) UNIQUE NOT NULL,
     program_name VARCHAR(150) NOT NULL,
     degree_type ENUM('certificate', 'diploma', 'bachelor', 'master', 'doctorate') NOT NULL,
@@ -4655,8 +5745,10 @@ CREATE TABLE programs (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (campus_id) REFERENCES campuses(campus_id) ON DELETE RESTRICT,
+    FOREIGN KEY (college_id) REFERENCES colleges(college_id) ON DELETE RESTRICT,
     INDEX idx_program_code (program_code),
-    INDEX idx_program_campus (campus_id)
+    INDEX idx_program_campus (campus_id),
+    INDEX idx_program_college (college_id)
 );
 
 -- 3. SUBJECTS TABLE
@@ -4690,6 +5782,59 @@ CREATE TABLE curriculum (
     UNIQUE KEY uk_curriculum (program_id, subject_id, year_level, semester),
     INDEX idx_curriculum_program (program_id),
     INDEX idx_curriculum_year_sem (year_level, semester)
+);
+
+-- 4B. DEFAULT_CURRICULUM TABLE (Template curriculum for programs)
+CREATE TABLE default_curriculum (
+    default_curriculum_id INT AUTO_INCREMENT PRIMARY KEY,
+    program_id INT NOT NULL,
+    subject_id INT NOT NULL,
+    year_level INT NOT NULL CHECK (year_level BETWEEN 1 AND 6),
+    semester INT NOT NULL CHECK (semester BETWEEN 1 AND 3),
+    term_type ENUM('1st Semester', '2nd Semester', '3rd Semester', 'Summer', 'Trimester 1', 'Trimester 2', 'Trimester 3') NOT NULL,
+    subject_type ENUM('Core', 'Major', 'Minor', 'Elective', 'GE', 'PE', 'NSTP') NOT NULL DEFAULT 'Core',
+    is_required BOOLEAN DEFAULT TRUE,
+    prerequisites TEXT,
+    co_requisites TEXT,
+    description TEXT,
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (program_id) REFERENCES programs(program_id) ON DELETE CASCADE,
+    FOREIGN KEY (subject_id) REFERENCES subjects(subject_id) ON DELETE CASCADE,
+    UNIQUE KEY uk_default_curriculum (program_id, subject_id, year_level, semester),
+    INDEX idx_default_curriculum_program (program_id),
+    INDEX idx_default_curriculum_year_sem (year_level, semester),
+    INDEX idx_default_curriculum_type (subject_type)
+);
+
+-- 4C. COURSE_OFFERINGS TABLE (Actual course offerings per term)
+-- This connects PROGRAMS → ACADEMIC_TERMS → SUBJECTS
+CREATE TABLE course_offerings (
+    offering_id INT AUTO_INCREMENT PRIMARY KEY,
+    program_id INT NOT NULL,
+    term_id INT NOT NULL,
+    subject_id INT NOT NULL,
+    year_level INT NOT NULL CHECK (year_level BETWEEN 1 AND 6),
+    semester INT NOT NULL CHECK (semester BETWEEN 1 AND 3),
+    subject_type ENUM('Core', 'Major', 'Minor', 'Elective', 'GE', 'PE', 'NSTP') NOT NULL DEFAULT 'Core',
+    max_slots INT DEFAULT 40,
+    enrolled_count INT DEFAULT 0,
+    faculty_id BIGINT NULL,
+    is_available BOOLEAN DEFAULT TRUE,
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (program_id) REFERENCES programs(program_id) ON DELETE CASCADE,
+    FOREIGN KEY (term_id) REFERENCES academic_terms(term_id) ON DELETE CASCADE,
+    FOREIGN KEY (subject_id) REFERENCES subjects(subject_id) ON DELETE CASCADE,
+    FOREIGN KEY (faculty_id) REFERENCES faculty(faculty_id) ON DELETE SET NULL,
+    UNIQUE KEY uk_course_offering (program_id, term_id, subject_id, year_level, semester),
+    INDEX idx_offering_program (program_id),
+    INDEX idx_offering_term (term_id),
+    INDEX idx_offering_subject (subject_id),
+    INDEX idx_offering_faculty (faculty_id),
+    INDEX idx_offering_available (is_available)
 );
 
 -- 5. SECTIONS TABLE
@@ -8120,7 +9265,7 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                         Ready to Start Development
                     </h4>
                     <p style="margin: 0; opacity: 0.95; line-height: 1.6;">
-                        All 72 tasks are planned and ready for implementation. Start with <strong>Priority 1: System Foundation</strong> 
+                        All 80 tasks are planned and ready for implementation (8 new tasks added for curriculum management). Start with <strong>Priority 1: System Foundation</strong> 
                         (Week 1-2) to build the core infrastructure and security systems.
                     </p>
                 </div>
@@ -8175,7 +9320,7 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                                 <h5>📋 Task Details:</h5>
                                 <ul>
                                     <li>Laravel project setup and configuration</li>
-                                    <li>Database schema design and implementation</li>
+                                    <li>Database schema design and implementation (49 tables including new academic hierarchy)</li>
                                     <li>Multi-campus setup and configuration</li>
                                     <li>Basic API structure and routing</li>
                                     <li>Development environment setup</li>
@@ -8183,7 +9328,7 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                             </div>
                             <div class="expected-result">
                                 <h6>🎯 Expected Result:</h6>
-                                <p>Complete Laravel backend with database schema, multi-campus support, API structure, and development environment ready for Phase 1 implementation.</p>
+                                <p>Complete Laravel backend with 49-table database schema including new academic hierarchy (COLLEGES, ACADEMIC_TERMS, DEFAULT_CURRICULUM, COURSE_OFFERINGS), multi-campus support, API structure, and development environment ready for Phase 1 implementation.</p>
                             </div>
                         </div>
 
@@ -8241,7 +9386,7 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                 <div class="module-section">
                     <div class="module-header" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%);">
                         <h3>🛠️ Priority 2: Maintenance Features (Week 3-4: Oct 16-31)</h3>
-                        <p>Subject management, user management, schedule management, and clinic management</p>
+                        <p>Subject management, user management, schedule management, clinic management, <strong style="color: #fff;">+ NEW: College management, academic terms, default curriculum, and course offerings</strong></p>
                     </div>
                     
                     <div class="task-grid">
@@ -8260,7 +9405,7 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                                     <li>Bulk subject import UI (Excel/CSV)</li>
                                     <li>Subject data validation forms</li>
                                     <li>Multi-campus subject sync interface</li>
-                                    <li>Subject management dashboard</li>
+                                    <li>Subject Management</li>
                                 </ul>
                             </div>
                             <div class="expected-result">
@@ -8434,6 +9579,273 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                             <div class="expected-result">
                                 <h6>🎯 Expected Result:</h6>
                                 <p>Comprehensive clinic management API with staff operations, medical records, health reporting, and emergency protocol management.</p>
+                            </div>
+                        </div>
+
+                        <!-- NEW TASK: Week 3: College Management - Frontend -->
+                        <div class="task-card frontend" style="border: 3px solid #ff6b6b;">
+                            <div class="task-header">
+                                <div class="task-ticket frontend" style="background: #ff6b6b;">SKOL-007-FE</div>
+                                <div class="task-status for-development">Week 3</div>
+                                <span style="background: #ff6b6b; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8em; font-weight: 600;">⭐ NEW</span>
+                            </div>
+                            <h4>College Management - Frontend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Create college registration interface</li>
+                                    <li>College CRUD (Create, Read, Update, Delete) UI</li>
+                                    <li>Assign dean and contact information forms</li>
+                                    <li>Link colleges to campuses interface</li>
+                                    <li>College listing and search functionality</li>
+                                    <li>College status management (active/inactive)</li>
+                                </ul>
+                                <h5>🔗 Related Tables:</h5>
+                                <ul style="background: #fff3cd; padding: 10px; border-radius: 6px; margin-top: 10px;">
+                                    <li>COLLEGES (primary)</li>
+                                    <li>CAMPUSES (parent)</li>
+                                    <li>PROGRAMS (child)</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Complete college management interface for creating and managing organizational units (COE, COB, CAS) within campuses with dean assignments.</p>
+                            </div>
+                        </div>
+
+                        <!-- NEW TASK: Week 3: College Management - Backend -->
+                        <div class="task-card backend" style="border: 3px solid #ff6b6b;">
+                            <div class="task-header">
+                                <div class="task-ticket backend" style="background: #ff6b6b;">SKOL-007-BE</div>
+                                <div class="task-status for-development">Week 3</div>
+                                <span style="background: #ff6b6b; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8em; font-weight: 600;">⭐ NEW</span>
+                            </div>
+                            <h4>College Management - Backend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>College CRUD API endpoints</li>
+                                    <li>College-campus relationship validation</li>
+                                    <li>Dean assignment and management API</li>
+                                    <li>College activation/deactivation logic</li>
+                                    <li>College search and filtering API</li>
+                                    <li>College statistics and reporting</li>
+                                </ul>
+                                <h5>🔗 Related Tables:</h5>
+                                <ul style="background: #fff3cd; padding: 10px; border-radius: 6px; margin-top: 10px;">
+                                    <li>COLLEGES (primary)</li>
+                                    <li>CAMPUSES (foreign key)</li>
+                                    <li>PROGRAMS (dependent)</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Robust college management API with CRUD operations, validation, campus-college relationships, and reporting capabilities.</p>
+                            </div>
+                        </div>
+
+                        <!-- NEW TASK: Week 3: Academic Terms Management - Frontend -->
+                        <div class="task-card frontend" style="border: 3px solid #ffc107;">
+                            <div class="task-header">
+                                <div class="task-ticket frontend" style="background: #ffc107; color: #212529;">SKOL-008-FE</div>
+                                <div class="task-status for-development">Week 3</div>
+                                <span style="background: #ffc107; color: #212529; padding: 4px 8px; border-radius: 4px; font-size: 0.8em; font-weight: 600;">⭐ NEW</span>
+                            </div>
+                            <h4>Academic Terms Management - Frontend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Create academic term setup interface</li>
+                                    <li>Term scheduling (semester/trimester) forms</li>
+                                    <li>Set enrollment period dates UI</li>
+                                    <li>Activate/deactivate term interface</li>
+                                    <li>Set current term functionality</li>
+                                    <li>Academic calendar visualization</li>
+                                    <li>Term listing with status indicators</li>
+                                </ul>
+                                <h5>🔗 Related Tables:</h5>
+                                <ul style="background: #fff3cd; padding: 10px; border-radius: 6px; margin-top: 10px;">
+                                    <li>ACADEMIC_TERMS (primary)</li>
+                                    <li>COURSE_OFFERINGS (dependent)</li>
+                                    <li>ENROLLMENTS (dependent)</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Complete academic term management interface for creating semesters/trimesters with enrollment periods, term activation, and calendar visualization.</p>
+                            </div>
+                        </div>
+
+                        <!-- NEW TASK: Week 3: Academic Terms Management - Backend -->
+                        <div class="task-card backend" style="border: 3px solid #ffc107;">
+                            <div class="task-header">
+                                <div class="task-ticket backend" style="background: #ffc107; color: #212529;">SKOL-008-BE</div>
+                                <div class="task-status for-development">Week 3</div>
+                                <span style="background: #ffc107; color: #212529; padding: 4px 8px; border-radius: 4px; font-size: 0.8em; font-weight: 600;">⭐ NEW</span>
+                            </div>
+                            <h4>Academic Terms Management - Backend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Academic terms CRUD API endpoints</li>
+                                    <li>Term scheduling validation logic</li>
+                                    <li>Enrollment period validation</li>
+                                    <li>Current term management API</li>
+                                    <li>Term activation/deactivation with validation</li>
+                                    <li>Academic calendar API</li>
+                                    <li>Term statistics and reporting</li>
+                                </ul>
+                                <h5>🔗 Related Tables:</h5>
+                                <ul style="background: #fff3cd; padding: 10px; border-radius: 6px; margin-top: 10px;">
+                                    <li>ACADEMIC_TERMS (primary)</li>
+                                    <li>COURSE_OFFERINGS (dependent)</li>
+                                    <li>ENROLLMENTS (dependent)</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Robust academic terms API with validation, term management, enrollment period handling, and calendar generation capabilities.</p>
+                            </div>
+                        </div>
+
+                        <!-- NEW TASK: Week 4: Default Curriculum Management - Frontend -->
+                        <div class="task-card frontend" style="border: 3px solid #9c27b0;">
+                            <div class="task-header">
+                                <div class="task-ticket frontend" style="background: #9c27b0;">SKOL-009-FE</div>
+                                <div class="task-status for-development">Week 4</div>
+                                <span style="background: #9c27b0; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8em; font-weight: 600;">⭐ NEW</span>
+                            </div>
+                            <h4>Default Curriculum Management - Frontend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Create default curriculum template interface</li>
+                                    <li>Subject mapping by year level & semester UI</li>
+                                    <li>Subject type classification (Core, Major, Minor, GE, PE, NSTP)</li>
+                                    <li>Prerequisites and co-requisites management</li>
+                                    <li>Curriculum builder with drag-and-drop</li>
+                                    <li>Curriculum preview and validation</li>
+                                    <li>Export/import curriculum templates</li>
+                                </ul>
+                                <h5>🔗 Related Tables:</h5>
+                                <ul style="background: #fff3cd; padding: 10px; border-radius: 6px; margin-top: 10px;">
+                                    <li>DEFAULT_CURRICULUM (primary)</li>
+                                    <li>PROGRAMS (parent)</li>
+                                    <li>SUBJECTS (reference)</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Intuitive curriculum template builder for defining program curricula with subject sequencing, prerequisites, and type classifications.</p>
+                            </div>
+                        </div>
+
+                        <!-- NEW TASK: Week 4: Default Curriculum Management - Backend -->
+                        <div class="task-card backend" style="border: 3px solid #9c27b0;">
+                            <div class="task-header">
+                                <div class="task-ticket backend" style="background: #9c27b0;">SKOL-009-BE</div>
+                                <div class="task-status for-development">Week 4</div>
+                                <span style="background: #9c27b0; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8em; font-weight: 600;">⭐ NEW</span>
+                            </div>
+                            <h4>Default Curriculum Management - Backend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Default curriculum CRUD API endpoints</li>
+                                    <li>Curriculum template validation logic</li>
+                                    <li>Prerequisites validation and checking</li>
+                                    <li>Subject sequencing validation</li>
+                                    <li>Curriculum duplication/cloning API</li>
+                                    <li>Curriculum export/import processing</li>
+                                    <li>Template statistics and reporting</li>
+                                </ul>
+                                <h5>🔗 Related Tables:</h5>
+                                <ul style="background: #fff3cd; padding: 10px; border-radius: 6px; margin-top: 10px;">
+                                    <li>DEFAULT_CURRICULUM (primary)</li>
+                                    <li>PROGRAMS (foreign key)</li>
+                                    <li>SUBJECTS (foreign key)</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Complete default curriculum API with template management, validation, prerequisite checking, and curriculum operations.</p>
+                            </div>
+                        </div>
+
+                        <!-- NEW TASK: Week 4: Course Offerings Management - Frontend -->
+                        <div class="task-card frontend" style="border: 3px solid #2196f3;">
+                            <div class="task-header">
+                                <div class="task-ticket frontend" style="background: #2196f3;">SKOL-010-FE</div>
+                                <div class="task-status for-development">Week 4</div>
+                                <span style="background: #2196f3; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8em; font-weight: 600;">⭐ NEW</span>
+                            </div>
+                            <h4>Course Offerings Management - Frontend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Create course offerings per term interface</li>
+                                    <li>Auto-generate from default curriculum UI</li>
+                                    <li>Faculty assignment to offerings interface</li>
+                                    <li>Slot management (max capacity) UI</li>
+                                    <li>Offering availability toggle (open/close enrollment)</li>
+                                    <li>Real-time slot tracking dashboard</li>
+                                    <li>Offerings preview by program and term</li>
+                                </ul>
+                                <h5>🔗 Related Tables:</h5>
+                                <ul style="background: #fff3cd; padding: 10px; border-radius: 6px; margin-top: 10px;">
+                                    <li>COURSE_OFFERINGS (primary)</li>
+                                    <li>PROGRAMS (foreign key)</li>
+                                    <li>ACADEMIC_TERMS (foreign key)</li>
+                                    <li>SUBJECTS (foreign key)</li>
+                                    <li>FACULTY (foreign key)</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Complete course offerings management interface connecting programs, terms, and subjects with faculty assignments and enrollment slot tracking.</p>
+                            </div>
+                        </div>
+
+                        <!-- NEW TASK: Week 4: Course Offerings Management - Backend -->
+                        <div class="task-card backend" style="border: 3px solid #2196f3;">
+                            <div class="task-header">
+                                <div class="task-ticket backend" style="background: #2196f3;">SKOL-010-BE</div>
+                                <div class="task-status for-development">Week 4</div>
+                                <span style="background: #2196f3; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8em; font-weight: 600;">⭐ NEW</span>
+                            </div>
+                            <h4>Course Offerings Management - Backend</h4>
+                            <div class="task-priority high">Priority: High</div>
+                            <div class="task-details">
+                                <h5>📋 Task Details:</h5>
+                                <ul>
+                                    <li>Course offerings CRUD API endpoints</li>
+                                    <li>Auto-generate offerings from DEFAULT_CURRICULUM</li>
+                                    <li>Faculty assignment validation and API</li>
+                                    <li>Slot management and tracking logic</li>
+                                    <li>Offering availability control API</li>
+                                    <li>Enrollment count update triggers</li>
+                                    <li>Course offerings reporting and analytics</li>
+                                </ul>
+                                <h5>🔗 Related Tables:</h5>
+                                <ul style="background: #fff3cd; padding: 10px; border-radius: 6px; margin-top: 10px;">
+                                    <li>COURSE_OFFERINGS (primary)</li>
+                                    <li>PROGRAMS (foreign key)</li>
+                                    <li>ACADEMIC_TERMS (foreign key)</li>
+                                    <li>SUBJECTS (foreign key)</li>
+                                    <li>FACULTY (foreign key)</li>
+                                    <li>DEFAULT_CURRICULUM (template source)</li>
+                                </ul>
+                            </div>
+                            <div class="expected-result">
+                                <h6>🎯 Expected Result:</h6>
+                                <p>Complete course offerings API connecting PROGRAMS→ACADEMIC_TERMS→SUBJECTS with faculty management, slot tracking, and automated enrollment handling.</p>
                             </div>
                         </div>
                     </div>
@@ -9452,9 +10864,9 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                         <div class="category-card">
                             <h3>🎯 Phase 1 Task Distribution</h3>
                             <ul>
-                                <li><strong>Total Tasks:</strong> 72 tasks (36 Frontend + 36 Backend)</li>
+                                <li><strong>Total Tasks:</strong> 80 tasks (40 Frontend + 40 Backend)</li>
                                 <li><strong>Priority 1 (Foundation):</strong> 4 tasks (Week 1-2)</li>
-                                <li><strong>Priority 2 (Maintenance):</strong> 8 tasks (Week 3-4)</li>
+                                <li><strong>Priority 2 (Maintenance):</strong> 12 tasks (Week 3-4) - includes 4 new curriculum management tasks ⭐</li>
                                 <li><strong>Priority 3 (Student Core):</strong> 8 tasks (Week 5-6)</li>
                                 <li><strong>Priority 4 (Faculty Core):</strong> 8 tasks (Week 7-8)</li>
                                 <li><strong>Priority 5 (Admin Core):</strong> 8 tasks (Week 9-10)</li>
@@ -9488,9 +10900,9 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                             <h3>📅 Next Sprint Planning</h3>
                             <ul>
                                 <li><strong>Week 1-2:</strong> System Foundation (SKOL-001 to SKOL-002)</li>
-                                <li><strong>Week 3-4:</strong> Maintenance Features (SKOL-003 to SKOL-006)</li>
-                                <li><strong>Week 5-6:</strong> Student Core Processes (SKOL-007 to SKOL-010)</li>
-                                <li><strong>Week 7-8:</strong> Faculty Core Processes (SKOL-011 to SKOL-014)</li>
+                                <li><strong>Week 3-4:</strong> Maintenance Features (SKOL-003 to SKOL-010) ⭐ includes new curriculum management tasks</li>
+                                <li><strong>Week 5-6:</strong> Student Core Processes (SKOL-011 to SKOL-014)</li>
+                                <li><strong>Week 7-8:</strong> Faculty Core Processes (SKOL-015 to SKOL-018)</li>
                             </ul>
                         </div>
                     </div>
@@ -12770,6 +14182,48 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                                         <li>Medical Emergency Protocols</li>
                                     </ul>
                                 </div>
+                                <div style="background: #fff3cd; padding: 15px; border-radius: 8px; border: 1px solid #ff6b6b;">
+                                    <h6 style="color: #c92a2a; margin-bottom: 10px;">🏛️ Week 3: College Management ⭐ NEW</h6>
+                                    <ul style="margin: 0; padding-left: 15px; font-size: 0.9em; color: #666;">
+                                        <li>College Registration Interface</li>
+                                        <li>College CRUD Operations</li>
+                                        <li>Dean Assignment Management</li>
+                                        <li>College-Campus Linking</li>
+                                    </ul>
+                                </div>
+                                <div style="background: #fff3cd; padding: 15px; border-radius: 8px; border: 1px solid #ffc107;">
+                                    <h6 style="color: #e65100; margin-bottom: 10px;">📅 Week 3: Academic Terms Management ⭐ NEW</h6>
+                                    <ul style="margin: 0; padding-left: 15px; font-size: 0.9em; color: #666;">
+                                        <li>Term Scheduling Setup</li>
+                                        <li>Semester/Trimester Creation</li>
+                                        <li>Enrollment Period Management</li>
+                                        <li>Academic Calendar Visualization</li>
+                                    </ul>
+                                </div>
+                                <div style="background: #fff3cd; padding: 15px; border-radius: 8px; border: 1px solid #9c27b0;">
+                                    <h6 style="color: #6a1b9a; margin-bottom: 10px;">📖 Week 4: Default Curriculum ⭐ NEW</h6>
+                                    <ul style="margin: 0; padding-left: 15px; font-size: 0.9em; color: #666;">
+                                        <li>Curriculum Template Builder</li>
+                                        <li>Subject Mapping by Year/Semester</li>
+                                        <li>Prerequisites Management</li>
+                                        <li>Subject Type Classification</li>
+                                    </ul>
+                                </div>
+                                <div style="background: #fff3cd; padding: 15px; border-radius: 8px; border: 1px solid #2196f3;">
+                                    <h6 style="color: #1565c0; margin-bottom: 10px;">🔗 Week 4: Course Offerings ⭐ NEW</h6>
+                                    <ul style="margin: 0; padding-left: 15px; font-size: 0.9em; color: #666;">
+                                        <li>Create Course Offerings per Term</li>
+                                        <li>Faculty Assignment Interface</li>
+                                        <li>Slot Management & Tracking</li>
+                                        <li>Auto-generate from Template</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div style="background: #e8f5e9; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #4caf50;">
+                                <strong style="color: #2e7d32;">⭐ 4 New Tasks Added:</strong>
+                                <div style="margin-top: 10px; color: #555; font-size: 0.9em;">
+                                    Priority 2 now includes <strong>12 tasks</strong> (was 8) with new curriculum management features for academic hierarchy (Colleges, Academic Terms, Default Curriculum, Course Offerings).
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -15199,6 +16653,9 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
             modal.style.display = 'none';
         }
 
+        // Global variable to store uploaded images for the report
+        let reportImages = [];
+
         async function generateProgressReport() {
             const modalBody = document.getElementById('progressReportModalBody');
             
@@ -15214,6 +16671,12 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
             const currentWeek = getCurrentWeek(now);
             const currentPriority = getCurrentPriority(now);
             const checklistProgress = await getChecklistProgress();
+            
+            // Load any previously uploaded images
+            const savedImages = localStorage.getItem('skolarisReportImages');
+            if (savedImages) {
+                reportImages = JSON.parse(savedImages);
+            }
             
             // Get real task status from Trello
             let taskStatus = {
@@ -15375,13 +16838,125 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                     <h2>📝 Notes</h2>
                     <p>This report focuses on the current sprint: <strong>${currentPriority.name}</strong>. The system will automatically update to show the next priority when the current sprint is completed. All tasks are planned and ready for implementation.</p>
                     
+                    ${reportImages.length > 0 ? `
+                        <h2>📎 Index Annex - Supporting Images</h2>
+                        <div class="annex-images">
+                            ${reportImages.map((image, index) => `
+                                <div class="annex-image-item">
+                                    <h4>Image ${index + 1}: ${image.name}</h4>
+                                    <img src="${image.dataUrl}" alt="${image.name}" style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 4px; margin: 10px 0;">
+                                    <p><em>Uploaded: ${new Date(image.uploadDate).toLocaleString()}</em></p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                    
                     <p><strong>Report generated by:</strong> SKOLARIS Progress Tracker System</p>
                     <p><strong>Last updated:</strong> ${now.toLocaleString()}</p>
                 </div>
             `;
             
-            // Display the report
-            modalBody.innerHTML = reportContent;
+            // Display the report with image upload section
+            modalBody.innerHTML = reportContent + `
+                <div class="image-upload-section">
+                    <h3>📎 Add Images to Report (Index Annex)</h3>
+                    <div class="image-upload-controls">
+                        <input type="file" id="reportImageUpload" accept="image/*" multiple style="display: none;">
+                        <button onclick="document.getElementById('reportImageUpload').click()" class="btn btn-primary">
+                            📷 Add Screenshots/Images
+                        </button>
+                        <button onclick="clearAllImages()" class="btn btn-secondary" style="margin-left: 10px;">
+                            🗑️ Clear All Images
+                        </button>
+                        <div class="uploaded-images-preview" id="uploadedImagesPreview"></div>
+                    </div>
+                </div>
+            `;
+            
+            // Set up event listeners and show preview
+            setupImageUploadHandlers();
+            updateImagePreview();
+        }
+
+        // Image upload functionality
+        function setupImageUploadHandlers() {
+            const fileInput = document.getElementById('reportImageUpload');
+            if (fileInput) {
+                fileInput.addEventListener('change', handleImageUpload);
+            }
+        }
+
+        function handleImageUpload(event) {
+            const files = event.target.files;
+            if (files.length === 0) return;
+
+            Array.from(files).forEach(file => {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const imageData = {
+                            id: Date.now() + Math.random(),
+                            name: file.name,
+                            dataUrl: e.target.result,
+                            uploadDate: new Date().toISOString()
+                        };
+                        
+                        reportImages.push(imageData);
+                        saveImagesToStorage();
+                        updateImagePreview();
+                        regenerateReportWithImages();
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    alert('Please select only image files.');
+                }
+            });
+            
+            // Reset the input
+            event.target.value = '';
+        }
+
+        function updateImagePreview() {
+            const preview = document.getElementById('uploadedImagesPreview');
+            if (!preview) return;
+
+            if (reportImages.length === 0) {
+                preview.innerHTML = '<p style="color: #666; font-style: italic;">No images uploaded yet.</p>';
+                return;
+            }
+
+            preview.innerHTML = reportImages.map((image, index) => `
+                <div class="uploaded-image-item" style="display: inline-block; margin: 5px; position: relative;">
+                    <img src="${image.dataUrl}" alt="${image.name}" style="width: 100px; height: 100px; object-fit: cover; border-radius: 4px; border: 1px solid #ddd;">
+                    <button onclick="removeImage(${image.id})" style="position: absolute; top: -5px; right: -5px; background: #ff4444; color: white; border: none; border-radius: 50%; width: 20px; height: 20px; font-size: 12px; cursor: pointer;">×</button>
+                    <div style="font-size: 10px; text-align: center; margin-top: 2px; max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${image.name}</div>
+                </div>
+            `).join('');
+        }
+
+        function removeImage(imageId) {
+            reportImages = reportImages.filter(img => img.id !== imageId);
+            saveImagesToStorage();
+            updateImagePreview();
+            regenerateReportWithImages();
+        }
+
+        function saveImagesToStorage() {
+            localStorage.setItem('skolarisReportImages', JSON.stringify(reportImages));
+        }
+
+        function regenerateReportWithImages() {
+            // Regenerate the report with updated images
+            generateProgressReport();
+        }
+
+        function clearAllImages() {
+            if (confirm('Are you sure you want to remove all uploaded images from the report?')) {
+                reportImages = [];
+                saveImagesToStorage();
+                updateImagePreview();
+                regenerateReportWithImages();
+            }
         }
 
         function getCurrentWeek() {
@@ -15636,6 +17211,21 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                 const originalText = button.textContent;
                 button.textContent = '🔄 Generating...';
                 button.disabled = true;
+
+                // Wait for all images to load before capturing
+                const images = reportContent.querySelectorAll('img');
+                const imagePromises = Array.from(images).map(img => {
+                    return new Promise((resolve) => {
+                        if (img.complete) {
+                            resolve();
+                        } else {
+                            img.onload = resolve;
+                            img.onerror = resolve; // Continue even if image fails to load
+                        }
+                    });
+                });
+                
+                await Promise.all(imagePromises);
 
                 // First, capture the report as an image using html2canvas
                 const canvas = await html2canvas(reportContent, {

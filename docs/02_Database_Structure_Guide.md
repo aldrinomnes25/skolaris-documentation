@@ -51,6 +51,44 @@ The Database Structure section contains the complete database schema, entity rel
 
 ## 🗄️ Database Architecture
 
+### **Academic Hierarchy Structure**
+
+The SKOLARIS database follows a clear academic hierarchy:
+
+```
+┌──────────────────────────────────────────────────────┐
+│                    🏫 CAMPUSES                       │
+│              (8 ICCT Physical Locations)             │
+└────────────────────┬─────────────────────────────────┘
+                     │
+                     ↓
+┌──────────────────────────────────────────────────────┐
+│                    🏛️ COLLEGES                       │
+│        (Organizational Units: COE, COB, CAS)         │
+└────────────────────┬─────────────────────────────────┘
+                     │
+                     ↓
+┌──────────────────────────────────────────────────────┐
+│                    📚 PROGRAMS                        │
+│          (Degree Programs: BSCS, BSIT, BSBA)         │
+└────────────────────┬─────────────────────────────────┘
+                     │
+         ┌───────────┴───────────┐
+         ↓                       ↓
+┌─────────────────┐    ┌──────────────────────┐
+│ 📅 ACADEMIC     │    │ 📖 DEFAULT          │
+│    TERMS        │    │    CURRICULUM        │
+│ (Semesters,     │    │ (Template per        │
+│  Trimesters)    │    │  Program)            │
+└────────┬────────┘    └──────────┬───────────┘
+         │                        │
+         ↓                        ↓
+┌──────────────────────────────────────────────┐
+│              📝 SUBJECTS/COURSES             │
+│          (Individual Course Offerings)       │
+└──────────────────────────────────────────────┘
+```
+
 ### **Core Tables Structure**
 
 The database is organized into logical groups:
@@ -59,18 +97,23 @@ The database is organized into logical groups:
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
 │   User Tables   │    │  Academic Tables│    │  System Tables  │
 │                 │    │                 │    │                 │
-│ • users         │    │ • students      │    │ • campuses      │
-│ • roles         │    │ • courses       │    │ • settings      │
-│ • permissions   │    │ • subjects      │    │ • logs          │
+│ • users         │    │ • campuses      │    │ • settings      │
+│ • roles         │    │ • colleges      │    │ • logs          │
+│ • permissions   │    │ • programs      │    │ • audit_logs    │
+│                 │    │ • academic_terms│    │                 │
+│                 │    │ • students      │    │                 │
+│                 │    │ • default_curric│    │                 │
+│                 │    │ • curriculum    │    │                 │
+│                 │    │ • subjects      │    │                 │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
          │                       │                       │
          │                       │                       │
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│ Financial Tables│    │  Medical Tables │    │  Audit Tables   │
+│ Financial Tables│    │  Medical Tables │    │  Scheduling     │
 │                 │    │                 │    │                 │
-│ • payments      │    │ • medical_records│   │ • audit_logs    │
-│ • fees          │    │ • clinic_visits │    │ • user_activity │
-│ • transactions  │    │ • health_status │    │ • system_logs   │
+│ • payments      │    │ • medical_records│   │ • sections      │
+│ • fees          │    │ • clinic_visits │    │ • schedules     │
+│ • transactions  │    │ • health_status │    │ • enrollments   │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
 
@@ -85,9 +128,14 @@ The database is organized into logical groups:
 
 #### **2. Academic Tables**
 
+- `campuses`: Campus locations (8 ICCT campuses)
+- `colleges`: Organizational units within campuses
+- `programs`: Academic programs offered by colleges
+- `academic_terms`: Centralized term management (semesters, trimesters)
 - `students`: Student information
-- `courses`: Course catalog
-- `subjects`: Subject details
+- `default_curriculum`: Template curriculum per program
+- `curriculum`: Student-specific curriculum
+- `subjects`: Subject/course catalog
 - `enrollments`: Student course enrollments
 - `grades`: Academic grades
 - `schedules`: Class schedules
@@ -164,13 +212,60 @@ INSERT INTO roles (name, description) VALUES
 ('Student', 'Student user');
 ```
 
-#### **3. Sample Courses**
+#### **3. Sample Colleges**
 
 ```sql
--- Insert sample courses
-INSERT INTO courses (code, name, description, credits) VALUES
-('CS101', 'Introduction to Computer Science', 'Basic CS concepts', 3),
-('IT201', 'Database Management', 'Database design and implementation', 3);
+-- Insert college information
+INSERT INTO colleges (campus_id, college_code, college_name, dean_name, dean_contact) VALUES
+(1, 'COE', 'College of Engineering', 'Dr. Juan Cruz', 'jcruz@icct.edu.ph'),
+(1, 'COB', 'College of Business', 'Dr. Maria Santos', 'msantos@icct.edu.ph'),
+(1, 'CAS', 'College of Arts and Sciences', 'Dr. Pedro Reyes', 'preyes@icct.edu.ph');
+```
+
+#### **4. Sample Academic Terms**
+
+```sql
+-- Insert academic terms
+INSERT INTO academic_terms (term_code, school_year, term_type, term_start_date, term_end_date, is_current) VALUES
+('2025-1S', '2025-2026', '1st Semester', '2025-08-01', '2025-12-15', TRUE),
+('2025-2S', '2025-2026', '2nd Semester', '2026-01-05', '2026-05-20', FALSE),
+('2025-SUM', '2025-2026', 'Summer', '2026-06-01', '2026-07-30', FALSE);
+```
+
+#### **5. Sample Programs**
+
+```sql
+-- Insert sample programs
+INSERT INTO programs (campus_id, college_id, program_code, program_name, degree_type, duration_years, total_units) VALUES
+(1, 1, 'BSCS', 'Bachelor of Science in Computer Science', 'bachelor', 4.0, 180),
+(1, 1, 'BSIT', 'Bachelor of Science in Information Technology', 'bachelor', 4.0, 180),
+(1, 2, 'BSBA', 'Bachelor of Science in Business Administration', 'bachelor', 4.0, 165);
+```
+
+#### **6. Sample Subjects**
+
+```sql
+-- Insert sample subjects
+INSERT INTO subjects (subject_code, subject_name, units, type) VALUES
+('CS101', 'Introduction to Computing', 3, 'lecture'),
+('MATH101', 'Calculus I', 3, 'lecture'),
+('ENG101', 'English I - Communication Skills', 3, 'lecture'),
+('PE101', 'Physical Education 1', 2, 'lab'),
+('NSTP101', 'National Service Training Program 1', 3, 'lab');
+```
+
+#### **7. Sample Default Curriculum**
+
+```sql
+-- Insert default curriculum for BS Computer Science
+INSERT INTO default_curriculum
+(program_id, subject_id, year_level, semester, term_type, subject_type, is_required)
+VALUES
+(1, 1, 1, 1, '1st Semester', 'Core', TRUE),
+(1, 2, 1, 1, '1st Semester', 'Core', TRUE),
+(1, 3, 1, 1, '1st Semester', 'GE', TRUE),
+(1, 4, 1, 1, '1st Semester', 'PE', TRUE),
+(1, 5, 1, 1, '1st Semester', 'NSTP', TRUE);
 ```
 
 ### **Migration Scripts**
@@ -268,11 +363,23 @@ users (1) ──── (1) students
 users (1) ──── (1) faculty
 ```
 
-#### **2. Academic Relationships**
+#### **2. Academic Hierarchy Relationships**
+
+```
+campuses (1) ──── (many) colleges
+colleges (1) ──── (many) programs
+programs (1) ──── (many) students
+programs (1) ──── (many) default_curriculum
+academic_terms (1) ──── (many) enrollments
+```
+
+#### **3. Academic Operational Relationships**
 
 ```
 students (1) ──── (many) enrollments
-courses (1) ──── (many) enrollments
+programs (1) ──── (many) curriculum
+subjects (1) ──── (many) default_curriculum
+subjects (1) ──── (many) curriculum
 subjects (1) ──── (many) schedules
 faculty (1) ──── (many) schedules
 ```
