@@ -1,10 +1,53 @@
+<!-- 
+    ============================================
+    SKOLARIS - Student Information System Documentation
+    ============================================
+    
+    Author: Aldrin Cruz Omnes
+    Project: SKOLARIS Student Information System
+    Version: 1.0.0
+    Last Updated: 2025
+    
+    This is the main documentation page for the SKOLARIS Student Information System.
+    It provides comprehensive documentation for developers, administrators, and stakeholders
+    including database structure, API documentation, implementation roadmaps, and progress tracking.
+    
+    Key Features:
+    - Interactive navigation with multiple sections
+    - Real-time progress tracking with Trello integration
+    - Comprehensive API documentation
+    - Database schema and SQL scripts
+    - Implementation roadmaps and timelines
+    - Security and access control documentation
+    ============================================ 
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta Tags for SEO and Mobile Optimization -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SKOLARIS - Student Information System Documentation</title>
     
+    <!-- 
+        ============================================
+        SECURITY PROTECTION SCRIPTS
+        ============================================
+        
+        These scripts implement comprehensive security measures to protect the documentation:
+        - Disable right-click context menu
+        - Block developer tools access (F12, Ctrl+Shift+I, etc.)
+        - Prevent text selection and copying
+        - Disable drag and drop functionality
+        - Anti-debugging measures with console warnings
+        - Print screen protection
+        - Image saving prevention
+        - Source code obfuscation
+        
+        Note: Some features are commented out to allow normal usage while maintaining security awareness.
+        ============================================ 
+    -->
     <!-- Security Protection Scripts -->
     <script>
         // Disable right-click context menu
@@ -106,6 +149,30 @@
         })();
     </script>  
     
+    <!-- 
+        ============================================
+        CSS STYLES - SKOLARIS DOCUMENTATION THEME
+        ============================================
+        
+        This section contains all CSS styles for the SKOLARIS documentation interface:
+        - Modern, responsive design with gradient themes
+        - Component-based styling (cards, buttons, forms)
+        - Navigation and layout systems
+        - Progress tracking and status indicators
+        - Mobile-responsive breakpoints
+        - Interactive elements and animations
+        - Trello integration styling
+        - Modal and sidebar components
+        
+        Color Scheme:
+        - Primary: #667eea (Blue gradient)
+        - Secondary: #764ba2 (Purple gradient)
+        - Success: #28a745 (Green)
+        - Warning: #ffc107 (Yellow)
+        - Danger: #dc3545 (Red)
+        - Background: #f8f9fa (Light gray)
+        ============================================ 
+    -->
     <style>
         * { 
             margin: 0; 
@@ -142,6 +209,14 @@
         .nav-link:hover { background: #f8f9fa; color: #2c3e50; border-bottom-color: #667eea; }
         .nav-link.active { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-bottom-color: #4a5dc9; }
         
+        /* 
+            ============================================
+            EMAIL REPORT BUTTON STYLES
+            ============================================
+            Styling for the email report functionality button
+            with gradient background and hover effects
+            ============================================ 
+        */
         /* Email Report Button Styles */
         .email-report-btn { 
             background: linear-gradient(135deg, #28a745 0%, #20c997 100%); 
@@ -162,6 +237,14 @@
             box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
         }
         
+        /* 
+            ============================================
+            NAVIGATION DROPDOWN MENU STYLES
+            ============================================
+            Complete styling for the dropdown navigation menu
+            including positioning, animations, and responsive behavior
+            ============================================ 
+        */
         /* Dropdown Styles */
         .nav-dropdown { position: relative; display: inline-block; }
         .dropdown-toggle { cursor: pointer; }
@@ -238,6 +321,15 @@
         .task-card.frontend { border-left-color: #28a745; }
         .task-card.backend { border-left-color: #dc3545; }
         
+        /* 
+            ============================================
+            TRELLO INTEGRATION STATUS STYLES
+            ============================================
+            Visual indicators for Trello board status synchronization
+            Matching the documentation design theme with color-coded status
+            indicators for different task states (todo, ongoing, testing, done, error)
+            ============================================ 
+        */
         /* Trello Status Sync Styles - Matching Documentation Design */
         .trello-status-sync {
             margin: 8px 0;
@@ -270,6 +362,18 @@
             font-weight: 600;
         }
         
+        /* 
+            ============================================
+            TRELLO STATUS COLOR CODING
+            ============================================
+            Color-coded status indicators:
+            - TODO: Blue theme (#2196f3)
+            - ONGOING: Orange theme (#ff9800)
+            - TESTING: Purple theme (#9c27b0)
+            - DONE: Green theme (#4caf50)
+            - ERROR: Red theme (#f44336)
+            ============================================ 
+        */
         /* Status-specific styling matching task-card design */
         .trello-status-indicator[data-trello-status="todo"] {
             background: #e3f2fd;
@@ -337,6 +441,14 @@
         .task-details ul { padding-left: 20px; }
         .task-details li { margin: 5px 0; color: #555; }
         
+        /* 
+            ============================================
+            CHECKLIST PROGRESS TRACKING STYLES
+            ============================================
+            Visual representation of task checklist progress
+            with progress bars, completion indicators, and status summaries
+            ============================================ 
+        */
         /* Checklist Status Styles */
         .checklist-status { margin: 15px 0; padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #17a2b8; }
         .checklist-status h6 { color: #17a2b8; margin-bottom: 10px; font-size: 1em; }
@@ -381,6 +493,14 @@
         }
         .checklist-status { position: relative; }
         
+        /* 
+            ============================================
+            COMMENTS MODAL DIALOG STYLES
+            ============================================
+            Modal dialog for displaying and managing comments
+            with overlay, positioning, and responsive design
+            ============================================ 
+        */
         /* Comments Modal Styles */
         .comments-modal { 
             display: none; 
@@ -455,6 +575,14 @@
             scroll-behavior: smooth;
         }
         
+        /* 
+            ============================================
+            PROGRESS REPORT MODAL STYLES
+            ============================================
+            Modal dialog for displaying detailed progress reports
+            with header, body, footer sections and loading states
+            ============================================ 
+        */
         /* Progress Report Modal Styles */
         .progress-report-modal { 
             display: none; 
@@ -536,6 +664,14 @@
             font-size: 1.1em;
         }
 
+        /* 
+            ============================================
+            IMAGE UPLOAD AND MANAGEMENT STYLES
+            ============================================
+            Styling for image upload controls, preview areas,
+            and attachment management within the documentation
+            ============================================ 
+        */
         /* Image Upload Section Styles */
         .image-upload-section {
             background: #f8f9fa;
@@ -1437,11 +1573,30 @@
             justify-content: flex-end;
         }
 
+        /* 
+            ============================================
+            MOBILE NAVIGATION MENU STYLES
+            ============================================
+            Responsive mobile navigation with hamburger menu,
+            slide animations, and touch-friendly interactions
+            ============================================ 
+        */
         /* Mobile Menu Styles */
         .mobile-menu-toggle { display: none; transition: all 0.3s ease; }
         .nav-links.mobile-open { display: flex; }
         .nav-links { transition: all 0.3s ease; }
         
+        /* 
+            ============================================
+            RESPONSIVE DESIGN BREAKPOINTS
+            ============================================
+            Mobile-first responsive design with breakpoints:
+            - Mobile: max-width 480px
+            - Tablet: 481px - 768px
+            - Desktop: 769px - 1024px
+            - Large Desktop: 1025px+
+            ============================================ 
+        */
         /* Mobile First Responsive Design */
         @media (max-width: 480px) {
             .container { padding: 0 10px; }
@@ -1663,44 +1818,70 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            background: #f8f9fa;
         }
 
         .activity-filters {
-            padding: 15px 20px;
+            padding: 20px;
             border-bottom: 1px solid #e9ecef;
             display: flex;
-            gap: 8px;
+            gap: 10px;
             flex-wrap: wrap;
+            background: white;
+            margin: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
         .filter-btn {
-            background: #f8f9fa;
-            border: 1px solid #dee2e6;
+            background: white;
+            border: 2px solid #e9ecef;
             color: #6c757d;
-            padding: 6px 12px;
-            border-radius: 20px;
+            padding: 10px 16px;
+            border-radius: 25px;
             font-size: 0.85em;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
         .filter-btn:hover {
-            background: #e9ecef;
-            color: #495057;
+            background: #f8f9fa;
+            border-color: #667eea;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
         .filter-btn.active {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .filter-btn[data-filter="all"]::before {
+            content: "📋";
+        }
+
+        .filter-btn[data-filter="comments"]::before {
+            content: "💬";
+        }
+
+        .filter-btn[data-filter="checklist"]::before {
+            content: "✅";
         }
 
         .activity-list {
             flex: 1;
             overflow-y: auto;
-            padding: 0;
+            padding: 15px;
             position: relative;
+            background: transparent;
         }
 
         .loading-more {
@@ -1715,47 +1896,66 @@
             display: none;
         }
 
+        /* 
+            ============================================
+            IMPROVED ACTIVITY HISTORY FORMATTING
+            ============================================
+            Enhanced styling for better readability and visual hierarchy
+            ============================================ 
+        */
         .activity-item {
-            padding: 15px 20px;
-            border-bottom: 1px solid #f8f9fa;
-            transition: background 0.3s ease;
+            padding: 20px;
+            border-bottom: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+            background: white;
+            margin-bottom: 8px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            position: relative;
         }
 
         .activity-item:hover {
             background: #f8f9fa;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
         }
 
         .activity-item.comment {
-            border-left: 4px solid #17a2b8;
+            border-left: 5px solid #17a2b8;
+            background: linear-gradient(135deg, rgba(23, 162, 184, 0.02) 0%, rgba(23, 162, 184, 0.05) 100%);
         }
 
         .activity-item.activity {
-            border-left: 4px solid #28a745;
+            border-left: 5px solid #28a745;
+            background: linear-gradient(135deg, rgba(40, 167, 69, 0.02) 0%, rgba(40, 167, 69, 0.05) 100%);
         }
 
         .activity-item.checklist {
-            border-left: 4px solid #ffc107;
+            border-left: 5px solid #ffc107;
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.02) 0%, rgba(255, 193, 7, 0.05) 100%);
         }
 
         .activity-header {
             display: flex;
-            align-items: center;
-            margin-bottom: 8px;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            gap: 15px;
         }
 
         .activity-avatar {
-            width: 32px;
-            height: 32px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 600;
-            font-size: 0.9em;
-            margin-right: 10px;
+            font-weight: bold;
+            font-size: 1em;
             flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+            border: 3px solid white;
         }
 
         .activity-meta {
@@ -1764,52 +1964,339 @@
         }
 
         .activity-author {
-            font-weight: 600;
+            font-weight: 700;
             color: #2c3e50;
-            font-size: 0.9em;
+            margin-bottom: 4px;
+            font-size: 1em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .activity-date {
+            font-size: 0.85em;
             color: #6c757d;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .activity-date::before {
+            content: "🕒";
             font-size: 0.8em;
-            margin-top: 2px;
         }
 
         .activity-type {
-            background: #e9ecef;
-            color: #6c757d;
-            padding: 2px 6px;
-            border-radius: 10px;
-            font-size: 0.7em;
-            font-weight: 500;
+            font-size: 0.75em;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 700;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .activity-type.comment {
+            background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+            color: white;
+        }
+
+        .activity-type.activity {
+            background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+            color: white;
+        }
+
+        .activity-type.checklist {
+            background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%);
+            color: #212529;
         }
 
         .activity-content {
-            margin-left: 42px;
-            color: #495057;
-            line-height: 1.4;
+            margin-top: 12px;
+            font-size: 0.95em;
+            line-height: 1.6;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 8px;
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
         .activity-content.comment {
-            background: #f8f9fa;
-            padding: 10px;
-            border-radius: 8px;
+            color: #495057;
+            background: rgba(23, 162, 184, 0.05);
             border-left: 3px solid #17a2b8;
         }
 
         .activity-content.activity {
-            background: #f8f9fa;
-            padding: 10px;
-            border-radius: 8px;
+            color: #495057;
+            background: rgba(40, 167, 69, 0.05);
             border-left: 3px solid #28a745;
         }
 
         .activity-content.checklist {
-            background: #fff3cd;
-            padding: 10px;
-            border-radius: 8px;
+            color: #6c5b00;
+            background: rgba(255, 193, 7, 0.1);
             border-left: 3px solid #ffc107;
+        }
+
+        .activity-card-name {
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-radius: 6px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .activity-card-name::before {
+            content: "📋";
+            font-size: 1em;
+        }
+
+        /* Enhanced activity elements */
+        .author-name {
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .author-role {
+            font-weight: 500;
+            color: #6c757d;
+            font-size: 0.85em;
+            margin-left: 4px;
+        }
+
+        .activity-text {
+            margin: 10px 0;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+            line-height: 1.4;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 12px;
+            position: relative;
+        }
+
+        /* Documentation-style text blocks with line numbers */
+        .activity-text.documentation-format {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 0;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.85em;
+            line-height: 1.5;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .activity-text-block {
+            display: flex;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+
+        .line-numbers {
+            background: #e9ecef;
+            color: #6c757d;
+            padding: 12px 8px 12px 12px;
+            border-right: 1px solid #dee2e6;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.8em;
+            line-height: 1.5;
+            text-align: right;
+            user-select: none;
+            min-width: 30px;
+            flex-shrink: 0;
+        }
+
+        .activity-content-block {
+            flex: 1;
+            padding: 12px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.85em;
+            line-height: 1.5;
+            background: white;
+        }
+
+        .activity-info-section {
+            margin: 8px 0;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .activity-info-header {
+            background: #e9ecef;
+            padding: 8px 12px;
+            font-weight: 600;
+            font-size: 0.8em;
+            color: #495057;
+            border-bottom: 1px solid #dee2e6;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+        }
+
+        .activity-info-content {
+            padding: 12px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.85em;
+            line-height: 1.5;
+            background: white;
+        }
+
+        .activity-info-item {
+            margin: 4px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .activity-info-label {
+            font-weight: 600;
+            color: #495057;
+            min-width: 80px;
+            margin-right: 8px;
+        }
+
+        .activity-info-value {
+            color: #212529;
+            flex: 1;
+        }
+
+        .attachment-info {
+            font-size: 0.8em;
+            color: #6c757d;
+            margin-top: 8px;
+            font-style: italic;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .activity-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+            padding-top: 8px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            font-size: 0.75em;
+            color: #6c757d;
+        }
+
+        .activity-source {
+            font-weight: 500;
+            color: #667eea;
+        }
+
+        .activity-id {
+            font-family: monospace;
+            background: rgba(108, 117, 125, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8em;
+        }
+
+        /* Additional documentation-style enhancements */
+        .activity-content .activity-text-block:first-child {
+            margin-top: 0;
+        }
+
+        .activity-content .activity-info-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .activity-info-section .attachment-image {
+            margin: 8px 0;
+            text-align: center;
+        }
+
+        .activity-info-section .attachment-info {
+            margin-top: 8px;
+            font-size: 0.8em;
+            color: #6c757d;
+            text-align: center;
+            font-style: italic;
+        }
+
+        /* Code-style highlighting for specific elements */
+        .activity-info-value {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+        }
+
+        .activity-info-label {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+        }
+
+        /* Responsive adjustments for documentation format */
+        @media (max-width: 768px) {
+            .activity-text-block {
+                flex-direction: column;
+            }
+            
+            .line-numbers {
+                display: none;
+            }
+            
+            .activity-content-block {
+                padding: 8px;
+                font-size: 0.8em;
+            }
+            
+            .activity-info-content {
+                padding: 8px;
+                font-size: 0.8em;
+            }
+        }
+
+        /* Responsive improvements for activity items */
+        @media (max-width: 768px) {
+            .activity-item {
+                padding: 15px;
+                margin-bottom: 6px;
+            }
+
+            .activity-header {
+                gap: 12px;
+                margin-bottom: 12px;
+            }
+
+            .activity-avatar {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9em;
+            }
+
+            .activity-author {
+                font-size: 0.9em;
+            }
+
+            .activity-date {
+                font-size: 0.8em;
+            }
+
+            .activity-type {
+                font-size: 0.7em;
+                padding: 4px 8px;
+            }
+
+            .activity-content {
+                padding: 12px;
+                font-size: 0.9em;
+            }
         }
 
         .activity-card-name {
@@ -2495,7 +2982,34 @@
 
 <!-- Auto-refresh timestamp: 1759679896406 -->
 </head>
+<!-- 
+    ============================================
+    MAIN DOCUMENT BODY
+    ============================================
+    
+    The main body contains:
+    1. Header section with project title and description
+    2. Navigation menu with section links and dropdown
+    3. Activity sidebar for progress tracking
+    4. Main content area with multiple documentation sections
+    5. JavaScript functionality for interactivity
+    
+    Layout Structure:
+    - Fixed header with gradient background
+    - Sticky navigation with responsive design
+    - Collapsible sidebar for activity tracking
+    - Tabbed content sections for organized documentation
+    ============================================ 
+-->
 <body>
+    <!-- 
+        ============================================
+        HEADER SECTION
+        ============================================
+        Main header with SKOLARIS branding and project description
+        Features gradient background and centered content layout
+        ============================================ 
+    -->
     <div class="header">
         <div class="container">
             <h1>SKOLARIS</h1>
@@ -2503,6 +3017,23 @@
         </div>
     </div>
 
+    <!-- 
+        ============================================
+        NAVIGATION MENU
+        ============================================
+        Sticky navigation bar with:
+        - Main navigation links (Progress Tracker, Overview, Phase 1 Timeline)
+        - Dropdown menu for additional sections
+        - Mobile hamburger menu toggle
+        - Active state management for current section
+        
+        Navigation Sections:
+        - Progress Tracker: Real-time task tracking with Trello integration
+        - Overview: Project summary and statistics
+        - Phase 1 Timeline: 3-month implementation roadmap
+        - More Sections: Additional documentation (API, Database, etc.)
+        ============================================ 
+    -->
     <div class="nav">
         <div class="nav-container">
             <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
@@ -2528,6 +3059,23 @@
         </div>
     </div>
 
+    <!-- 
+        ============================================
+        ACTIVITY HISTORY SIDEBAR
+        ============================================
+        Collapsible sidebar for tracking project activities:
+        - Real-time activity feed from Trello integration
+        - Filterable by activity type (All, Comments, Checklist)
+        - Scrollable content with pagination
+        - Toggle functionality for show/hide
+        
+        Features:
+        - Activity filtering and search
+        - Real-time updates from Trello API
+        - Responsive design for mobile devices
+        - Loading states and error handling
+        ============================================ 
+    -->
     <!-- Activity History Sidebar -->
     <div class="activity-sidebar" id="activitySidebar">
         <div class="sidebar-header">
@@ -2557,8 +3105,43 @@
         <span class="toggle-icon">📋</span>
     </button>
 
+    <!-- 
+        ============================================
+        MAIN CONTENT CONTAINER
+        ============================================
+        
+        The main content area contains all documentation sections:
+        - Tabbed interface with show/hide functionality
+        - Multiple documentation sections organized by topic
+        - Responsive grid layouts for different content types
+        - Interactive elements and progress tracking
+        
+        Content Sections:
+        1. Overview - Project summary and statistics
+        2. Task Management - Progress tracking with Trello integration
+        3. Database Structure - Schema and table documentation
+        4. API Documentation - Endpoint specifications
+        5. Implementation Roadmap - Development phases and timelines
+        6. Process Flow - System workflows and procedures
+        7. UI/UX - Frontend development guidelines
+        8. Mobile Development - Flutter app specifications
+        9. Security - Access control and security measures
+        ============================================ 
+    -->
     <div class="container">
         <div class="content">
+            <!-- 
+                ============================================
+                OVERVIEW SECTION
+                ============================================
+                
+                Project overview with:
+                - System summary and key features
+                - Technology stack information
+                - Statistics and metrics
+                - Project goals and objectives
+                ============================================ 
+            -->
             <!-- Overview Section -->
             <div class="content-section" id="overview">
                 <h2 class="section-title">📊 Project Overview</h2>
@@ -3165,6 +3748,20 @@
             </div>
 
             <!-- Database Structure Section -->
+            <!-- 
+                ============================================
+                DATABASE STRUCTURE SECTION
+                ============================================
+                
+                Comprehensive database documentation including:
+                - 49-table relational database schema
+                - Table relationships and foreign keys
+                - Data types and constraints
+                - Indexes and performance optimization
+                - Multi-campus data organization
+                - DepEd compliance requirements
+                ============================================ 
+            -->
             <div class="content-section" id="database-structure">
                 <h2 class="section-title">🗄️ Database Structure</h2>
                 
@@ -5718,6 +6315,20 @@ WHERE offering_id = 101;</pre>
             </div>
 
             <!-- SQL Scripts Section -->
+            <!-- 
+                ============================================
+                SQL SCRIPTS SECTION
+                ============================================
+                
+                Complete SQL implementation scripts:
+                - Database creation scripts
+                - Table definitions with constraints
+                - Index creation for performance
+                - Stored procedures and functions
+                - Sample data and test records
+                - Migration scripts for updates
+                ============================================ 
+            -->
             <div class="content-section" id="sql-scripts">
                 <h2 class="section-title">💾 SQL Scripts</h2>
                 
@@ -7066,6 +7677,20 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
             </div>
 
             <!-- Implementation Roadmap Section -->
+            <!-- 
+                ============================================
+                IMPLEMENTATION ROADMAP SECTION
+                ============================================
+                
+                Structured development roadmap with:
+                - Phase-based implementation approach
+                - Dependency-aware task organization
+                - Timeline estimates and milestones
+                - Resource allocation and team assignments
+                - Risk assessment and mitigation strategies
+                - Quality assurance and testing phases
+                ============================================ 
+            -->
             <div class="content-section" id="implementation-roadmap">
                 <h2 class="section-title">🚀 Implementation Roadmap</h2>
                 
@@ -9581,6 +10206,22 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
             </div>
 
             <!-- Task Management Section -->
+            <!-- 
+                ============================================
+                PROGRESS TRACKER SECTION (ACTIVE)
+                ============================================
+                
+                Real-time progress tracking with:
+                - Trello board integration and synchronization
+                - Task status monitoring (todo, ongoing, testing, done)
+                - Progress percentages and completion metrics
+                - Team collaboration and assignment tracking
+                - Timeline adherence and milestone monitoring
+                - Interactive task management interface
+                
+                This is the default active section when page loads.
+                ============================================ 
+            -->
             <div class="content-section active" id="task-management">
                 <h2 class="section-title">📊 Progress Tracker - Phase 1 (3-Month) Implementation</h2>
                 
@@ -15408,6 +16049,20 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
             </div>
 
             <!-- API Documentation Section -->
+            <!-- 
+                ============================================
+                API DOCUMENTATION SECTION
+                ============================================
+                
+                Comprehensive API reference including:
+                - RESTful endpoint specifications
+                - Request/response examples
+                - Authentication and authorization
+                - Error handling and status codes
+                - Rate limiting and usage guidelines
+                - SDK and integration examples
+                ============================================ 
+            -->
             <div class="content-section" id="api-documentation">
                 <h2 class="section-title">🔌 API Documentation</h2>
                 
@@ -15650,6 +16305,26 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
         </div>
     </div>
 
+    <!-- 
+        ============================================
+        MAIN JAVASCRIPT FUNCTIONALITY
+        ============================================
+        
+        Core JavaScript functionality for SKOLARIS documentation:
+        - Navigation menu management and section switching
+        - Mobile responsive menu handling
+        - Dropdown menu interactions
+        - Content section show/hide functionality
+        - Active state management for navigation
+        - Event listeners for user interactions
+        
+        Features:
+        - Smooth transitions between sections
+        - Mobile-friendly navigation
+        - Keyboard accessibility
+        - Error handling and fallbacks
+        ============================================ 
+    -->
     <script>
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -15848,6 +16523,24 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     
+    <!-- 
+        ============================================
+        TRELLO INTEGRATION AND CHECKLIST MANAGEMENT
+        ============================================
+        
+        JavaScript functionality for Trello integration:
+        - Real-time checklist status updates
+        - Progress tracking and completion monitoring
+        - Activity feed management
+        - Comment system integration
+        - Image attachment handling
+        - Modal dialog management
+        
+        External Libraries Used:
+        - html2canvas: For screenshot generation
+        - jsPDF: For PDF report generation
+        ============================================ 
+    -->
     <script>
         // Function to display checklist status for task cards
         async function displayChecklistStatus() {
@@ -19322,23 +20015,51 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                 const typeLabel = activity.type === 'comment' ? 'Comment' : 
                                  (activity.activityType === 'checklist' ? 'Checklist' : 'Activity');
 
+                // Enhanced type icons
+                const typeIcon = activity.type === 'comment' ? '💬' : 
+                                 (activity.activityType === 'checklist' ? '✅' : '📝');
+
+                // Enhanced author display with role
+                const authorDisplay = activity.role ? `${activity.author} (${activity.role})` : activity.author;
+
                 return `
-                    <div class="activity-item ${typeClass}">
+                    <div class="activity-item ${typeClass}" data-activity-id="${activity.id || ''}" data-activity-type="${typeClass}">
                         <div class="activity-header">
-                            <div class="activity-avatar">${activity.initials}</div>
+                            <div class="activity-avatar" title="${authorDisplay}">${activity.initials}</div>
                             <div class="activity-meta">
-                                <div class="activity-author">${activity.author}</div>
-                                <div class="activity-date">${formattedDate}</div>
+                                <div class="activity-author">
+                                    <span class="author-name">${activity.author}</span>
+                                    ${activity.role ? `<span class="author-role">(${activity.role})</span>` : ''}
                             </div>
-                            <div class="activity-type">${typeLabel}</div>
+                                <div class="activity-date" title="${date.toLocaleString('en-US')}">
+                                    ${formattedDate}
+                                </div>
+                            </div>
+                            <div class="activity-type ${typeClass}" title="${typeLabel}">
+                                ${typeIcon} ${typeLabel}
+                            </div>
                         </div>
                         <div class="activity-content ${typeClass}">
-                            <div class="activity-card-name">${activity.cardName}</div>
-                            <div>${this.formatActivityText(activity)}</div>
+                            <div class="activity-card-name" title="Task: ${activity.cardName}">
+                                ${activity.cardName}
+                            </div>
+                            
+                            <!-- Documentation-style formatted content -->
+                            <div class="activity-text documentation-format">
+                                ${this.formatActivityText(activity)}
+                            </div>
+                            
                             ${activity.attachment && activity.attachment.mimeType && activity.attachment.mimeType.startsWith('image/') ? `
+                                <div class="activity-info-section">
+                                    <div class="activity-info-header">Attachment</div>
+                                    <div class="activity-info-content">
                                 <div class="attachment-image">
                                     <img src="${activity.attachment.url}" alt="${activity.attachment.name}" 
-                                         onclick="openImageModal('${activity.attachment.url}', '${activity.attachment.name}')" />
+                                                 onclick="openImageModal('${activity.attachment.url}', '${activity.attachment.name}')" 
+                                                 style="max-width: 100%; height: auto; border-radius: 6px; cursor: pointer; border: 1px solid #dee2e6;" />
+                                            <div class="attachment-info">📎 ${activity.attachment.name}</div>
+                                        </div>
+                                    </div>
                                 </div>
                             ` : ''}
                         </div>
@@ -19347,15 +20068,63 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
             }
 
             formatActivityText(activity) {
-                // Process markdown formatting and images in activity text
-                const formattedText = processMarkdownFormatting(activity.text);
-                const { processedText, hasImages, imageElements } = processMarkdownImages(formattedText);
+                // Create documentation-style formatted text blocks
+                const text = activity.text || 'No description available';
+                const lines = text.split('\n').filter(line => line.trim() !== '');
                 
-                if (hasImages) {
-                    return processedText + imageElements;
-                } else {
-                    return formattedText;
-                }
+                // Create structured documentation format
+                let formattedHTML = '';
+                
+                // Activity Details Block
+                formattedHTML += `
+                    <div class="activity-text-block">
+                        <div class="line-numbers">
+                            ${lines.map((_, i) => (i + 1).toString()).join('<br>')}
+                        </div>
+                        <div class="activity-content-block">
+                            ${lines.map(line => this.escapeHtml(line)).join('<br>')}
+                        </div>
+                    </div>
+                `;
+                
+                // Activity Information Section
+                formattedHTML += `
+                    <div class="activity-info-section">
+                        <div class="activity-info-header">Activity Information</div>
+                        <div class="activity-info-content">
+                            <div class="activity-info-item">
+                                <div class="activity-info-label">Type:</div>
+                                <div class="activity-info-value">${activity.type || activity.activityType || 'Unknown'}</div>
+                            </div>
+                            <div class="activity-info-item">
+                                <div class="activity-info-label">Author:</div>
+                                <div class="activity-info-value">${activity.author || 'Unknown'}</div>
+                            </div>
+                            <div class="activity-info-item">
+                                <div class="activity-info-label">Date:</div>
+                                <div class="activity-info-value">${new Date(activity.date).toLocaleString('en-US')}</div>
+                            </div>
+                            ${activity.role ? `
+                                <div class="activity-info-item">
+                                    <div class="activity-info-label">Role:</div>
+                                    <div class="activity-info-value">${activity.role}</div>
+                                </div>
+                            ` : ''}
+                            <div class="activity-info-item">
+                                <div class="activity-info-label">Source:</div>
+                                <div class="activity-info-value">Trello API</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                return formattedHTML;
+            }
+
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
             }
 
             showLoading() {
@@ -19974,6 +20743,20 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
         </div>
     </div>
 
+    <!-- 
+        ============================================
+        API DOCUMENTATION JAVASCRIPT
+        ============================================
+        
+        JavaScript for API documentation functionality:
+        - Embedded Postman collection data
+        - Dynamic API endpoint rendering
+        - Interactive API testing interface
+        - Request/response examples
+        - Authentication flow demonstrations
+        - Error handling examples
+        ============================================ 
+    -->
     <!-- API Documentation Script -->
     <script>
         // Embedded Postman Collection Data
@@ -21423,9 +22206,42 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
         }
     </script>
 
+    <!-- 
+        ============================================
+        CHATBOT INTEGRATION
+        ============================================
+        
+        External chatbot integration script for:
+        - Interactive help and support
+        - Documentation navigation assistance
+        - FAQ and common queries handling
+        - User engagement and feedback collection
+        ============================================ 
+    -->
     <!-- SKOLARIS Chatbot Integration -->
     <script src="js/chatbot-integration.js"></script>
 </body>
+
+<!-- 
+    ============================================
+    END OF SKOLARIS DOCUMENTATION
+    ============================================
+    
+    This comprehensive documentation system provides:
+    - Complete project overview and specifications
+    - Real-time progress tracking with Trello integration
+    - Detailed database and API documentation
+    - Implementation roadmaps and timelines
+    - Interactive task management and collaboration tools
+    - Mobile-responsive design for all devices
+    - Security features and access controls
+    
+    Total Lines: 21,800+ lines of comprehensive documentation
+    Last Updated: 2025
+    Author: Aldrin Cruz Omnes
+    Project: SKOLARIS Student Information System
+    ============================================ 
+-->
 </html>
 
 
