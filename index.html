@@ -18105,8 +18105,11 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
             
             // Display the report with image upload section
             modalBody.innerHTML = reportContent + `
-                <div class="image-upload-section">
+                <div class="image-upload-section" style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 8px; border: 2px dashed #007bff;">
                     <h3>📎 Add Images to Report (Index Annex)</h3>
+                    <p style="color: #666; font-size: 14px; margin: 10px 0;">
+                        ✨ <strong>New:</strong> Images are automatically compressed! Upload as many as you need - no more 3-image limit!
+                    </p>
                     <div class="image-upload-controls">
                         <input type="file" id="reportImageUpload" accept="image/*" multiple style="display: none;">
                         <button onclick="document.getElementById('reportImageUpload').click()" class="btn btn-primary">
@@ -18133,52 +18136,136 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
             }
         }
 
-        function handleImageUpload(event) {
+        // Image compression function to reduce storage size
+        function compressImage(file, maxWidth = 1200, quality = 0.8) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        let width = img.width;
+                        let height = img.height;
+                        
+                        // Calculate new dimensions while maintaining aspect ratio
+                        if (width > maxWidth) {
+                            height = (height * maxWidth) / width;
+                            width = maxWidth;
+                        }
+                        
+                        canvas.width = width;
+                        canvas.height = height;
+                        
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+                        
+                        // Convert to JPEG with compression for smaller file size
+                        const compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
+                        resolve(compressedDataUrl);
+                    };
+                    img.onerror = reject;
+                    img.src = e.target.result;
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        async function handleImageUpload(event) {
             const files = event.target.files;
             if (files.length === 0) return;
 
-            Array.from(files).forEach(file => {
-                if (file.type.startsWith('image/')) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        const imageData = {
-                            id: Date.now() + Math.random(),
-                            name: file.name,
-                            dataUrl: e.target.result,
-                            uploadDate: new Date().toISOString()
-                        };
-                        
-                        reportImages.push(imageData);
-                        saveImagesToStorage();
-                        updateImagePreview();
-                        regenerateReportWithImages();
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    alert('Please select only image files.');
-                }
-            });
+            const uploadButton = event.target.previousElementSibling || document.querySelector('button');
+            const originalText = uploadButton ? uploadButton.innerHTML : '';
             
-            // Reset the input
-            event.target.value = '';
+            try {
+                if (uploadButton) {
+                    uploadButton.innerHTML = '⏳ Compressing images...';
+                    uploadButton.disabled = true;
+                }
+
+                for (const file of Array.from(files)) {
+                    if (file.type.startsWith('image/')) {
+                        try {
+                            // Compress the image before storing
+                            const compressedDataUrl = await compressImage(file, 1200, 0.8);
+                            
+                            const imageData = {
+                                id: Date.now() + Math.random(),
+                                name: file.name,
+                                dataUrl: compressedDataUrl,
+                                uploadDate: new Date().toISOString(),
+                                originalSize: file.size,
+                                compressedSize: Math.round(compressedDataUrl.length * 0.75) // Approximate size
+                            };
+                            
+                            reportImages.push(imageData);
+                            
+                            // Try to save to storage
+                            const saved = saveImagesToStorage();
+                            if (!saved) {
+                                // Remove the last image if storage failed
+                                reportImages.pop();
+                                alert(`⚠️ Storage limit reached! Cannot add "${file.name}".\n\nTip: Remove some existing images to make space, or the images are too large even after compression.`);
+                                break;
+                            }
+                        } catch (error) {
+                            console.error('Error processing image:', error);
+                            alert(`❌ Failed to process image "${file.name}". Please try a different image.`);
+                        }
+                    } else {
+                        alert('Please select only image files.');
+                    }
+                }
+                
+                updateImagePreview();
+                regenerateReportWithImages();
+                
+            } finally {
+                // Reset button state
+                if (uploadButton) {
+                    uploadButton.innerHTML = originalText;
+                    uploadButton.disabled = false;
+                }
+                // Reset the input
+                event.target.value = '';
+            }
         }
 
         function updateImagePreview() {
             const preview = document.getElementById('uploadedImagesPreview');
             if (!preview) return;
 
+            const storageInfo = getStorageInfo();
+            const storageWarning = parseFloat(storageInfo.mb) > 4 ? 
+                '<span style="color: #ff6b6b; font-weight: bold;"> ⚠️ Approaching storage limit!</span>' : '';
+
             if (reportImages.length === 0) {
-                preview.innerHTML = '<p style="color: #666; font-style: italic;">No images uploaded yet.</p>';
+                preview.innerHTML = `
+                    <p style="color: #666; font-style: italic; margin-top: 10px;">No images uploaded yet.</p>
+                    <p style="color: #888; font-size: 12px;">📊 Storage: 0 KB | Images: 0</p>
+                `;
                 return;
             }
 
-            preview.innerHTML = reportImages.map((image, index) => `
-                <div class="uploaded-image-item" style="display: inline-block; margin: 5px; position: relative;">
-                    <img src="${image.dataUrl}" alt="${image.name}" style="width: 100px; height: 100px; object-fit: cover; border-radius: 4px; border: 1px solid #ddd;">
-                    <button onclick="removeImage(${image.id})" style="position: absolute; top: -5px; right: -5px; background: #ff4444; color: white; border: none; border-radius: 50%; width: 20px; height: 20px; font-size: 12px; cursor: pointer;">×</button>
-                    <div style="font-size: 10px; text-align: center; margin-top: 2px; max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${image.name}</div>
+            preview.innerHTML = `
+                <div style="margin: 15px 0; padding: 10px; background: #f8f9fa; border-radius: 4px; border-left: 3px solid #007bff;">
+                    <strong>📊 Storage Info:</strong> ${storageInfo.mb} MB (${storageInfo.kb} KB) | 
+                    <strong>📷 Images:</strong> ${storageInfo.imageCount}${storageWarning}
+                    <br>
+                    <small style="color: #666;">💡 Images are automatically compressed to save space. You can now upload many more images!</small>
                 </div>
-            `).join('');
+                <div style="margin-top: 10px;">
+                    ${reportImages.map((image, index) => `
+                        <div class="uploaded-image-item" style="display: inline-block; margin: 5px; position: relative;">
+                            <img src="${image.dataUrl}" alt="${image.name}" style="width: 100px; height: 100px; object-fit: cover; border-radius: 4px; border: 1px solid #ddd;">
+                            <button onclick="removeImage(${image.id})" style="position: absolute; top: -5px; right: -5px; background: #ff4444; color: white; border: none; border-radius: 50%; width: 20px; height: 20px; font-size: 12px; cursor: pointer; line-height: 20px; padding: 0;">×</button>
+                            <div style="font-size: 10px; text-align: center; margin-top: 2px; max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${image.name}">${image.name}</div>
+                            ${image.compressedSize ? `<div style="font-size: 9px; text-align: center; color: #28a745;">✓ Compressed</div>` : ''}
+                        </div>
+                    `).join('')}
+                </div>
+            `;
         }
 
         function removeImage(imageId) {
@@ -18189,7 +18276,37 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
         }
 
         function saveImagesToStorage() {
-            localStorage.setItem('skolarisReportImages', JSON.stringify(reportImages));
+            try {
+                const dataToSave = JSON.stringify(reportImages);
+                localStorage.setItem('skolarisReportImages', dataToSave);
+                return true;
+            } catch (e) {
+                if (e.name === 'QuotaExceededError' || e.code === 22) {
+                    console.error('LocalStorage quota exceeded:', e);
+                    return false;
+                }
+                console.error('Error saving images to storage:', e);
+                return false;
+            }
+        }
+        
+        // Calculate storage usage
+        function getStorageInfo() {
+            try {
+                const data = localStorage.getItem('skolarisReportImages');
+                const sizeInBytes = data ? new Blob([data]).size : 0;
+                const sizeInKB = (sizeInBytes / 1024).toFixed(2);
+                const sizeInMB = (sizeInBytes / (1024 * 1024)).toFixed(2);
+                
+                return {
+                    bytes: sizeInBytes,
+                    kb: sizeInKB,
+                    mb: sizeInMB,
+                    imageCount: reportImages.length
+                };
+            } catch (e) {
+                return { bytes: 0, kb: '0', mb: '0', imageCount: 0 };
+            }
         }
 
         function regenerateReportWithImages() {
@@ -18456,10 +18573,32 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                 // Show loading state
                 const button = document.querySelector('.download-pdf-btn');
                 const originalText = button.textContent;
-                button.textContent = '🔄 Generating...';
+                button.textContent = '🔄 Generating PDF...';
                 button.disabled = true;
 
-                // Wait for all images to load before capturing
+                // Find and temporarily hide the Index Annex section to render it separately
+                const annexSection = reportContent.querySelector('.annex-images');
+                let annexImages = [];
+                
+                if (annexSection) {
+                    // Save the annex images for later processing
+                    const annexImageElements = annexSection.querySelectorAll('.annex-image-item');
+                    annexImages = Array.from(annexImageElements).map(item => {
+                        const img = item.querySelector('img');
+                        const title = item.querySelector('h4')?.textContent || 'Image';
+                        const caption = item.querySelector('p em')?.textContent || '';
+                        return {
+                            src: img.src,
+                            title: title,
+                            caption: caption
+                        };
+                    });
+                    
+                    // Temporarily hide annex section for main report rendering
+                    annexSection.style.display = 'none';
+                }
+
+                // Wait for all remaining images to load
                 const images = reportContent.querySelectorAll('img');
                 const imagePromises = Array.from(images).map(img => {
                     return new Promise((resolve) => {
@@ -18467,23 +18606,30 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                             resolve();
                         } else {
                             img.onload = resolve;
-                            img.onerror = resolve; // Continue even if image fails to load
+                            img.onerror = resolve;
                         }
                     });
                 });
                 
                 await Promise.all(imagePromises);
 
-                // First, capture the report as an image using html2canvas
+                button.textContent = '🔄 Rendering report...';
+
+                // Capture the main report content (without Index Annex images)
                 const canvas = await html2canvas(reportContent, {
                     backgroundColor: '#ffffff',
-                    scale: 1.5, // Balanced quality and file size
+                    scale: 1.5,
                     useCORS: true,
                     allowTaint: true,
                     logging: false,
                     width: reportContent.scrollWidth,
                     height: reportContent.scrollHeight
                 });
+
+                // Restore annex section visibility
+                if (annexSection) {
+                    annexSection.style.display = '';
+                }
 
                 // Initialize jsPDF
                 const { jsPDF } = window.jspdf;
@@ -18492,34 +18638,29 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                 // Get page dimensions
                 const pageWidth = pdf.internal.pageSize.getWidth();
                 const pageHeight = pdf.internal.pageSize.getHeight();
-                const margin = 15; // Reasonable margin
+                const margin = 15;
                 
-                // Calculate the available space for the image
                 const availableWidth = pageWidth - (margin * 2);
                 const availableHeight = pageHeight - (margin * 2);
                 
-                // Calculate image dimensions maintaining aspect ratio
+                // Calculate main report dimensions
                 const aspectRatio = canvas.width / canvas.height;
                 let imgWidth = availableWidth;
                 let imgHeight = availableWidth / aspectRatio;
                 
-                // If the image is too tall for one page, adjust to fit height
                 if (imgHeight > availableHeight) {
                     imgHeight = availableHeight;
                     imgWidth = availableHeight * aspectRatio;
                 }
                 
-                // Convert canvas to image data
                 const imgData = canvas.toDataURL('image/png', 0.9);
                 
-                // Check if image fits in one page
+                // Add main report pages
                 if (imgHeight <= availableHeight) {
-                    // Single page - center the image
                     const x = margin + (availableWidth - imgWidth) / 2;
                     const y = margin + (availableHeight - imgHeight) / 2;
                     pdf.addImage(imgData, 'PNG', x, y, imgWidth, imgHeight);
                 } else {
-                    // Multi-page - split the image properly
                     const totalPages = Math.ceil(imgHeight / availableHeight);
                     const pageImgHeight = availableHeight;
                     
@@ -18528,33 +18669,26 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                             pdf.addPage();
                         }
                         
-                        // Calculate the source rectangle for this page
                         const sourceY = i * pageImgHeight * (canvas.height / imgHeight);
                         const sourceHeight = Math.min(
                             pageImgHeight * (canvas.height / imgHeight), 
                             canvas.height - sourceY
                         );
                         
-                        // Create a temporary canvas for this page slice
                         const pageCanvas = document.createElement('canvas');
                         const pageCtx = pageCanvas.getContext('2d');
                         pageCanvas.width = canvas.width;
                         pageCanvas.height = sourceHeight;
                         
-                        // Draw the portion of the image for this page
                         pageCtx.drawImage(
                             canvas, 
                             0, sourceY, canvas.width, sourceHeight, 
                             0, 0, canvas.width, sourceHeight
                         );
                         
-                        // Convert to image data
                         const pageImgData = pageCanvas.toDataURL('image/png', 0.9);
-                        
-                        // Calculate the actual height for this page (might be shorter for last page)
                         const actualPageHeight = Math.min(pageImgHeight, imgHeight - (i * pageImgHeight));
                         
-                        // Add to PDF with proper scaling
                         pdf.addImage(
                             pageImgData, 
                             'PNG', 
@@ -18563,6 +18697,77 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                             imgWidth, 
                             actualPageHeight
                         );
+                    }
+                }
+
+                // Now add Index Annex images on separate pages (large and readable)
+                if (annexImages.length > 0) {
+                    button.textContent = '🔄 Adding Index Annex images...';
+                    
+                    for (let i = 0; i < annexImages.length; i++) {
+                        const imageInfo = annexImages[i];
+                        
+                        try {
+                            // Create a new page for each annex image
+                            pdf.addPage();
+                            
+                            // Add title
+                            pdf.setFontSize(14);
+                            pdf.setFont(undefined, 'bold');
+                            pdf.text(imageInfo.title, margin, margin + 5);
+                            
+                            // Load the image
+                            const img = new Image();
+                            img.src = imageInfo.src;
+                            
+                            await new Promise((resolve, reject) => {
+                                img.onload = resolve;
+                                img.onerror = reject;
+                            });
+                            
+                            // Calculate image dimensions (make it as large as possible)
+                            const imgAspectRatio = img.width / img.height;
+                            let annexImgWidth = availableWidth;
+                            let annexImgHeight = annexImgWidth / imgAspectRatio;
+                            
+                            const titleHeight = 15; // Space for title
+                            const captionHeight = 10; // Space for caption
+                            const maxImageHeight = pageHeight - (margin * 2) - titleHeight - captionHeight;
+                            
+                            // If image is too tall, scale it down
+                            if (annexImgHeight > maxImageHeight) {
+                                annexImgHeight = maxImageHeight;
+                                annexImgWidth = annexImgHeight * imgAspectRatio;
+                            }
+                            
+                            // Center the image horizontally if it's smaller than page width
+                            const imgX = margin + (availableWidth - annexImgWidth) / 2;
+                            const imgY = margin + titleHeight;
+                            
+                            // Add the image (large and centered)
+                            pdf.addImage(
+                                imageInfo.src, 
+                                'JPEG', 
+                                imgX, 
+                                imgY, 
+                                annexImgWidth, 
+                                annexImgHeight,
+                                undefined,
+                                'FAST' // Use fast compression for better quality
+                            );
+                            
+                            // Add caption at the bottom
+                            if (imageInfo.caption) {
+                                pdf.setFontSize(9);
+                                pdf.setFont(undefined, 'italic');
+                                const captionY = imgY + annexImgHeight + 5;
+                                pdf.text(imageInfo.caption, pageWidth / 2, captionY, { align: 'center' });
+                            }
+                            
+                        } catch (error) {
+                            console.error(`Error adding image ${i + 1} to PDF:`, error);
+                            // Continue with other images even if one fails
+                        }
                     }
                 }
 
