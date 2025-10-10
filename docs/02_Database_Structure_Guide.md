@@ -4,6 +4,29 @@
 
 The Database Structure section contains the complete database schema, entity relationships, and ready-to-use SQL scripts for the SKOLARIS Student Information System.
 
+## ⚠️ Implementation Status
+
+> **Important Note**: This documentation describes both **currently implemented** tables and **planned features**. Please note the following:
+>
+> - ✅ **IMPLEMENTED**: Tables that exist in the current backend (`skolaris-be/database/migrations`)
+> - 🔜 **PLANNED**: Tables and features planned for future implementation
+>
+> ### Planned Features (Not Yet Implemented):
+>
+> - `academic_terms` table - Centralized term management system
+> - `default_curriculum` table - Template curriculum per program
+> - `course_offerings` table - Course offerings bridge table
+>
+> ### Current Implementation Notes:
+>
+> - `programs` table does not yet have `college_id` foreign key (planned for future)
+> - `colleges` table uses `head_employee_id` (FK) instead of `dean_name` text field
+> - `users` table does not store `student_id` or `employee_number` (these are in separate `students` and `employees` tables)
+> - `class_schedules` uses `room` as VARCHAR field, not `room_id` foreign key
+> - `grades` table links to `schedule_id`, not `subject_id` directly
+>
+> For a complete list of currently implemented tables, see the **Currently Implemented Backend Tables** section below.
+
 ---
 
 ## 🎯 What You'll Find Here
@@ -573,6 +596,196 @@ REPAIR TABLE students, courses, enrollments;
 - Security Guide covers database security
 - Progress Tracker monitors database implementation
 - Implementation Roadmap includes database milestones
+
+---
+
+## ✅ Currently Implemented Backend Tables
+
+This section lists all tables that are **currently implemented** in the backend Laravel application (`skolaris-be/database/migrations`).
+
+### **Core System Tables** (10 tables)
+
+| Table Name           | Purpose                    | Key Fields                                                                      |
+| -------------------- | -------------------------- | ------------------------------------------------------------------------------- |
+| `campuses`           | 8 ICCT physical locations  | `campus_id`, `campus_code`, `campus_name`, `address`, `phone`, `email`          |
+| `users`              | Base user authentication   | `user_id`, `campus_id` (FK), `email`, `password_hash`, `full_name`, `user_type` |
+| `roles`              | User roles & permissions   | `role_id`, `role_name`, `role_level`, `is_global`, `campus_id`                  |
+| `permissions`        | Granular permission system | `permission_id`, `module`, `action`, `resource`                                 |
+| `user_roles`         | User-role assignments      | `user_id` (FK), `role_id` (FK), `campus_id` (FK)                                |
+| `role_permissions`   | Role-permission mapping    | `role_id` (FK), `permission_id` (FK)                                            |
+| `system_modules`     | System module definitions  | `module_id`, `module_name`, `description`                                       |
+| `role_module_access` | Module access control      | `role_id` (FK), `module_id` (FK)                                                |
+| `audit_logs`         | System audit trail         | `log_id`, `table_name`, `action`, `user_id`, `timestamp`                        |
+| `auth_logs`          | Authentication logging     | `log_id`, `user_id`, `action`, `ip_address`, `timestamp`                        |
+
+### **Academic Management Tables** (13 tables)
+
+| Table Name         | Purpose                              | Key Fields                                                                                                       | Notes                                                                |
+| ------------------ | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `colleges`         | Organizational units (COE, COB, CAS) | `college_id`, `campus_id` (FK), `college_code`, `college_name`, `head_employee_id` (FK)                          | Uses `head_employee_id` FK instead of dean_name text                 |
+| `programs`         | Degree programs (BSCS, BSIT, etc.)   | `program_id`, `campus_id` (FK), `program_code`, `program_name`, `degree_type`, `duration_years`                  | ⚠️ `college_id` field planned for future                             |
+| `students`         | Student records                      | `student_id`, `user_id` (FK), `program_id` (FK), `student_number`, `year_level`, `status`, `gpa`                 |                                                                      |
+| `subjects`         | Course catalog                       | `subject_id`, `subject_code`, `subject_name`, `units`, `type`, `prerequisites`                                   | `type` includes: lecture, laboratory, lecture_lab, practicum, thesis |
+| `curriculum`       | Program curriculum mapping           | `curriculum_id`, `program_id` (FK), `subject_id` (FK), `year_level`, `semester`, `is_required`                   | Single curriculum table (no separate default_curriculum yet)         |
+| `sections`         | Class sections                       | `section_id`, `program_id` (FK), `section_name`, `year_level`, `semester`, `max_students`                        |                                                                      |
+| `class_schedules`  | Course scheduling                    | `schedule_id`, `section_id` (FK), `subject_id` (FK), `employee_id` (FK), `day`, `start_time`, `end_time`, `room` | `room` is VARCHAR, not FK                                            |
+| `student_sections` | Student section enrollment           | `student_id` (FK), `section_id` (FK), `enrollment_date`, `status`                                                | Replaces generic enrollments table                                   |
+| `grades`           | Student grades                       | `grade_id`, `student_id` (FK), `schedule_id` (FK), `midterm_grade`, `final_grade`, `remarks_grade`, `status`     | Links to schedule_id, not subject_id                                 |
+| `transcripts`      | Academic transcripts                 | `transcript_id`, `student_id` (FK), `school_year`, `semester`, `gpa`, `total_units`                              |                                                                      |
+| `rooms`            | Facility management                  | `room_id`, `campus_id` (FK), `room_number`, `building`, `capacity`, `type`                                       |                                                                      |
+| `employees`        | Faculty and staff records            | `employee_id`, `user_id` (FK), `employee_number`, `status`, `college_id`, `hire_date`                            |                                                                      |
+| `employee_load`    | Faculty teaching load                | `load_id`, `employee_id` (FK), `schedule_id` (FK), `units`, `load_type`, `status`                                |                                                                      |
+
+### **Student Information Tables** (5 tables)
+
+| Table Name                       | Purpose                                   |
+| -------------------------------- | ----------------------------------------- |
+| `student_personal_information`   | Personal details, birth info, citizenship |
+| `student_educational_background` | Previous education records                |
+| `student_family_information`     | Family members & guardians                |
+| `student_addresses`              | Current and permanent addresses           |
+| `student_contact_information`    | Phone numbers, email addresses            |
+
+### **Financial Tables** (5 tables)
+
+| Table Name             | Purpose                       | Key Fields                                                                                        |
+| ---------------------- | ----------------------------- | ------------------------------------------------------------------------------------------------- |
+| `student_assessments`  | Student financial assessments | `assessment_id`, `student_id` (FK), `school_year`, `semester`, `total_amount`, `balance`          |
+| `assessment_details`   | Assessment line items         | `detail_id`, `assessment_id` (FK), `fee_type`, `amount`                                           |
+| `fee_structures`       | Fee definitions               | `fee_id`, `program_id` (FK), `fee_type`, `amount`, `school_year`                                  |
+| `payments`             | Payment records               | `payment_id`, `student_id` (FK), `assessment_id` (FK), `amount`, `payment_method`, `payment_date` |
+| `payment_installments` | Installment plans             | `installment_id`, `assessment_id` (FK), `installment_number`, `due_date`, `amount`                |
+
+### **Academic Support Tables** (7 tables)
+
+| Table Name                 | Purpose                                            |
+| -------------------------- | -------------------------------------------------- |
+| `assignments`              | Course assignments                                 |
+| `attendance_records`       | Class attendance tracking                          |
+| `grade_components`         | Grade component definitions (quizzes, exams, etc.) |
+| `student_grade_components` | Individual grade component scores                  |
+| `scholarships`             | Scholarship programs                               |
+| `graduation_applications`  | Graduation processing                              |
+| `user_sessions`            | Active user sessions                               |
+
+### **Health & Medical Tables** (3 tables)
+
+| Table Name              | Purpose                   |
+| ----------------------- | ------------------------- |
+| `medical_records`       | Student health records    |
+| `health_requirements`   | Required health documents |
+| `student_health_status` | Health status tracking    |
+
+### **Clearance System Tables** (2 tables)
+
+| Table Name               | Purpose                           |
+| ------------------------ | --------------------------------- |
+| `clearance_requirements` | Clearance requirement definitions |
+| `student_clearances`     | Student clearance tracking        |
+
+### **Library System Tables** (2 tables)
+
+| Table Name     | Purpose                |
+| -------------- | ---------------------- |
+| `books`        | Library book catalog   |
+| `book_borrows` | Book borrowing records |
+
+### **Total Count**: ~48 tables currently implemented
+
+---
+
+## 🔜 Planned Features (Not Yet Implemented)
+
+The following tables and features are documented but not yet implemented in the backend:
+
+### **1. academic_terms Table** 🔜
+
+**Purpose**: Centralized term management for semesters, trimesters, and summer terms
+
+**Planned Structure**:
+
+```sql
+CREATE TABLE academic_terms (
+    term_id INT PRIMARY KEY AUTO_INCREMENT,
+    term_code VARCHAR(20) UNIQUE,
+    school_year VARCHAR(20),
+    term_type ENUM('1st Semester', '2nd Semester', '3rd Semester', 'Summer'),
+    term_start_date DATE,
+    term_end_date DATE,
+    is_current BOOLEAN DEFAULT FALSE,
+    enrollment_start_date DATE,
+    enrollment_end_date DATE,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
+);
+```
+
+**Why Needed**: Currently, terms are managed using `school_year` and `semester` integer fields in various tables. A centralized `academic_terms` table would provide better term management and scheduling.
+
+### **2. default_curriculum Table** 🔜
+
+**Purpose**: Template curriculum per program (separate from student-specific curriculum)
+
+**Planned Structure**:
+
+```sql
+CREATE TABLE default_curriculum (
+    default_curriculum_id INT PRIMARY KEY AUTO_INCREMENT,
+    program_id INT,
+    subject_id INT,
+    year_level INT,
+    semester INT,
+    term_type VARCHAR(50),
+    subject_type ENUM('Core', 'Major', 'Minor', 'Elective', 'GE', 'PE', 'NSTP'),
+    is_required BOOLEAN DEFAULT TRUE,
+    prerequisites TEXT,
+    co_requisites TEXT,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP,
+    FOREIGN KEY (program_id) REFERENCES programs(program_id),
+    FOREIGN KEY (subject_id) REFERENCES subjects(subject_id)
+);
+```
+
+**Why Needed**: Currently, there's only one `curriculum` table. A separate `default_curriculum` table would serve as the master template that can be copied to individual student curricula.
+
+### **3. course_offerings Table** 🔜
+
+**Purpose**: Bridge table connecting programs, terms, and subjects with faculty and slot management
+
+**Planned Structure**:
+
+```sql
+CREATE TABLE course_offerings (
+    offering_id INT PRIMARY KEY AUTO_INCREMENT,
+    program_id INT,
+    term_id INT,
+    subject_id INT,
+    employee_id INT,
+    max_slots INT DEFAULT 40,
+    enrolled_count INT DEFAULT 0,
+    is_available BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP,
+    FOREIGN KEY (program_id) REFERENCES programs(program_id),
+    FOREIGN KEY (term_id) REFERENCES academic_terms(term_id),
+    FOREIGN KEY (subject_id) REFERENCES subjects(subject_id),
+    FOREIGN KEY (employee_id) REFERENCES employees(employee_id)
+);
+```
+
+**Why Needed**: Currently, course scheduling is managed through `class_schedules`. The `course_offerings` table would provide better management of what courses are offered each term with enrollment tracking.
+
+### **4. Programs Table Enhancement** 🔜
+
+**Planned Addition**: Add `college_id` foreign key to link programs directly to colleges
+
+```sql
+ALTER TABLE programs ADD COLUMN college_id INT;
+ALTER TABLE programs ADD FOREIGN KEY (college_id) REFERENCES colleges(college_id);
+```
+
+**Current State**: Programs are linked to `campus_id` but not to `college_id`, breaking the CAMPUSES → COLLEGES → PROGRAMS hierarchy.
 
 ---
 

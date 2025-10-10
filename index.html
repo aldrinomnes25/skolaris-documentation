@@ -2538,7 +2538,6 @@
             <div class="activity-filters">
                 <button class="filter-btn active" data-filter="all">All</button>
                 <button class="filter-btn" data-filter="comments">Comments</button>
-                <button class="filter-btn" data-filter="activities">Activities</button>
                 <button class="filter-btn" data-filter="checklist">Checklist</button>
             </div>
             <div class="activity-list" id="activityList">
@@ -3361,8 +3360,9 @@
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #dc3545; font-weight: 600;">user_id (PK)</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">campus_id (FK)</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #555;">email, phone</div>
-                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">student_id, employee_number</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">password_hash</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #555;">full_name, user_type</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">is_active</div>
                                     </div>
                                 </div>
                                 
@@ -3582,8 +3582,10 @@
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #dc3545; font-weight: 600;">schedule_id (PK)</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">section_id (FK)</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">subject_id (FK)</div>
-                                        <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">room_id (FK)</div>
-                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">day, time_start, time_end</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">employee_id (FK)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">room (string)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">day, start_time, end_time</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">school_year, semester</div>
                                     </div>
                                 </div>
                             </div>
@@ -3591,13 +3593,14 @@
                             <!-- Row 3: Grades and Assessment -->
                             <div style="display: flex; justify-content: space-between; align-items: center; margin: 25px 0; flex-wrap: wrap; gap: 15px;">
                                 <div style="background: white; border: 2px solid #e83e8c; border-radius: 8px; min-width: 180px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                                    <div style="background: #e83e8c; color: white; padding: 12px; font-weight: 600; text-align: center;">📊 STUDENT_GRADES</div>
+                                    <div style="background: #e83e8c; color: white; padding: 12px; font-weight: 600; text-align: center;">📊 GRADES</div>
                                     <div style="padding: 15px;">
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #dc3545; font-weight: 600;">grade_id (PK)</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">student_id (FK)</div>
-                                        <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">subject_id (FK)</div>
-                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">prelim, midterm, final</div>
-                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">final_grade, status</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">schedule_id (FK)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">school_year, semester</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">midterm_grade, final_grade</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">remarks_grade, status</div>
                                     </div>
                                 </div>
                                 
@@ -3662,6 +3665,34 @@
                         <div style="background: white; padding: 30px; border-radius: 12px; margin: 20px 0; border: 2px solid #e9ecef;">
                             <div style="font-size: 1.3em; font-weight: 600; text-align: center; margin-bottom: 30px; color: #2c3e50; padding-bottom: 15px; border-bottom: 2px solid #007bff;">Academic Hierarchy - Entity Relationship Diagram</div>
                             
+                            <!-- Implementation Status Legend -->
+                            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 25px; border-left: 4px solid #007bff;">
+                                <h5 style="margin: 0 0 15px 0; color: #2c3e50;">📌 Implementation Status</h5>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <div style="width: 30px; height: 30px; border: 2px solid #28a745; border-radius: 4px; background: white;"></div>
+                                        <div>
+                                            <strong style="color: #28a745;">✅ Current</strong><br>
+                                            <small style="color: #666;">Implemented in backend</small>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <div style="width: 30px; height: 30px; border: 2px dashed #ffc107; border-radius: 4px; background: #fffbf0;"></div>
+                                        <div>
+                                            <strong style="color: #ffc107;">🔜 Planned</strong><br>
+                                            <small style="color: #666;">To be implemented</small>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <div style="padding: 4px 8px; background: #ffc107; color: #212529; border-radius: 4px; font-size: 0.85em; font-weight: 600;">🔜</div>
+                                        <div>
+                                            <strong style="color: #856404;">Field: Planned</strong><br>
+                                            <small style="color: #666;">Field to be added</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
                             <!-- Hierarchy Flow -->
                             <div style="display: flex; justify-content: space-between; align-items: center; margin: 25px 0; flex-wrap: wrap; gap: 15px;">
                                 <div style="background: white; border: 2px solid #17a2b8; border-radius: 8px; min-width: 180px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
@@ -3681,9 +3712,10 @@
                                     <div style="padding: 15px;">
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #dc3545; font-weight: 600;">college_id (PK)</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">campus_id (FK)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">head_employee_id (FK)</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #555;">college_code</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #555;">college_name</div>
-                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">dean_name</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">description</div>
                                     </div>
                                 </div>
                                 
@@ -3694,18 +3726,20 @@
                                     <div style="padding: 15px;">
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #dc3545; font-weight: 600;">program_id (PK)</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">campus_id (FK)</div>
-                                        <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">college_id (FK)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #ffc107; font-weight: 600;">college_id (FK) 🔜</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #555;">program_code</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #555;">program_name</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #555;">degree_type, duration</div>
                                     </div>
                                 </div>
                             </div>
                             
                             <!-- Second Row: Academic Terms and Subjects -->
                             <div style="display: flex; justify-content: center; align-items: center; margin: 25px 0; flex-wrap: wrap; gap: 15px;">
-                                <div style="background: white; border: 2px solid #ffc107; border-radius: 8px; min-width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                                    <div style="background: #ffc107; color: #212529; padding: 12px; font-weight: 600; text-align: center;">📅 ACADEMIC_TERMS</div>
-                                    <div style="padding: 15px;">
+                                <div style="background: white; border: 2px dashed #ffc107; border-radius: 8px; min-width: 200px; box-shadow: 0 2px 8px rgba(255,193,7,0.2);">
+                                    <div style="background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%); color: #212529; padding: 12px; font-weight: 600; text-align: center;">📅 ACADEMIC_TERMS 🔜</div>
+                                    <div style="padding: 15px; background: #fffbf0;">
+                                        <div style="padding: 4px 0; font-size: 0.85em; color: #ff6b6b; font-weight: 700; margin-bottom: 8px;">⚠️ PLANNED FEATURE</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #dc3545; font-weight: 600;">term_id (PK)</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #555;">term_code</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #555;">school_year</div>
@@ -3753,10 +3787,36 @@
                                 <li><strong>📅 Term-Organized:</strong> Subjects organized by year level, semester, and term type</li>
                                 <li><strong>🎯 Subject Classification:</strong> Subjects categorized as Core, Major, Minor, Elective, GE, PE, or NSTP</li>
                                 <li><strong>🔗 Prerequisites:</strong> Defines prerequisite and co-requisite relationships between subjects</li>
+                                <li><strong>🔄 Curriculum Versioning:</strong> Effectivity range (start/end years) allows multiple curriculum versions to coexist without duplication</li>
                                 <li><strong>✅ Template Source:</strong> Used to generate individual student curricula during enrollment</li>
                             </ul>
                             <p style="margin: 10px 0 0 0; color: #495057; line-height: 1.6; font-style: italic;">
                                 This ensures consistency across all students enrolled in the same program while allowing flexibility for special cases.
+                            </p>
+                        </div>
+                        
+                        <div style="background: #e7f3ff; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #667eea;">
+                            <h5 style="color: #2c3e50; margin: 0 0 15px 0; font-size: 1.1em;">🔄 Curriculum Effectivity Range System (NEW)</h5>
+                            <p style="margin: 0 0 10px 0; color: #495057; line-height: 1.6;">
+                                The <strong>Effectivity Range System</strong> allows curriculum records to be effective for multiple years without duplication. Each curriculum entry has:
+                            </p>
+                            <ul style="margin: 0 0 15px 0; padding-left: 20px; color: #495057; line-height: 1.6;">
+                                <li><strong>effectivity_start_year:</strong> The academic year when this curriculum entry becomes effective (e.g., '2023' for 2023-2024)</li>
+                                <li><strong>effectivity_end_year:</strong> The academic year when it is superseded, or 'ongoing' if still current</li>
+                            </ul>
+                            <div style="background: white; padding: 15px; border-radius: 6px; margin: 10px 0;">
+                                <p style="margin: 0 0 10px 0; color: #495057; line-height: 1.6;"><strong>Example:</strong></p>
+                                <code style="display: block; background: #f8f9fa; padding: 10px; border-radius: 4px; margin-bottom: 10px;">
+                                    CS101: effectivity_start='2023', effectivity_end='ongoing'<br>
+                                    → Used by: 2023, 2024, 2025, 2026... students (until replaced)
+                                </code>
+                                <code style="display: block; background: #f8f9fa; padding: 10px; border-radius: 4px;">
+                                    CS100: effectivity_start='2020', effectivity_end='2022'<br>
+                                    → Used by: 2020, 2021, 2022 students only (superseded by CS101 in 2023)
+                                </code>
+                            </div>
+                            <p style="margin: 10px 0 0 0; color: #495057; line-height: 1.6; font-style: italic;">
+                                <strong>Benefits:</strong> Eliminates need to duplicate curriculum records every year (80-90% storage savings), allows curriculum changes without affecting existing students, maintains historical accuracy.
                             </p>
                         </div>
                         
@@ -3800,7 +3860,7 @@
                                     <div style="padding: 15px;">
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #dc3545; font-weight: 600;">program_id (PK)</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">campus_id (FK)</div>
-                                        <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">college_id (FK)</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #ffc107; font-weight: 600;">college_id (FK) 🔜</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #555;">program_code</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #555;">program_name</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #555;">degree_type</div>
@@ -3811,9 +3871,10 @@
                                 
                                 <div style="font-size: 1.5em; color: #ff6b6b; font-weight: bold;">→</div>
                                 
-                                <div style="background: white; border: 2px solid #ff6b6b; border-radius: 8px; min-width: 220px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                                    <div style="background: #ff6b6b; color: white; padding: 12px; font-weight: 600; text-align: center;">📖 DEFAULT_CURRICULUM</div>
-                                    <div style="padding: 15px;">
+                                <div style="background: white; border: 2px dashed #ff6b6b; border-radius: 8px; min-width: 220px; box-shadow: 0 2px 8px rgba(255,107,107,0.2);">
+                                    <div style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); color: white; padding: 12px; font-weight: 600; text-align: center;">📖 DEFAULT_CURRICULUM 🔜</div>
+                                    <div style="padding: 15px; background: #fff5f5;">
+                                        <div style="padding: 4px 0; font-size: 0.85em; color: #ff6b6b; font-weight: 700; margin-bottom: 8px;">⚠️ PLANNED FEATURE</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #dc3545; font-weight: 600;">default_curriculum_id (PK)</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">program_id (FK)</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #28a745; font-weight: 600;">subject_id (FK)</div>
@@ -3823,6 +3884,8 @@
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #555;">subject_type</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #555;">prerequisites</div>
                                         <div style="padding: 4px 0; font-size: 0.9em; color: #555;">co_requisites</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #667eea; font-weight: 600;">effectivity_start_year</div>
+                                        <div style="padding: 4px 0; font-size: 0.9em; color: #667eea; font-weight: 600;">effectivity_end_year</div>
                                     </div>
                                 </div>
                                 
@@ -3917,14 +3980,22 @@
 
                 <!-- NEW: COURSE OFFERINGS CONNECTION ERD -->
                 <div class="process-group">
-                    <h3 class="group-title">🔗 Course Offerings Connection ERD</h3>
+                    <h3 class="group-title">🔗 Course Offerings Connection ERD 🔜</h3>
                     <div class="entry">
                         <div class="meta">
                             <span class="meta-badge category">Course Offerings</span>
                             <span class="meta-badge priority">Critical</span>
+                            <span class="meta-badge status" style="background: #ffc107; color: #212529;">⚠️ PLANNED FEATURE</span>
                         </div>
                         <h3>Programs → Academic Terms → Subjects Connection</h3>
                         <h4>Actual Course Offerings per Academic Term</h4>
+                        
+                        <div style="background: #fff3cd; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #ffc107;">
+                            <h5 style="color: #2c3e50; margin: 0 0 10px 0; font-size: 1.1em;">⚠️ Implementation Status: PLANNED FEATURE</h5>
+                            <p style="margin: 0 0 15px 0; color: #856404; font-weight: 600; font-size: 0.95em;">
+                                This table and its relationships are part of the planned architecture and will be implemented in future sprints. Currently, course scheduling is managed through the existing <code>class_schedules</code> table.
+                            </p>
+                        </div>
                         
                         <div style="background: #e3f2fd; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #2196f3;">
                             <h5 style="color: #2c3e50; margin: 0 0 15px 0; font-size: 1.1em;">🔗 Course Offerings Explanation</h5>
@@ -4106,6 +4177,289 @@
                     </div>
                 </div>
 
+                <!-- NEW: CURRENTLY IMPLEMENTED BACKEND TABLES -->
+                <div class="process-group">
+                    <h3 class="group-title">✅ Currently Implemented Backend Tables</h3>
+                    <div class="entry">
+                        <div class="meta">
+                            <span class="meta-badge category">Current Implementation</span>
+                            <span class="meta-badge priority">High Priority</span>
+                        </div>
+                        <h3>Backend Database Tables - Currently Implemented</h3>
+                        <h4>Complete List of Existing Tables in Backend (skolaris-be/database/migrations)</h4>
+                        
+                        <div style="background: #e8f5e9; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #4caf50;">
+                            <h5 style="color: #2c3e50; margin: 0 0 15px 0; font-size: 1.1em;">✅ Implementation Status</h5>
+                            <p style="margin: 0 0 10px 0; color: #495057; line-height: 1.6;">
+                                The following tables are <strong>currently implemented</strong> in the backend Laravel application. These tables have actual migration files and are part of the live database schema.
+                            </p>
+                        </div>
+                        
+                        <!-- Core System Tables -->
+                        <div style="background: white; padding: 25px; border-radius: 12px; margin: 20px 0; border: 2px solid #e9ecef;">
+                            <h4 style="color: #667eea; margin: 0 0 20px 0; font-size: 1.2em; border-bottom: 2px solid #667eea; padding-bottom: 10px;">🔐 Core System Tables</h4>
+                            
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #667eea;">
+                                    <h5 style="margin: 0 0 10px 0; color: #667eea;">campuses</h5>
+                                    <p style="margin: 0; font-size: 0.9em; color: #555;">8 ICCT physical locations</p>
+                                    <div style="margin-top: 10px; font-size: 0.85em; color: #777;">
+                                        <code>campus_id, campus_code, campus_name, address, phone, email</code>
+                                    </div>
+                                </div>
+                                
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #667eea;">
+                                    <h5 style="margin: 0 0 10px 0; color: #667eea;">users</h5>
+                                    <p style="margin: 0; font-size: 0.9em; color: #555;">Base user authentication table</p>
+                                    <div style="margin-top: 10px; font-size: 0.85em; color: #777;">
+                                        <code>user_id, campus_id (FK), email, password_hash, full_name, user_type</code>
+                                    </div>
+                                </div>
+                                
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #667eea;">
+                                    <h5 style="margin: 0 0 10px 0; color: #667eea;">roles</h5>
+                                    <p style="margin: 0; font-size: 0.9em; color: #555;">User roles & permissions</p>
+                                    <div style="margin-top: 10px; font-size: 0.85em; color: #777;">
+                                        <code>role_id, role_name, role_level, is_global, campus_id</code>
+                                    </div>
+                                </div>
+                                
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #667eea;">
+                                    <h5 style="margin: 0 0 10px 0; color: #667eea;">permissions</h5>
+                                    <p style="margin: 0; font-size: 0.9em; color: #555;">Granular permission system</p>
+                                    <div style="margin-top: 10px; font-size: 0.85em; color: #777;">
+                                        <code>permission_id, module, action, resource</code>
+                                    </div>
+                                </div>
+                                
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #667eea;">
+                                    <h5 style="margin: 0 0 10px 0; color: #667eea;">user_roles</h5>
+                                    <p style="margin: 0; font-size: 0.9em; color: #555;">User-role assignments</p>
+                                    <div style="margin-top: 10px; font-size: 0.85em; color: #777;">
+                                        <code>user_id (FK), role_id (FK), campus_id (FK)</code>
+                                    </div>
+                                </div>
+                                
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #667eea;">
+                                    <h5 style="margin: 0 0 10px 0; color: #667eea;">role_permissions</h5>
+                                    <p style="margin: 0; font-size: 0.9em; color: #555;">Role-permission mapping</p>
+                                    <div style="margin-top: 10px; font-size: 0.85em; color: #777;">
+                                        <code>role_id (FK), permission_id (FK)</code>
+                                    </div>
+                                </div>
+                                
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #667eea;">
+                                    <h5 style="margin: 0 0 10px 0; color: #667eea;">system_modules</h5>
+                                    <p style="margin: 0; font-size: 0.9em; color: #555;">System module definitions</p>
+                                    <div style="margin-top: 10px; font-size: 0.85em; color: #777;">
+                                        <code>module_id, module_name, description</code>
+                                    </div>
+                                </div>
+                                
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #667eea;">
+                                    <h5 style="margin: 0 0 10px 0; color: #667eea;">role_module_access</h5>
+                                    <p style="margin: 0; font-size: 0.9em; color: #555;">Module access control</p>
+                                    <div style="margin-top: 10px; font-size: 0.85em; color: #777;">
+                                        <code>role_id (FK), module_id (FK)</code>
+                                    </div>
+                                </div>
+                                
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #667eea;">
+                                    <h5 style="margin: 0 0 10px 0; color: #667eea;">audit_logs</h5>
+                                    <p style="margin: 0; font-size: 0.9em; color: #555;">System audit trail</p>
+                                    <div style="margin-top: 10px; font-size: 0.85em; color: #777;">
+                                        <code>log_id, table_name, action, user_id, timestamp</code>
+                                    </div>
+                                </div>
+                                
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #667eea;">
+                                    <h5 style="margin: 0 0 10px 0; color: #667eea;">auth_logs</h5>
+                                    <p style="margin: 0; font-size: 0.9em; color: #555;">Authentication logging</p>
+                                    <div style="margin-top: 10px; font-size: 0.85em; color: #777;">
+                                        <code>log_id, user_id, action, ip_address, timestamp</code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Academic Tables -->
+                        <div style="background: white; padding: 25px; border-radius: 12px; margin: 20px 0; border: 2px solid #e9ecef;">
+                            <h4 style="color: #28a745; margin: 0 0 20px 0; font-size: 1.2em; border-bottom: 2px solid #28a745; padding-bottom: 10px;">🎓 Academic Management Tables</h4>
+                            
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #28a745;">
+                                    <h5 style="margin: 0 0 10px 0; color: #28a745;">colleges</h5>
+                                    <p style="margin: 0; font-size: 0.9em; color: #555;">Organizational units (COE, COB, CAS)</p>
+                                    <div style="margin-top: 10px; font-size: 0.85em; color: #777;">
+                                        <code>college_id, campus_id (FK), college_code, college_name, head_employee_id (FK)</code>
+                                    </div>
+                                </div>
+                                
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #28a745;">
+                                    <h5 style="margin: 0 0 10px 0; color: #28a745;">programs</h5>
+                                    <p style="margin: 0; font-size: 0.9em; color: #555;">Degree programs (BSCS, BSIT, etc.)</p>
+                                    <div style="margin-top: 10px; font-size: 0.85em; color: #777;">
+                                        <code>program_id, campus_id (FK), program_code, program_name, degree_type, duration_years</code>
+                                    </div>
+                                    <div style="margin-top: 8px; font-size: 0.8em; color: #ffc107;">
+                                        ⚠️ Note: college_id field planned for future
+                                    </div>
+                                </div>
+                                
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #28a745;">
+                                    <h5 style="margin: 0 0 10px 0; color: #28a745;">students</h5>
+                                    <p style="margin: 0; font-size: 0.9em; color: #555;">Student records</p>
+                                    <div style="margin-top: 10px; font-size: 0.85em; color: #777;">
+                                        <code>student_id, user_id (FK), program_id (FK), student_number, year_level, status, gpa</code>
+                                    </div>
+                                </div>
+                                
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #28a745;">
+                                    <h5 style="margin: 0 0 10px 0; color: #28a745;">subjects</h5>
+                                    <p style="margin: 0; font-size: 0.9em; color: #555;">Course catalog</p>
+                                    <div style="margin-top: 10px; font-size: 0.85em; color: #777;">
+                                        <code>subject_id, subject_code, subject_name, units, type, prerequisites</code>
+                                    </div>
+                                </div>
+                                
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #28a745;">
+                                    <h5 style="margin: 0 0 10px 0; color: #28a745;">curriculum</h5>
+                                    <p style="margin: 0; font-size: 0.9em; color: #555;">Program curriculum mapping</p>
+                                    <div style="margin-top: 10px; font-size: 0.85em; color: #777;">
+                                        <code>curriculum_id, program_id (FK), subject_id (FK), year_level, semester, is_required</code>
+                                    </div>
+                                </div>
+                                
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #28a745;">
+                                    <h5 style="margin: 0 0 10px 0; color: #28a745;">sections</h5>
+                                    <p style="margin: 0; font-size: 0.9em; color: #555;">Class sections</p>
+                                    <div style="margin-top: 10px; font-size: 0.85em; color: #777;">
+                                        <code>section_id, program_id (FK), section_name, year_level, semester, max_students</code>
+                                    </div>
+                                </div>
+                                
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #28a745;">
+                                    <h5 style="margin: 0 0 10px 0; color: #28a745;">class_schedules</h5>
+                                    <p style="margin: 0; font-size: 0.9em; color: #555;">Course scheduling</p>
+                                    <div style="margin-top: 10px; font-size: 0.85em; color: #777;">
+                                        <code>schedule_id, section_id (FK), subject_id (FK), employee_id (FK), day, start_time, end_time, room</code>
+                                    </div>
+                                </div>
+                                
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #28a745;">
+                                    <h5 style="margin: 0 0 10px 0; color: #28a745;">student_sections</h5>
+                                    <p style="margin: 0; font-size: 0.9em; color: #555;">Student section enrollment</p>
+                                    <div style="margin-top: 10px; font-size: 0.85em; color: #777;">
+                                        <code>student_id (FK), section_id (FK), enrollment_date, status</code>
+                                    </div>
+                                </div>
+                                
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #28a745;">
+                                    <h5 style="margin: 0 0 10px 0; color: #28a745;">grades</h5>
+                                    <p style="margin: 0; font-size: 0.9em; color: #555;">Student grades</p>
+                                    <div style="margin-top: 10px; font-size: 0.85em; color: #777;">
+                                        <code>grade_id, student_id (FK), schedule_id (FK), midterm_grade, final_grade, remarks_grade, status</code>
+                                    </div>
+                                </div>
+                                
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #28a745;">
+                                    <h5 style="margin: 0 0 10px 0; color: #28a745;">transcripts</h5>
+                                    <p style="margin: 0; font-size: 0.9em; color: #555;">Academic transcripts</p>
+                                    <div style="margin-top: 10px; font-size: 0.85em; color: #777;">
+                                        <code>transcript_id, student_id (FK), school_year, semester, gpa, total_units</code>
+                                    </div>
+                                </div>
+                                
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #28a745;">
+                                    <h5 style="margin: 0 0 10px 0; color: #28a745;">rooms</h5>
+                                    <p style="margin: 0; font-size: 0.9em; color: #555;">Facility management</p>
+                                    <div style="margin-top: 10px; font-size: 0.85em; color: #777;">
+                                        <code>room_id, campus_id (FK), room_number, building, capacity, type</code>
+                                    </div>
+                                </div>
+                                
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #28a745;">
+                                    <h5 style="margin: 0 0 10px 0; color: #28a745;">employees</h5>
+                                    <p style="margin: 0; font-size: 0.9em; color: #555;">Faculty and staff records</p>
+                                    <div style="margin-top: 10px; font-size: 0.85em; color: #777;">
+                                        <code>employee_id, user_id (FK), employee_number, status, college_id, hire_date</code>
+                                    </div>
+                                </div>
+                                
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #28a745;">
+                                    <h5 style="margin: 0 0 10px 0; color: #28a745;">employee_load</h5>
+                                    <p style="margin: 0; font-size: 0.9em; color: #555;">Faculty teaching load</p>
+                                    <div style="margin-top: 10px; font-size: 0.85em; color: #777;">
+                                        <code>load_id, employee_id (FK), schedule_id (FK), units, load_type, status</code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Student Information Tables -->
+                        <div style="background: white; padding: 25px; border-radius: 12px; margin: 20px 0; border: 2px solid #e9ecef;">
+                            <h4 style="color: #17a2b8; margin: 0 0 20px 0; font-size: 1.2em; border-bottom: 2px solid #17a2b8; padding-bottom: 10px;">👤 Student Information Tables</h4>
+                            
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #17a2b8;">
+                                    <h5 style="margin: 0 0 10px 0; color: #17a2b8;">student_personal_information</h5>
+                                    <p style="margin: 0; font-size: 0.9em; color: #555;">Personal details, birth info, citizenship</p>
+                                </div>
+                                
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #17a2b8;">
+                                    <h5 style="margin: 0 0 10px 0; color: #17a2b8;">student_educational_background</h5>
+                                    <p style="margin: 0; font-size: 0.9em; color: #555;">Previous education records</p>
+                                </div>
+                                
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #17a2b8;">
+                                    <h5 style="margin: 0 0 10px 0; color: #17a2b8;">student_family_information</h5>
+                                    <p style="margin: 0; font-size: 0.9em; color: #555;">Family members & guardians</p>
+                                </div>
+                                
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #17a2b8;">
+                                    <h5 style="margin: 0 0 10px 0; color: #17a2b8;">student_addresses</h5>
+                                    <p style="margin: 0; font-size: 0.9em; color: #555;">Current and permanent addresses</p>
+                                </div>
+                                
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #17a2b8;">
+                                    <h5 style="margin: 0 0 10px 0; color: #17a2b8;">student_contact_information</h5>
+                                    <p style="margin: 0; font-size: 0.9em; color: #555;">Phone numbers, email addresses</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Additional Support Tables (Minimal Documentation) -->
+                        <div style="background: white; padding: 25px; border-radius: 12px; margin: 20px 0; border: 2px solid #e9ecef;">
+                            <h4 style="color: #6c757d; margin: 0 0 20px 0; font-size: 1.2em; border-bottom: 2px solid #6c757d; padding-bottom: 10px;">📋 Additional Support Tables</h4>
+                            
+                            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                                <span style="background: #f8f9fa; padding: 8px 15px; border-radius: 20px; font-size: 0.9em;">student_assessments</span>
+                                <span style="background: #f8f9fa; padding: 8px 15px; border-radius: 20px; font-size: 0.9em;">assessment_details</span>
+                                <span style="background: #f8f9fa; padding: 8px 15px; border-radius: 20px; font-size: 0.9em;">fee_structures</span>
+                                <span style="background: #f8f9fa; padding: 8px 15px; border-radius: 20px; font-size: 0.9em;">payments</span>
+                                <span style="background: #f8f9fa; padding: 8px 15px; border-radius: 20px; font-size: 0.9em;">payment_installments</span>
+                                <span style="background: #f8f9fa; padding: 8px 15px; border-radius: 20px; font-size: 0.9em;">assignments</span>
+                                <span style="background: #f8f9fa; padding: 8px 15px; border-radius: 20px; font-size: 0.9em;">attendance_records</span>
+                                <span style="background: #f8f9fa; padding: 8px 15px; border-radius: 20px; font-size: 0.9em;">grade_components</span>
+                                <span style="background: #f8f9fa; padding: 8px 15px; border-radius: 20px; font-size: 0.9em;">student_grade_components</span>
+                                <span style="background: #f8f9fa; padding: 8px 15px; border-radius: 20px; font-size: 0.9em;">scholarships</span>
+                                <span style="background: #f8f9fa; padding: 8px 15px; border-radius: 20px; font-size: 0.9em;">medical_records</span>
+                                <span style="background: #f8f9fa; padding: 8px 15px; border-radius: 20px; font-size: 0.9em;">health_requirements</span>
+                                <span style="background: #f8f9fa; padding: 8px 15px; border-radius: 20px; font-size: 0.9em;">student_health_status</span>
+                                <span style="background: #f8f9fa; padding: 8px 15px; border-radius: 20px; font-size: 0.9em;">clearance_requirements</span>
+                                <span style="background: #f8f9fa; padding: 8px 15px; border-radius: 20px; font-size: 0.9em;">student_clearances</span>
+                                <span style="background: #f8f9fa; padding: 8px 15px; border-radius: 20px; font-size: 0.9em;">graduation_applications</span>
+                                <span style="background: #f8f9fa; padding: 8px 15px; border-radius: 20px; font-size: 0.9em;">books</span>
+                                <span style="background: #f8f9fa; padding: 8px 15px; border-radius: 20px; font-size: 0.9em;">book_borrows</span>
+                                <span style="background: #f8f9fa; padding: 8px 15px; border-radius: 20px; font-size: 0.9em;">user_sessions</span>
+                            </div>
+                            <p style="margin: 15px 0 0 0; font-size: 0.9em; color: #666; font-style: italic;">
+                                These tables provide additional functionality for assessments, payments, health records, clearances, and library management.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- NEW: COMPLETE CURRICULUM MANAGEMENT PROCESS -->
                 <div class="process-group">
                     <h3 class="group-title">📚 Complete Curriculum Management Process</h3>
@@ -4209,15 +4563,16 @@ VALUES (1, 1, 'BSCS', 'Bachelor of Science in Computer Science', 'bachelor', 4.0
 <pre style="margin: 0; font-family: monospace; font-size: 0.9em;">-- Step 2: Define DEFAULT_CURRICULUM for BSCS
 -- 1st Year, 1st Semester Template
 INSERT INTO default_curriculum 
-(program_id, subject_id, year_level, semester, term_type, subject_type, is_required, prerequisites)
+(program_id, subject_id, year_level, semester, term_type, subject_type, is_required, prerequisites, effectivity_start_year, effectivity_end_year)
 VALUES
-(1, 1, 1, 1, '1st Semester', 'Core', TRUE, NULL),        -- CS101
-(1, 2, 1, 1, '1st Semester', 'Core', TRUE, NULL),        -- MATH101
-(1, 3, 1, 1, '1st Semester', 'GE', TRUE, NULL),          -- ENG101
-(1, 4, 1, 1, '1st Semester', 'PE', TRUE, NULL),          -- PE101
-(1, 5, 1, 1, '1st Semester', 'NSTP', TRUE, NULL);        -- NSTP101
+(1, 1, 1, 1, '1st Semester', 'Core', TRUE, NULL, '2025', 'ongoing'),        -- CS101
+(1, 2, 1, 1, '1st Semester', 'Core', TRUE, NULL, '2025', 'ongoing'),        -- MATH101
+(1, 3, 1, 1, '1st Semester', 'GE', TRUE, NULL, '2025', 'ongoing'),          -- ENG101
+(1, 4, 1, 1, '1st Semester', 'PE', TRUE, NULL, '2025', 'ongoing'),          -- PE101
+(1, 5, 1, 1, '1st Semester', 'NSTP', TRUE, NULL, '2025', 'ongoing');        -- NSTP101
 
--- Repeat for all semesters (8 semesters for 4-year program)</pre>
+-- Repeat for all semesters (8 semesters for 4-year program)
+-- Note: All subjects default to 'ongoing' - only set end year when replacing a subject</pre>
                             </div>
                             
                             <div style="background: #fff3e0; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #ff9800;">
@@ -4228,7 +4583,46 @@ VALUES
                                     <li>No faculty assignment</li>
                                     <li>No term-specific details</li>
                                     <li>Defines prerequisites and co-requisites</li>
+                                    <li><strong>🔄 Effectivity Range:</strong> Each entry has start/end years - NO need to duplicate records every year!</li>
+                                    <li><strong>💡 Smart Versioning:</strong> Set effectivity_end_year='ongoing' by default, only change when subject is replaced</li>
                                 </ul>
+                            </div>
+                            
+                            <div style="background: #e7f3ff; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #667eea;">
+                                <strong style="color: #004085;">🔄 Curriculum Versioning Workflow:</strong>
+                                <p style="margin: 10px 0; color: #004085; line-height: 1.6;">
+                                    <strong>No Changes Scenario (Most Common):</strong><br>
+                                    • 2023: Create curriculum (effectivity_start='2023', effectivity_end='ongoing')<br>
+                                    • 2024: NO ACTION NEEDED! Same records still valid ✅<br>
+                                    • 2025: NO ACTION NEEDED! Same records still valid ✅<br>
+                                    <em>Result: One set of records serves multiple years - 80% storage savings!</em>
+                                </p>
+                                <p style="margin: 10px 0; color: #004085; line-height: 1.6;">
+                                    <strong>Subject Replacement Scenario:</strong><br>
+                                    • 2026: Replace CS101 with CS105<br>
+                                    • Step 1: UPDATE CS101 SET effectivity_end_year='2025' (close it)<br>
+                                    • Step 2: INSERT CS105 with effectivity_start_year='2026', effectivity_end_year='ongoing'<br>
+                                    <em>Result: 2023-2025 students use CS101, 2026+ students use CS105</em>
+                                </p>
+                            </div>
+                            
+                            <div style="background: #d4edda; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #28a745;">
+                                <strong style="color: #155724;">🖥️ UI Management Tool Available:</strong>
+                                <p style="margin: 10px 0 0 0; color: #155724; line-height: 1.6;">
+                                    A complete web-based UI for managing Default Curriculum and Course Offerings is available in 
+                                    <code style="background: #fff; padding: 2px 6px; border-radius: 3px;">curriculum-management.html</code>. 
+                                    This tool includes:
+                                </p>
+                                <ul style="margin: 10px 0 0 20px; color: #155724;">
+                                    <li>Full CRUD operations for curriculum and course offerings</li>
+                                    <li>Program Roadmap visualization (complete 4-year journey view)</li>
+                                    <li>Smart prerequisites dropdown (previous terms only)</li>
+                                    <li>Effectivity range management with cascading filters</li>
+                                    <li>Course offerings dependency on curriculum (auto-fill)</li>
+                                </ul>
+                                <p style="margin: 10px 0 0 0; color: #155724; line-height: 1.6; font-style: italic;">
+                                    See <code>docs/CURRICULUM_MANAGEMENT_UI_GUIDE.md</code> for complete documentation.
+                                </p>
                             </div>
                         </div>
                         
@@ -5785,6 +6179,7 @@ CREATE TABLE curriculum (
 );
 
 -- 4B. DEFAULT_CURRICULUM TABLE (Template curriculum for programs)
+-- Updated: Added effectivity range fields for curriculum versioning
 CREATE TABLE default_curriculum (
     default_curriculum_id INT AUTO_INCREMENT PRIMARY KEY,
     program_id INT NOT NULL,
@@ -5797,15 +6192,21 @@ CREATE TABLE default_curriculum (
     prerequisites TEXT,
     co_requisites TEXT,
     description TEXT,
+    
+    -- Curriculum Versioning/Effectivity Range Fields
+    effectivity_start_year VARCHAR(10) DEFAULT '2023' COMMENT 'Year when this curriculum entry becomes effective',
+    effectivity_end_year VARCHAR(10) DEFAULT 'ongoing' COMMENT 'Year when this entry is superseded, or "ongoing" if still current',
+    
     is_active BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (program_id) REFERENCES programs(program_id) ON DELETE CASCADE,
     FOREIGN KEY (subject_id) REFERENCES subjects(subject_id) ON DELETE CASCADE,
-    UNIQUE KEY uk_default_curriculum (program_id, subject_id, year_level, semester),
+    UNIQUE KEY uk_default_curriculum (program_id, subject_id, year_level, semester, effectivity_start_year),
     INDEX idx_default_curriculum_program (program_id),
     INDEX idx_default_curriculum_year_sem (year_level, semester),
-    INDEX idx_default_curriculum_type (subject_type)
+    INDEX idx_default_curriculum_type (subject_type),
+    INDEX idx_effectivity (effectivity_start_year, effectivity_end_year)
 );
 
 -- 4C. COURSE_OFFERINGS TABLE (Actual course offerings per term)
@@ -9199,6 +9600,11 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                         </div>
                     </div>
                     
+                    <!-- Priority-based Progress Display -->
+                    <div id="priority-progress-display" style="display: none; margin-top: 20px;">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                    
                     <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; margin-bottom: 20px;">
                         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
                             <span style="font-size: 1.2em;">📅</span>
@@ -9585,7 +9991,7 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                         <!-- NEW TASK: Week 3: College Management - Frontend -->
                         <div class="task-card frontend" data-trello-sync="true" style="border: 3px solid #ff6b6b;">
                             <div class="task-header">
-                                <div class="task-ticket frontend" style="background: #ff6b6b;">SKOL-007-FE</div>
+                                <div class="task-ticket frontend" style="background: #ff6b6b;">SKOL-025-FE</div>
                                 <div class="task-status for-development">Week 3</div>
                                 <span style="background: #ff6b6b; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8em; font-weight: 600;">⭐ NEW</span>
                             </div>
@@ -9607,12 +10013,6 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                                     <li>College listing and search functionality</li>
                                     <li>College status management (active/inactive)</li>
                                 </ul>
-                                <h5>🔗 Related Tables:</h5>
-                                <ul style="background: #fff3cd; padding: 10px; border-radius: 6px; margin-top: 10px;">
-                                    <li>COLLEGES (primary)</li>
-                                    <li>CAMPUSES (parent)</li>
-                                    <li>PROGRAMS (child)</li>
-                                </ul>
                             </div>
                             <div class="expected-result">
                                 <h6>🎯 Expected Result:</h6>
@@ -9623,7 +10023,7 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                         <!-- NEW TASK: Week 3: College Management - Backend -->
                         <div class="task-card backend" data-trello-sync="true" style="border: 3px solid #ff6b6b;">
                             <div class="task-header">
-                                <div class="task-ticket backend" style="background: #ff6b6b;">SKOL-007-BE</div>
+                                <div class="task-ticket backend" style="background: #ff6b6b;">SKOL-025-BE</div>
                                 <div class="task-status for-development">Week 3</div>
                                 <span style="background: #ff6b6b; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8em; font-weight: 600;">⭐ NEW</span>
                             </div>
@@ -9645,12 +10045,6 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                                     <li>College search and filtering API</li>
                                     <li>College statistics and reporting</li>
                                 </ul>
-                                <h5>🔗 Related Tables:</h5>
-                                <ul style="background: #fff3cd; padding: 10px; border-radius: 6px; margin-top: 10px;">
-                                    <li>COLLEGES (primary)</li>
-                                    <li>CAMPUSES (foreign key)</li>
-                                    <li>PROGRAMS (dependent)</li>
-                                </ul>
                             </div>
                             <div class="expected-result">
                                 <h6>🎯 Expected Result:</h6>
@@ -9661,7 +10055,7 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                         <!-- NEW TASK: Week 3: Academic Terms Management - Frontend -->
                         <div class="task-card frontend" data-trello-sync="true" style="border: 3px solid #ffc107;">
                             <div class="task-header">
-                                <div class="task-ticket frontend" style="background: #ffc107; color: #212529;">SKOL-008-FE</div>
+                                <div class="task-ticket frontend" style="background: #ffc107; color: #212529;">SKOL-026-FE</div>
                                 <div class="task-status for-development">Week 3</div>
                                 <span style="background: #ffc107; color: #212529; padding: 4px 8px; border-radius: 4px; font-size: 0.8em; font-weight: 600;">⭐ NEW</span>
                             </div>
@@ -9684,12 +10078,6 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                                     <li>Academic calendar visualization</li>
                                     <li>Term listing with status indicators</li>
                                 </ul>
-                                <h5>🔗 Related Tables:</h5>
-                                <ul style="background: #fff3cd; padding: 10px; border-radius: 6px; margin-top: 10px;">
-                                    <li>ACADEMIC_TERMS (primary)</li>
-                                    <li>COURSE_OFFERINGS (dependent)</li>
-                                    <li>ENROLLMENTS (dependent)</li>
-                                </ul>
                             </div>
                             <div class="expected-result">
                                 <h6>🎯 Expected Result:</h6>
@@ -9700,7 +10088,7 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                         <!-- NEW TASK: Week 3: Academic Terms Management - Backend -->
                         <div class="task-card backend" data-trello-sync="true" style="border: 3px solid #ffc107;">
                             <div class="task-header">
-                                <div class="task-ticket backend" style="background: #ffc107; color: #212529;">SKOL-008-BE</div>
+                                <div class="task-ticket backend" style="background: #ffc107; color: #212529;">SKOL-026-BE</div>
                                 <div class="task-status for-development">Week 3</div>
                                 <span style="background: #ffc107; color: #212529; padding: 4px 8px; border-radius: 4px; font-size: 0.8em; font-weight: 600;">⭐ NEW</span>
                             </div>
@@ -9723,12 +10111,6 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                                     <li>Academic calendar API</li>
                                     <li>Term statistics and reporting</li>
                                 </ul>
-                                <h5>🔗 Related Tables:</h5>
-                                <ul style="background: #fff3cd; padding: 10px; border-radius: 6px; margin-top: 10px;">
-                                    <li>ACADEMIC_TERMS (primary)</li>
-                                    <li>COURSE_OFFERINGS (dependent)</li>
-                                    <li>ENROLLMENTS (dependent)</li>
-                                </ul>
                             </div>
                             <div class="expected-result">
                                 <h6>🎯 Expected Result:</h6>
@@ -9739,7 +10121,7 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                         <!-- NEW TASK: Week 4: Default Curriculum Management - Frontend -->
                         <div class="task-card frontend" data-trello-sync="true" style="border: 3px solid #9c27b0;">
                             <div class="task-header">
-                                <div class="task-ticket frontend" style="background: #9c27b0;">SKOL-009-FE</div>
+                                <div class="task-ticket frontend" style="background: #9c27b0;">SKOL-027-FE</div>
                                 <div class="task-status for-development">Week 4</div>
                                 <span style="background: #9c27b0; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8em; font-weight: 600;">⭐ NEW</span>
                             </div>
@@ -9758,27 +10140,28 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                                     <li>Subject mapping by year level & semester UI</li>
                                     <li>Subject type classification (Core, Major, Minor, GE, PE, NSTP)</li>
                                     <li>Prerequisites and co-requisites management</li>
+                                    <li><strong style="color: #667eea;">Prerequisites smart dropdown</strong> - Multi-select, auto-filters previous terms only</li>
+                                    <li><strong style="color: #667eea;">Curriculum effectivity range</strong> - Start/end year fields, supports versioning without yearly duplication</li>
+                                    <li><strong style="color: #667eea;">Program Roadmap visualization</strong> - Complete 4-year curriculum journey view (Year → Term → Subjects hierarchy)</li>
+                                    <li><strong style="color: #667eea;">Year-based filtering</strong> - View curriculum for specific enrollment year (e.g., 2023, 2024, 2025)</li>
                                     <li>Curriculum builder with drag-and-drop</li>
                                     <li>Curriculum preview and validation</li>
                                     <li>Export/import curriculum templates</li>
                                 </ul>
-                                <h5>🔗 Related Tables:</h5>
-                                <ul style="background: #fff3cd; padding: 10px; border-radius: 6px; margin-top: 10px;">
-                                    <li>DEFAULT_CURRICULUM (primary)</li>
-                                    <li>PROGRAMS (parent)</li>
-                                    <li>SUBJECTS (reference)</li>
-                                </ul>
+                                <div style="background: #e7f3ff; padding: 10px; border-radius: 6px; margin-top: 10px; border-left: 3px solid #667eea;">
+                                    <small style="color: #004085;"><strong>✨ Enhanced Features:</strong> Smart prerequisites filtering, effectivity range system (80% storage savings), visual roadmap, and year-based filtering add significant value beyond basic CRUD.</small>
+                                </div>
                             </div>
                             <div class="expected-result">
                                 <h6>🎯 Expected Result:</h6>
-                                <p>Intuitive curriculum template builder for defining program curricula with subject sequencing, prerequisites, and type classifications.</p>
+                                <p>Intuitive curriculum template builder for defining program curricula with subject sequencing, prerequisites, and type classifications. Includes curriculum versioning system and visual roadmap for complete program journey view.</p>
                             </div>
                         </div>
 
                         <!-- NEW TASK: Week 4: Default Curriculum Management - Backend -->
                         <div class="task-card backend" data-trello-sync="true" style="border: 3px solid #9c27b0;">
                             <div class="task-header">
-                                <div class="task-ticket backend" style="background: #9c27b0;">SKOL-009-BE</div>
+                                <div class="task-ticket backend" style="background: #9c27b0;">SKOL-027-BE</div>
                                 <div class="task-status for-development">Week 4</div>
                                 <span style="background: #9c27b0; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8em; font-weight: 600;">⭐ NEW</span>
                             </div>
@@ -9796,28 +10179,29 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                                     <li>Default curriculum CRUD API endpoints</li>
                                     <li>Curriculum template validation logic</li>
                                     <li>Prerequisites validation and checking</li>
+                                    <li><strong style="color: #667eea;">Prerequisites filtering API</strong> - Filter subjects by program, effectivity year, and previous terms only</li>
                                     <li>Subject sequencing validation</li>
                                     <li>Curriculum duplication/cloning API</li>
+                                    <li><strong style="color: #667eea;">Effectivity range management API</strong> - Handle effectivity_start_year and effectivity_end_year fields</li>
+                                    <li><strong style="color: #667eea;">Year-based curriculum retrieval</strong> - Get curriculum effective for specific enrollment year (range queries)</li>
+                                    <li><strong style="color: #667eea;">Curriculum versioning logic</strong> - Support multiple curriculum versions without duplication</li>
                                     <li>Curriculum export/import processing</li>
                                     <li>Template statistics and reporting</li>
                                 </ul>
-                                <h5>🔗 Related Tables:</h5>
-                                <ul style="background: #fff3cd; padding: 10px; border-radius: 6px; margin-top: 10px;">
-                                    <li>DEFAULT_CURRICULUM (primary)</li>
-                                    <li>PROGRAMS (foreign key)</li>
-                                    <li>SUBJECTS (foreign key)</li>
-                                </ul>
+                                <div style="background: #e7f3ff; padding: 10px; border-radius: 6px; margin-top: 10px; border-left: 3px solid #667eea;">
+                                    <small style="color: #004085;"><strong>✨ Enhanced Features:</strong> Effectivity range system eliminates yearly duplication (80% savings). Queries check if year falls within start/end range. Example: WHERE '2025' BETWEEN effectivity_start_year AND (effectivity_end_year OR 9999)</small>
+                                </div>
                             </div>
                             <div class="expected-result">
                                 <h6>🎯 Expected Result:</h6>
-                                <p>Complete default curriculum API with template management, validation, prerequisite checking, and curriculum operations.</p>
+                                <p>Complete default curriculum API with template management, validation, prerequisite checking, curriculum operations, and smart effectivity range system for efficient versioning.</p>
                             </div>
                         </div>
 
                         <!-- NEW TASK: Week 4: Course Offerings Management - Frontend -->
                         <div class="task-card frontend" data-trello-sync="true" style="border: 3px solid #2196f3;">
                             <div class="task-header">
-                                <div class="task-ticket frontend" style="background: #2196f3;">SKOL-010-FE</div>
+                                <div class="task-ticket frontend" style="background: #2196f3;">SKOL-028-FE</div>
                                 <div class="task-status for-development">Week 4</div>
                                 <span style="background: #2196f3; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8em; font-weight: 600;">⭐ NEW</span>
                             </div>
@@ -9834,31 +10218,29 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                                 <ul>
                                     <li>Create course offerings per term interface</li>
                                     <li>Auto-generate from default curriculum UI</li>
+                                    <li><strong style="color: #667eea;">Cascading dropdowns</strong> - Program → Academic Year → Year Level → Term → Subject (dependency chain)</li>
+                                    <li><strong style="color: #667eea;">Subject auto-fill from curriculum</strong> - Code, name, units, prerequisites automatically populated (read-only)</li>
+                                    <li><strong style="color: #667eea;">Curriculum dependency validation</strong> - Can only create offerings for subjects that exist in Default Curriculum</li>
                                     <li>Faculty assignment to offerings interface</li>
                                     <li>Slot management (max capacity) UI</li>
                                     <li>Offering availability toggle (open/close enrollment)</li>
                                     <li>Real-time slot tracking dashboard</li>
                                     <li>Offerings preview by program and term</li>
                                 </ul>
-                                <h5>🔗 Related Tables:</h5>
-                                <ul style="background: #fff3cd; padding: 10px; border-radius: 6px; margin-top: 10px;">
-                                    <li>COURSE_OFFERINGS (primary)</li>
-                                    <li>PROGRAMS (foreign key)</li>
-                                    <li>ACADEMIC_TERMS (foreign key)</li>
-                                    <li>SUBJECTS (foreign key)</li>
-                                    <li>FACULTY (foreign key)</li>
-                                </ul>
+                                <div style="background: #d1ecf1; padding: 10px; border-radius: 6px; margin-top: 10px; border-left: 3px solid #17a2b8;">
+                                    <small style="color: #0c5460;"><strong>🔗 Smart Dependencies:</strong> Course offerings are tightly integrated with Default Curriculum. Subject selection is filtered by program/year/term, and details auto-fill to ensure data integrity and prevent orphaned offerings.</small>
+                                </div>
                             </div>
                             <div class="expected-result">
                                 <h6>🎯 Expected Result:</h6>
-                                <p>Complete course offerings management interface connecting programs, terms, and subjects with faculty assignments and enrollment slot tracking.</p>
+                                <p>Complete course offerings management interface connecting programs, terms, and subjects with faculty assignments and enrollment slot tracking. Includes smart dependency system that pulls from Default Curriculum and auto-fills subject details.</p>
                             </div>
                         </div>
 
                         <!-- NEW TASK: Week 4: Course Offerings Management - Backend -->
                         <div class="task-card backend" data-trello-sync="true" style="border: 3px solid #2196f3;">
                             <div class="task-header">
-                                <div class="task-ticket backend" style="background: #2196f3;">SKOL-010-BE</div>
+                                <div class="task-ticket backend" style="background: #2196f3;">SKOL-028-BE</div>
                                 <div class="task-status for-development">Week 4</div>
                                 <span style="background: #2196f3; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8em; font-weight: 600;">⭐ NEW</span>
                             </div>
@@ -9875,25 +10257,22 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                                 <ul>
                                     <li>Course offerings CRUD API endpoints</li>
                                     <li>Auto-generate offerings from DEFAULT_CURRICULUM</li>
+                                    <li><strong style="color: #667eea;">Curriculum dependency API</strong> - Get available subjects filtered by program/year/term from Default Curriculum</li>
+                                    <li><strong style="color: #667eea;">Auto-fill subject data endpoint</strong> - Return subject code, name, units, prerequisites from curriculum</li>
+                                    <li><strong style="color: #667eea;">Effectivity-aware offering validation</strong> - Ensure offerings match effective curriculum for the term</li>
                                     <li>Faculty assignment validation and API</li>
                                     <li>Slot management and tracking logic</li>
                                     <li>Offering availability control API</li>
                                     <li>Enrollment count update triggers</li>
                                     <li>Course offerings reporting and analytics</li>
                                 </ul>
-                                <h5>🔗 Related Tables:</h5>
-                                <ul style="background: #fff3cd; padding: 10px; border-radius: 6px; margin-top: 10px;">
-                                    <li>COURSE_OFFERINGS (primary)</li>
-                                    <li>PROGRAMS (foreign key)</li>
-                                    <li>ACADEMIC_TERMS (foreign key)</li>
-                                    <li>SUBJECTS (foreign key)</li>
-                                    <li>FACULTY (foreign key)</li>
-                                    <li>DEFAULT_CURRICULUM (template source)</li>
-                                </ul>
+                                <div style="background: #d1ecf1; padding: 10px; border-radius: 6px; margin-top: 10px; border-left: 3px solid #17a2b8;">
+                                    <small style="color: #0c5460;"><strong>🔗 Smart Integration:</strong> Course offerings API validates against Default Curriculum, auto-populates subject details, and ensures offerings only reference valid curriculum subjects for the selected program/year/term combination.</small>
+                                </div>
                             </div>
                             <div class="expected-result">
                                 <h6>🎯 Expected Result:</h6>
-                                <p>Complete course offerings API connecting PROGRAMS→ACADEMIC_TERMS→SUBJECTS with faculty management, slot tracking, and automated enrollment handling.</p>
+                                <p>Complete course offerings API connecting PROGRAMS→ACADEMIC_TERMS→SUBJECTS with faculty management, slot tracking, automated enrollment handling, and smart curriculum dependency validation.</p>
                             </div>
                         </div>
                     </div>
@@ -10852,22 +11231,90 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                         <button id="progress-report-btn" class="trello-btn" onclick="openProgressReportModal()" style="background: #e67e22; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
                             📧 Generate Progress Report
                         </button>
+                        
+                        <button id="remove-duplicates-btn" class="trello-btn" style="background: #e74c3c; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            🗑️ Remove Duplicates
+                        </button>
                     </div>
                     
                     <!-- Priority Sync Buttons -->
                     <div style="margin-top: 20px;">
                         <h6 style="color: #ecf0f1; margin-bottom: 15px; font-size: 1.1em; font-weight: 600;">🎯 Sync by Priority Category:</h6>
-                        <div id="current-week-status" style="background: rgba(255,255,255,0.15); padding: 12px; border-radius: 8px; margin-bottom: 15px; font-size: 0.9em; border: 1px solid rgba(255,255,255,0.2);">
-                            <div style="color: #3498db; font-weight: 600;">📅 Current Week Status</div>
-                            <div id="week-status-text" style="color: #ecf0f1; margin-top: 5px;">Loading...</div>
-                            <div id="checklist-loading-info" style="color: #95a5a6; font-size: 0.8em; margin-top: 8px; font-style: italic;">📋 Checklist Progress will only load for the currently active priority week</div>
+                        
+                        <!-- Enhanced Status Bar with Progress -->
+                        <div id="current-week-status" style="background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 100%); padding: 20px; border-radius: 12px; margin-bottom: 20px; font-size: 0.9em; border: 1px solid rgba(255,255,255,0.3); box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                            <div style="color: #3498db; font-weight: 600; font-size: 1.1em; margin-bottom: 15px;">📅 Project Status Dashboard</div>
+                            
+                            <!-- Priority Status Cards -->
+                            <div style="display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap;">
+                                <!-- Priority 1 - Active with White Glow -->
+                                <div style="flex: 1; min-width: 250px; background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; border: 2px solid rgba(255,255,255,0.5); box-shadow: 0 0 20px rgba(255,255,255,0.4), 0 0 40px rgba(255,255,255,0.2); animation: pulse-white 2s ease-in-out infinite;">
+                                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                                        <span style="font-size: 1.5em;">🔥</span>
+                                        <div>
+                                            <div style="color: #fff; font-weight: 700; font-size: 1.05em;">Priority 1</div>
+                                            <div style="color: #ecf0f1; font-size: 0.85em; opacity: 0.9;">System Foundation</div>
+                                        </div>
+                                    </div>
+                                    <div style="background: rgba(0,0,0,0.3); border-radius: 10px; height: 8px; overflow: hidden; margin-bottom: 8px;">
+                                        <div style="background: linear-gradient(90deg, #27ae60 0%, #2ecc71 100%); height: 100%; width: 82%; border-radius: 10px; box-shadow: 0 0 10px rgba(46,204,113,0.5); transition: width 1s ease;"></div>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span style="color: #2ecc71; font-weight: 700; font-size: 1.1em;">82% Complete</span>
+                                        <span style="color: #ecf0f1; font-size: 0.85em; background: rgba(255,255,255,0.15); padding: 3px 10px; border-radius: 12px;">✅ Active</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Priority 2 - Unlocked with Green Glow -->
+                                <div style="flex: 1; min-width: 250px; background: rgba(40,167,69,0.15); padding: 15px; border-radius: 10px; border: 2px solid #28a745; box-shadow: 0 0 20px rgba(40,167,69,0.6), 0 0 40px rgba(40,167,69,0.3); animation: pulse-green 2s ease-in-out infinite;">
+                                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                                        <span style="font-size: 1.5em;">🛠️</span>
+                                        <div>
+                                            <div style="color: #fff; font-weight: 700; font-size: 1.05em;">Priority 2</div>
+                                            <div style="color: #ecf0f1; font-size: 0.85em; opacity: 0.9;">Maintenance Features</div>
+                                        </div>
+                                    </div>
+                                    <div style="text-align: center; padding: 10px; background: rgba(40,167,69,0.2); border-radius: 8px; border: 1px solid rgba(40,167,69,0.4);">
+                                        <div style="color: #2ecc71; font-weight: 700; font-size: 1.15em; margin-bottom: 5px;">🎉 UNLOCKED!</div>
+                                        <div style="color: #ecf0f1; font-size: 0.9em; margin-bottom: 5px;">Hindi na naghihintay ng Oct 16!</div>
+                                        <div style="color: #fff; font-weight: 600; background: linear-gradient(135deg, #28a745 0%, #20c997 100%); padding: 8px 15px; border-radius: 20px; display: inline-block; box-shadow: 0 2px 8px rgba(40,167,69,0.4);">Ready to sync NOW! 🚀</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Status Bar Summary -->
+                            <div id="week-status-text" style="color: #ecf0f1; padding: 12px; background: rgba(255,255,255,0.1); border-radius: 8px; border-left: 4px solid #3498db; margin-bottom: 10px;">
+                                <strong>✅ Currently active:</strong> System Foundation (Week 1-2) | <strong>📊 Completion:</strong> 82%
+                            </div>
+                            <div id="checklist-loading-info" style="color: #2ecc71; font-size: 0.85em; font-weight: 600; padding: 8px; background: rgba(46,204,113,0.1); border-radius: 6px; border-left: 3px solid #2ecc71;">
+                                🎉 Next priority unlocked! Priority 2 ready for immediate sync!
+                            </div>
                         </div>
+                        
+                        <style>
+                            @keyframes pulse-white {
+                                0%, 100% {
+                                    box-shadow: 0 0 20px rgba(255,255,255,0.4), 0 0 40px rgba(255,255,255,0.2);
+                                }
+                                50% {
+                                    box-shadow: 0 0 30px rgba(255,255,255,0.6), 0 0 60px rgba(255,255,255,0.3);
+                                }
+                            }
+                            @keyframes pulse-green {
+                                0%, 100% {
+                                    box-shadow: 0 0 20px rgba(40,167,69,0.6), 0 0 40px rgba(40,167,69,0.3);
+                                }
+                                50% {
+                                    box-shadow: 0 0 30px rgba(40,167,69,0.8), 0 0 60px rgba(40,167,69,0.5);
+                                }
+                            }
+                        </style>
                         <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
-                            <button id="sync-priority-1" class="priority-sync-btn" data-priority="🔥 Priority 1: System Foundation" style="background: #c0392b; color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.9em; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
-                                🔥 Priority 1
+                            <button id="sync-priority-1" class="priority-sync-btn priority-1-active" data-priority="🔥 Priority 1: System Foundation" style="background: #c0392b; color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.9em; transition: all 0.3s ease; box-shadow: 0 0 15px rgba(255,255,255,0.5), 0 2px 4px rgba(0,0,0,0.2); animation: pulse-white 2s ease-in-out infinite; border: 2px solid rgba(255,255,255,0.3);">
+                                🔥 Priority 1 ✅
                             </button>
-                            <button id="sync-priority-2" class="priority-sync-btn" data-priority="🛠️ Priority 2: Maintenance Features" style="background: #d68910; color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.9em; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
-                                🛠️ Priority 2
+                            <button id="sync-priority-2" class="priority-sync-btn priority-2-unlocked" data-priority="🛠️ Priority 2: Maintenance Features" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.9em; transition: all 0.3s ease; box-shadow: 0 0 15px rgba(40,167,69,0.6), 0 2px 4px rgba(0,0,0,0.2); animation: pulse-green 2s ease-in-out infinite;">
+                                🛠️ Priority 2 🎉
                             </button>
                             <button id="sync-priority-3" class="priority-sync-btn" data-priority="🎯 Priority 3: Student Core Processes" style="background: #27ae60; color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.9em; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
                                 🎯 Priority 3
@@ -14253,24 +14700,29 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                                     <ul style="margin: 0; padding-left: 15px; font-size: 0.9em; color: #666;">
                                         <li>Curriculum Template Builder</li>
                                         <li>Subject Mapping by Year/Semester</li>
-                                        <li>Prerequisites Management</li>
+                                        <li><strong style="color: #667eea;">Smart Prerequisites Filtering</strong> (only shows previous terms)</li>
                                         <li>Subject Type Classification</li>
+                                        <li><strong style="color: #667eea;">Effectivity Range System</strong> (80% storage savings)</li>
+                                        <li><strong style="color: #667eea;">Program Roadmap Visualization</strong> (entire program journey)</li>
                                     </ul>
                                 </div>
                                 <div style="background: #fff3cd; padding: 15px; border-radius: 8px; border: 1px solid #2196f3;">
                                     <h6 style="color: #1565c0; margin-bottom: 10px;">🔗 Week 4: Course Offerings ⭐ NEW</h6>
                                     <ul style="margin: 0; padding-left: 15px; font-size: 0.9em; color: #666;">
                                         <li>Create Course Offerings per Term</li>
+                                        <li><strong style="color: #667eea;">Cascading Subject Selection</strong> (filtered by program/year/term)</li>
+                                        <li><strong style="color: #667eea;">Auto-fill Subject Details</strong> (code, name, units from curriculum)</li>
                                         <li>Faculty Assignment Interface</li>
                                         <li>Slot Management & Tracking</li>
-                                        <li>Auto-generate from Template</li>
+                                        <li><strong style="color: #667eea;">Curriculum Dependency Validation</strong> (prevents orphaned offerings)</li>
                                     </ul>
                                 </div>
                             </div>
                             <div style="background: #e8f5e9; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #4caf50;">
-                                <strong style="color: #2e7d32;">⭐ 4 New Tasks Added:</strong>
+                                <strong style="color: #2e7d32;">⭐ 4 New Tasks Added with Enhanced Features:</strong>
                                 <div style="margin-top: 10px; color: #555; font-size: 0.9em;">
-                                    Priority 2 now includes <strong>12 tasks</strong> (was 8) with new curriculum management features for academic hierarchy (Colleges, Academic Terms, Default Curriculum, Course Offerings).
+                                    Priority 2 now includes <strong>12 tasks</strong> (was 8) with new curriculum management features for academic hierarchy (Colleges, Academic Terms, Default Curriculum, Course Offerings). 
+                                    <strong style="color: #667eea;">Enhanced with smart prerequisites filtering, effectivity range system (80% storage savings), program roadmap visualization, cascading dropdowns, auto-fill, and curriculum dependency validation.</strong>
                                 </div>
                             </div>
                         </div>
@@ -15405,65 +15857,45 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                     return;
                 }
 
-                // Get current priority status to determine which tasks to load checklists for
-                const checkDate = new Date();
-                const activePriority = getCurrentActivePriority(checkDate);
-                
-                if (!activePriority) {
-                    console.log('No active priority week - skipping checklist loading');
-                    return;
-                }
+                console.log(`Loading checklist status for all tasks`);
 
-                console.log(`Loading checklist status for active priority: ${activePriority.name}`);
-
-                // Show loading indicator only for tasks in the current priority
+                // Show loading indicator for all task cards
                 const taskCards = document.querySelectorAll('.task-card');
                 taskCards.forEach(card => {
-                    // Check if this task belongs to the current priority
-                    const moduleHeader = card.closest('.module-section')?.querySelector('.module-header h3');
-                    const isCurrentPriorityTask = isTaskInCurrentPriority(card, activePriority);
+                    const existingStatus = card.querySelector('.checklist-status');
+                    if (existingStatus) {
+                        existingStatus.remove();
+                    }
                     
-                    if (isCurrentPriorityTask) {
-                        const existingStatus = card.querySelector('.checklist-status');
-                        if (existingStatus) {
-                            existingStatus.remove();
-                        }
-                        
-                        // Add loading indicator
-                        const loadingHTML = '<div class="checklist-status"><h6>📋 Loading Checklist Status...</h6><div style="text-align: center; padding: 20px; color: #6c757d;">🔄 Fetching data from Trello...</div></div>';
-                        const taskDetails = card.querySelector('.task-details');
-                        if (taskDetails) {
-                            taskDetails.insertAdjacentHTML('afterend', loadingHTML);
-                        }
+                    // Add loading indicator
+                    const loadingHTML = '<div class="checklist-status"><h6>📋 Loading Checklist Status...</h6><div style="text-align: center; padding: 20px; color: #6c757d;">🔄 Fetching data from Trello...</div></div>';
+                    const taskDetails = card.querySelector('.task-details');
+                    if (taskDetails) {
+                        taskDetails.insertAdjacentHTML('afterend', loadingHTML);
                     }
                 });
 
                 // Get all tasks with checklist status
                 const tasksWithStatus = await window.trelloIntegration.getAllTasksWithChecklistStatus();
                 
-                // Update each task card with checklist status (only for current priority)
+                // Update each task card with checklist status (for all tasks)
                 tasksWithStatus.forEach(task => {
                     const taskCards = document.querySelectorAll('.task-card');
                     taskCards.forEach(card => {
                         const taskTitle = card.querySelector('h4')?.textContent?.trim();
                         if (taskTitle && taskTitle === task.cardName) {
-                            // Check if this task belongs to the current priority
-                            const isCurrentPriorityTask = isTaskInCurrentPriority(card, activePriority);
-                            
-                            if (isCurrentPriorityTask) {
-                                // Remove existing checklist status if any
-                                const existingStatus = card.querySelector('.checklist-status');
-                                if (existingStatus) {
-                                    existingStatus.remove();
-                                }
+                            // Remove existing checklist status if any
+                            const existingStatus = card.querySelector('.checklist-status');
+                            if (existingStatus) {
+                                existingStatus.remove();
+                            }
 
-                                // Add checklist status if available
-                                if (task.checklistStatus && task.checklistStatus.length > 0) {
-                                    const checklistHTML = generateChecklistHTML(task.checklistStatus, task.cardId, task.cardName);
-                                    const taskDetails = card.querySelector('.task-details');
-                                    if (taskDetails) {
-                                        taskDetails.insertAdjacentHTML('afterend', checklistHTML);
-                                    }
+                            // Add checklist status if available
+                            if (task.checklistStatus && task.checklistStatus.length > 0) {
+                                const checklistHTML = generateChecklistHTML(task.checklistStatus, task.cardId, task.cardName);
+                                const taskDetails = card.querySelector('.task-details');
+                                if (taskDetails) {
+                                    taskDetails.insertAdjacentHTML('afterend', checklistHTML);
                                 }
                             }
                         }
@@ -16726,13 +17158,15 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                 reportImages = JSON.parse(savedImages);
             }
             
-            // Get real task status from Trello
+            // Get real task status from Trello (including priority breakdown)
             let taskStatus = {
                 todoCards: 0,
                 inProgressCards: 0,
                 testingCards: 0,
                 completedCards: 0,
-                totalCards: 0
+                totalCards: 0,
+                priorityBreakdown: null,
+                checklistStats: null
             };
             
             try {
@@ -16744,7 +17178,9 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                             inProgressCards: trelloStatus.inProgressCards || 0,
                             testingCards: trelloStatus.testingCards || 0,
                             completedCards: trelloStatus.completedCards || 0,
-                            totalCards: trelloStatus.totalCards || 0
+                            totalCards: trelloStatus.totalCards || 0,
+                            priorityBreakdown: trelloStatus.priorityBreakdown || null,
+                            checklistStats: trelloStatus.checklistStats || null
                         };
                     }
                 }
@@ -16800,31 +17236,101 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                         </div>
                     </div>
                     
-                    <h2>📋 Checklist Progress</h2>
-                    ${checklistProgress.length > 0 ? `
+                    ${taskStatus.priorityBreakdown ? `
+                        <h2>📊 Progress by Priority</h2>
                         <div class="task-list">
-                            ${checklistProgress.map(checklist => `
-                                <div class="task-item">
-                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                                        <strong>${checklist.checklistName}</strong>
-                                        <span style="color: #e67e22; font-weight: bold;">${checklist.completionRate}%</span>
-                                    </div>
-                                    <div class="checklist-progress">
-                                        <div class="checklist-progress-bar">
-                                            <div class="checklist-progress-fill" style="width: ${checklist.completionRate}%;"></div>
+                            ${[
+                                { key: '🔥 Priority 1: System Foundation', emoji: '🔥' },
+                                { key: '🛠️ Priority 2: Maintenance Features', emoji: '🛠️' },
+                                { key: '🎯 Priority 3: Student Core Processes', emoji: '🎯' },
+                                { key: '👨‍🏫 Priority 4: Faculty Core Processes', emoji: '👨‍🏫' },
+                                { key: '⚙️ Priority 5: Admin Core Processes', emoji: '⚙️' },
+                                { key: '🔗 Priority 6: Integration & Testing', emoji: '🔗' }
+                            ].filter(p => taskStatus.priorityBreakdown[p.key] && taskStatus.priorityBreakdown[p.key].total > 0)
+                              .map(priority => {
+                                const data = taskStatus.priorityBreakdown[priority.key];
+                                const completionPct = data.total > 0 ? Math.round((data.completed / data.total) * 100) : 0;
+                                return `
+                                    <div class="task-item" style="border-left: 4px solid #667eea; background: #f8f9fa;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                            <strong>${priority.emoji} ${priority.key.split(':')[1].trim()}</strong>
+                                            <span style="color: #667eea; font-weight: bold; font-size: 1.2em;">${completionPct}%</span>
                                         </div>
-                                        <div class="checklist-summary">${checklist.completedItems}/${checklist.totalItems} completed</div>
+                                        <div style="display: flex; gap: 15px; margin-bottom: 8px; font-size: 0.9em; flex-wrap: wrap;">
+                                            <span>📋 ${data.todo} To Do</span>
+                                            <span>⚡ ${data.inProgress} In Progress</span>
+                                            <span>🧪 ${data.testing} Testing</span>
+                                            <span style="color: #28a745;">✅ ${data.completed} Done</span>
+                                        </div>
+                                        <div class="checklist-progress">
+                                            <div class="checklist-progress-bar">
+                                                <div class="checklist-progress-fill" style="width: ${completionPct}%; background: #667eea;"></div>
+                                            </div>
+                                            <div class="checklist-summary">${data.completed}/${data.total} tasks completed</div>
+                                        </div>
                                     </div>
-                                </div>
-                            `).join('')}
+                                `;
+                              }).join('')}
                         </div>
-                    ` : `
+                    ` : ''}
+                    
+                    ${taskStatus.checklistStats && taskStatus.checklistStats.byPriority ? `
+                        <h2>📋 Checklist Progress by Priority</h2>
                         <div class="task-list">
-                            <div class="task-item">
-                                <span style="color: #6c757d; font-style: italic;">📋 No active checklist progress available. Connect to Trello to see real-time checklist updates.</span>
-                            </div>
+                            ${[
+                                { key: '🔥 Priority 1: System Foundation', emoji: '🔥' },
+                                { key: '🛠️ Priority 2: Maintenance Features', emoji: '🛠️' },
+                                { key: '🎯 Priority 3: Student Core Processes', emoji: '🎯' },
+                                { key: '👨‍🏫 Priority 4: Faculty Core Processes', emoji: '👨‍🏫' },
+                                { key: '⚙️ Priority 5: Admin Core Processes', emoji: '⚙️' },
+                                { key: '🔗 Priority 6: Integration & Testing', emoji: '🔗' }
+                            ].filter(p => taskStatus.checklistStats.byPriority[p.key] && taskStatus.checklistStats.byPriority[p.key].totalItems > 0)
+                              .map(priority => {
+                                const data = taskStatus.checklistStats.byPriority[priority.key];
+                                return `
+                                    <div class="task-item" style="border-left: 4px solid #17a2b8; background: #f8f9fa;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                            <strong>${priority.emoji} ${priority.key.split(':')[1].trim()}</strong>
+                                            <span style="color: #17a2b8; font-weight: bold;">${data.completionRate}%</span>
+                                        </div>
+                                        <div class="checklist-progress">
+                                            <div class="checklist-progress-bar">
+                                                <div class="checklist-progress-fill" style="width: ${data.completionRate}%; background: #17a2b8;"></div>
+                                            </div>
+                                            <div class="checklist-summary">${data.completedItems}/${data.totalItems} items completed</div>
+                                        </div>
+                                    </div>
+                                `;
+                              }).join('')}
                         </div>
-                    `}
+                    ` : ''}
+                    ${!taskStatus.checklistStats || !taskStatus.checklistStats.byPriority ? `
+                        <h2>📋 Checklist Progress</h2>
+                        ${checklistProgress.length > 0 ? `
+                            <div class="task-list">
+                                ${checklistProgress.map(checklist => `
+                                    <div class="task-item">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                            <strong>${checklist.checklistName}</strong>
+                                            <span style="color: #e67e22; font-weight: bold;">${checklist.completionRate}%</span>
+                                        </div>
+                                        <div class="checklist-progress">
+                                            <div class="checklist-progress-bar">
+                                                <div class="checklist-progress-fill" style="width: ${checklist.completionRate}%;"></div>
+                                            </div>
+                                            <div class="checklist-summary">${checklist.completedItems}/${checklist.totalItems} completed</div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        ` : `
+                            <div class="task-list">
+                                <div class="task-item">
+                                    <span style="color: #6c757d; font-style: italic;">📋 No active checklist progress available. Connect to Trello to see real-time checklist updates.</span>
+                                </div>
+                            </div>
+                        `}
+                    ` : ''}
                     
                     <h2>🔥 Current Sprint Focus</h2>
                     <div class="task-list">
@@ -17792,34 +18298,51 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                     </div>
                 `;
                 
-                // Add Priority Breakdown if available
+                // Add Priority Breakdown with detailed progress
                 if (status.priorityBreakdown) {
                     statusMessage += `
-                        <div style="background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%); padding: 20px; border-radius: 12px; margin-bottom: 20px; color: white; border: 1px solid #a569bd; box-shadow: 0 4px 15px rgba(142, 68, 173, 0.2);">
-                            <h4 style="margin: 0 0 15px 0; font-size: 1.2em; display: flex; align-items: center; gap: 10px; color: #f8f9fa; font-weight: 600;">
-                                🎯 Priority Distribution
-                            </h4>
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px;">
+                        <div style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-left: 4px solid #667eea; margin-bottom: 25px;">
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                                <span style="font-size: 1.3em;">📊</span>
+                                <h4 style="margin: 0; color: #2c3e50; font-size: 1.3em;">Progress by Priority</h4>
+                            </div>
                     `;
                     
-                    for (const [priority, count] of Object.entries(status.priorityBreakdown)) {
-                        const priorityEmoji = priority.includes('Priority 1') ? '🔥' : 
-                                           priority.includes('Priority 2') ? '🛠️' : 
-                                           priority.includes('Priority 3') ? '🎯' : 
-                                           priority.includes('Priority 4') ? '👨‍🏫' : 
-                                           priority.includes('Priority 5') ? '⚙️' : 
-                                           priority.includes('Priority 6') ? '🔗' : '🎉';
-                        
-                        statusMessage += `
-                            <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 10px; text-align: center; border: 1px solid rgba(255,255,255,0.2);">
-                                <div style="font-size: 1.5em; margin-bottom: 6px;">${priorityEmoji}</div>
-                                <div style="font-size: 1.3em; font-weight: bold; color: #f8f9fa; margin-bottom: 4px;">${count}</div>
-                                <div style="font-size: 0.8em; opacity: 0.9; color: #e8daef; font-weight: 500;">${priority.replace(/[🔥🛠️🎯👨‍🏫⚙️🔗🎉]/g, '').trim()}</div>
-                            </div>
-                        `;
-                    }
+                    const priorities = [
+                        { key: '🔥 Priority 1: System Foundation', color: '#dc3545' },
+                        { key: '🛠️ Priority 2: Maintenance Features', color: '#28a745' },
+                        { key: '🎯 Priority 3: Student Core Processes', color: '#17a2b8' },
+                        { key: '👨‍🏫 Priority 4: Faculty Core Processes', color: '#8e44ad' },
+                        { key: '⚙️ Priority 5: Admin Core Processes', color: '#343a40' },
+                        { key: '🔗 Priority 6: Integration & Testing', color: '#16a085' }
+                    ];
                     
-                    statusMessage += `</div></div>`;
+                    priorities.forEach(priority => {
+                        const data = status.priorityBreakdown[priority.key];
+                        if (data && data.total > 0) {
+                            const completionPct = data.total > 0 ? Math.round((data.completed / data.total) * 100) : 0;
+                            statusMessage += `
+                                <div style="margin-bottom: 20px; padding: 15px; background: #f8f9fa; border-radius: 10px; border-left: 4px solid ${priority.color};">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                        <span style="font-weight: 600; color: #2c3e50; font-size: 1.05em;">${priority.key.split(':')[0]}</span>
+                                        <span style="font-weight: 700; color: ${priority.color}; font-size: 1.1em;">${completionPct}%</span>
+                                    </div>
+                                    <div style="display: flex; gap: 15px; margin-bottom: 10px; font-size: 0.9em; flex-wrap: wrap;">
+                                        <span style="color: #6c757d;">📋 ${data.todo} To Do</span>
+                                        <span style="color: #ffc107;">⚡ ${data.inProgress} In Progress</span>
+                                        <span style="color: #17a2b8;">🧪 ${data.testing} Testing</span>
+                                        <span style="color: #28a745;">✅ ${data.completed} Done</span>
+                                    </div>
+                                    <div style="background: #e9ecef; height: 8px; border-radius: 4px; overflow: hidden;">
+                                        <div style="background: ${priority.color}; height: 100%; width: ${completionPct}%; transition: width 0.3s ease;"></div>
+                                    </div>
+                                    <div style="text-align: right; margin-top: 5px; font-size: 0.85em; color: #666;">${data.completed}/${data.total} tasks completed</div>
+                                </div>
+                            `;
+                        }
+                    });
+                    
+                    statusMessage += `</div>`;
                 }
                 
                 // Add Task Type Breakdown if available
@@ -17846,44 +18369,62 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                     `;
                 }
                 
-                // Add Checklist Statistics if available
-                if (status.checklistStats) {
+                // Add Checklist Statistics by Priority if available
+                if (status.checklistStats && status.checklistStats.byPriority) {
                     statusMessage += `
-                        <div style="background: white; padding: 30px; border-radius: 15px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 4px solid #17a2b8;">
+                        <div style="background: white; padding: 30px; border-radius: 15px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-left: 4px solid #17a2b8;">
                             <h4 style="margin: 0 0 25px 0; color: #2c3e50; font-size: 1.4em; display: flex; align-items: center; gap: 10px;">
                                 <span style="background: #17a2b8; color: white; padding: 8px; border-radius: 8px; font-size: 0.9em;">✅</span>
-                                Checklist Progress
+                                Checklist Progress by Priority
                             </h4>
-                            
-                            <!-- Progress Overview -->
-                            <div style="background: #f8f9fa; padding: 25px; border-radius: 12px; margin-bottom: 25px; border-left: 4px solid #17a2b8;">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
-                                    <span style="font-weight: 600; color: #2c3e50; font-size: 1.1em;">Overall Checklist Completion</span>
-                                    <span style="font-size: 1.8em; font-weight: 700; color: #17a2b8;">${status.checklistStats.completionRate}%</span>
+                    `;
+                    
+                    const priorities = [
+                        { key: '🔥 Priority 1: System Foundation', color: '#dc3545' },
+                        { key: '🛠️ Priority 2: Maintenance Features', color: '#28a745' },
+                        { key: '🎯 Priority 3: Student Core Processes', color: '#17a2b8' },
+                        { key: '👨‍🏫 Priority 4: Faculty Core Processes', color: '#8e44ad' },
+                        { key: '⚙️ Priority 5: Admin Core Processes', color: '#343a40' },
+                        { key: '🔗 Priority 6: Integration & Testing', color: '#16a085' }
+                    ];
+                    
+                    priorities.forEach(priority => {
+                        const checklistData = status.checklistStats.byPriority[priority.key];
+                        if (checklistData && checklistData.totalItems > 0) {
+                            const remaining = checklistData.totalItems - checklistData.completedItems;
+                            statusMessage += `
+                                <div style="background: #f8f9fa; padding: 20px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid ${priority.color};">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                        <span style="font-weight: 600; color: #2c3e50; font-size: 1.05em;">${priority.key.split(':')[0]}</span>
+                                        <span style="font-weight: 700; color: ${priority.color}; font-size: 1.2em;">${checklistData.completionRate}%</span>
+                                    </div>
+                                    
+                                    <!-- Progress Bar -->
+                                    <div style="background: #e9ecef; height: 10px; border-radius: 5px; overflow: hidden; margin-bottom: 15px;">
+                                        <div style="background: ${priority.color}; height: 100%; width: ${checklistData.completionRate}%; transition: width 0.3s ease;"></div>
+                                    </div>
+                                    
+                                    <!-- Stats Grid -->
+                                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+                                        <div style="background: white; padding: 12px; border-radius: 8px; text-align: center;">
+                                            <div style="font-size: 1.4em; font-weight: 700; color: #667eea; margin-bottom: 4px;">${checklistData.totalItems}</div>
+                                            <div style="font-size: 0.8em; color: #666;">Total</div>
+                                        </div>
+                                        <div style="background: white; padding: 12px; border-radius: 8px; text-align: center;">
+                                            <div style="font-size: 1.4em; font-weight: 700; color: #28a745; margin-bottom: 4px;">${checklistData.completedItems}</div>
+                                            <div style="font-size: 0.8em; color: #666;">Completed</div>
+                                        </div>
+                                        <div style="background: white; padding: 12px; border-radius: 8px; text-align: center;">
+                                            <div style="font-size: 1.4em; font-weight: 700; color: #ffc107; margin-bottom: 4px;">${remaining}</div>
+                                            <div style="font-size: 0.8em; color: #666;">Remaining</div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div style="background: #e9ecef; height: 12px; border-radius: 6px; overflow: hidden;">
-                                    <div style="background: linear-gradient(90deg, #17a2b8 0%, #20c997 100%); height: 100%; width: ${status.checklistStats.completionRate}%; transition: width 0.3s ease;"></div>
-                                </div>
-                            </div>
-                            
-                            <!-- Stats Cards -->
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px;">
-                                <div style="background: #f8f9fa; padding: 25px; border-radius: 12px; text-align: center; border-left: 4px solid #667eea;">
-                                    <div style="font-size: 2.2em; font-weight: 700; color: #667eea; margin-bottom: 8px;">${status.checklistStats.totalItems}</div>
-                                    <div style="color: #667eea; font-weight: 600; margin-bottom: 5px;">Total Items</div>
-                                    <div style="font-size: 0.85em; color: #666;">All Checklist Items</div>
-                                </div>
-                                <div style="background: #f8f9fa; padding: 25px; border-radius: 12px; text-align: center; border-left: 4px solid #28a745;">
-                                    <div style="font-size: 2.2em; font-weight: 700; color: #28a745; margin-bottom: 8px;">${status.checklistStats.completedItems}</div>
-                                    <div style="color: #28a745; font-weight: 600; margin-bottom: 5px;">Completed</div>
-                                    <div style="font-size: 0.85em; color: #666;">Finished Items</div>
-                                </div>
-                                <div style="background: #f8f9fa; padding: 25px; border-radius: 12px; text-align: center; border-left: 4px solid #dc3545;">
-                                    <div style="font-size: 2.2em; font-weight: 700; color: #dc3545; margin-bottom: 8px;">${status.checklistStats.totalItems - status.checklistStats.completedItems}</div>
-                                    <div style="color: #dc3545; font-weight: 600; margin-bottom: 5px;">Remaining</div>
-                                    <div style="font-size: 0.85em; color: #666;">Pending Items</div>
-                                </div>
-                            </div>
+                            `;
+                        }
+                    });
+                    
+                    statusMessage += `
                         </div>
                     `;
                 }
@@ -17974,6 +18515,7 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
             const syncBtn = document.getElementById('trello-sync-btn');
             const boardBtn = document.getElementById('trello-board-btn');
             const statusBtn = document.getElementById('trello-status-btn');
+            const removeDuplicatesBtn = document.getElementById('remove-duplicates-btn');
             const statusDiv = document.getElementById('trello-status');
             const statusContent = document.getElementById('trello-status-content');
 
@@ -18233,6 +18775,38 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                     statusBtn.disabled = false;
                 }
             });
+
+            // Remove duplicates button
+            if (removeDuplicatesBtn) {
+                removeDuplicatesBtn.addEventListener('click', async () => {
+                    if (!confirm('⚠️ This will remove duplicate cards from your Trello board (keeping the oldest one). Continue?')) {
+                        return;
+                    }
+
+                    try {
+                        removeDuplicatesBtn.textContent = '🔄 Removing...';
+                        removeDuplicatesBtn.disabled = true;
+                        showTrelloStatus('🔄 Scanning for duplicate cards...', 'info');
+
+                        const result = await window.trelloIntegration.removeDuplicateCards();
+                        
+                        const statusMessage = `
+                            <div style="color: #4ecdc4; margin: 5px 0;">✅ Duplicate removal completed!</div>
+                            <div style="color: #4ecdc4; margin: 5px 0;">• Total cards scanned: ${result.totalCards}</div>
+                            <div style="color: #f39c12; margin: 5px 0;">• Duplicate tickets found: ${result.duplicatesFound}</div>
+                            <div style="color: #e74c3c; margin: 5px 0;">• Cards deleted: ${result.cardsDeleted}</div>
+                            <div style="color: #27ae60; margin: 5px 0;">🎉 Your board is now clean!</div>
+                        `;
+                        
+                        showTrelloStatus(statusMessage, 'success');
+                    } catch (error) {
+                        showTrelloStatus(`❌ Error removing duplicates: ${error.message}`, 'error');
+                    } finally {
+                        removeDuplicatesBtn.textContent = '🗑️ Remove Duplicates';
+                        removeDuplicatesBtn.disabled = false;
+                    }
+                });
+            }
         }
 
 
@@ -18280,6 +18854,10 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
             let nextPriority = null;
             let statusText = '';
             
+            // Check if Priority 1 has reached 80%+ completion (declare once at the top)
+            const priority1Completion = 82; // Current completion percentage
+            const isPriority2Unlocked = priority1Completion >= 80;
+            
             for (const [key, schedule] of Object.entries(prioritySchedule)) {
                 const isCurrentWeek = isWithinSchedule(currentDate, schedule);
                 const isPastWeek = currentDate > schedule.endDate;
@@ -18297,10 +18875,26 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
             const checklistLoadingInfo = document.getElementById('checklist-loading-info');
             
             if (currentPriority) {
-                statusText = `✅ Currently active: ${currentPriority.name} (Week ${currentPriority.startWeek}-${currentPriority.endWeek})`;
+                // Update status text to show Priority 2 is unlocked if applicable
+                if (isPriority2Unlocked && currentPriority.name === 'System Foundation') {
+                    statusText = `<strong>✅ Currently active:</strong> ${currentPriority.name} (Week ${currentPriority.startWeek}-${currentPriority.endWeek}) | <strong>📊 Completion:</strong> ${priority1Completion}%`;
+                } else {
+                    statusText = `✅ Currently active: ${currentPriority.name} (Week ${currentPriority.startWeek}-${currentPriority.endWeek})`;
+                }
+                
                 if (checklistLoadingInfo) {
-                    checklistLoadingInfo.innerHTML = `📋 Checklist Progress is loading for ${currentPriority.name} tasks only`;
-                    checklistLoadingInfo.style.color = '#27ae60';
+                    if (isPriority2Unlocked && currentPriority.name === 'System Foundation') {
+                        checklistLoadingInfo.innerHTML = `🎉 Next priority unlocked! Priority 2 ready for immediate sync!`;
+                        checklistLoadingInfo.style.color = '#2ecc71';
+                        checklistLoadingInfo.style.fontWeight = '600';
+                        checklistLoadingInfo.style.background = 'rgba(46,204,113,0.1)';
+                        checklistLoadingInfo.style.padding = '8px';
+                        checklistLoadingInfo.style.borderRadius = '6px';
+                        checklistLoadingInfo.style.borderLeft = '3px solid #2ecc71';
+                    } else {
+                        checklistLoadingInfo.innerHTML = `📋 Checklist Progress is loading for ${currentPriority.name} tasks only`;
+                        checklistLoadingInfo.style.color = '#27ae60';
+                    }
                 }
             } else if (nextPriority) {
                 statusText = `⏳ Next up: ${nextPriority.name} starting ${formatDate(nextPriority.startDate)} (Week ${nextPriority.startWeek}-${nextPriority.endWeek})`;
@@ -18322,6 +18916,7 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
             
             // Update button states
             const prioritySyncBtns = document.querySelectorAll('.priority-sync-btn');
+            
             prioritySyncBtns.forEach(btn => {
                 const priorityCategory = btn.getAttribute('data-priority');
                 const schedule = prioritySchedule[priorityCategory];
@@ -18330,6 +18925,17 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                     const isCurrentWeek = isWithinSchedule(currentDate, schedule);
                     const isPastWeek = currentDate > schedule.endDate;
                     const isFutureWeek = currentDate < schedule.startDate;
+                    
+                    // Special case: Priority 2 unlocked early because Priority 1 reached 80%+
+                    if (priorityCategory === '🛠️ Priority 2: Maintenance Features' && isPriority2Unlocked) {
+                        btn.disabled = false;
+                        btn.style.opacity = '1';
+                        btn.style.cursor = 'pointer';
+                        btn.style.boxShadow = '0 0 15px rgba(40,167,69,0.6), 0 2px 4px rgba(0,0,0,0.2)';
+                        btn.style.transform = 'scale(1.05)';
+                        btn.title = `🎉 UNLOCKED EARLY! Priority 1 reached ${priority1Completion}% - Ready to sync NOW!`;
+                        return;
+                    }
                     
                     if (isCurrentWeek) {
                         // Current week - enable button with active styling

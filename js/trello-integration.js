@@ -264,7 +264,7 @@ class TrelloIntegration {
                     idBoard: this.boardId,
                     pos: priority.pos,
                     key: this.apiKey,
-                    token: this.token
+                    token: this.adminToken
                 };
 
                 const response = await fetch(`${this.baseUrl}/lists`, {
@@ -320,7 +320,7 @@ class TrelloIntegration {
                     idBoard: this.boardId,
                     pos: list.pos,
                     key: this.apiKey,
-                    token: this.token
+                    token: this.adminToken
                 };
 
                 const response = await fetch(`${this.baseUrl}/lists`, {
@@ -380,8 +380,8 @@ class TrelloIntegration {
                 throw new Error(`List ${listName} not found`);
             }
 
-            // Check if card exists in any list
-            const cardInfo = await this.findCardInAnyList(taskData.title);
+            // Check if card exists in any list (search by ticket number for better accuracy)
+            const cardInfo = await this.findCardInAnyList(taskData.title, taskData.ticket);
             
             if (cardInfo) {
                 // Card exists - check if it's in the target list
@@ -431,7 +431,7 @@ class TrelloIntegration {
     /**
      * Check if card exists in any list and get its current list
      */
-    async findCardInAnyList(title) {
+    async findCardInAnyList(title, ticket = null) {
         try {
             // Get all lists from the board
             const lists = await this.getBoardLists();
@@ -440,7 +440,22 @@ class TrelloIntegration {
                 const response = await fetch(`${this.baseUrl}/lists/${list.id}/cards?key=${this.apiKey}&token=${this.adminToken}`);
                 if (response.ok) {
                     const cards = await response.json();
-                    const card = cards.find(card => card.name === title);
+                    
+                    // First try to match by ticket number (more reliable)
+                    let card = null;
+                    if (ticket) {
+                        card = cards.find(c => 
+                            c.name.includes(ticket) || 
+                            c.desc.includes(ticket) ||
+                            c.name.trim() === title.trim()
+                        );
+                    }
+                    
+                    // Fallback to exact title match
+                    if (!card) {
+                        card = cards.find(c => c.name.trim() === title.trim());
+                    }
+                    
                     if (card) {
                         return {
                             card: card,
@@ -468,7 +483,7 @@ class TrelloIntegration {
             pos: 'top',
             labels: this.getCardLabels(taskData),
             key: this.apiKey,
-            token: this.token
+            token: this.adminToken
         };
 
         const response = await fetch(`${this.baseUrl}/cards`, {
@@ -507,7 +522,7 @@ class TrelloIntegration {
             idList: listId,
             labels: this.getCardLabels(taskData),
             key: this.apiKey,
-            token: this.token
+            token: this.adminToken
         };
 
         const response = await fetch(`${this.baseUrl}/cards/${cardId}`, {
@@ -898,7 +913,7 @@ class TrelloIntegration {
             uiSections.forEach(section => {
                 if (section.tagName === 'H5') {
                     const sectionTitle = section.textContent.trim();
-                    if (sectionTitle && !sectionTitle.includes('UI/UX')) {
+                    if (sectionTitle && !sectionTitle.includes('UI/UX') && !sectionTitle.includes('Related Tables')) {
                         // Add section as a checklist item
                         details.push(`📌 ${sectionTitle}`);
                     }
@@ -943,7 +958,7 @@ class TrelloIntegration {
             additionalSections.forEach(section => {
                 if (section.tagName === 'H5') {
                     const title = section.textContent.trim();
-                    if (title && !details.some(d => d.includes(title))) {
+                    if (title && !details.some(d => d.includes(title)) && !title.includes('Related Tables')) {
                         const nextElement = section.nextElementSibling;
                         if (nextElement && nextElement.tagName === 'UL') {
                             details.push(`📝 ${title}`);
@@ -996,7 +1011,7 @@ class TrelloIntegration {
                     color: label.color,
                     idBoard: this.boardId,
                     key: this.apiKey,
-                    token: this.token
+                    token: this.adminToken
                 };
 
                 await fetch(`${this.baseUrl}/labels`, {
@@ -1009,6 +1024,91 @@ class TrelloIntegration {
             } catch (error) {
                 console.error(`Error creating label ${label.name}:`, error);
             }
+        }
+    }
+
+    /**
+     * Remove duplicate cards (keeps the oldest one based on ticket number)
+     */
+    async removeDuplicateCards() {
+        try {
+            if (!this.boardId) {
+                throw new Error('No board ID available. Please sync tasks first.');
+            }
+
+            // Get all cards from the board
+            const cardsResponse = await fetch(`${this.baseUrl}/boards/${this.boardId}/cards?key=${this.apiKey}&token=${this.adminToken}`);
+            if (!cardsResponse.ok) {
+                throw new Error('Failed to fetch board cards');
+            }
+
+            const allCards = await cardsResponse.json();
+            console.log(`Found ${allCards.length} total cards`);
+
+            // Group cards by ticket number
+            const cardsByTicket = {};
+            allCards.forEach(card => {
+                // Extract ticket number from description
+                const ticketMatch = card.desc?.match(/\*\*Ticket:\*\*\s*(SKOL-\d+-[FB]E)/);
+                if (ticketMatch) {
+                    const ticket = ticketMatch[1];
+                    if (!cardsByTicket[ticket]) {
+                        cardsByTicket[ticket] = [];
+                    }
+                    cardsByTicket[ticket].push(card);
+                }
+            });
+
+            // Find duplicates (tickets with more than 1 card)
+            const duplicates = Object.entries(cardsByTicket).filter(([ticket, cards]) => cards.length > 1);
+            console.log(`Found ${duplicates.length} tickets with duplicates`);
+
+            let deletedCount = 0;
+            const results = [];
+
+            for (const [ticket, cards] of duplicates) {
+                // Sort by creation date (keep the oldest one)
+                cards.sort((a, b) => new Date(a.dateLastActivity) - new Date(b.dateLastActivity));
+                
+                // Keep the first card, delete the rest
+                const keepCard = cards[0];
+                const deleteCards = cards.slice(1);
+                
+                console.log(`Ticket ${ticket}: Keeping card "${keepCard.name}" (${keepCard.id}), deleting ${deleteCards.length} duplicate(s)`);
+                
+                for (const card of deleteCards) {
+                    try {
+                        const deleteResponse = await fetch(`${this.baseUrl}/cards/${card.id}?key=${this.apiKey}&token=${this.adminToken}`, {
+                            method: 'DELETE'
+                        });
+                        
+                        if (deleteResponse.ok) {
+                            deletedCount++;
+                            results.push({ ticket, action: 'deleted', cardName: card.name });
+                            console.log(`  ✓ Deleted duplicate: "${card.name}"`);
+                        } else {
+                            results.push({ ticket, action: 'error', cardName: card.name, error: 'Delete failed' });
+                            console.log(`  ✗ Failed to delete: "${card.name}"`);
+                        }
+                        
+                        // Small delay between deletions
+                        await new Promise(resolve => setTimeout(resolve, 500));
+                    } catch (error) {
+                        results.push({ ticket, action: 'error', cardName: card.name, error: error.message });
+                        console.log(`  ✗ Error deleting "${card.name}":`, error.message);
+                    }
+                }
+            }
+
+            return {
+                totalCards: allCards.length,
+                duplicatesFound: duplicates.length,
+                cardsDeleted: deletedCount,
+                details: results
+            };
+        } catch (error) {
+            console.error('Error removing duplicates:', error);
+            throw error;
         }
     }
 
@@ -1049,7 +1149,7 @@ class TrelloIntegration {
             for (const list of listsToDelete) {
                 try {
                     // First, archive the list (this also removes all cards in it)
-                    const archiveResponse = await fetch(`${this.baseUrl}/lists/${list.id}?closed=true&key=${this.apiKey}&token=${this.token}`, {
+                    const archiveResponse = await fetch(`${this.baseUrl}/lists/${list.id}?closed=true&key=${this.apiKey}&token=${this.adminToken}`, {
                         method: 'PUT'
                     });
                     
@@ -1711,40 +1811,72 @@ class TrelloIntegration {
                 completedCards: 0
             };
 
-            const priorityBreakdown = {};
+            const priorityBreakdown = {
+                '🔥 Priority 1: System Foundation': { total: 0, completed: 0, inProgress: 0, testing: 0, todo: 0 },
+                '🛠️ Priority 2: Maintenance Features': { total: 0, completed: 0, inProgress: 0, testing: 0, todo: 0 },
+                '🎯 Priority 3: Student Core Processes': { total: 0, completed: 0, inProgress: 0, testing: 0, todo: 0 },
+                '👨‍🏫 Priority 4: Faculty Core Processes': { total: 0, completed: 0, inProgress: 0, testing: 0, todo: 0 },
+                '⚙️ Priority 5: Admin Core Processes': { total: 0, completed: 0, inProgress: 0, testing: 0, todo: 0 },
+                '🔗 Priority 6: Integration & Testing': { total: 0, completed: 0, inProgress: 0, testing: 0, todo: 0 }
+            };
             const typeBreakdown = { Frontend: 0, Backend: 0 };
 
-            // Count cards by list
+            // Count cards by list and priority
             cards.forEach(card => {
                 const listName = lists.find(list => list.id === card.idList)?.name || 'Unknown';
                 
+                // Extract priority category from card description
+                let priorityCategory = null;
+                if (card.desc) {
+                    const categoryMatch = card.desc.match(/\*\*Category:\*\*\s*(.+)/);
+                    if (categoryMatch) {
+                        priorityCategory = categoryMatch[1].trim();
+                    }
+                }
+                
+                // Count by status
                 if (listName.includes('TO DO')) {
                     statusCounts.todoCards++;
+                    if (priorityCategory && priorityBreakdown[priorityCategory]) {
+                        priorityBreakdown[priorityCategory].todo++;
+                        priorityBreakdown[priorityCategory].total++;
+                    }
                 } else if (listName.includes('ON-GOING')) {
                     statusCounts.inProgressCards++;
+                    if (priorityCategory && priorityBreakdown[priorityCategory]) {
+                        priorityBreakdown[priorityCategory].inProgress++;
+                        priorityBreakdown[priorityCategory].total++;
+                    }
                 } else if (listName.includes('FOR TESTING')) {
                     statusCounts.testingCards++;
+                    if (priorityCategory && priorityBreakdown[priorityCategory]) {
+                        priorityBreakdown[priorityCategory].testing++;
+                        priorityBreakdown[priorityCategory].total++;
+                    }
                 } else if (listName.includes('DONE')) {
                     statusCounts.completedCards++;
+                    if (priorityCategory && priorityBreakdown[priorityCategory]) {
+                        priorityBreakdown[priorityCategory].completed++;
+                        priorityBreakdown[priorityCategory].total++;
+                    }
                 }
 
-                // Analyze priority from labels
+                // Analyze type from labels
                 if (card.labels && card.labels.length > 0) {
                     card.labels.forEach(label => {
-                        if (label.name.includes('Priority')) {
-                            priorityBreakdown[label.name] = (priorityBreakdown[label.name] || 0) + 1;
-                        }
-                        if (label.name === 'Frontend') {
+                        if (label.name === 'Frontend' || label.color === 'green') {
                             typeBreakdown.Frontend++;
-                        } else if (label.name === 'Backend') {
+                        } else if (label.name === 'Backend' || label.color === 'red') {
                             typeBreakdown.Backend++;
                         }
                     });
                 }
             });
 
-            // Get checklist statistics
+            // Get checklist statistics by priority
             let checklistStats = null;
+            const checklistByPriority = {};
+            
             try {
                 const checklistResponse = await fetch(`${this.baseUrl}/boards/${this.boardId}/checklists?key=${this.apiKey}&token=${this.adminToken}`);
                 if (checklistResponse.ok) {
@@ -1752,17 +1884,54 @@ class TrelloIntegration {
                     let totalItems = 0;
                     let completedItems = 0;
 
+                    // Initialize priority checklist stats
+                    Object.keys(priorityBreakdown).forEach(priority => {
+                        checklistByPriority[priority] = {
+                            totalItems: 0,
+                            completedItems: 0,
+                            completionRate: 0
+                        };
+                    });
+
+                    // Process each checklist and match to card's priority
                     for (const checklist of checklists) {
-                        if (checklist.checkItems) {
-                            totalItems += checklist.checkItems.length;
-                            completedItems += checklist.checkItems.filter(item => item.state === 'complete').length;
+                        if (checklist.checkItems && checklist.checkItems.length > 0) {
+                            // Find the card this checklist belongs to
+                            const card = cards.find(c => c.id === checklist.idCard);
+                            
+                            if (card && card.desc) {
+                                // Extract priority from card description
+                                const categoryMatch = card.desc.match(/\*\*Category:\*\*\s*(.+)/);
+                                const priorityCategory = categoryMatch ? categoryMatch[1].trim() : null;
+                                
+                                const checklistTotal = checklist.checkItems.length;
+                                const checklistCompleted = checklist.checkItems.filter(item => item.state === 'complete').length;
+                                
+                                totalItems += checklistTotal;
+                                completedItems += checklistCompleted;
+                                
+                                // Add to priority-specific stats
+                                if (priorityCategory && checklistByPriority[priorityCategory]) {
+                                    checklistByPriority[priorityCategory].totalItems += checklistTotal;
+                                    checklistByPriority[priorityCategory].completedItems += checklistCompleted;
+                                }
+                            }
                         }
                     }
+
+                    // Calculate completion rates for each priority
+                    Object.keys(checklistByPriority).forEach(priority => {
+                        const stats = checklistByPriority[priority];
+                        if (stats.totalItems > 0) {
+                            stats.completionRate = Math.round((stats.completedItems / stats.totalItems) * 100);
+                        }
+                    });
 
                     checklistStats = {
                         totalItems,
                         completedItems,
-                        completionRate: totalItems > 0 ? Math.round((completedItems / totalItems) * 100) : 0
+                        completionRate: totalItems > 0 ? Math.round((completedItems / totalItems) * 100) : 0,
+                        byPriority: checklistByPriority
                     };
                 }
             } catch (error) {
