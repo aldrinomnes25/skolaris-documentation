@@ -1,0 +1,364 @@
+{
+  "info": {
+    "_postman_id": "skolaris-complete-api-2025",
+    "name": "SKOLARIS - Complete API Documentation",
+    "description": "# SKOLARIS Student Information System - Complete API\n\nComprehensive API documentation for SKOLARIS including:\n- Authentication & Session Management\n- User & Role Management\n- Campus & College Management\n- Academic Term & Calendar Management\n- Curriculum & Program Management\n- Enrollment & Student Management\n- Room & Resource Management\n- Permission System\n\n## Authentication\nAll protected endpoints require JWT Bearer token authentication.\n\n## Base URL\n`{{base_url}}/api/v1`\n\n## Environment Variables\n- `base_url`: API base URL (e.g., http://localhost)\n- `access_token`: JWT access token\n- `refresh_token`: JWT refresh token\n- `token_expires_at`: Token expiration timestamp\n\n## Role Hierarchy\n1. Super Admin - Full system access\n2. Campus Admin - Campus-level management\n3. Registrar - Academic management\n4. Faculty - Teaching and grading\n5. Cashier - Financial operations\n6. Student - Read-only access to own data",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "description": "Authentication endpoints for login, logout, token refresh, and session management",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}, {"key": "Accept", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n    \"email\": \"superadmin@icct.edu.ph\",\n    \"password\": \"Password123!\"\n}"},
+            "url": {"raw": "{{base_url}}/api/v1/login", "host": ["{{base_url}}"], "path": ["api", "v1", "login"]},
+            "description": "Login with email/password to obtain JWT access and refresh tokens"
+          }
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n    \"refresh_token\": \"{{refresh_token}}\"\n}"},
+            "url": {"raw": "{{base_url}}/api/v1/refresh", "host": ["{{base_url}}"], "path": ["api", "v1", "refresh"]},
+            "description": "Refresh access token using refresh token"
+          }
+        },
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+            "url": {"raw": "{{base_url}}/api/v1/user", "host": ["{{base_url}}"], "path": ["api", "v1", "user"]},
+            "description": "Get authenticated user information"
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+            "url": {"raw": "{{base_url}}/api/v1/logout", "host": ["{{base_url}}"], "path": ["api", "v1", "logout"]},
+            "description": "Logout and invalidate current session"
+          }
+        },
+        {
+          "name": "Get Active Sessions",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+            "url": {"raw": "{{base_url}}/api/v1/sessions", "host": ["{{base_url}}"], "path": ["api", "v1", "sessions"]},
+            "description": "Get all active sessions for the current user"
+          }
+        },
+        {
+          "name": "Revoke All Sessions",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+            "url": {"raw": "{{base_url}}/api/v1/sessions/revoke-all", "host": ["{{base_url}}"], "path": ["api", "v1", "sessions", "revoke-all"]},
+            "description": "Revoke all sessions except current"
+          }
+        },
+        {
+          "name": "Revoke Specific Session",
+          "request": {
+            "method": "DELETE",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+            "url": {"raw": "{{base_url}}/api/v1/sessions/:sessionId", "host": ["{{base_url}}"], "path": ["api", "v1", "sessions", ":sessionId"], "variable": [{"key": "sessionId", "value": "1"}]},
+            "description": "Revoke a specific session by ID"
+          }
+        }
+      ]
+    },
+    {
+      "name": "File Upload",
+      "description": "Reusable file upload endpoint",
+      "item": [
+        {
+          "name": "Upload File",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+            "body": {"mode": "formdata", "formdata": [{"key": "file", "type": "file", "src": ""}]},
+            "url": {"raw": "{{base_url}}/api/v1/upload", "host": ["{{base_url}}"], "path": ["api", "v1", "upload"]},
+            "description": "Upload a file to the system"
+          }
+        }
+      ]
+    },
+    {
+      "name": "User Management",
+      "description": "User CRUD operations and management (Super Admin only)",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+            "url": {"raw": "{{base_url}}/api/v1/users?per_page=15&search=&campus_id=&user_type=&is_active=", "host": ["{{base_url}}"], "path": ["api", "v1", "users"], "query": [{"key": "per_page", "value": "15"}, {"key": "search", "value": ""}, {"key": "campus_id", "value": ""}, {"key": "user_type", "value": ""}, {"key": "is_active", "value": ""}]},
+            "description": "Get paginated list of users with optional filters"
+          }
+        },
+        {
+          "name": "Get User Statistics",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+            "url": {"raw": "{{base_url}}/api/v1/users/statistics", "host": ["{{base_url}}"], "path": ["api", "v1", "users", "statistics"]},
+            "description": "Get user statistics and breakdowns"
+          }
+        },
+        {
+          "name": "Get User by ID",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+            "url": {"raw": "{{base_url}}/api/v1/users/:id", "host": ["{{base_url}}"], "path": ["api", "v1", "users", ":id"], "variable": [{"key": "id", "value": "1"}]},
+            "description": "Get specific user details"
+          }
+        },
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}, {"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n    \"email\": \"newuser@icct.edu.ph\",\n    \"password\": \"Password123!\",\n    \"full_name\": \"New User\",\n    \"phone\": \"+639171234567\",\n    \"user_type\": \"staff\",\n    \"campus_id\": 1,\n    \"is_active\": true\n}"},
+            "url": {"raw": "{{base_url}}/api/v1/users", "host": ["{{base_url}}"], "path": ["api", "v1", "users"]},
+            "description": "Create a new user"
+          }
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}, {"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n    \"full_name\": \"Updated Name\",\n    \"phone\": \"+639171234567\"\n}"},
+            "url": {"raw": "{{base_url}}/api/v1/users/:id", "host": ["{{base_url}}"], "path": ["api", "v1", "users", ":id"], "variable": [{"key": "id", "value": "1"}]},
+            "description": "Update user information"
+          }
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+            "url": {"raw": "{{base_url}}/api/v1/users/:id", "host": ["{{base_url}}"], "path": ["api", "v1", "users", ":id"], "variable": [{"key": "id", "value": "1"}]},
+            "description": "Delete a user"
+          }
+        },
+        {
+          "name": "Toggle User Status",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+            "url": {"raw": "{{base_url}}/api/v1/users/:id/toggle-status", "host": ["{{base_url}}"], "path": ["api", "v1", "users", ":id", "toggle-status"], "variable": [{"key": "id", "value": "1"}]},
+            "description": "Activate/deactivate user"
+          }
+        },
+        {
+          "name": "Assign Role to User",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}, {"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n    \"role_id\": 3\n}"},
+            "url": {"raw": "{{base_url}}/api/v1/users/:id/assign-role", "host": ["{{base_url}}"], "path": ["api", "v1", "users", ":id", "assign-role"], "variable": [{"key": "id", "value": "1"}]},
+            "description": "Assign role to user"
+          }
+        },
+        {
+          "name": "Remove Role from User",
+          "request": {
+            "method": "DELETE",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}, {"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n    \"role_id\": 3\n}"},
+            "url": {"raw": "{{base_url}}/api/v1/users/:id/remove-role", "host": ["{{base_url}}"], "path": ["api", "v1", "users", ":id", "remove-role"], "variable": [{"key": "id", "value": "1"}]},
+            "description": "Remove role from user"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Campus Management",
+      "description": "Campus CRUD operations and statistics",
+      "item": [
+        {
+          "name": "Get All Campuses",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+            "url": {"raw": "{{base_url}}/api/v1/campuses", "host": ["{{base_url}}"], "path": ["api", "v1", "campuses"]},
+            "description": "Get all campuses"
+          }
+        },
+        {
+          "name": "Get Distinct Campus Names",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+            "url": {"raw": "{{base_url}}/api/v1/campuses/distinct-names", "host": ["{{base_url}}"], "path": ["api", "v1", "campuses", "distinct-names"]},
+            "description": "Get distinct campus names for filtering"
+          }
+        },
+        {
+          "name": "Get Campus by ID",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+            "url": {"raw": "{{base_url}}/api/v1/campuses/:id", "host": ["{{base_url}}"], "path": ["api", "v1", "campuses", ":id"], "variable": [{"key": "id", "value": "1"}]},
+            "description": "Get specific campus details"
+          }
+        },
+        {
+          "name": "Get Campus Statistics",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+            "url": {"raw": "{{base_url}}/api/v1/campuses/:id/statistics", "host": ["{{base_url}}"], "path": ["api", "v1", "campuses", ":id", "statistics"], "variable": [{"key": "id", "value": "1"}]},
+            "description": "Get campus statistics"
+          }
+        },
+        {
+          "name": "Create Campus",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}, {"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n    \"campus_name\": \"New Campus\",\n    \"campus_code\": \"NC\",\n    \"address\": \"123 Main St\",\n    \"city\": \"City\",\n    \"province\": \"Province\",\n    \"contact_number\": \"+639171234567\",\n    \"email\": \"campus@icct.edu.ph\",\n    \"is_active\": true\n}"},
+            "url": {"raw": "{{base_url}}/api/v1/campuses", "host": ["{{base_url}}"], "path": ["api", "v1", "campuses"]},
+            "description": "Create new campus"
+          }
+        },
+        {
+          "name": "Update Campus",
+          "request": {
+            "method": "PUT",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}, {"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n    \"campus_name\": \"Updated Campus\",\n    \"address\": \"Updated Address\"\n}"},
+            "url": {"raw": "{{base_url}}/api/v1/campuses/:id", "host": ["{{base_url}}"], "path": ["api", "v1", "campuses", ":id"], "variable": [{"key": "id", "value": "1"}]},
+            "description": "Update campus information"
+          }
+        },
+        {
+          "name": "Toggle Campus Status",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+            "url": {"raw": "{{base_url}}/api/v1/campuses/:id/toggle-status", "host": ["{{base_url}}"], "path": ["api", "v1", "campuses", ":id", "toggle-status"], "variable": [{"key": "id", "value": "1"}]},
+            "description": "Activate/deactivate campus"
+          }
+        },
+        {
+          "name": "Delete Campus",
+          "request": {
+            "method": "DELETE",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+            "url": {"raw": "{{base_url}}/api/v1/campuses/:id", "host": ["{{base_url}}"], "path": ["api", "v1", "campuses", ":id"], "variable": [{"key": "id", "value": "1"}]},
+            "description": "Delete campus"
+          }
+        }
+      ]
+    },
+    {
+      "name": "College Management",
+      "description": "College CRUD operations and management",
+      "item": [
+        {
+          "name": "Get All Colleges",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+            "url": {"raw": "{{base_url}}/api/v1/colleges", "host": ["{{base_url}}"], "path": ["api", "v1", "colleges"]},
+            "description": "Get all colleges"
+          }
+        },
+        {
+          "name": "Get College Statistics",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+            "url": {"raw": "{{base_url}}/api/v1/colleges/statistics", "host": ["{{base_url}}"], "path": ["api", "v1", "colleges", "statistics"]},
+            "description": "Get college statistics"
+          }
+        },
+        {
+          "name": "Get College Distinct Values",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+            "url": {"raw": "{{base_url}}/api/v1/colleges/distinct-values", "host": ["{{base_url}}"], "path": ["api", "v1", "colleges", "distinct-values"]},
+            "description": "Get distinct values for filtering"
+          }
+        },
+        {
+          "name": "Get College Employees",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+            "url": {"raw": "{{base_url}}/api/v1/colleges/:id/employees", "host": ["{{base_url}}"], "path": ["api", "v1", "colleges", ":id", "employees"], "variable": [{"key": "id", "value": "1"}]},
+            "description": "Get college employees"
+          }
+        },
+        {
+          "name": "Get College by ID",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+            "url": {"raw": "{{base_url}}/api/v1/colleges/:id", "host": ["{{base_url}}"], "path": ["api", "v1", "colleges", ":id"], "variable": [{"key": "id", "value": "1"}]},
+            "description": "Get specific college details"
+          }
+        },
+        {
+          "name": "Create College",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}, {"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n    \"college_name\": \"College of Computer Studies\",\n    \"college_code\": \"CCS\",\n    \"dean_name\": \"Dr. John Doe\",\n    \"campus_id\": 1,\n    \"is_active\": true\n}"},
+            "url": {"raw": "{{base_url}}/api/v1/colleges", "host": ["{{base_url}}"], "path": ["api", "v1", "colleges"]},
+            "description": "Create new college"
+          }
+        },
+        {
+          "name": "Update College",
+          "request": {
+            "method": "PUT",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}, {"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n    \"college_name\": \"Updated College Name\"\n}"},
+            "url": {"raw": "{{base_url}}/api/v1/colleges/:id", "host": ["{{base_url}}"], "path": ["api", "v1", "colleges", ":id"], "variable": [{"key": "id", "value": "1"}]},
+            "description": "Update college information"
+          }
+        },
+        {
+          "name": "Toggle College Status",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+            "url": {"raw": "{{base_url}}/api/v1/colleges/:id/toggle-status", "host": ["{{base_url}}"], "path": ["api", "v1", "colleges", ":id", "toggle-status"], "variable": [{"key": "id", "value": "1"}]},
+            "description": "Activate/deactivate college"
+          }
+        },
+        {
+          "name": "Delete College",
+          "request": {
+            "method": "DELETE",
+            "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+            "url": {"raw": "{{base_url}}/api/v1/colleges/:id", "host": ["{{base_url}}"], "path": ["api", "v1", "colleges", ":id"], "variable": [{"key": "id", "value": "1"}]},
+            "description": "Delete college"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {"key": "base_url", "value": "http://localhost", "type": "string"},
+    {"key": "access_token", "value": "", "type": "string"},
+    {"key": "refresh_token", "value": "", "type": "string"},
+    {"key": "token_expires_at", "value": "", "type": "string"}
+  ]
+}
+

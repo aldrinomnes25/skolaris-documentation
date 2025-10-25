@@ -890,6 +890,9 @@
                     <a href="#api-programs" style="padding: 10px; background: #ffc107; color: #212529; text-decoration: none; border-radius: 6px; text-align: center; font-weight: 600;">🎓 Programs</a>
                     <a href="#api-subjects" style="padding: 10px; background: #17a2b8; color: white; text-decoration: none; border-radius: 6px; text-align: center; font-weight: 600;">📝 Subjects</a>
                     <a href="#api-terms" style="padding: 10px; background: #6f42c1; color: white; text-decoration: none; border-radius: 6px; text-align: center; font-weight: 600;">📅 Academic Terms</a>
+                    <a href="#api-enrollment" style="padding: 10px; background: #ff6b6b; color: white; text-decoration: none; border-radius: 6px; text-align: center; font-weight: 600;">⭐ 🎯 Enrollment Period NEW</a>
+                    <a href="#api-rooms" style="padding: 10px; background: #4ecdc4; color: white; text-decoration: none; border-radius: 6px; text-align: center; font-weight: 600;">⭐ 🏢 Rooms NEW</a>
+                    <a href="#api-roadmap" style="padding: 10px; background: #95e1d3; color: #212529; text-decoration: none; border-radius: 6px; text-align: center; font-weight: 600;">⭐ 🗺️ Student Roadmap NEW</a>
                 </div>
             </div>
 
@@ -918,7 +921,59 @@
                         <strong style="color: #6f42c1;">academic_terms</strong>
                         <div style="font-size: 0.85em; color: #666; margin-top: 5px;">Term definitions</div>
                     </div>
+                    <div style="background: white; padding: 12px; border-radius: 6px; border: 2px solid #ff6b6b;">
+                        <strong style="color: #ff6b6b;">⭐ enrollment_periods</strong>
+                        <div style="font-size: 0.85em; color: #666; margin-top: 5px;">Enrollment management NEW</div>
+                    </div>
+                    <div style="background: white; padding: 12px; border-radius: 6px; border: 2px solid #4ecdc4;">
+                        <strong style="color: #4ecdc4;">⭐ rooms</strong>
+                        <div style="font-size: 0.85em; color: #666; margin-top: 5px;">Room management NEW</div>
+                    </div>
+                    <div style="background: white; padding: 12px; border-radius: 6px; border: 2px solid #95e1d3;">
+                        <strong style="color: #0e7490;">⭐ student_curriculum_roadmap</strong>
+                        <div style="font-size: 0.85em; color: #666; margin-top: 5px;">Program roadmaps NEW</div>
+                    </div>
                 </div>
+            </div>
+
+            <!-- API Organization by Feature -->
+            <div style="background: #fff9e6; padding: 20px; border-radius: 10px; margin-bottom: 30px; border-left: 4px solid #ffc107;">
+                <h4 style="color: #856404; margin-bottom: 15px;">📂 APIs Organized by Feature Tabs</h4>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                    <div style="background: white; padding: 15px; border-radius: 8px; border-left: 3px solid #667eea;">
+                        <h5 style="color: #667eea; margin-bottom: 10px;">📋 Default Curriculum APIs</h5>
+                        <ul style="font-size: 0.9em; color: #555; margin-left: 20px;">
+                            <li>Default Curriculum CRUD</li>
+                            <li>Programs Management</li>
+                            <li>Subjects Management</li>
+                            <li>Academic Terms</li>
+                        </ul>
+                    </div>
+                    <div style="background: white; padding: 15px; border-radius: 8px; border-left: 3px solid #95e1d3;">
+                        <h5 style="color: #0e7490; margin-bottom: 10px;">🗺️ Program Roadmap APIs</h5>
+                        <ul style="font-size: 0.9em; color: #555; margin-left: 20px;">
+                            <li>⭐ Student Roadmap (NEW)</li>
+                            <li>⭐ Get Current Roadmap (NEW)</li>
+                            <li>⭐ Roadmap Versions (NEW)</li>
+                            <li>Program Curriculum</li>
+                        </ul>
+                    </div>
+                    <div style="background: white; padding: 15px; border-radius: 8px; border-left: 3px solid #28a745;">
+                        <h5 style="color: #28a745; margin-bottom: 10px;">📖 Course Offerings APIs</h5>
+                        <ul style="font-size: 0.9em; color: #555; margin-left: 20px;">
+                            <li>Course Offerings CRUD</li>
+                            <li>⭐ Enrollment Periods (NEW)</li>
+                            <li>⭐ Room Management (NEW)</li>
+                            <li>⭐ Subject Sync (NEW)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===================== TAB 1: DEFAULT CURRICULUM APIs ===================== -->
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; margin: 40px 0 30px 0; border-radius: 10px; text-align: center;">
+                <h2 style="color: white; margin: 0; font-size: 2em;">📋 DEFAULT CURRICULUM APIs</h2>
+                <p style="color: rgba(255,255,255,0.9); margin-top: 10px; font-size: 1.1em;">APIs related to Tab 1: Default Curriculum Management</p>
             </div>
 
             <!-- API Section: Default Curriculum -->
@@ -1091,6 +1146,12 @@ Content-Type: application/json</code></pre>
                     </div>
                     <p style="color: #555;"><strong>Description:</strong> Delete a default curriculum record (soft delete - sets is_active to false)</p>
                 </div>
+            </div>
+
+            <!-- ===================== TAB 3: COURSE OFFERINGS APIs ===================== -->
+            <div style="background: linear-gradient(135deg, #a8e6cf 0%, #56ab2f 100%); padding: 20px; margin: 40px 0 30px 0; border-radius: 10px; text-align: center;">
+                <h2 style="color: white; margin: 0; font-size: 2em;">📖 COURSE OFFERINGS APIs</h2>
+                <p style="color: rgba(255,255,255,0.95); margin-top: 10px; font-size: 1.1em;">APIs related to Tab 3: Course Offerings, Enrollment & Room Management</p>
             </div>
 
             <!-- API Section: Course Offerings -->
@@ -1361,6 +1422,456 @@ Content-Type: application/json</code></pre>
   "enrollment_end": "2026-08-10",
   "is_active": true,
   "is_current": false
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- ⭐ NEW: Enrollment Period API -->
+            <div id="api-enrollment" class="api-section" style="background: white; padding: 25px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 3px 15px rgba(0,0,0,0.1); border-left: 5px solid #ff6b6b;">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                    <h3 style="color: #ff6b6b; margin: 0; font-size: 1.8em;">🎯 Enrollment Period API</h3>
+                    <span style="background: #ff6b6b; color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.8em; font-weight: 600;">⭐ NEW</span>
+                </div>
+
+                <div style="background: #fff5f5; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 3px solid #ff6b6b;">
+                    <p style="color: #c92a2a; margin: 0; font-size: 0.95em;"><strong>📌 Purpose:</strong> Manages enrollment periods for student registration. Controls when students can enroll, which subjects are available, and syncs roadmap subjects to enrollable curriculum.</p>
+                </div>
+
+                <!-- Get All Enrollment Periods -->
+                <div class="api-endpoint" style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                        <span style="background: #28a745; color: white; padding: 6px 12px; border-radius: 4px; font-weight: 600; font-size: 0.9em;">GET</span>
+                        <code style="flex: 1; background: white; padding: 10px; border-radius: 4px; font-size: 0.95em;">/api/v1/enrollment-periods</code>
+                    </div>
+                    <p style="color: #555;"><strong>Description:</strong> Get all enrollment periods with filters</p>
+                    <p style="color: #666; font-size: 0.9em; margin-top: 10px;"><strong>📝 Use Case:</strong> Para makita lahat ng enrollment periods (past, current, future). May filters para sa academic year at status.</p>
+                    
+                    <h5 style="color: #2c3e50; margin: 15px 0 10px;">Query Parameters:</h5>
+                    <ul style="margin-left: 20px; color: #555;">
+                        <li><code>academic_year</code> - Filter by year (e.g., "2025-2026")</li>
+                        <li><code>is_current</code> - Filter current period (true/false)</li>
+                        <li><code>enrollment_open</code> - Filter open periods (true/false)</li>
+                    </ul>
+
+                    <h5 style="color: #2c3e50; margin: 20px 0 10px;">Example Response:</h5>
+                    <pre style="background: #2d2d2d; color: #f8f8f2; padding: 15px; border-radius: 6px; overflow-x: auto;"><code>{
+  "success": true,
+  "message": "Enrollment periods retrieved successfully",
+  "data": [
+    {
+      "enrollment_period_id": 1,
+      "period_name": "2025-2026 First Semester",
+      "academic_year": "2025-2026",
+      "term_sequence": 1,
+      "is_current": true,
+      "enrollment_open": true,
+      "start_date": "2025-08-01",
+      "end_date": "2025-08-15"
+    }
+  ]
+}</code></pre>
+                </div>
+
+                <!-- Get Current Period -->
+                <div class="api-endpoint" style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                        <span style="background: #28a745; color: white; padding: 6px 12px; border-radius: 4px; font-weight: 600; font-size: 0.9em;">GET</span>
+                        <code style="flex: 1; background: white; padding: 10px; border-radius: 4px; font-size: 0.95em;">/api/v1/enrollment-periods/current</code>
+                    </div>
+                    <p style="color: #555;"><strong>Description:</strong> Get the current active enrollment period</p>
+                    <p style="color: #666; font-size: 0.9em; margin-top: 10px;"><strong>📝 Use Case:</strong> Para malaman kung anong enrollment period ang active ngayon. Ginagamit sa student enrollment forms para makita kung pwede ba mag-enroll.</p>
+                </div>
+
+                <!-- Set as Current -->
+                <div class="api-endpoint" style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                        <span style="background: #007bff; color: white; padding: 6px 12px; border-radius: 4px; font-weight: 600; font-size: 0.9em;">POST</span>
+                        <code style="flex: 1; background: white; padding: 10px; border-radius: 4px; font-size: 0.95em;">/api/v1/enrollment-periods/{period_id}/set-current</code>
+                    </div>
+                    <p style="color: #555;"><strong>Description:</strong> Set an enrollment period as the current active period</p>
+                    <p style="color: #666; font-size: 0.9em; margin-top: 10px;"><strong>📝 Use Case:</strong> Para i-activate ang isang specific enrollment period. Automatic nito idi-deactivate ang dating current period.</p>
+                </div>
+
+                <!-- Open Enrollment -->
+                <div class="api-endpoint" style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                        <span style="background: #007bff; color: white; padding: 6px 12px; border-radius: 4px; font-weight: 600; font-size: 0.9em;">POST</span>
+                        <code style="flex: 1; background: white; padding: 10px; border-radius: 4px; font-size: 0.95em;">/api/v1/enrollment-periods/{period_id}/open</code>
+                    </div>
+                    <p style="color: #555;"><strong>Description:</strong> Open enrollment for a specific period</p>
+                    <p style="color: #666; font-size: 0.9em; margin-top: 10px;"><strong>📝 Use Case:</strong> Para i-open ang enrollment window. Kapag na-open na, pwede na mag-enroll ang mga students sa period na 'to.</p>
+                </div>
+
+                <!-- Close Enrollment -->
+                <div class="api-endpoint" style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                        <span style="background: #007bff; color: white; padding: 6px 12px; border-radius: 4px; font-weight: 600; font-size: 0.9em;">POST</span>
+                        <code style="flex: 1; background: white; padding: 10px; border-radius: 4px; font-size: 0.95em;">/api/v1/enrollment-periods/{period_id}/close</code>
+                    </div>
+                    <p style="color: #555;"><strong>Description:</strong> Close enrollment for a specific period</p>
+                    <p style="color: #666; font-size: 0.9em; margin-top: 10px;"><strong>📝 Use Case:</strong> Para i-close ang enrollment window. Kapag closed na, hindi na pwede mag-enroll ang students.</p>
+                </div>
+
+                <!-- Preview Subjects -->
+                <div class="api-endpoint" style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                        <span style="background: #28a745; color: white; padding: 6px 12px; border-radius: 4px; font-weight: 600; font-size: 0.9em;">GET</span>
+                        <code style="flex: 1; background: white; padding: 10px; border-radius: 4px; font-size: 0.95em;">/api/v1/enrollment-periods/preview-subjects</code>
+                    </div>
+                    <p style="color: #555;"><strong>Description:</strong> Preview what subjects will be available for enrollment</p>
+                    <p style="color: #666; font-size: 0.9em; margin-top: 10px;"><strong>📝 Use Case:</strong> Para makita kung anong mga subjects ang available based sa roadmap. Ito yung mga subjects na iko-copy sa default_curricula kapag nag-sync. Preview lang ito, hindi pa nag-aaffect sa actual data.</p>
+                    
+                    <h5 style="color: #2c3e50; margin: 15px 0 10px;">Query Parameters:</h5>
+                    <ul style="margin-left: 20px; color: #555;">
+                        <li><code>enrollment_period_id</code> (optional) - Specific period ID, default is current</li>
+                    </ul>
+                </div>
+
+                <!-- Sync Subjects -->
+                <div class="api-endpoint" style="background: #fff3cd; padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 2px solid #ffc107;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                        <span style="background: #007bff; color: white; padding: 6px 12px; border-radius: 4px; font-weight: 600; font-size: 0.9em;">POST</span>
+                        <code style="flex: 1; background: white; padding: 10px; border-radius: 4px; font-size: 0.95em;">/api/v1/enrollment-periods/sync-subjects</code>
+                        <span style="background: #ffc107; color: #212529; padding: 4px 8px; border-radius: 4px; font-size: 0.75em; font-weight: 600;">IMPORTANT</span>
+                    </div>
+                    <p style="color: #555;"><strong>Description:</strong> Sync subjects from roadmap to default_curricula for enrollment</p>
+                    <p style="color: #856404; font-size: 0.9em; margin-top: 10px;"><strong>📝 Use Case:</strong> <strong>CRITICAL ENDPOINT!</strong> Ito ang nag-co-copy ng subjects from student_curriculum_roadmap to default_curricula. Kailangan i-run ito bago mag-open ng enrollment para may available subjects for students. Ginagawa nito: kukunin ang lahat ng Year 1 subjects sa current roadmap at iko-copy sa default_curricula para ma-enroll ng freshmen.</p>
+                    
+                    <h5 style="color: #2c3e50; margin: 15px 0 10px;">Request Body:</h5>
+                    <pre style="background: #2d2d2d; color: #f8f8f2; padding: 15px; border-radius: 6px; overflow-x: auto;"><code>{
+  "enrollment_period_id": 1,
+  "clear_old": true,
+  "year_levels": [1, 2, 3, 4]
+}</code></pre>
+
+                    <h5 style="color: #2c3e50; margin: 15px 0 10px;">Parameters:</h5>
+                    <ul style="margin-left: 20px; color: #555;">
+                        <li><code>enrollment_period_id</code> (optional) - Period ID, default is current</li>
+                        <li><code>clear_old</code> (optional) - Clear old ongoing curricula (default: true)</li>
+                        <li><code>year_levels</code> (optional) - Array of year levels to sync (default: [1])</li>
+                    </ul>
+                </div>
+
+                <!-- Get Suggested Subjects -->
+                <div class="api-endpoint" style="background: #f8f9fa; padding: 20px; border-radius: 8px;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                        <span style="background: #28a745; color: white; padding: 6px 12px; border-radius: 4px; font-weight: 600; font-size: 0.9em;">GET</span>
+                        <code style="flex: 1; background: white; padding: 10px; border-radius: 4px; font-size: 0.95em;">/api/v1/enrollment-periods/suggested-subjects</code>
+                    </div>
+                    <p style="color: #555;"><strong>Description:</strong> Get suggested subjects for all year levels based on enrollment period</p>
+                    <p style="color: #666; font-size: 0.9em; margin-top: 10px;"><strong>📝 Use Case:</strong> Para makita ang recommended subjects per year level sa specific enrollment period. May option to include all years (1-4) or year 1 only. Helpful for planning and advising.</p>
+                    
+                    <h5 style="color: #2c3e50; margin: 15px 0 10px;">Query Parameters:</h5>
+                    <ul style="margin-left: 20px; color: #555;">
+                        <li><code>enrollment_period_id</code> (optional) - Specific period ID</li>
+                        <li><code>include_all_years</code> (optional) - Include all year levels (default: false, Year 1 only)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ⭐ NEW: Room Management API -->
+            <div id="api-rooms" class="api-section" style="background: white; padding: 25px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 3px 15px rgba(0,0,0,0.1); border-left: 5px solid #4ecdc4;">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                    <h3 style="color: #4ecdc4; margin: 0; font-size: 1.8em;">🏢 Room Management API</h3>
+                    <span style="background: #4ecdc4; color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.8em; font-weight: 600;">⭐ NEW</span>
+                </div>
+
+                <div style="background: #e6fffa; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 3px solid #4ecdc4;">
+                    <p style="color: #0e7490; margin: 0; font-size: 0.95em;"><strong>📌 Purpose:</strong> Manages classroom and facility information. Tracks room capacity, availability, equipment, and building locations. Used for class scheduling and room allocation.</p>
+                </div>
+
+                <!-- Get All Rooms -->
+                <div class="api-endpoint" style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                        <span style="background: #28a745; color: white; padding: 6px 12px; border-radius: 4px; font-weight: 600; font-size: 0.9em;">GET</span>
+                        <code style="flex: 1; background: white; padding: 10px; border-radius: 4px; font-size: 0.95em;">/api/v1/rooms</code>
+                    </div>
+                    <p style="color: #555;"><strong>Description:</strong> Get all rooms with filtering and search</p>
+                    <p style="color: #666; font-size: 0.9em; margin-top: 10px;"><strong>📝 Use Case:</strong> Para makita lahat ng available rooms sa system. May search and filter options para madaling hanapin ang specific rooms.</p>
+                    
+                    <h5 style="color: #2c3e50; margin: 15px 0 10px;">Query Parameters:</h5>
+                    <ul style="margin-left: 20px; color: #555;">
+                        <li><code>search</code> - Search by room number or building</li>
+                        <li><code>campus_id</code> - Filter by campus</li>
+                        <li><code>type</code> - Filter by type (classroom, laboratory, computer_lab, library, auditorium, gym)</li>
+                        <li><code>building</code> - Filter by building name</li>
+                        <li><code>floor</code> - Filter by floor number</li>
+                        <li><code>min_capacity</code> - Minimum capacity required</li>
+                        <li><code>is_available</code> - Filter available rooms only</li>
+                        <li><code>per_page</code> - Items per page (default: 15)</li>
+                    </ul>
+
+                    <h5 style="color: #2c3e50; margin: 20px 0 10px;">Example Response:</h5>
+                    <pre style="background: #2d2d2d; color: #f8f8f2; padding: 15px; border-radius: 6px; overflow-x: auto;"><code>{
+  "success": true,
+  "message": "Rooms retrieved successfully",
+  "data": {
+    "data": [
+      {
+        "room_id": 1,
+        "campus_id": 1,
+        "room_number": "A-101",
+        "building": "Main Building",
+        "floor": 1,
+        "capacity": 40,
+        "type": "classroom",
+        "equipment": ["whiteboard", "projector", "AC"],
+        "is_available": true
+      }
+    ],
+    "total": 50,
+    "per_page": 15,
+    "current_page": 1
+  }
+}</code></pre>
+                </div>
+
+                <!-- Create Room -->
+                <div class="api-endpoint" style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                        <span style="background: #007bff; color: white; padding: 6px 12px; border-radius: 4px; font-weight: 600; font-size: 0.9em;">POST</span>
+                        <code style="flex: 1; background: white; padding: 10px; border-radius: 4px; font-size: 0.95em;">/api/v1/rooms</code>
+                    </div>
+                    <p style="color: #555;"><strong>Description:</strong> Create a new room</p>
+                    <p style="color: #666; font-size: 0.9em; margin-top: 10px;"><strong>📝 Use Case:</strong> Para mag-add ng bagong room sa system. May validation para hindi mag-duplicate ng room number sa same campus.</p>
+                    
+                    <h5 style="color: #2c3e50; margin: 15px 0 10px;">Request Body:</h5>
+                    <pre style="background: #2d2d2d; color: #f8f8f2; padding: 15px; border-radius: 6px; overflow-x: auto;"><code>{
+  "campus_id": 1,
+  "room_number": "A-101",
+  "building": "Main Building",
+  "floor": 1,
+  "capacity": 40,
+  "type": "classroom",
+  "equipment": ["whiteboard", "projector", "AC"],
+  "is_available": true
+}</code></pre>
+                </div>
+
+                <!-- Get Single Room -->
+                <div class="api-endpoint" style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                        <span style="background: #28a745; color: white; padding: 6px 12px; border-radius: 4px; font-weight: 600; font-size: 0.9em;">GET</span>
+                        <code style="flex: 1; background: white; padding: 10px; border-radius: 4px; font-size: 0.95em;">/api/v1/rooms/{id}</code>
+                    </div>
+                    <p style="color: #555;"><strong>Description:</strong> Get details of a specific room</p>
+                    <p style="color: #666; font-size: 0.9em; margin-top: 10px;"><strong>📝 Use Case:</strong> Para makita ang full details ng isang room including equipment list at capacity status.</p>
+                </div>
+
+                <!-- Update Room -->
+                <div class="api-endpoint" style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                        <span style="background: #ffc107; color: #212529; padding: 6px 12px; border-radius: 4px; font-weight: 600; font-size: 0.9em;">PUT</span>
+                        <code style="flex: 1; background: white; padding: 10px; border-radius: 4px; font-size: 0.95em;">/api/v1/rooms/{id}</code>
+                    </div>
+                    <p style="color: #555;"><strong>Description:</strong> Update room information</p>
+                    <p style="color: #666; font-size: 0.9em; margin-top: 10px;"><strong>📝 Use Case:</strong> Para i-update ang room details like capacity, equipment, or building. May validation din to prevent duplicates.</p>
+                </div>
+
+                <!-- Delete Room -->
+                <div class="api-endpoint" style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                        <span style="background: #dc3545; color: white; padding: 6px 12px; border-radius: 4px; font-weight: 600; font-size: 0.9em;">DELETE</span>
+                        <code style="flex: 1; background: white; padding: 10px; border-radius: 4px; font-size: 0.95em;">/api/v1/rooms/{id}</code>
+                    </div>
+                    <p style="color: #555;"><strong>Description:</strong> Delete a room</p>
+                    <p style="color: #666; font-size: 0.9em; margin-top: 10px;"><strong>📝 Use Case:</strong> Para tanggalin ang room sa system. Note: Hindi pwede i-delete kung may existing schedules na gumagamit ng room (soon).</p>
+                </div>
+
+                <!-- Toggle Availability -->
+                <div class="api-endpoint" style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                        <span style="background: #007bff; color: white; padding: 6px 12px; border-radius: 4px; font-weight: 600; font-size: 0.9em;">POST</span>
+                        <code style="flex: 1; background: white; padding: 10px; border-radius: 4px; font-size: 0.95em;">/api/v1/rooms/{room}/toggle-availability</code>
+                    </div>
+                    <p style="color: #555;"><strong>Description:</strong> Toggle room availability status</p>
+                    <p style="color: #666; font-size: 0.9em; margin-top: 10px;"><strong>📝 Use Case:</strong> Para i-mark ang room as available or unavailable. Useful kapag under maintenance or renovation ang room - hindi mo need i-delete, i-toggle mo lang to unavailable.</p>
+                </div>
+
+                <!-- Room Statistics -->
+                <div class="api-endpoint" style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                        <span style="background: #28a745; color: white; padding: 6px 12px; border-radius: 4px; font-weight: 600; font-size: 0.9em;">GET</span>
+                        <code style="flex: 1; background: white; padding: 10px; border-radius: 4px; font-size: 0.95em;">/api/v1/rooms/statistics</code>
+                    </div>
+                    <p style="color: #555;"><strong>Description:</strong> Get room statistics and analytics</p>
+                    <p style="color: #666; font-size: 0.9em; margin-top: 10px;"><strong>📝 Use Case:</strong> Para sa dashboard at reporting. Makikita total rooms, available/unavailable count, total capacity, average capacity, breakdown by campus and by type.</p>
+
+                    <h5 style="color: #2c3e50; margin: 20px 0 10px;">Example Response:</h5>
+                    <pre style="background: #2d2d2d; color: #f8f8f2; padding: 15px; border-radius: 6px; overflow-x: auto;"><code>{
+  "success": true,
+  "data": {
+    "overview": {
+      "total_rooms": 50,
+      "available_rooms": 45,
+      "unavailable_rooms": 5,
+      "total_capacity": 2000,
+      "average_capacity": 40
+    },
+    "by_campus": [...],
+    "by_type": [...]
+  }
+}</code></pre>
+                </div>
+
+                <!-- Get Distinct Values -->
+                <div class="api-endpoint" style="background: #f8f9fa; padding: 20px; border-radius: 8px;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                        <span style="background: #28a745; color: white; padding: 6px 12px; border-radius: 4px; font-weight: 600; font-size: 0.9em;">GET</span>
+                        <code style="flex: 1; background: white; padding: 10px; border-radius: 4px; font-size: 0.95em;">/api/v1/rooms/distinct-values</code>
+                    </div>
+                    <p style="color: #555;"><strong>Description:</strong> Get distinct room types, buildings, and floors for dropdowns</p>
+                    <p style="color: #666; font-size: 0.9em; margin-top: 10px;"><strong>📝 Use Case:</strong> Para sa filter dropdowns sa frontend. Makukuha mo lahat ng unique building names, floor numbers, at room types na existing sa system.</p>
+                </div>
+            </div>
+
+            <!-- ===================== TAB 2: PROGRAM ROADMAP APIs ===================== -->
+            <div style="background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); padding: 20px; margin: 40px 0 30px 0; border-radius: 10px; text-align: center;">
+                <h2 style="color: #0e7490; margin: 0; font-size: 2em;">🗺️ PROGRAM ROADMAP APIs</h2>
+                <p style="color: #0e7490; margin-top: 10px; font-size: 1.1em;">⭐ NEW APIs related to Tab 2: Student Curriculum Roadmap</p>
+            </div>
+
+            <!-- ⭐ NEW: Student Curriculum Roadmap API -->
+            <div id="api-roadmap" class="api-section" style="background: white; padding: 25px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 3px 15px rgba(0,0,0,0.1); border-left: 5px solid #95e1d3;">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                    <h3 style="color: #0e7490; margin: 0; font-size: 1.8em;">🗺️ Student Curriculum Roadmap API</h3>
+                    <span style="background: #95e1d3; color: #212529; padding: 4px 12px; border-radius: 12px; font-size: 0.8em; font-weight: 600;">⭐ NEW</span>
+                </div>
+
+                <div style="background: #f0fdfa; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 3px solid #95e1d3;">
+                    <p style="color: #0e7490; margin: 0; font-size: 0.95em;"><strong>📌 Purpose:</strong> Manages the complete 4-year curriculum roadmap for each program. This is the MASTER PLAN that defines what subjects students should take per year and term. Used as source for syncing to enrollment-ready curriculum.</p>
+                </div>
+
+                <!-- Get All Roadmaps -->
+                <div class="api-endpoint" style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                        <span style="background: #28a745; color: white; padding: 6px 12px; border-radius: 4px; font-weight: 600; font-size: 0.9em;">GET</span>
+                        <code style="flex: 1; background: white; padding: 10px; border-radius: 4px; font-size: 0.95em;">/api/v1/student-roadmap</code>
+                    </div>
+                    <p style="color: #555;"><strong>Description:</strong> Get all curriculum roadmaps with filters</p>
+                    <p style="color: #666; font-size: 0.9em; margin-top: 10px;"><strong>📝 Use Case:</strong> Para makita lahat ng roadmaps sa system. May filters para sa program, version year, at status (current/active).</p>
+                    
+                    <h5 style="color: #2c3e50; margin: 15px 0 10px;">Query Parameters:</h5>
+                    <ul style="margin-left: 20px; color: #555;">
+                        <li><code>program_id</code> - Filter by program</li>
+                        <li><code>curriculum_version_year</code> - Filter by version (e.g., "2025")</li>
+                        <li><code>is_current</code> - Filter current roadmap only</li>
+                        <li><code>is_active</code> - Filter active roadmaps only</li>
+                    </ul>
+
+                    <h5 style="color: #2c3e50; margin: 20px 0 10px;">Example Response:</h5>
+                    <pre style="background: #2d2d2d; color: #f8f8f2; padding: 15px; border-radius: 6px; overflow-x: auto;"><code>{
+  "success": true,
+  "message": "Curriculum roadmaps retrieved successfully",
+  "data": [
+    {
+      "roadmap_id": 1,
+      "program_id": 1,
+      "program_name": "BS Computer Science",
+      "roadmap_name": "BSCS 2025 Curriculum",
+      "curriculum_version_year": "2025",
+      "revision_number": 1,
+      "is_current": true,
+      "total_subjects": 45,
+      "total_units": 135
+    }
+  ]
+}</code></pre>
+                </div>
+
+                <!-- Get Complete Roadmap -->
+                <div class="api-endpoint" style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                        <span style="background: #28a745; color: white; padding: 6px 12px; border-radius: 4px; font-weight: 600; font-size: 0.9em;">GET</span>
+                        <code style="flex: 1; background: white; padding: 10px; border-radius: 4px; font-size: 0.95em;">/api/v1/student-roadmap/{roadmap_id}</code>
+                    </div>
+                    <p style="color: #555;"><strong>Description:</strong> Get complete roadmap with all subjects in hierarchical or flat format</p>
+                    <p style="color: #666; font-size: 0.9em; margin-top: 10px;"><strong>📝 Use Case:</strong> Para makita ang buong curriculum plan ng program. Hierarchical format = organized by Year → Semester → Subjects. Flat format = simple list of all subjects. Ginagamit ito for displaying roadmap sa students at for planning.</p>
+                    
+                    <h5 style="color: #2c3e50; margin: 15px 0 10px;">Query Parameters:</h5>
+                    <ul style="margin-left: 20px; color: #555;">
+                        <li><code>format</code> (optional) - "hierarchical" (default) or "flat"</li>
+                    </ul>
+
+                    <h5 style="color: #2c3e50; margin: 20px 0 10px;">Example Response (Hierarchical):</h5>
+                    <pre style="background: #2d2d2d; color: #f8f8f2; padding: 15px; border-radius: 6px; overflow-x: auto;"><code>{
+  "success": true,
+  "data": {
+    "roadmap": {...},
+    "years": [
+      {
+        "year": 1,
+        "total_subjects": 10,
+        "total_units": 30,
+        "terms": [
+          {
+            "term_sequence": 1,
+            "term_name": "1st Semester",
+            "total_subjects": 5,
+            "total_units": 15,
+            "subjects": [
+              {
+                "subject_code": "CS101",
+                "subject_name": "Intro to Computing",
+                "units": 3,
+                "type": "lecture",
+                "prerequisites": "None"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+                </div>
+
+                <!-- Get Current Roadmap for Program -->
+                <div class="api-endpoint" style="background: #fff3cd; padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 2px solid #ffc107;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                        <span style="background: #28a745; color: white; padding: 6px 12px; border-radius: 4px; font-weight: 600; font-size: 0.9em;">GET</span>
+                        <code style="flex: 1; background: white; padding: 10px; border-radius: 4px; font-size: 0.95em;">/api/v1/student-roadmap/program/{program_id}/current</code>
+                        <span style="background: #ffc107; color: #212529; padding: 4px 8px; border-radius: 4px; font-size: 0.75em; font-weight: 600;">FREQUENTLY USED</span>
+                    </div>
+                    <p style="color: #555;"><strong>Description:</strong> Get the current active roadmap for a specific program</p>
+                    <p style="color: #856404; font-size: 0.9em; margin-top: 10px;"><strong>📝 Use Case:</strong> <strong>MOST USED ENDPOINT!</strong> Ginagamit ito para kunin ang current curriculum ng program. Ito yung curriculum na ginagamit for new students. For example, kung nag-enroll ka ngayong 2025 sa BSCS, ito yung roadmap na makukuha mo - yung 2025 version.</p>
+                </div>
+
+                <!-- Get All Versions -->
+                <div class="api-endpoint" style="background: #f8f9fa; padding: 20px; border-radius: 8px;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                        <span style="background: #28a745; color: white; padding: 6px 12px; border-radius: 4px; font-weight: 600; font-size: 0.9em;">GET</span>
+                        <code style="flex: 1; background: white; padding: 10px; border-radius: 4px; font-size: 0.95em;">/api/v1/student-roadmap/program/{program_id}/versions</code>
+                    </div>
+                    <p style="color: #555;"><strong>Description:</strong> Get all available curriculum versions for a program</p>
+                    <p style="color: #666; font-size: 0.9em; margin-top: 10px;"><strong>📝 Use Case:</strong> Para makita lahat ng versions ng curriculum. Kasi may mga old students na naka-2023 curriculum pa, may mga 2024, may mga 2025. Makikita mo dito lahat including revision numbers at kung alin ang current.</p>
+
+                    <h5 style="color: #2c3e50; margin: 20px 0 10px;">Example Response:</h5>
+                    <pre style="background: #2d2d2d; color: #f8f8f2; padding: 15px; border-radius: 6px; overflow-x: auto;"><code>{
+  "success": true,
+  "data": [
+    {
+      "roadmap_id": 3,
+      "roadmap_name": "BSCS 2025 Curriculum",
+      "version_year": "2025",
+      "revision": 1,
+      "full_version": "2025.1",
+      "is_current": true,
+      "cmo_number": "CMO 25-2025",
+      "total_subjects": 45,
+      "total_units": 135
+    },
+    {
+      "roadmap_id": 2,
+      "roadmap_name": "BSCS 2024 Curriculum",
+      "version_year": "2024",
+      "revision": 2,
+      "full_version": "2024.2",
+      "is_current": false,
+      "total_subjects": 43,
+      "total_units": 132
+    }
+  ]
 }</code></pre>
                 </div>
             </div>

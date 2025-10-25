@@ -15982,70 +15982,91 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                 <div class="api-overview">
                     <div class="overview-header">
                         <h3>📊 API Overview</h3>
-                        <p>SKOLARIS REST API provides comprehensive endpoints for complete student information system management including authentication, user management, campus operations, academic management, and role-based access control. The API follows RESTful principles with JWT-based authentication and supports multi-campus operations with granular permissions.</p>
+                        <p>SKOLARIS REST API provides comprehensive endpoints for complete student information system management including authentication, user management, campus operations, academic management, curriculum management, enrollment, and role-based access control with granular permissions. The API follows RESTful principles with JWT-based authentication and supports multi-campus operations.</p>
                     </div>
                     <div class="stats-grid">
                         <div class="stat-card">
                             <div class="stat-icon">🔗</div>
                             <div class="stat-content">
-                                <div class="stat-number" id="totalEndpoints">48</div>
+                                <div class="stat-number" id="totalEndpoints">150+</div>
                                 <div class="stat-label">Total Endpoints</div>
                             </div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-icon">🔐</div>
                             <div class="stat-content">
-                                <div class="stat-number" id="authEndpoints">4</div>
+                                <div class="stat-number" id="authEndpoints">7</div>
                                 <div class="stat-label">Authentication</div>
                             </div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-icon">👥</div>
                             <div class="stat-content">
-                                <div class="stat-number" id="userEndpoints">9</div>
+                                <div class="stat-number" id="userEndpoints">10</div>
                                 <div class="stat-label">User Management</div>
                             </div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-icon">🏢</div>
                             <div class="stat-content">
-                                <div class="stat-number" id="campusEndpoints">7</div>
+                                <div class="stat-number" id="campusEndpoints">8</div>
                                 <div class="stat-label">Campus Management</div>
                             </div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-icon">🎓</div>
                             <div class="stat-content">
-                                <div class="stat-number" id="studentEndpoints">7</div>
-                                <div class="stat-label">Student Management</div>
-                            </div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon">👨‍🏫</div>
-                            <div class="stat-content">
-                                <div class="stat-number" id="teacherEndpoints">6</div>
-                                <div class="stat-label">Teacher Management</div>
+                                <div class="stat-number" id="curriculumEndpoints">15</div>
+                                <div class="stat-label">Curriculum Management</div>
                             </div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-icon">📚</div>
                             <div class="stat-content">
-                                <div class="stat-number" id="classEndpoints">5</div>
-                                <div class="stat-label">Class Management</div>
+                                <div class="stat-number" id="academicEndpoints">22</div>
+                                <div class="stat-label">Academic Management</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🔑</div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="roleEndpoints">18</div>
+                                <div class="stat-label">Role & Permissions</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🏫</div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="collegeEndpoints">9</div>
+                                <div class="stat-label">College Management</div>
                             </div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-icon">📝</div>
                             <div class="stat-content">
-                                <div class="stat-number" id="assignmentEndpoints">5</div>
-                                <div class="stat-label">Assignment Management</div>
+                                <div class="stat-number" id="enrollmentEndpoints">8</div>
+                                <div class="stat-label">Enrollment</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🏠</div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="roomEndpoints">8</div>
+                                <div class="stat-label">Room Management</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">📅</div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="calendarEndpoints">20</div>
+                                <div class="stat-label">Academic Calendar</div>
                             </div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-icon">📊</div>
                             <div class="stat-content">
-                                <div class="stat-number" id="gradeEndpoints">5</div>
-                                <div class="stat-label">Grade Management</div>
+                                <div class="stat-number" id="programEndpoints">7</div>
+                                <div class="stat-label">Program Management</div>
                             </div>
                         </div>
                     </div>
@@ -16062,11 +16083,15 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
                         <button class="filter-tab" data-filter="auth">Authentication</button>
                         <button class="filter-tab" data-filter="user">User Management</button>
                         <button class="filter-tab" data-filter="campus">Campus Management</button>
-                        <button class="filter-tab" data-filter="student">Student Management</button>
-                        <button class="filter-tab" data-filter="teacher">Teacher Management</button>
-                        <button class="filter-tab" data-filter="class">Class Management</button>
-                        <button class="filter-tab" data-filter="assignment">Assignment Management</button>
-                        <button class="filter-tab" data-filter="grade">Grade Management</button>
+                        <button class="filter-tab" data-filter="role">Role & Permissions</button>
+                        <button class="filter-tab" data-filter="curriculum">Curriculum</button>
+                        <button class="filter-tab" data-filter="academic">Academic</button>
+                        <button class="filter-tab" data-filter="calendar">Calendar</button>
+                        <button class="filter-tab" data-filter="enrollment">Enrollment</button>
+                        <button class="filter-tab" data-filter="college">College</button>
+                        <button class="filter-tab" data-filter="program">Program</button>
+                        <button class="filter-tab" data-filter="room">Room</button>
+                        <button class="filter-tab" data-filter="file">File Upload</button>
                     </div>
                 </div>
 
@@ -21071,12 +21096,12 @@ INSERT INTO student_contact_information (student_id, contact_type, contact_value
         // Embedded Postman Collection Data
         window.postmanCollectionData = {
             "info": {
-                "_postman_id": "3943dcc8-5438-4e3e-bce9-086239bf457c",
-                "name": "School Management API - User Management",
-                "description": "# School Management API - Postman Collection\n\nThis directory contains Postman collections and environment files for testing the School Management API.\n\n## Collection Structure\n\n### Authentication\n\n- **Login** - Get access and refresh tokens\n    \n- **Refresh Token** - Refresh expired access token\n    \n- **Get Current User** - Get authenticated user info\n    \n- **Logout** - Invalidate current token\n    \n\n### User Management\n\n- **Get All Users** - List users with pagination and filtering\n    \n- **Get User Statistics** - Get user statistics and breakdowns\n    \n- **Get User by ID** - Get specific user details\n    \n- **Create New User** - Create a new user account\n    \n- **Update User** - Update user information\n    \n- **Assign Role to User** - Assign role to user\n    \n- **Remove Role from User** - Remove role from user\n    \n- **Toggle User Status** - Activate/deactivate user\n    \n- **Delete User** - Delete user account\n    \n\n### Campus Management\n\n- **Get All Campuses** - List all campuses\n    \n- **Get Campus by ID** - Get specific campus\n    \n- **Create New Campus** - Create new campus\n    \n- **Update Campus** - Update campus information\n    \n- **Toggle Campus Status** - Activate/deactivate campus\n    \n- **Get Campus Statistics** - Get campus statistics\n    \n- **Delete Campus** - Delete campus\n    \n\n## Features\n\n### Automatic Token Management\n\n- **Auto-refresh**: Tokens are automatically refreshed when they expire\n    \n- **Token storage**: Access and refresh tokens are saved in environment variables\n    \n- **Expiration tracking**: Token expiration times are tracked and managed\n    \n\n### Pre-request Scripts\n\n- **Token validation**: Checks if token is expired before each request\n    \n- **Auto-refresh**: Automatically refreshes token if it expires within 5 minutes\n    \n- **Error handling**: Handles token refresh failures gracefully\n    \n\n### Test Scripts\n\n- **Response validation**: Validates API responses\n    \n- **Variable extraction**: Extracts and saves important data from responses\n    \n- **Logging**: Provides console logging for debugging\n    \n\n## Environment Variables\n\n| Variable | Description | Example |\n| --- | --- | --- |\n| `base_url` | API base URL | `http://localhost` |\n| `access_token` | JWT access token | `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...` |\n| `refresh_token` | JWT refresh token | `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...` |\n| `token_expires_at` | Token expiration timestamp | `2025-09-29T13:00:00.000Z` |\n| `user_id` | Current user ID | `1` |\n| `new_user_id` | ID of newly created user | `14` |\n| `new_campus_id` | ID of newly created campus | `4` |\n\n## API Endpoints\n\nAuthentication\n\n- `POST /login` - Login with email/password\n    \n- `POST /refresh` - Refresh access token\n    \n- `GET /user` - Get current user\n    \n- `POST /logout` - Logout\n    \n\n### User Management\n\n- `GET /users` - List users (with pagination and filters)\n    \n- `GET /users/statistics` - Get user statistics\n    \n- `GET /users/{id}` - Get user by ID\n    \n- `POST /users` - Create new user\n    \n- `PUT /users/{id}` - Update user\n    \n- `DELETE /users/{id}` - Delete user\n    \n- `POST /users/{id}/assign-role` - Assign role\n    \n- `DELETE /users/{id}/remove-role` - Remove role\n    \n- `POST /users/{id}/toggle-status` - Toggle status\n    \n\n### Campus Management\n\n- `GET /campuses` - List campuses\n    \n- `GET /campuses/{id}` - Get campus by ID\n    \n- `POST /campuses` - Create campus\n    \n- `PUT /campuses/{id}` - Update campus\n    \n- `DELETE /campuses/{id}` - Delete campus\n    \n- `POST /campuses/{id}/toggle-status` - Toggle campus status\n    \n- `GET /campuses/{id}/statistics` - Get campus statistics\n    \n\n## Sample Data\n\n### Default Login Credentials\n\n``` json\n{\n  \"email\": \"superadmin@icct.edu.ph\",\n  \"password\": \"Password123!\"\n}\n\n ```\n\n###   \nUser Types\n\n- `student` - Student user\n    \n- `teacher` - Faculty/Teacher user\n    \n- `staff` - Staff user\n    \n- `admin` - Administrator user\n    \n\n### Role IDs\n\n- `1` - Super Admin\n    \n- `2` - Campus Admin\n    \n- `3` - Registrar\n    \n- `4` - Faculty\n    \n- `5` - Cashier\n    \n- `6` - Student\n    \n\n### Campus IDs\n\n- `1` - ICCT Main Campus\n    \n- `2` - ICCT Antipolo Campus\n    \n- `3` - ICCT Subic Campus",
+                "_postman_id": "skolaris-complete-api-2025",
+                "name": "SKOLARIS - Complete API Documentation (Updated 2025)",
+                "description": "# SKOLARIS Student Information System - Complete API\n\nComprehensive API documentation for SKOLARIS SIS including 150+ endpoints organized into:\n\n## 📦 Main Modules\n\n### 🔐 Authentication & Sessions (7 endpoints)\n- Login / Logout\n- Token Refresh\n- Session Management (View, Revoke All, Revoke Specific)\n\n### 👥 User Management (10 endpoints)\n- CRUD operations for users\n- User statistics and filtering\n- Role assignment\n- Status management\n\n### 🏢 Campus Management (8 endpoints)\n- Campus CRUD operations\n- Campus statistics\n- Status toggle\n- Distinct names for filtering\n\n### 🏫 College Management (9 endpoints)\n- College CRUD operations\n- College statistics\n- Employee listing\n- Status management\n\n### 🔑 Role & Permission Management (18 endpoints)\n- Role hierarchy management\n- Permission assignment\n- Module access control\n- User role assignment\n\n### 🎓 Curriculum Management (15 endpoints)\n- Curriculum CRUD and versioning\n- Program roadmaps\n- Subject sharing info\n- Enrollment curriculum\n\n### 📚 Academic Management (22 endpoints)\n- Programs (with status toggle)\n- Subjects (with status toggle)\n- Academic Terms (with statistics)\n- Student/Employee management\n- Classes, Assignments, Grades\n\n### 📅 Academic Calendar (20 endpoints)\n- Calendar events management\n- Event type configuration\n- Visibility rules\n- User-specific calendar views\n\n### 📝 Enrollment Management (8 endpoints)\n- Enrollment periods\n- Current period management\n- Available subjects preview\n- Subject synchronization\n\n### 🏠 Room Management (8 endpoints)\n- Room CRUD operations\n- Availability toggle\n- Statistics and filtering\n\n### 📤 File Upload (1 endpoint)\n- Reusable file upload\n\n## 🔒 Authentication\nAll protected endpoints require JWT Bearer token authentication.\n\n## 🌐 Base URL\n`{{base_url}}/api/v1`\n\n## 🔑 Environment Variables\n| Variable | Description |\n|----------|-------------|\n| `base_url` | API base URL (e.g., http://localhost) |\n| `access_token` | JWT access token |\n| `refresh_token` | JWT refresh token |\n| `token_expires_at` | Token expiration timestamp |\n\n## 👑 Role Hierarchy\n1. **Super Admin** - Full system access\n2. **Campus Admin** - Campus-level management\n3. **Registrar** - Academic operations\n4. **Faculty** - Teaching and grading\n5. **Cashier** - Financial operations\n6. **Student** - Read-only personal data\n\n## 📋 Default Credentials\n```json\n{\n  \"email\": \"superadmin@icct.edu.ph\",\n  \"password\": \"Password123!\"\n}\n```",
                 "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-                "_exporter_id": "49014689",
-                "_collection_link": "https://speeding-desert-110783.postman.co/workspace/Alpha-Byte~397b10cc-b517-4aa9-8b5f-e451db43228d/collection/6092661-3943dcc8-5438-4e3e-bce9-086239bf457c?action=share&source=collection_link&creator=49014689"
+                "_exporter_id": "skolaris-2025",
+                "_collection_link": "Updated based on current backend structure"
             },
             "item": [
                 {
