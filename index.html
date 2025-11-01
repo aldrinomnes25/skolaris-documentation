@@ -19,7 +19,7 @@
         .tab { appearance:none; border:none; background:transparent; padding:10px 14px; border-radius:10px; cursor:pointer; font-weight:600; color:#334155; }
         .tab[aria-selected="true"] { background:#eef2ff; color:#1e40af; border:1px solid #dbeafe; }
         .tabpanes { margin-top: 12px; }
-        .tabpane { display:none; }
+        .tabpane { display:block; }
         .tabpane.active { display:block; min-height: 400px; }
         /* timeline progress */
         .timeline-progress { display: flex; flex-direction: column; gap: 12px; }
@@ -42,15 +42,6 @@
     </style>
 </head>
 <body>
-    <!-- Tabs Navigation -->
-    <div class="tabs tablist" role="tablist" aria-label="Documentation Tabs">
-        <button class="tab" role="tab" id="tab-timeline" aria-controls="panel-timeline" aria-selected="true">Timeline</button>
-        <button class="tab" role="tab" id="tab-guide" aria-controls="panel-guide" aria-selected="false">User Guide</button>
-    </div>
-
-    <div class="tabpanes">
-    <!-- Timeline Panel -->
-    <div id="panel-timeline" class="tabpane active" role="tabpanel" aria-labelledby="tab-timeline">
     <div class="container">
     <div class="content-section" id="3month-timeline">
                 <h2 class="section-title">📅 SKOLARIS - Phase 1 (3-Month) Core Process Implementation</h2>
@@ -300,7 +291,7 @@
                                 </div>
                             </div>
                         </div>
-                </div>
+                    </div>
                 </div>
 
                 <!-- Additional Notes (November) -->
@@ -366,10 +357,8 @@
                     </div>
                 </div>
     </div>
-    </div>
 
-    <!-- User Guide Panel -->
-    <div id="panel-guide" class="tabpane" role="tabpanel" aria-labelledby="tab-guide">
+    <!-- User Guide (moved below, without tabs) -->
     <div class="container">
         <div class="content-section">
             <h2 class="section-title">📘 User Guide - Completed Items (Priority 1 & 2)</h2>
@@ -382,6 +371,10 @@
                     <li>Confirm your role from the header/profile; menus adapt per role and campus.</li>
                     <li>Use the Admin menu to configure campus, colleges, programs, rooms, and users first.</li>
                 </ol>
+                <div style="margin-top:12px; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px;">
+                    <img src="./images/skolaris_202511/login.png" alt="Login" style="width:100%; border:1px solid #e5e7eb; border-radius:8px;">
+                    <img src="./images/skolaris_202511/super_admin_dashboard.png" alt="Super Admin Dashboard" style="width:100%; border:1px solid #e5e7eb; border-radius:8px;">
+                </div>
             </div>
 
             <div class="highlight-box">
@@ -417,7 +410,9 @@
                     <li>Click <em>Add Subject</em> or use <em>Import</em> for CSV/XLS bulk upload.</li>
                     <li>Fix highlighted errors (duplicate code, invalid units) and save.</li>
                 </ol>
-                <div style="margin-top:8px; color:#6b7280; font-size:0.9em;">Related: <a href="./docs/POSTMAN_UPDATES_CURRICULUM_API.md">Subjects API notes</a></div>
+                <div style="margin-top:12px; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px;">
+                    <img src="./images/skolaris_202511/course_management.png" alt="Subject/Course Management" style="width:100%; border:1px solid #e5e7eb; border-radius:8px;">
+                </div>
             </div>
 
             <div class="highlight-box">
@@ -426,7 +421,13 @@
                     <li>Admin → Users: create user, set role(s), assign campus/college scope.</li>
                     <li>Use Enable/Disable to control access; changes are audit-logged.</li>
                 </ol>
-                <div style="margin-top:8px; color:#6b7280; font-size:0.9em;">See also: <a href="./docs/ROLE_BASED_ACCESS_MATRIX_IMPLEMENTATION.md">Role-based access matrix</a></div>
+                <div style="margin-top:12px; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px;">
+                    <img src="./images/skolaris_202511/user_management.png" alt="User Management" style="width:100%; border:1px solid #e5e7eb; border-radius:8px;">
+                    <img src="./images/skolaris_202511/role_management.png" alt="Role Management" style="width:100%; border:1px solid #e5e7eb; border-radius:8px;">
+                    <img src="./images/skolaris_202511/user_types_management.png" alt="User Types Management" style="width:100%; border:1px solid #e5e7eb; border-radius:8px;">
+                    <img src="./images/skolaris_202511/employee_management.png" alt="Employee Management" style="width:100%; border:1px solid #e5e7eb; border-radius:8px;">
+                    <img src="./images/skolaris_202511/student_management.png" alt="Student Management" style="width:100%; border:1px solid #e5e7eb; border-radius:8px;">
+                </div>
             </div>
 
             <div class="highlight-box">
@@ -437,7 +438,12 @@
                     <li><strong>Programs</strong>: connect program → college and available campuses.</li>
                     <li><strong>Rooms</strong>: define capacity and type to aid scheduling.</li>
                 </ul>
-                <div style="margin-top:8px; color:#6b7280; font-size:0.9em;">References: <a href="./docs/PROGRAM_COLLEGE_ASSIGNMENT_COMPLETE.md">Program↔College</a>, <a href="./docs/COURSE_OFFERING_SECTION_FIX.md">Section codes</a></div>
+                <div style="margin-top:12px; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px;">
+                    <img src="./images/skolaris_202511/campus_management.png" alt="Campus Management" style="width:100%; border:1px solid #e5e7eb; border-radius:8px;">
+                    <img src="./images/skolaris_202511/college_management.png" alt="College Management" style="width:100%; border:1px solid #e5e7eb; border-radius:8px;">
+                    <img src="./images/skolaris_202511/academic_program_management.png" alt="Academic Program Management" style="width:100%; border:1px solid #e5e7eb; border-radius:8px;">
+                    <img src="./images/skolaris_202511/room_management.png" alt="Room Management" style="width:100%; border:1px solid #e5e7eb; border-radius:8px;">
+                </div>
             </div>
 
             <div class="highlight-box">
@@ -446,7 +452,10 @@
                     <li><strong>Academic Terms</strong>: define term order (e.g., 1st, 2nd, Summer) per year.</li>
                     <li><strong>Curriculum</strong>: map subjects per term; set prerequisites and effectivity start/end.</li>
                 </ul>
-                <div style="margin-top:8px; color:#6b7280; font-size:0.9em;">More: <a href="./docs/CURRICULUM_TERM_SEQUENCE_FIX.md">Term sequencing</a>, <a href="./docs/COURSE_OFFERINGS_MODULE_SETUP.md">Curriculum setup tips</a></div>
+                <div style="margin-top:12px; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px;">
+                    <img src="./images/skolaris_202511/curriculum_management.png" alt="Curriculum Management" style="width:100%; border:1px solid #e5e7eb; border-radius:8px;">
+                    <img src="./images/skolaris_202511/academic_term_management.png" alt="Academic Term Management" style="width:100%; border:1px solid #e5e7eb; border-radius:8px;">
+                </div>
             </div>
 
             <div class="highlight-box">
@@ -456,7 +465,9 @@
                     <li>Pick Subject; code/units auto-fill. Assign faculty and slots.</li>
                     <li>Section code validation runs on save.</li>
                 </ol>
-                <div style="margin-top:8px; color:#6b7280; font-size:0.9em;">Guide: <a href="./docs/COURSE_OFFERINGS_MODULE_ADDED.md">Course offerings overview</a></div>
+                <div style="margin-top:12px; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px;">
+                    <img src="./images/skolaris_202511/course_offerings_management.png" alt="Course Offerings Management" style="width:100%; border:1px solid #e5e7eb; border-radius:8px;">
+                </div>
             </div>
 
             <div class="highlight-box">
@@ -466,7 +477,11 @@
                     <li>Create schedule selecting offering, room, faculty, session time.</li>
                     <li>System prevents overlaps for room/faculty time conflicts.</li>
                 </ol>
-                <div style="margin-top:8px; color:#6b7280; font-size:0.9em;">See: <a href="./docs/NO_SAME_DAY_OVERLAP_FIX.md">Overlap handling</a>, <a href="./docs/ROOM_SCHEDULE_CONFLICT_FIX.md">Room conflicts</a></div>
+                <div style="margin-top:12px; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px;">
+                    <img src="./images/skolaris_202511/schedule_management.png" alt="Schedule Management" style="width:100%; border:1px solid #e5e7eb; border-radius:8px;">
+                    <img src="./images/skolaris_202511/my_calendar.png" alt="My Calendar" style="width:100%; border:1px solid #e5e7eb; border-radius:8px;">
+                    <img src="./images/skolaris_202511/calendar_visibility_rules.png" alt="Calendar Visibility Rules" style="width:100%; border:1px solid #e5e7eb; border-radius:8px;">
+                </div>
             </div>
 
             <div class="highlight-box">
@@ -475,53 +490,24 @@
                     <li><strong>Enrollment Periods</strong>: set open/close times per term to control student actions.</li>
                     <li><strong>Sessions</strong>: define reusable time blocks (e.g., MWF 9:00–10:00).</li>
                 </ul>
-                <div style="margin-top:8px; color:#6b7280; font-size:0.9em;">Reference: <a href="./docs/ENROLLMENT_PERIOD_GUIDE.md">Enrollment period guide</a></div>
+                <div style="margin-top:12px; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px;">
+                    <img src="./images/skolaris_202511/enrollment_period_management.png" alt="Enrollment Period Management" style="width:100%; border:1px solid #e5e7eb; border-radius:8px;">
+                    <img src="./images/skolaris_202511/session_management.png" alt="Session Management" style="width:100%; border:1px solid #e5e7eb; border-radius:8px;">
+                    <img src="./images/skolaris_202511/academic_calendar.png" alt="Academic Calendar" style="width:100%; border:1px solid #e5e7eb; border-radius:8px;">
+                    <img src="./images/skolaris_202511/academic_calendar_table.png" alt="Academic Calendar Table" style="width:100%; border:1px solid #e5e7eb; border-radius:8px;">
+                </div>
             </div>
 
             <div class="highlight-box">
                 <h4>🏥 Clinic Management</h4>
-                <p style="margin:8px 0 0; color:#666;">Manage clinic staff and confidential medical records; uploads go to protected storage.</p>
+                <p style="margin:8px 0 0; color:#666;">Ongoing development: endpoints and data structures are prepared; UI/flows are being finalized.</p>
             </div>
 
-        </div>
-    </div>
     </div>
     </div>
 
-    <script>
-        // Basic tab switching
-        (function() {
-            var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
-            var panes = Array.prototype.slice.call(document.querySelectorAll('.tabpane'));
-            function show(panelId) {
-                panes.forEach(function(p){
-                    var isActive = p.id === panelId;
-                    p.classList.toggle('active', isActive);
-                    p.setAttribute('aria-hidden', String(!isActive));
-                    if (isActive) {
-                        p.style.display = 'block';
-                    } else {
-                        p.style.display = 'none';
-                    }
-                });
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-            function activate(tabId, pushHash) {
-                tabs.forEach(function(t){ t.setAttribute('aria-selected', String(t.id === tabId)); });
-                var panelId = tabId === 'tab-timeline' ? 'panel-timeline' : 'panel-guide';
-                show(panelId);
-                if (pushHash) {
-                    var hash = tabId === 'tab-guide' ? '#guide' : '#timeline';
-                    if (history && history.replaceState) history.replaceState(null, '', hash);
-                }
-            }
-            tabs.forEach(function(t){ t.addEventListener('click', function(e){ e.preventDefault(); activate(t.id, true); }); });
-            // initialize state on load (support deep-link via hash)
-            var startTab = (location.hash === '#guide') ? 'tab-guide' : 'tab-timeline';
-            activate(startTab, false);
-        })();
-    </script>
-    <script>
+    
+<script>
     (function() {
         const milestones = [
             { date: '2025-10-01', label: 'Foundation', title: '🔥 Priority 1: System Foundation (Oct 1–15)',
@@ -670,7 +656,7 @@
         const dateEl = document.getElementById('tp-date');
         if (dateEl) dateEl.textContent = 'Today: ' + today.toLocaleDateString();
     })();
-    </script>
+</script>
 </body>
 </html>
 
