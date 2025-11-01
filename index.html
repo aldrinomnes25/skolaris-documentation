@@ -18,7 +18,7 @@
         .tablist { display: flex; gap: 8px; background:#fff; border:1px solid var(--border); border-radius: 12px; padding: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
         .tab { appearance:none; border:none; background:transparent; padding:10px 14px; border-radius:10px; cursor:pointer; font-weight:600; color:#334155; }
         .tab[aria-selected="true"] { background:#eef2ff; color:#1e40af; border:1px solid #dbeafe; }
-        .tabpanes { }
+        .tabpanes { margin-top: 12px; }
         .tabpane { display:none; }
         .tabpane.active { display:block; }
         /* timeline progress */
@@ -43,7 +43,7 @@
 </head>
 <body>
     <!-- Tabs Navigation -->
-    <div class="tabs" role="tablist" aria-label="Documentation Tabs">
+    <div class="tabs tablist" role="tablist" aria-label="Documentation Tabs">
         <button class="tab" role="tab" id="tab-timeline" aria-controls="panel-timeline" aria-selected="true">Timeline</button>
         <button class="tab" role="tab" id="tab-guide" aria-controls="panel-guide" aria-selected="false">User Guide</button>
     </div>
@@ -503,9 +503,7 @@
             tabs.forEach(function(t){ t.addEventListener('click', function(){ activate(t.id); }); });
         })();
     </script>
-</body>
-</html>
-<script>
+    <script>
     (function() {
         const milestones = [
             { date: '2025-10-01', label: 'Foundation', title: '🔥 Priority 1: System Foundation (Oct 1–15)',
@@ -654,6 +652,7 @@
         const dateEl = document.getElementById('tp-date');
         if (dateEl) dateEl.textContent = 'Today: ' + today.toLocaleDateString();
     })();
-</script>
+    </script>
+</body>
 </html>
 
