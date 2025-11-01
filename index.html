@@ -373,81 +373,114 @@
     <div class="container">
         <div class="content-section">
             <h2 class="section-title">📘 User Guide - Completed Items (Priority 1 & 2)</h2>
-            <p style="text-align:center; color:#666;">Quick how-to for features delivered in Foundation and Maintenance phases.</p>
+            <p style="text-align:center; color:#666;">How to use the features delivered in Foundation and Maintenance phases.</p>
+
+            <div class="highlight-box">
+                <h4>🚀 Getting Started</h4>
+                <ol style="margin:8px 0 0; padding-left:18px; color:#666; line-height:1.7;">
+                    <li>Login with your issued credentials.</li>
+                    <li>Confirm your role from the header/profile; menus adapt per role and campus.</li>
+                    <li>Use the Admin menu to configure campus, colleges, programs, rooms, and users first.</li>
+                </ol>
+            </div>
 
             <div class="highlight-box">
                 <h4>🔐 Authentication & Security (Priority 1)</h4>
                 <ul style="margin:8px 0 0; padding-left:18px; color:#666; line-height:1.7;">
-                    <li><strong>Login</strong>: Use your issued email/username and password to access the portal.</li>
-                    <li><strong>Role-based Menus</strong>: Visible modules depend on your assigned role and campus.</li>
-                    <li><strong>Profile & Settings</strong>: Update personal info and change password from your profile page.</li>
+                    <li><strong>Login</strong>: Enter username/email + password to access the dashboard.</li>
+                    <li><strong>RBAC</strong>: Access is enforced by role and campus; menus are filtered.</li>
+                    <li><strong>Profile</strong>: Update profile and change password under Profile & Settings.</li>
                 </ul>
             </div>
 
             <div class="highlight-box">
-                <h4>📚 Subject Management (Priority 2)</h4>
+                <h4>🧩 Admin Setup Checklist (Priority 2)</h4>
                 <ol style="margin:8px 0 0; padding-left:18px; color:#666; line-height:1.7;">
-                    <li>Go to Subjects in Admin menu.</li>
-                    <li>Use <em>Add Subject</em> for single entries or <em>Import</em> for bulk upload.</li>
-                    <li>Validation errors highlight missing codes, duplicates, and invalid units.</li>
+                    <li><strong>Campuses</strong> → add campuses used by your organization.</li>
+                    <li><strong>Colleges</strong> → create colleges and <em>assign a dean</em>.</li>
+                    <li><strong>Programs</strong> → link to colleges and associate available campuses.</li>
+                    <li><strong>Rooms</strong> → define room type and capacity per campus.</li>
+                    <li><strong>Users</strong> → create accounts, assign roles and campus/college scope.</li>
+                    <li><strong>Academic Terms</strong> → set term sequence for the school year.</li>
+                    <li><strong>Curriculum</strong> → map subjects per term; set prerequisites and effectivity.</li>
+                    <li><strong>Subjects</strong> → add/import subjects with validation.</li>
+                    <li><strong>Course Offerings</strong> → create offerings per program and term.</li>
+                    <li><strong>Enrollment Periods</strong> → define open/close windows per term.</li>
+                    <li><strong>Sessions</strong> → configure standard class time blocks.</li>
                 </ol>
             </div>
 
             <div class="highlight-box">
-                <h4>👥 User Management (Priority 2)</h4>
+                <h4>📚 Subject Management</h4>
                 <ol style="margin:8px 0 0; padding-left:18px; color:#666; line-height:1.7;">
-                    <li>Navigate to Users in Admin menu.</li>
-                    <li>Create accounts, assign roles and campus/college scope.</li>
-                    <li>Use <em>Disable/Enable</em> to manage account status; edits are audit-logged.</li>
+                    <li>Go to Admin → Subjects.</li>
+                    <li>Click <em>Add Subject</em> or use <em>Import</em> for CSV/XLS bulk upload.</li>
+                    <li>Fix highlighted errors (duplicate code, invalid units) and save.</li>
                 </ol>
+                <div style="margin-top:8px; color:#6b7280; font-size:0.9em;">Related: <a href="./docs/POSTMAN_UPDATES_CURRICULUM_API.md">Subjects API notes</a></div>
             </div>
 
             <div class="highlight-box">
-                <h4>📅 Schedule Management (Priority 2)</h4>
+                <h4>👥 User & Roles Management</h4>
                 <ol style="margin:8px 0 0; padding-left:18px; color:#666; line-height:1.7;">
-                    <li>Open Schedule module; filter by campus, program, and term.</li>
-                    <li>Create schedules by selecting course offering, faculty, room, and session time.</li>
-                    <li>System checks for room/faculty time conflicts automatically.</li>
+                    <li>Admin → Users: create user, set role(s), assign campus/college scope.</li>
+                    <li>Use Enable/Disable to control access; changes are audit-logged.</li>
                 </ol>
+                <div style="margin-top:8px; color:#6b7280; font-size:0.9em;">See also: <a href="./docs/ROLE_BASED_ACCESS_MATRIX_IMPLEMENTATION.md">Role-based access matrix</a></div>
             </div>
 
             <div class="highlight-box">
-                <h4>🏛️ College, 🏫 Campus, 🎓 Program, 🏢 Rooms (Priority 2)</h4>
+                <h4>🏛️ Campus, Colleges, Programs, Rooms</h4>
                 <ul style="margin:8px 0 0; padding-left:18px; color:#666; line-height:1.7;">
-                    <li><strong>Colleges</strong>: Create colleges and assign a dean.</li>
-                    <li><strong>Programs</strong>: Link programs to colleges and campuses for availability.</li>
-                    <li><strong>Rooms</strong>: Maintain room capacity and type for scheduling.</li>
+                    <li><strong>Campuses</strong>: create campuses for multi-site operations.</li>
+                    <li><strong>Colleges</strong>: add college and assign a dean.</li>
+                    <li><strong>Programs</strong>: connect program → college and available campuses.</li>
+                    <li><strong>Rooms</strong>: define capacity and type to aid scheduling.</li>
                 </ul>
+                <div style="margin-top:8px; color:#6b7280; font-size:0.9em;">References: <a href="./docs/PROGRAM_COLLEGE_ASSIGNMENT_COMPLETE.md">Program↔College</a>, <a href="./docs/COURSE_OFFERING_SECTION_FIX.md">Section codes</a></div>
             </div>
 
             <div class="highlight-box">
-                <h4>📖 Curriculum & Academic Terms (Priority 2)</h4>
+                <h4>📖 Curriculum & Academic Terms</h4>
                 <ul style="margin:8px 0 0; padding-left:18px; color:#666; line-height:1.7;">
-                    <li><strong>Academic Terms</strong>: Define terms and ensure correct sequence per school year.</li>
-                    <li><strong>Curriculum</strong>: Use templates; map subjects per term with prerequisites and effectivity ranges.</li>
+                    <li><strong>Academic Terms</strong>: define term order (e.g., 1st, 2nd, Summer) per year.</li>
+                    <li><strong>Curriculum</strong>: map subjects per term; set prerequisites and effectivity start/end.</li>
                 </ul>
+                <div style="margin-top:8px; color:#6b7280; font-size:0.9em;">More: <a href="./docs/CURRICULUM_TERM_SEQUENCE_FIX.md">Term sequencing</a>, <a href="./docs/COURSE_OFFERINGS_MODULE_SETUP.md">Curriculum setup tips</a></div>
             </div>
 
             <div class="highlight-box">
-                <h4>🔗 Course Offerings (Priority 2)</h4>
+                <h4>🔗 Course Offerings</h4>
                 <ol style="margin:8px 0 0; padding-left:18px; color:#666; line-height:1.7;">
-                    <li>Select campus → college → program → term (cascading filters).</li>
-                    <li>Choose subject; details auto-fill units, code, and description.</li>
-                    <li>Assign faculty and track available slots; section codes are auto-validated.</li>
+                    <li>Select Campus → College → Program → Term.</li>
+                    <li>Pick Subject; code/units auto-fill. Assign faculty and slots.</li>
+                    <li>Section code validation runs on save.</li>
                 </ol>
+                <div style="margin-top:8px; color:#6b7280; font-size:0.9em;">Guide: <a href="./docs/COURSE_OFFERINGS_MODULE_ADDED.md">Course offerings overview</a></div>
             </div>
 
             <div class="highlight-box">
-                <h4>🗓️ Enrollment Periods & Sessions (Priority 2)</h4>
+                <h4>📅 Schedule Management</h4>
+                <ol style="margin:8px 0 0; padding-left:18px; color:#666; line-height:1.7;">
+                    <li>Open Schedule; filter context (campus, program, term).</li>
+                    <li>Create schedule selecting offering, room, faculty, session time.</li>
+                    <li>System prevents overlaps for room/faculty time conflicts.</li>
+                </ol>
+                <div style="margin-top:8px; color:#6b7280; font-size:0.9em;">See: <a href="./docs/NO_SAME_DAY_OVERLAP_FIX.md">Overlap handling</a>, <a href="./docs/ROOM_SCHEDULE_CONFLICT_FIX.md">Room conflicts</a></div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>🗓️ Enrollment Periods & Sessions</h4>
                 <ul style="margin:8px 0 0; padding-left:18px; color:#666; line-height:1.7;">
-                    <li><strong>Enrollment Periods</strong>: Set opening/closing windows per academic term.</li>
-                    <li><strong>Sessions</strong>: Configure standard class time blocks for quick scheduling.</li>
+                    <li><strong>Enrollment Periods</strong>: set open/close times per term to control student actions.</li>
+                    <li><strong>Sessions</strong>: define reusable time blocks (e.g., MWF 9:00–10:00).</li>
                 </ul>
+                <div style="margin-top:8px; color:#6b7280; font-size:0.9em;">Reference: <a href="./docs/ENROLLMENT_PERIOD_GUIDE.md">Enrollment period guide</a></div>
             </div>
 
             <div class="highlight-box">
-                <h4>🏥 Clinic Management (Priority 2)</h4>
-                <p style="margin:8px 0 0; color:#666;">Manage clinic staff and medical records; uploads are secured to protected storage.</p>
+                <h4>🏥 Clinic Management</h4>
+                <p style="margin:8px 0 0; color:#666;">Manage clinic staff and confidential medical records; uploads go to protected storage.</p>
             </div>
 
         </div>
