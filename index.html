@@ -20,7 +20,7 @@
         .tab[aria-selected="true"] { background:#eef2ff; color:#1e40af; border:1px solid #dbeafe; }
         .tabpanes { margin-top: 12px; }
         .tabpane { display:none; }
-        .tabpane.active { display:block; }
+        .tabpane.active { display:block; min-height: 400px; }
         /* timeline progress */
         .timeline-progress { display: flex; flex-direction: column; gap: 12px; }
         .tp-meta { display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 0.9em; }
@@ -506,14 +506,19 @@
                 });
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
-            function activate(tabId) {
+            function activate(tabId, pushHash) {
                 tabs.forEach(function(t){ t.setAttribute('aria-selected', String(t.id === tabId)); });
                 var panelId = tabId === 'tab-timeline' ? 'panel-timeline' : 'panel-guide';
                 show(panelId);
+                if (pushHash) {
+                    var hash = tabId === 'tab-guide' ? '#guide' : '#timeline';
+                    if (history && history.replaceState) history.replaceState(null, '', hash);
+                }
             }
-            tabs.forEach(function(t){ t.addEventListener('click', function(e){ e.preventDefault(); activate(t.id); }); });
-            // initialize state on load
-            activate(document.querySelector('.tab[aria-selected="true"]').id);
+            tabs.forEach(function(t){ t.addEventListener('click', function(e){ e.preventDefault(); activate(t.id, true); }); });
+            // initialize state on load (support deep-link via hash)
+            var startTab = (location.hash === '#guide') ? 'tab-guide' : 'tab-timeline';
+            activate(startTab, false);
         })();
     </script>
     <script>
