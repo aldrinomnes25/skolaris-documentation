@@ -492,15 +492,28 @@
         // Basic tab switching
         (function() {
             var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
-            function activate(id) {
-                tabs.forEach(function(t){ t.setAttribute('aria-selected', String(t.id === id)); });
-                var panes = document.querySelectorAll('.tabpane');
-                Array.prototype.forEach.call(panes, function(p){ p.classList.remove('active'); });
-                var panelId = id === 'tab-timeline' ? 'panel-timeline' : 'panel-guide';
-                var panel = document.getElementById(panelId);
-                if (panel) panel.classList.add('active');
+            var panes = Array.prototype.slice.call(document.querySelectorAll('.tabpane'));
+            function show(panelId) {
+                panes.forEach(function(p){
+                    var isActive = p.id === panelId;
+                    p.classList.toggle('active', isActive);
+                    p.setAttribute('aria-hidden', String(!isActive));
+                    if (isActive) {
+                        p.style.display = 'block';
+                    } else {
+                        p.style.display = 'none';
+                    }
+                });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
-            tabs.forEach(function(t){ t.addEventListener('click', function(){ activate(t.id); }); });
+            function activate(tabId) {
+                tabs.forEach(function(t){ t.setAttribute('aria-selected', String(t.id === tabId)); });
+                var panelId = tabId === 'tab-timeline' ? 'panel-timeline' : 'panel-guide';
+                show(panelId);
+            }
+            tabs.forEach(function(t){ t.addEventListener('click', function(e){ e.preventDefault(); activate(t.id); }); });
+            // initialize state on load
+            activate(document.querySelector('.tab[aria-selected="true"]').id);
         })();
     </script>
     <script>
