@@ -13,6 +13,10 @@
         .section-title { margin: 0 0 12px 0; text-align: center; font-size: 1.6em; }
         .highlight-box { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px 20px 20px; margin: 20px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
         .content-section h5 { font-size: 1.1em; margin-top: 0px !important; }
+        .button-primary { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; border: none; font-weight: 600; cursor: pointer; background: linear-gradient(135deg,#4338ca,#4f46e5); color: #fff; box-shadow: 0 6px 16px rgba(79,70,229,0.25); transition: transform 0.15s ease, box-shadow 0.15s ease; }
+        .button-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(79,70,229,0.3); }
+        .button-primary:active { transform: translateY(0); box-shadow: 0 4px 12px rgba(79,70,229,0.2); }
+        .report-actions { display: flex; justify-content: flex-end; margin-bottom: 16px; }
         /* tabs */
         .tabs { max-width: 1100px; margin: 16px auto 0; padding: 0 16px; }
         .tablist { display: flex; gap: 8px; background:#fff; border:1px solid var(--border); border-radius: 12px; padding: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
@@ -78,6 +82,9 @@
                 <!-- Timeline Progress -->
                 <div class="highlight-box">
                     <h4>📈 Timeline Progress</h4>
+                    <div class="report-actions">
+                        <button id="generate-report" class="button-primary">⬇ Generate Latest Progress Report</button>
+                    </div>
                     <div class="timeline-progress">
                         <div class="tp-meta"><span id="tp-phase">Current phase: —</span><span id="tp-date">Today: —</span></div>
                         <div class="tpv" id="tpv"></div>
@@ -499,6 +506,46 @@
             </div>
 
             <div class="highlight-box">
+                <h4>👨‍🎓 Student Registration</h4>
+                <ol style="margin:8px 0 0; padding-left:18px; color:#666; line-height:1.7;">
+                    <li>Students access the registration wizard to supply personal information and required documents.</li>
+                    <li>Use guided steps to review curriculum assignments and confirm campus, program, and term.</li>
+                    <li>Submit the registration package for registrar review; status updates appear on the dashboard.</li>
+                </ol>
+                <div style="margin-top:12px; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px;">
+                    <img src="./images/skolaris_202511/academic_registration.png" alt="Student Registration Flow" style="width:100%; border:1px solid #e5e7eb; border-radius:8px;">
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>🏥 Student Medical Records</h4>
+                <ul style="margin:8px 0 0; padding-left:18px; color:#666; line-height:1.7;">
+                    <li>Clinic staff review wellness requests, schedule appointments, and capture visit notes.</li>
+                    <li>Track health history, immunizations, and uploaded medical certificates per student.</li>
+                    <li>Students view approved appointments and wellness care updates from their portal.</li>
+                </ul>
+                <div style="margin-top:12px; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px;">
+                    <img src="./images/skolaris_202511/wellness_care_requests.png" alt="Clinic Requests Management" style="width:100%; border:1px solid #e5e7eb; border-radius:8px;">
+                    <img src="./images/skolaris_202511/wellness_care_available_schedules.png" alt="Clinic Available Schedules" style="width:100%; border:1px solid #e5e7eb; border-radius:8px;">
+                    <img src="./images/skolaris_202511/wellness_care_health_history.png" alt="Student Health History" style="width:100%; border:1px solid #e5e7eb; border-radius:8px;">
+                    <img src="./images/skolaris_202511/wellness_care_my_appointments.png" alt="Student Clinic Appointments" style="width:100%; border:1px solid #e5e7eb; border-radius:8px;">
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>🗓️ My Calendar</h4>
+                <ol style="margin:8px 0 0; padding-left:18px; color:#666; line-height:1.7;">
+                    <li>Students review approved class schedules, room assignments, and instructor details in calendar form.</li>
+                    <li>Toggle between list and calendar views; filters keep focus on a campus, program, or term.</li>
+                    <li>Conflicts automatically flag on the timeline so students can coordinate adjustments.</li>
+                </ol>
+                <div style="margin-top:12px; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px;">
+                    <img src="./images/skolaris_202511/my_calendar.png" alt="My Calendar View" style="width:100%; border:1px solid #e5e7eb; border-radius:8px;">
+                    <img src="./images/skolaris_202511/my-calendar.png" alt="My Calendar Timeline" style="width:100%; border:1px solid #e5e7eb; border-radius:8px;">
+                </div>
+            </div>
+
+            <div class="highlight-box">
                 <h4>🏥 Clinic Management</h4>
                 <p style="margin:8px 0 0; color:#666;">Ongoing development: endpoints and data structures are prepared; UI/flows are being finalized.</p>
             </div>
@@ -529,7 +576,7 @@
                 { name: 'SubjectListAdmin', done: true },
                 { name: 'UserListAdmin', done: true },
                 { name: 'Schedule', done: true },
-                { name: 'Clinic UI', done: false },
+                { name: 'Clinic UI', done: true },
                 { name: 'CampusListAdmin', done: true },
                 { name: 'CollegeListAdmin', done: true },
                 { name: 'ProgramListAdmin', done: true },
@@ -564,19 +611,19 @@
             },
             { date: '2025-11-01', label: 'Student', title: '🎯 Priority 3: Student Core (Nov 1–15)',
               feModules: [
-                { name: 'Student Registration', done: false },
+                { name: 'Student Registration', done: true },
                 { name: 'StudentEnrollment', done: false },
                 { name: 'RegistrationSummary', done: false },
                 { name: 'Payments UI', done: false },
-                { name: 'Medical Records UI', done: false },
-                { name: 'MyCalendar', done: false }
+                { name: 'Medical Records UI', done: true },
+                { name: 'MyCalendar', done: true }
               ],
               beModules: [
-                { name: 'Registration API', done: false },
+                { name: 'Registration API', done: true },
                 { name: 'Enrollment API', done: false },
                 { name: 'Payment computation', done: false },
-                { name: 'Medical records API', done: false },
-                { name: 'Student Self-Service API', done: false }
+                { name: 'Medical records API', done: true },
+                { name: 'Student Self-Service API', done: true }
               ]
             },
             { date: '2025-11-16', label: 'Faculty', title: '👨‍🏫 Priority 4: Faculty Core (Nov 16–30)',
@@ -611,6 +658,35 @@
               feModules: [ { name: 'Deployment checklist UI', done: false } ],
               beModules: [ { name: 'Prod deployment', done: false }, { name: 'Monitoring & logs', done: false } ]
             }
+        ];
+        const imageIndex = [
+            { title: 'Login', path: './images/skolaris_202511/login.png' },
+            { title: 'Super Admin Dashboard', path: './images/skolaris_202511/super_admin_dashboard.png' },
+            { title: 'Subject / Course Management', path: './images/skolaris_202511/course_management.png' },
+            { title: 'User Management', path: './images/skolaris_202511/user_management.png' },
+            { title: 'Role Management', path: './images/skolaris_202511/role_management.png' },
+            { title: 'User Types Management', path: './images/skolaris_202511/user_types_management.png' },
+            { title: 'Employee Management', path: './images/skolaris_202511/employee_management.png' },
+            { title: 'Student Management', path: './images/skolaris_202511/student_management.png' },
+            { title: 'Campus Management', path: './images/skolaris_202511/campus_management.png' },
+            { title: 'College Management', path: './images/skolaris_202511/college_management.png' },
+            { title: 'Academic Program Management', path: './images/skolaris_202511/academic_program_management.png' },
+            { title: 'Room Management', path: './images/skolaris_202511/room_management.png' },
+            { title: 'Curriculum Management', path: './images/skolaris_202511/curriculum_management.png' },
+            { title: 'Academic Term Management', path: './images/skolaris_202511/academic_term_management.png' },
+            { title: 'Course Offerings Management', path: './images/skolaris_202511/course_offerings_management.png' },
+            { title: 'Schedule Management', path: './images/skolaris_202511/schedule_management.png' },
+            { title: 'My Calendar View', path: './images/skolaris_202511/my_calendar.png' },
+            { title: 'My Calendar Timeline', path: './images/skolaris_202511/my-calendar.png' },
+            { title: 'Student Registration', path: './images/skolaris_202511/academic_registration.png' },
+            { title: 'Enrollment Periods', path: './images/skolaris_202511/enrollment_period_management.png' },
+            { title: 'Session Management', path: './images/skolaris_202511/session_management.png' },
+            { title: 'Academic Calendar', path: './images/skolaris_202511/academic_calendar.png' },
+            { title: 'Academic Calendar Table', path: './images/skolaris_202511/academic_calendar_table.png' },
+            { title: 'Clinic Requests', path: './images/skolaris_202511/wellness_care_requests.png' },
+            { title: 'Clinic Available Schedules', path: './images/skolaris_202511/wellness_care_available_schedules.png' },
+            { title: 'Health History', path: './images/skolaris_202511/wellness_care_health_history.png' },
+            { title: 'Clinic Appointments', path: './images/skolaris_202511/wellness_care_my_appointments.png' }
         ];
         const endDate = new Date('2026-01-10T23:59:59');
         const startDate = new Date(milestones[0].date + 'T00:00:00');
@@ -655,6 +731,179 @@
         if (phaseEl) phaseEl.textContent = 'Current phase: ' + currentLabel;
         const dateEl = document.getElementById('tp-date');
         if (dateEl) dateEl.textContent = 'Today: ' + today.toLocaleDateString();
+
+        const reportBtn = document.getElementById('generate-report');
+        if (reportBtn) {
+            reportBtn.addEventListener('click', function() {
+                generateProgressReport();
+            });
+        }
+
+        function generateProgressReport() {
+            const now = new Date();
+            const isoStamp = now.toISOString().split('T')[0];
+            const prettyDate = now.toLocaleString();
+            let feTotal = 0, feDone = 0, beTotal = 0, beDone = 0;
+
+            const milestoneSections = milestones.map(function(milestone) {
+                const feModules = (milestone.feModules || []).map(normalizeModule);
+                const beModules = (milestone.beModules || []).map(normalizeModule);
+
+                const feCompleted = feModules.filter(function(mod) { return mod.done; });
+                const fePending = feModules.filter(function(mod) { return !mod.done; });
+                const beCompleted = beModules.filter(function(mod) { return mod.done; });
+                const bePending = beModules.filter(function(mod) { return !mod.done; });
+
+                feTotal += feModules.length;
+                feDone += feCompleted.length;
+                beTotal += beModules.length;
+                beDone += beCompleted.length;
+
+                const feList = feModules.length ? (
+                    '<div class="report-column">' +
+                        '<h4>Frontend (' + feCompleted.length + '/' + feModules.length + ')</h4>' +
+                        '<ul>' + feModules.map(function(mod) {
+                            return '<li class="' + (mod.done ? 'done' : 'pending') + '">' +
+                                (mod.done ? '✔' : '⏳') + ' ' + escapeHtml(mod.name) +
+                            '</li>';
+                        }).join('') + '</ul>' +
+                    '</div>'
+                ) : '';
+
+                const beList = beModules.length ? (
+                    '<div class="report-column">' +
+                        '<h4>Backend (' + beCompleted.length + '/' + beModules.length + ')</h4>' +
+                        '<ul>' + beModules.map(function(mod) {
+                            return '<li class="' + (mod.done ? 'done' : 'pending') + '">' +
+                                (mod.done ? '✔' : '⏳') + ' ' + escapeHtml(mod.name) +
+                            '</li>';
+                        }).join('') + '</ul>' +
+                    '</div>'
+                ) : '';
+
+                return (
+                    '<section class="report-section">' +
+                        '<h3>' + escapeHtml(milestone.title) + '</h3>' +
+                        '<div class="report-columns">' + feList + beList + '</div>' +
+                    '</section>'
+                );
+            }).join('');
+
+            const fePercent = feTotal ? Math.round((feDone / feTotal) * 100) : 0;
+            const bePercent = beTotal ? Math.round((beDone / beTotal) * 100) : 0;
+
+            const imageIndexSection = imageIndex.length ? (
+                '<section class="image-index">' +
+                    '<h3>Documentation Image Index</h3>' +
+                    '<p>Reference list of screenshots included in the user guide.</p>' +
+                    '<div class="image-grid">' +
+                        imageIndex.map(function(img) {
+                            return '<figure class="image-card">' +
+                                '<img src="' + encodeAttribute(img.path) + '" alt="' + escapeHtml(img.title) + '">' +
+                                '<figcaption>' +
+                                    '<strong>' + escapeHtml(img.title) + '</strong>' +
+                                '</figcaption>' +
+                            '</figure>';
+                        }).join('') +
+                    '</div>' +
+                '</section>'
+            ) : '';
+
+            const reportWindow = window.open('', '_blank');
+            if (!reportWindow) {
+                alert('Please allow popups to generate the report.');
+                return;
+            }
+
+            reportWindow.document.write(
+                '<!DOCTYPE html>' +
+                '<html lang="en">' +
+                '<head>' +
+                    '<meta charset="UTF-8">' +
+                    '<title>SKOLARIS Progress Report</title>' +
+                    '<style>' +
+                        'body { font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial; margin: 24px; color: #1f2937; }' +
+                        'header { text-align: center; margin-bottom: 32px; }' +
+                        'header h1 { margin: 0 0 8px; font-size: 28px; color: #1e3a8a; }' +
+                        'header p { margin: 4px 0; color: #4b5563; }' +
+                        '.summary { display: flex; gap: 16px; justify-content: center; margin-bottom: 32px; }' +
+                        '.summary-card { background: #f3f4f6; border-radius: 12px; padding: 16px 24px; min-width: 220px; text-align: center; box-shadow: 0 4px 12px rgba(15,23,42,0.08); }' +
+                        '.summary-card h2 { margin: 0; font-size: 24px; color: #111827; }' +
+                        '.summary-card span { display: block; margin-top: 6px; color: #4b5563; font-size: 14px; }' +
+                        '.report-section { margin-bottom: 36px; }' +
+                        '.report-section h3 { margin: 0 0 12px; color: #1f2937; font-size: 20px; }' +
+                        '.report-columns { display: flex; flex-wrap: wrap; gap: 16px; }' +
+                        '.report-column { flex: 1 1 280px; background: #fff; border-radius: 12px; border: 1px solid #e5e7eb; padding: 16px 20px; box-shadow: 0 2px 8px rgba(15,23,42,0.05); }' +
+                        '.report-column h4 { margin: 0 0 12px; color: #2563eb; }' +
+                        '.report-column ul { list-style: none; padding: 0; margin: 0; }' +
+                        '.report-column li { margin-bottom: 6px; font-size: 14px; color: #374151; }' +
+                        '.report-column li.done { color: #047857; }' +
+                        '.report-column li.pending { color: #d97706; }' +
+                        '.image-index { margin-top: 48px; }' +
+                        '.image-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 24px; }' +
+                        '.image-card { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 12px; box-shadow: 0 2px 8px rgba(15,23,42,0.05); }' +
+                        '.image-card img { width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; }' +
+                        '.image-card figcaption { margin-top: 10px; font-size: 12px; color: #4b5563; }' +
+                        '.image-card figcaption strong { display: block; color: #1f2937; margin-bottom: 4px; font-size: 13px; }' +
+                        'footer { margin-top: 48px; text-align: center; color: #6b7280; font-size: 12px; }' +
+                        '@media print { body { margin: 12mm; } .summary { flex-direction: row; } .report-column { break-inside: avoid; } .image-card { break-inside: avoid; } }' +
+                    '</style>' +
+                '</head>' +
+                '<body>' +
+                    '<header>' +
+                        '<h1>SKOLARIS Phase 1 Progress Report</h1>' +
+                        '<p>Generated on ' + escapeHtml(prettyDate) + '</p>' +
+                        '<p>Current Phase: <strong>' + escapeHtml(currentLabel) + '</strong></p>' +
+                    '</header>' +
+                    '<div class="summary">' +
+                        '<div class="summary-card">' +
+                            '<h2>' + feDone + ' / ' + feTotal + '</h2>' +
+                            '<span>Frontend Modules Completed (' + fePercent + '%)</span>' +
+                        '</div>' +
+                        '<div class="summary-card">' +
+                            '<h2>' + beDone + ' / ' + beTotal + '</h2>' +
+                            '<span>Backend Modules Completed (' + bePercent + '%)</span>' +
+                        '</div>' +
+                    '</div>' +
+                    milestoneSections +
+                    imageIndexSection +
+                    '<footer>Report generated by SKOLARIS Documentation · ' + escapeHtml(isoStamp) + '</footer>' +
+                '</body>' +
+                '</html>'
+            );
+            reportWindow.document.close();
+            reportWindow.focus();
+            setTimeout(function() {
+                reportWindow.print();
+            }, 400);
+        }
+
+        function normalizeModule(mod) {
+            if (typeof mod === 'string') {
+                return { name: mod, done: false };
+            }
+            return {
+                name: mod.name || '',
+                done: !!mod.done
+            };
+        }
+
+        function escapeHtml(str) {
+            return String(str || '').replace(/[&<>"']/g, function(ch) {
+                switch (ch) {
+                    case '&': return '&amp;';
+                    case '<': return '&lt;';
+                    case '>': return '&gt;';
+                    case '"': return '&quot;';
+                    case "'": return '&#39;';
+                    default: return ch;
+                }
+            });
+        }
+
+        function encodeAttribute(str) {
+            return String(str || '').replace(/"/g, '&quot;');
+        }
     })();
 </script>
 </body>
